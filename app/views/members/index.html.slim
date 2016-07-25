@@ -1,0 +1,4 @@
+h1 Listing members
+
+#grid
+  input v-for="member in members" v-model="member.name" @change="setDataAtCell($index,1,member.name)"
