@@ -16,7 +16,7 @@ $ ->
       @hot = new Handsontable grid, {data: @members}
 
     methods:
-      setDataAtCell: (row,col,value) -> @hot.setDataAtCell(row,col,value)
+      render: -> @hot.render()
 
 
 
