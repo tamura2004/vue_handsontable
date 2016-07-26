@@ -1,4 +1,4 @@
 h1 Listing members
 
 #grid
-  input v-for="member in members" v-model="member.name" @change="render"
+  input type="hidden" v-for="member in members" v-model="member" track-by="$index"
