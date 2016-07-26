@@ -37,18 +37,27 @@ $ ->
               {data: "name"}
             ]
             minSpareRows: 1
+            contextMenu: true
+
+          @hot.addHook "beforeRemoveRow", (index,amount) =>
+              for row in [index..(index+amount-1)]
+                id = @members[row].id
+                @resource.delete {id:id}
 
           @hot.addHook "afterChange", (change,source) =>
+            console.log change
             index = change[0][0]
             member = @members[index]
-            if member.id
-              @resource.update {id:member.id}, member
-            else
-              @resource.save(member).then(
-                (response) =>
-                  @members.$set index, response.data
-                  @hot.render()
-              )
+            switch source
+              when "edit"
+                if member.id
+                  @resource.update {id:member.id}, member
+                else
+                  @resource.save(member).then(
+                    (response) =>
+                      @members.$set index, response.data
+                      @hot.render()
+                  )
 
         (response) ->
           console.log response.data
