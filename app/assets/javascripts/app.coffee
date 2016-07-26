@@ -9,9 +9,12 @@ $ ->
 
     created: ->
 
-      @$http.get("/members.json").then(
+      @resource = @$resource "members{/id}"
+
+      @resource.get().then(
         (response) ->
           @members = response.data
+
           grid = document.getElementById('grid')
           @hot = new Handsontable grid,
             data: @members
@@ -36,8 +39,16 @@ $ ->
             minSpareRows: 1
 
           @hot.addHook "afterChange", (change,source) =>
-            console.log source
-            console.log @members[change[0][0]]
+            index = change[0][0]
+            member = @members[index]
+            if member.id
+              @resource.update {id:member.id}, member
+            else
+              @resource.save(member).then(
+                (response) =>
+                  @members.$set index, response.data
+                  @hot.render()
+              )
 
         (response) ->
           console.log response.data
