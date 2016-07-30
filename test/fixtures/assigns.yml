@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  project: one
+  member: one
+  month: MyString
+  work: 1
+
+two:
+  project: two
+  member: two
+  month: MyString
+  work: 1

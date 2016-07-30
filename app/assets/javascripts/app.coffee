@@ -1,80 +1,56 @@
+class VueFactory
+  @create: (name) ->
+    new Vue
+      el: "##{name}"
+      data:
+        records: []
 
+      created: ->
+        @resource = new Resource name
+        @resource.get (response) =>
+          @records = response.data
+          @hot = new Table name, OPTIONS[name], @records, @onChange, @onDelete
+      methods:
+        onChange: (changes,source) =>
+          console.log changes
+          return if source isnt "edit"
+          for change in changes
+            i = change[0]
+            record = @records[i]
+            if record.id?
+              @resource.update record
+            else
+              @resource.save record, (response) =>
+                @records.$set i, response.data
 
+        onDelete: (index,amount) =>
+          for i in [index..(index+amount-1)]
+            record = @records[i]
+            return unless record.id?
+            @resource.delete record.id
 
-$ ->
-  class Table
-    constructor: (members) ->
-      grid = document.getElementById('grid')
-      @hot = new Handsontable grid,
-        data: members
-        dataSchema:
-          id: null
-          name: null
-          group: null
-          job: null
-          number: null
-        colHeaders: [
-          "所属"
-          "職位"
-          "社員番号"
-          "氏名"
-        ]
-        columns: [
-          {data: "group"},
-          {data: "job"},
-          {data: "number"},
-          {data: "name"}
-        ]
-        minSpareRows: 1
-        contextMenu: true
+class Resource
+  constructor: (name) -> @resource = Vue.resource "#{name}{/id}"
+  handleError: (response) -> console.log response
+  get: (cb) -> @resource.get().then(cb, @handleError)
+  update: (record,cb) -> @resource.update(id:record.id,record).then(cb,@handleError)
+  save: (record,cb) -> @resource.save(record).then(cb,@handleError)
+  delete: (id) -> @resource.delete(id:id).then(null,@handleError)
 
-  vm = new Vue
-    el: "#grid"
-    data:
-      members: []
+class Table
+  constructor: (@name,@options,@records,onChange,onDelete) ->
+    container = document.getElementById @name
+    @hot = new Handsontable container, @options
+    @hot.loadData(@records)
+    @hot.addHook "afterChange", onChange
+    @hot.addHook "beforeRemoveRow", onDelete
 
-    created: ->
+OPTIONS =
+  members:
+    dataSchema: {id: null, name: null, group: null, job: null, number: null}
+    colHeaders: ["所属", "職位", "社員番号", "氏名"]
+    columns: [{data: "group"}, {data: "job"}, {data: "number"}, {data: "name"}]
+    minSpareRows: 1
+    contextMenu: ["remove_row"]
 
-      @resource = @$resource "members{/id}"
-
-      @resource.get().then(
-        (response) =>
-          @members = response.data
-
-          @table = new Table @members
-          @hot = @table.hot
-
-          @hot.addHook "beforeRemoveRow", (index,amount) =>
-            for row in [index..(index+amount-1)]
-              id = @members[row].id
-              @resource.delete {id:id}
-
-          @hot.addHook "afterChange", (change,source) =>
-            console.log change
-            index = change[0][0]
-            member = @members[index]
-            switch source
-              when "edit"
-                if member.id
-                  @resource.update {id:member.id}, member
-                else
-                  @resource.save(member).then(
-                    (response) =>
-                      @members.$set index, response.data
-                      @hot.render()
-                  )
-
-        (response) ->
-          console.log response.data
-      )
-
-
-    methods:
-      render: -> @hot.render()
-
-  vm.$watch "members", (n,o) ->
-    # console.log n
-    # console.log o
-
-
-
+$ -> VueFactory.create "members"
