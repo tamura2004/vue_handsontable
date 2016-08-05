@@ -4,7 +4,14 @@ class ProjectsController < ApplicationController
   # GET /projects
   # GET /projects.json
   def index
-    @projects = Project.all
+    gon.records = Project.all
+    gon.options = {
+      dataSchema: {id: nil, group: nil, number: nil, name:nil, cost:nil, rd:nil},
+      colHeaders: ["グループ", "案件管理番号", "案件名", "承認原価", "要件定義工数"],
+      columns: [{data: "group"}, {data: "number"}, {data: "name"}, {data: "cost"}, {data: "rd"}],
+      minSpareRows: 1,
+      contextMenu: ["remove_row"]
+    }
   end
 
   # GET /projects/1
@@ -69,6 +76,6 @@ class ProjectsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def project_params
-      params.require(:project).permit(:number, :name)
+      params.require(:project).permit(:group, :number, :name, :rd, :cost)
     end
 end

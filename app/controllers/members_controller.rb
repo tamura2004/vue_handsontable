@@ -4,7 +4,15 @@ class MembersController < ApplicationController
   # GET /members
   # GET /members.json
   def index
-    @members = Member.all
+    gon.records = Member.all
+    gon.options = {
+      dataSchema: {id: nil, name: nil, group: nil, job: nil, number: nil},
+      colHeaders: ["所属", "職位", "社員番号", "氏名"],
+      columns: [{data: "group"}, {data: "job"}, {data: "number"}, {data: "name"}],
+      minSpareRows: 1,
+      contextMenu: ["remove_row"]
+    }
+
   end
 
   # GET /members/1
