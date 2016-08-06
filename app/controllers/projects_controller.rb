@@ -4,11 +4,32 @@ class ProjectsController < ApplicationController
   # GET /projects
   # GET /projects.json
   def index
-    gon.records = Project.all
+    gon.records = Project.connection.select_all(<<-SQL).to_a
+      select
+        projects.id as id,
+        groups.name as group_name,
+        number,
+        projects.name as name,
+        cost,
+        rd
+      from projects
+      left join groups on projects.group_id = groups.id
+    SQL
+
     gon.options = {
-      dataSchema: {id: nil, group: nil, number: nil, name:nil, cost:nil, rd:nil},
+      dataSchema: {id: nil, group_name: nil, number: nil, name:nil, cost:nil, rd:nil},
       colHeaders: ["グループ", "案件管理番号", "案件名", "承認原価", "要件定義工数"],
-      columns: [{data: "group"}, {data: "number"}, {data: "name"}, {data: "cost"}, {data: "rd"}],
+      columns: [
+        {
+          data: "group_name",
+          type: "dropdown",
+          source: Group.pluck(:name)
+        },
+        {data: "number"},
+        {data: "name"},
+        {data: "cost"},
+        {data: "rd"}
+      ],
       minSpareRows: 1,
       contextMenu: ["remove_row"]
     }
@@ -76,6 +97,6 @@ class ProjectsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def project_params
-      params.require(:project).permit(:group, :number, :name, :rd, :cost)
+      params.permit(:group_name, :number, :name, :rd, :cost)
     end
 end

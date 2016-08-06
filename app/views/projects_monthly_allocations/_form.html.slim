@@ -1,0 +1,18 @@
+= form_for @projects_monthly_allocation do |f|
+  - if @projects_monthly_allocation.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@projects_monthly_allocation.errors.count, "error")} prohibited this projects_monthly_allocation from being saved:"
+      ul
+        - @projects_monthly_allocation.errors.full_messages.each do |message|
+          li = message
+
+  .field
+    = f.label :project
+    = f.text_field :project
+  .field
+    = f.label :month
+    = f.text_field :month
+  .field
+    = f.label :cost
+    = f.text_field :cost
+  .actions = f.submit

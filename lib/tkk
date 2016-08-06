@@ -1,0 +1,4 @@
+12.times do |i|
+  printf("m%02d:nil,",i)
+
+end

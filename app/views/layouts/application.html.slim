@@ -14,6 +14,9 @@ html lang="en"
   body
     = nav_bar fixed: :top, brand: "稼働管理", responsice: true
       = menu_group
+        = drop_down "稼働予定"
+          = menu_item "案件別", projects_monthly_allocations_path
+
         = drop_down "マスター管理"
           = menu_item "部", departments_path
           = menu_item "グループ", groups_path

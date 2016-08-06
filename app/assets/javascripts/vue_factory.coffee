@@ -16,10 +16,14 @@ class @VueFactory
         handleChange: (change)->
           [row,prop,oldVal,newVal] = change
           record = @records[row]
-          if record.id? then @update(record) else @save(record)
+          if record.id? then @update(record,prop,newVal) else @save(record)
 
-        update: (record) ->
-          @resource.update record
+          if name is "projects_monthly_allocations"
+            record.unallocated_cost += oldVal - newVal
+            @hot.hot.render()
+
+        update: (record,prop,newVal) ->
+          @resource.update record,prop,newVal
 
         save: (record) ->
           @resource.save record, (response) =>
@@ -36,7 +40,10 @@ class Resource
   handleNormal: (response) -> console.log response
   handleError: (response) -> console.log response
   get: (cb) -> @resource.get().then(cb, @handleError)
-  update: (record) -> @resource.update(id:record.id,record).then(@handleNormal,@handleError)
+  update: (record,prop,newVal) ->
+    params = {}
+    params[prop] = newVal
+    @resource.update(id:record.id,params).then(@handleNormal,@handleError)
   save: (record,cb) -> @resource.save(record).then(cb,@handleError)
   delete: (id) -> @resource.delete(id:id).then(@handleNormal,@handleError)
 
