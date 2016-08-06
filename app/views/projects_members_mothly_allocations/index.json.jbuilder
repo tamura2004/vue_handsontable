@@ -1,1 +1,0 @@
-json.array! @projects_members_mothly_allocations, partial: 'projects_members_mothly_allocations/projects_members_mothly_allocation', as: :projects_members_mothly_allocation

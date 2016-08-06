@@ -1,1 +1,0 @@
-json.partial! "projects_members_mothly_allocations/projects_members_mothly_allocation", projects_members_mothly_allocation: @projects_members_mothly_allocation

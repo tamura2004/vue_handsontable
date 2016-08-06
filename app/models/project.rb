@@ -1,6 +1,8 @@
 class Project < ApplicationRecord
-  belongs_to :group
+  belongs_to :group, optional: true
   has_many :projects_monthly_allocations
+  has_many :projects_members
+
   attr_accessor :group_name
 
   before_save do

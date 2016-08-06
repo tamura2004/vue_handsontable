@@ -10,8 +10,8 @@ class ProjectsMonthlyAllocationsController < ApplicationController
     Project.find_each do |project|
       result = {}
       result["id"] = project.id
-      result["project_number"] = project.number
-      result["project_name"] = project.name
+      result["project_number"] = "<a href='/projects/#{project.id}/projects_members_months'>#{project.number}</a>"
+      result["project_name"] = "<a href='/projects/#{project.id}/projects_members_months'>#{project.name}</a>"
       result["cost"] = project.cost
 
       sum = 0
@@ -27,76 +27,48 @@ class ProjectsMonthlyAllocationsController < ApplicationController
     gon.records = results
 
     gon.options = {
-      dataSchema: {
+      dataSchema: months_schema.merge(
         id:nil,
         project_number:nil,
         project_name:nil,
         cost:nil,
-        unallocated_cost:nil,
-        "2016-04":nil,
-        "2016-05":nil,
-        "2016-06":nil,
-        "2016-07":nil,
-        "2016-08":nil,
-        "2016-09":nil,
-        "2016-10":nil,
-        "2016-11":nil,
-        "2016-12":nil,
-        "2017-01":nil,
-        "2017-02":nil,
-        "2017-03":nil
-      },
+        unallocated_cost:nil
+      ),
       colHeaders: [
         "案件管理番号",
         "案件名",
-        "承認原価",
-        "未割当原価",
-        "2016-04",
-        "2016-05",
-        "2016-06",
-        "2016-07",
-        "2016-08",
-        "2016-09",
-        "2016-10",
-        "2016-11",
-        "2016-12",
-        "2017-01",
-        "2017-02",
-        "2017-03"
+        "総工数",
+        "未割当",
+        *months_headers
       ],
       columns: [
         {
           data: "project_number",
-          readOnly: true
+          disableVisualSelection: true,
+          readOnly: true,
+          renderer: "html"
         },
         {
           data: "project_name",
-          readOnly: true
+          disableVisualSelection: true,
+          readOnly: true,
+          renderer: "html"
         },
         {
           type: "numeric",
-          format: "0.00",
+          format: "0.0",
           data: "cost",
+          disableVisualSelection: true,
           readOnly: true
         },
         {
           type: "numeric",
-          format: "0.00",
+          format: "0.0",
           data: "unallocated_cost",
+          disableVisualSelection: true,
           readOnly: true
         },
-        {data:"2016-04"},
-        {data:"2016-05"},
-        {data:"2016-06"},
-        {data:"2016-07"},
-        {data:"2016-08"},
-        {data:"2016-09"},
-        {data:"2016-10"},
-        {data:"2016-11"},
-        {data:"2016-12"},
-        {data:"2017-01"},
-        {data:"2017-02"},
-        {data:"2017-03"}
+        *months_columns
       ],
     }
 
@@ -185,6 +157,34 @@ class ProjectsMonthlyAllocationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def projects_monthly_allocation_params
-      params.permit(:"2016-04",:"2016-05",:"2016-06",:"2016-07",:"2016-08",:"2016-09",:"2016-10",:"2016-11",:"2016-12",:"2017-01",:"2017-02",:"2017-03")
+      params.permit(months.map(&:to_sym))
+    end
+
+    def months
+      @months ||= 12.times.map do |n|
+        Time.local(2016,4).since(n.month)
+      end
+    end
+
+    def months_values
+      months.map{|m|m.strftime("%Y%m")}
+    end
+
+    def months_headers
+      months.map{|m|m.strftime("%m月")}
+    end
+
+    def months_columns
+      months_values.map do |m|
+        {
+          data: m,
+          type: "numeric",
+          format: "0.00"
+        }
+      end
+    end
+
+    def months_schema
+      Hash[months_values.map{|m|[m,nil]}]
     end
 end

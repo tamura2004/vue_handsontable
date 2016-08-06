@@ -3,11 +3,7 @@
 one:
   project: one
   member: one
-  month: MyString
-  cost: 1.5
 
 two:
   project: two
   member: two
-  month: MyString
-  cost: 1.5

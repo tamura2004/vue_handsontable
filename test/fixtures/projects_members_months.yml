@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  projects_member: one
+  month: MyString
+  cost: 1.5
+
+two:
+  projects_member: two
+  month: MyString
+  cost: 1.5

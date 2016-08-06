@@ -1,0 +1,1 @@
+json.array! @projects_members, partial: 'projects_members/projects_member', as: :projects_member

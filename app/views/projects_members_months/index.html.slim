@@ -1,0 +1,18 @@
+.row
+  .col-xs-6
+    table.table.table-condensed.table-bordered
+      thead
+        tr.active
+          th 案件管理番号
+          th 案件名
+          th 総工数
+      tbody
+        tr
+          td = @project.number
+          td = @project.name
+          td = @project.cost
+
+#projects_members_months
+coffee:
+  $ ->
+    VueFactory.create "projects_members_months"
