@@ -4,13 +4,14 @@ class GroupsController < ApplicationController
   # GET /groups
   # GET /groups.json
   def index
-    gon.records = Group.all
+    gon.records = Group.connection.select_all("select groups.id as id, departments.name as department_name, groups.name as name from groups left join departments on groups.department_id = departments.id").to_a
+
     gon.options = {
-      dataSchema: {id: nil, department:nil, name: nil},
+      dataSchema: {id: nil, department_name:nil, name: nil},
       colHeaders: ["部名","グループ名"],
       columns: [
         {
-          data: "department",
+          data: "department_name",
           type: "dropdown",
           source: Department.pluck(:name)
         },
@@ -38,11 +39,7 @@ class GroupsController < ApplicationController
   # POST /groups
   # POST /groups.json
   def create
-    @group = Group.new
-    @group.name = params[:name]
-    @group.department = Department.find_by(name: params[:department])
-    p @group
-
+    @group = Group.new(group_params)
     respond_to do |format|
       if @group.save
         format.html { redirect_to @group, notice: 'Group was successfully created.' }
@@ -86,6 +83,6 @@ class GroupsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def group_params
-      params.require(:group).permit(:department, :name)
+      params.permit(:department_name, :name)
     end
 end

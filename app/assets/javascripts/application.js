@@ -13,7 +13,6 @@
 //= require jquery
 //= require jquery_ujs
 //= require twitter/bootstrap
-//= require turbolinks
 //= require handsontable/dist/handsontable.full
 //= require vue
 //= require vue-resource
