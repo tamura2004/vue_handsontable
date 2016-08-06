@@ -1,0 +1,2 @@
+json.extract! projects_members_mothly_allocation, :id, :project_id, :member_id, :month, :cost, :created_at, :updated_at
+json.url projects_members_mothly_allocation_url(projects_members_mothly_allocation, format: :json)

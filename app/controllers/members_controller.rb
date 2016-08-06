@@ -8,7 +8,20 @@ class MembersController < ApplicationController
     gon.options = {
       dataSchema: {id: nil, name: nil, group: nil, job: nil, number: nil},
       colHeaders: ["所属", "職位", "社員番号", "氏名"],
-      columns: [{data: "group"}, {data: "job"}, {data: "number"}, {data: "name"}],
+      columns: [
+        {
+          data: "group",
+          type: "dropdown",
+          source: Group.pluck(:name)
+        },
+        {
+          data: "job",
+          type: "dropdown",
+          source: JobTitle.pluck(:name)
+        },
+        {data: "number"},
+        {data: "name"}
+      ],
       minSpareRows: 1,
       contextMenu: ["remove_row"]
     }
