@@ -4,18 +4,29 @@ class MembersController < ApplicationController
   # GET /members
   # GET /members.json
   def index
-    gon.records = Member.all
+    gon.records = Member.connection.select_all(<<-SQL).to_a
+      select
+        members.id as id,
+        groups.name as group_name,
+        job_titles.name as job_title_name,
+        members.number as number,
+        members.name as name
+      from members
+      left join groups on members.group_id = groups.id
+      left join job_titles on members.job_title_id = job_titles.id
+    SQL
+
     gon.options = {
-      dataSchema: {id: nil, name: nil, group: nil, job: nil, number: nil},
+      dataSchema: {id: nil, name: nil, group_name: nil, job_title_name: nil, number: nil},
       colHeaders: ["所属", "職位", "社員番号", "氏名"],
       columns: [
         {
-          data: "group",
+          data: "group_name",
           type: "dropdown",
           source: Group.pluck(:name)
         },
         {
-          data: "job",
+          data: "job_title_name",
           type: "dropdown",
           source: JobTitle.pluck(:name)
         },
@@ -90,6 +101,6 @@ class MembersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def member_params
-      params.require(:member).permit(:name, :group, :job, :number)
+      params.permit(:name, :group_name, :job_title_name, :number)
     end
 end
