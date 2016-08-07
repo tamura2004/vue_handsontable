@@ -1,0 +1,15 @@
+p#notice = notice
+
+p
+  strong Member:
+  = @members_month.member
+p
+  strong Month:
+  = @members_month.month
+p
+  strong Cost:
+  = @members_month.cost
+
+= link_to 'Edit', edit_members_month_path(@members_month)
+'|
+= link_to 'Back', members_months_path

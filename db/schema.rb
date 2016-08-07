@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160806131205) do
+ActiveRecord::Schema.define(version: 20160807024354) do
 
   create_table "assigns", force: :cascade do |t|
     t.integer  "project_id"
@@ -54,6 +54,24 @@ ActiveRecord::Schema.define(version: 20160806131205) do
     t.index ["job_title_id"], name: "index_members_on_job_title_id"
   end
 
+  create_table "members_months", force: :cascade do |t|
+    t.integer  "member_id"
+    t.string   "month"
+    t.float    "cost"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["member_id"], name: "index_members_months_on_member_id"
+  end
+
+  create_table "members_projects_months", force: :cascade do |t|
+    t.integer  "projects_member_id"
+    t.string   "month"
+    t.float    "cost"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.index ["projects_member_id"], name: "index_members_projects_months_on_projects_member_id"
+  end
+
   create_table "projects", force: :cascade do |t|
     t.integer  "group_id"
     t.string   "number"
@@ -81,17 +99,6 @@ ActiveRecord::Schema.define(version: 20160806131205) do
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
     t.index ["projects_member_id"], name: "index_projects_members_months_on_projects_member_id"
-  end
-
-  create_table "projects_members_mothly_allocations", force: :cascade do |t|
-    t.integer  "project_id"
-    t.integer  "member_id"
-    t.string   "month"
-    t.float    "cost"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["member_id"], name: "index_projects_members_mothly_allocations_on_member_id"
-    t.index ["project_id"], name: "index_projects_members_mothly_allocations_on_project_id"
   end
 
   create_table "projects_monthly_allocations", force: :cascade do |t|

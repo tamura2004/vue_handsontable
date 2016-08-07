@@ -1,11 +1,57 @@
 class ProjectsMembersMonthsController < ApplicationController
-  before_action :set_projects_members_month, only: [:show, :edit, :update, :destroy]
+  before_action :set_project, only: [:index,:create,:update]
+  before_action :set_projects_member, only: [:destroy,:update]
 
   # GET /projects_members_months
   # GET /projects_members_months.json
   def index
+    # プロジェクト個別 ----------------------
+    result = {}
+    result["id"] = @project.id
+    result["number"] = @project.number
+    result["name"] = @project.name
+    @project.projects_monthly_allocations.each do |allocation|
+      result[allocation.month] = allocation.cost
+    end
+    gon.projects_monthly_allocations = {}
+    gon.projects_monthly_allocations[:records] = [result]
+    gon.projects_monthly_allocations[:options] = {
+      dataSchema: months_schema.merge(
+        id:nil,
+        number:nil,
+        name:nil,
+        cost:nil
+      ),
+      colHeaders:[
+        "案件管理番号",
+        "案件名",
+        "総工数",
+        *months_headers
+      ],
+      columns: [
+        {
+          data: "number",
+          disableVisualSelection: true,
+          readOnly: true,
+        },
+        {
+          data: "name",
+          disableVisualSelection: true,
+          readOnly: true,
+        },
+        {
+          data: "cost",
+          type: "numeric",
+          format: "0.0",
+          disableVisualSelection: true,
+          readOnly: true,
+        },
+        *months_columns
+      ]
+    }
+
+    # 要員別明細 ---------------------------------
     results = []
-    @project = Project.find(params[:project_id])
     @project.projects_members.each do |assignment|
       result = {}
       result["id"] = assignment.id
@@ -58,15 +104,20 @@ class ProjectsMembersMonthsController < ApplicationController
   # POST /projects_members_months
   # POST /projects_members_months.json
   def create
-    @projects_members_month = ProjectsMembersMonth.new(projects_members_month_params)
+    # レコードidがnilの場合呼ばれる
+    # その場合、案件と要員のアサインを作成する
+
+    member = Member.find_or_create_by(name: projects_members_month_params[:member_name])
+
+    @projects_member = ProjectsMember.new(member:member,project:@project)
 
     respond_to do |format|
-      if @projects_members_month.save
+      if @projects_member.save
         format.html { redirect_to @projects_members_month, notice: 'Projects members month was successfully created.' }
-        format.json { render :show, status: :created, location: @projects_members_month }
+        format.json { render json: @projects_member}
       else
         format.html { render :new }
-        format.json { render json: @projects_members_month.errors, status: :unprocessable_entity }
+        format.json { render json: @projects_member.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -74,21 +125,41 @@ class ProjectsMembersMonthsController < ApplicationController
   # PATCH/PUT /projects_members_months/1
   # PATCH/PUT /projects_members_months/1.json
   def update
-    respond_to do |format|
-      if @projects_members_month.update(projects_members_month_params)
-        format.html { redirect_to @projects_members_month, notice: 'Projects members month was successfully updated.' }
-        format.json { render :show, status: :ok, location: @projects_members_month }
+    error = false
+    projects_members_month_params.each do |month,cost|
+      @allocation = @projects_member.projects_members_months.find_by(month:month)
+      if @allocation
+        if cost.to_f > 0
+          @allocation.cost = cost
+          @allocation.save
+        else
+          @allocation.destroy
+        end
       else
-        format.html { render :edit }
-        format.json { render json: @projects_members_month.errors, status: :unprocessable_entity }
+        @allocation = ProjectsMembersMonth.new
+        @allocation.projects_member = @projects_member
+        @allocation.month = month
+        @allocation.cost = cost
+        @allocation.save
       end
     end
+
+    respond_to do |format|
+      if error
+        format.html { render :edit }
+        format.json { head :no_content }
+      else
+        format.html { redirect_to @allocation, notice: 'successfully updated.' }
+        format.json { head :no_content }
+      end
+    end
+
   end
 
   # DELETE /projects_members_months/1
   # DELETE /projects_members_months/1.json
   def destroy
-    @projects_members_month.destroy
+    @projects_member.destroy
     respond_to do |format|
       format.html { redirect_to projects_members_months_url, notice: 'Projects members month was successfully destroyed.' }
       format.json { head :no_content }
@@ -101,36 +172,17 @@ class ProjectsMembersMonthsController < ApplicationController
       @projects_members_month = ProjectsMembersMonth.find(params[:id])
     end
 
+    def set_projects_member
+      @projects_member = ProjectsMember.find(params[:id])
+    end
+
+    def set_project
+      @project = Project.find(params[:project_id])
+    end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def projects_members_month_params
-      params.permit(:member_name, *months_values.map(&:to_sym))
+      params.permit(:member_name, *months_symbols)
     end
 
-    def months
-      @months ||= 12.times.map do |n|
-        Time.local(2016,4).since(n.month)
-      end
-    end
-
-    def months_values
-      months.map{|m|m.strftime("%Y%m")}
-    end
-
-    def months_headers
-      months.map{|m|m.strftime("%m月")}
-    end
-
-    def months_columns
-      months_values.map do |m|
-        {
-          data: m,
-          type: "numeric",
-          format: "0.00"
-        }
-      end
-    end
-
-    def months_schema
-      Hash[months_values.map{|m|[m,nil]}]
-    end
 end

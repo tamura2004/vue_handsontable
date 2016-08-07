@@ -2,6 +2,8 @@ class Member < ApplicationRecord
   belongs_to :group, optional: true
   belongs_to :job_title, optional: true
 
+  has_many :projects_members
+
   attr_accessor :group_name, :job_title_name
 
   before_save do

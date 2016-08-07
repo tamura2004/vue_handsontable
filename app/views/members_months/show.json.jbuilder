@@ -1,0 +1,1 @@
+json.partial! "members_months/members_month", members_month: @members_month

@@ -1,0 +1,10 @@
+ol.breadcrumb
+  li
+    = link_to "ホーム", root_path
+  li
+    = link_to "稼働予定", root_path
+  li.active 要員別一覧
+
+#members_months
+coffee:
+  $ -> VueFactory.create "members_months"

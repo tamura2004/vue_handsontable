@@ -1,0 +1,1 @@
+json.array! @members_projects_months, partial: 'members_projects_months/members_projects_month', as: :members_projects_month

@@ -3,10 +3,11 @@ class @VueFactory
     new Vue
       el: "##{name}"
       data:
-        records: gon.records
+        records: if gon[name] then gon[name].records else gon.records
       created: ->
         @resource = new Resource name
-        @hot = new Table name, gon.options, @records, @onChange, @onDelete
+        options = if gon[name] then gon[name].options else gon.options
+        @hot = new Table name, options, @records, @onChange, @onDelete
 
       methods:
         onChange: (changes,source) ->

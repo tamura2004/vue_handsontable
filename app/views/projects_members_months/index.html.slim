@@ -1,18 +1,16 @@
-.row
-  .col-xs-6
-    table.table.table-condensed.table-bordered
-      thead
-        tr.active
-          th 案件管理番号
-          th 案件名
-          th 総工数
-      tbody
-        tr
-          td = @project.number
-          td = @project.name
-          td = @project.cost
+ol.breadcrumb
+  li
+    = link_to "ホーム", root_path
+  li
+    = link_to "稼働予定", root_path
+  li
+    = link_to "案件別一覧", projects_monthly_allocations_path
+  li.active = "#{@project.number} #{@project.name}"
 
+#projects_monthly_allocations
+hr
 #projects_members_months
 coffee:
   $ ->
+    VueFactory.create "projects_monthly_allocations"
     VueFactory.create "projects_members_months"
