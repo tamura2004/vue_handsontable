@@ -16,6 +16,6 @@ Rails.application.routes.draw do
     resources :projects_monthly_allocations
   end
   resources :projects_monthly_allocations
-  root "members#index"
+  root "projects_monthly_allocations#index"
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
