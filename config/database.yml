@@ -25,5 +25,5 @@ production:
   encoding: unicode
   pool: 5
   min_messages: WARNING
-  database: word_list_production
+  database: projects_members_production
   username: ubuntu
