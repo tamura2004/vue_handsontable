@@ -9,8 +9,8 @@ class MembersMonthsController < ApplicationController
     Member.order(:group_id, :job_title_id, :number).each do |member|
       result = Hash.new(0)
       result["id"] = member.id
-      result["group_name"] = member.group.name
-      result["job_title_name"] = member.job_title.name
+      result["group_name"] = member.group.try(:name)
+      result["job_title_name"] = member.job_title.try(:name)
       result["number"] = member.number
       result["name"] = "<a href='/members/#{member.id}/members_projects_months'>#{member.name}</a>"
 
