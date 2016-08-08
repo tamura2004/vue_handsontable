@@ -63,7 +63,7 @@ class MembersMonthsController < ApplicationController
           readOnly: true,
           renderer: "html"
         },
-        *months_columns
+        *months_immutable_columns
       ],
     }
   end
@@ -131,16 +131,6 @@ class MembersMonthsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def members_month_params
       params.require(:members_month).permit(:member_id, :month, :cost)
-    end
-
-    def months_columns
-      months.map do |m|
-        {
-          data: m,
-          disableVisualSelection: true,
-          readOnly: true
-        }
-      end
     end
 
 end

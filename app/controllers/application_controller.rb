@@ -31,6 +31,18 @@ class ApplicationController < ActionController::Base
       end
     end
 
+    def months_immutable_columns
+      months_values.map do |m|
+        {
+          disableVisualSelection: true,
+          readOnly: true,
+          data: m,
+          type: "numeric",
+          format: "0.00"
+        }
+      end
+    end
+
     def months_schema
       Hash[months_values.map{|m|[m,nil]}]
     end

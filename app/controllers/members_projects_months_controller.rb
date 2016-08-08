@@ -60,7 +60,7 @@ class MembersProjectsMonthsController < ApplicationController
           readOnly: true,
           renderer: "html"
         },
-        *months_columns
+        *months_immutable_columns
       ],
     }
 
