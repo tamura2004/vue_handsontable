@@ -20,7 +20,7 @@ class ProjectsMonthlyAllocationsController < ApplicationController
         sum += allocation.cost
       end
 
-      result["unallocated_cost"] = project.cost - sum
+      result["unallocated_cost"] = project.cost.to_f - sum
       results << result
     end
 
