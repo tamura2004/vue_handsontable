@@ -23,7 +23,8 @@ class MembersController < ApplicationController
         {
           data: "group_name",
           type: "dropdown",
-          source: Group.pluck(:name)
+          source: Group.pluck(:name),
+          autoColumnSize: true
         },
         {
           data: "job_title_name",
