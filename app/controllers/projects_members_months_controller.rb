@@ -35,6 +35,7 @@ class ProjectsMembersMonthsController < ApplicationController
           readOnly: true,
         },
         {
+          width: 450,
           data: "name",
           disableVisualSelection: true,
           readOnly: true,

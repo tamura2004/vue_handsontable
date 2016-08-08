@@ -49,6 +49,7 @@ class ProjectsMonthlyAllocationsController < ApplicationController
           renderer: "html"
         },
         {
+          width: 450,
           data: "project_name",
           disableVisualSelection: true,
           readOnly: true,

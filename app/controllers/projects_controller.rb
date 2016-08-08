@@ -21,12 +21,16 @@ class ProjectsController < ApplicationController
       colHeaders: ["グループ", "案件管理番号", "案件名", "承認原価", "要件定義工数"],
       columns: [
         {
+          width: 150,
           data: "group_name",
           type: "dropdown",
           source: Group.pluck(:name)
         },
         {data: "number"},
-        {data: "name"},
+        {
+          width: 450,
+          data: "name"
+        },
         {data: "cost"},
         {data: "rd"}
       ],
