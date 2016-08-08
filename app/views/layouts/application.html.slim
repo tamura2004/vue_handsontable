@@ -4,7 +4,7 @@ html lang="en"
     meta charset="utf-8"
     meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"
     meta name="viewport" content="width=device-width, initial-scale=1.0"
-    title= content_for?(:title) ? yield(:title) : "VueHandsontable"
+    title 工数見込集計
     = csrf_meta_tags
     = stylesheet_link_tag "application", :media => "all"
     = include_gon
@@ -12,9 +12,9 @@ html lang="en"
 
 
   body
-    = nav_bar fixed: :top, brand: "稼働管理", responsice: true
+    = nav_bar fixed: :top, brand: "工数見込集計", responsice: true
       = menu_group
-        = drop_down "稼働予定"
+        = drop_down "月別工数見込"
           = menu_item "案件一覧", projects_monthly_allocations_path
           = menu_item "要員一覧", members_months_path
 
