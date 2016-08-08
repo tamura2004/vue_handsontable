@@ -77,6 +77,7 @@ class ProjectsMembersMonthsController < ApplicationController
       ],
       columns: [
         {
+          width: 150,
           data: "member_name",
           type: "dropdown",
           source: Member.pluck(:name)
