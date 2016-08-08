@@ -23,8 +23,7 @@ class MembersController < ApplicationController
         {
           data: "group_name",
           type: "dropdown",
-          source: Group.pluck(:name),
-          autoColumnSize: true
+          source: Group.pluck(:name)
         },
         {
           data: "job_title_name",
@@ -34,6 +33,7 @@ class MembersController < ApplicationController
         {data: "number"},
         {data: "name"}
       ],
+      autoColumnSize: true,
       minSpareRows: 1,
       contextMenu: ["remove_row"]
     }
