@@ -132,4 +132,15 @@ class MembersMonthsController < ApplicationController
     def members_month_params
       params.require(:members_month).permit(:member_id, :month, :cost)
     end
+
+    def months_columns
+      months.map do |m|
+        {
+          data: m,
+          disableVisualSelection: true,
+          readOnly: true
+        }
+      end
+    end
+
 end
