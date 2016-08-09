@@ -7,6 +7,7 @@ class @VueFactory
       created: ->
         @resource = new Resource name
         options = if gon[name] then gon[name].options else gon.options
+        options.fillHandle = false
         @hot = new Table name, options, @records, @onChange, @onDelete
 
       methods:
@@ -39,7 +40,7 @@ class @VueFactory
 class Resource
   constructor: (name) -> @resource = Vue.resource "#{name}{/id}"
   handleNormal: (response) -> console.log response.data
-  handleError: (response) -> alert response.data.join("\n")
+  handleError: (response) -> alert response.data
   get: (cb) -> @resource.get().then(cb, @handleError)
   update: (record,prop,newVal) ->
     params = {}

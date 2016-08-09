@@ -128,33 +128,44 @@ class ProjectsMembersMonthsController < ApplicationController
   # PATCH/PUT /projects_members_months/1
   # PATCH/PUT /projects_members_months/1.json
   def update
-    @status = true
 
-    projects_members_month_params.each do |month,cost|
-      @allocation = @projects_member.projects_members_months.find_by(month:month)
+    # アサイン先メンバーの変更
+    if params.has_key? :member_name
+      @projects_member.member = Member.find_by(name: params[:member_name])
+      if @projects_member.save
+        render json: @projects_member, status: :ok
+      else
+        render json: @projects_member.errors.full_messages, status: :unprocessable_entity
+      end
+
+    # アサインに紐づいた月別の工数を変更
+    else
+      month = projects_members_month_params.keys.try(:first)
+      cost = projects_members_month_params.values.try(:first)
+
+      @allocation = ProjectsMembersMonth.find_by(projects_member: @projects_member, month: month)
+
+      # 工数を更新
       if @allocation
         if cost.to_f > 0
-          @allocation.cost = cost
-          @status = @allocation.save
+          if @allocation.update(cost: cost)
+            render json: @allocation, status: :ok
+          else
+            render json: @allocation.errors.full_messages, status: :unprocessable_entity
+          end
         else
-          @status = @allocation.destroy
+          @allocation.destroy
+          head :no_content
         end
-      else
-        @allocation = ProjectsMembersMonth.new
-        @allocation.projects_member = @projects_member
-        @allocation.month = month
-        @allocation.cost = cost
-        @status = @allocation.save
-      end
-    end
 
-    respond_to do |format|
-      if @status
-        format.html { render :edit }
-        format.json { render json: @allocation, status: :ok}
+      # 工数を登録
       else
-        format.html { redirect_to @projects_monthly_allocation, notice: 'Projects monthly allocation was successfully updated.' }
-        format.json { render json: @allocation.errors.full_messages, status: :unprocessable_entity }
+        @allocation = ProjectsMembersMonth.new(projects_member: @projects_member, month: month, cost: cost)
+        if @allocation.save
+          render json: @allocation, status: :ok
+        else
+          render json: @allocation.errors.full_messages, status: :unprocessable_entity
+        end
       end
     end
 
