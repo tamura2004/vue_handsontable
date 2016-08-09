@@ -14,6 +14,7 @@ class MembersController < ApplicationController
       from members
       left join groups on members.group_id = groups.id
       left join job_titles on members.job_title_id = job_titles.id
+      order by group_id, job_title_id, number, name
     SQL
 
     gon.options = {
