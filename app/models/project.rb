@@ -5,6 +5,8 @@ class Project < ApplicationRecord
 
   attr_accessor :group_name
 
+  validates :name, presence: true
+
   before_save do
     if group_name.present?
       self.group = Group.find_or_create_by(name: group_name)

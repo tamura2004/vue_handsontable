@@ -124,7 +124,8 @@ class MembersProjectsMonthsController < ApplicationController
     # レコードidがnilの場合呼ばれる
     # その場合、案件と要員のアサインを作成する
 
-    project = Project.find_or_create_by(name: members_projects_month_params[:project_name])
+    # project = Project.find_or_create_by(name: members_projects_month_params[:project_name])
+    project = Project.find_by(name: members_projects_month_params[:project_name])
 
     @projects_member = ProjectsMember.new(project:project,member:@member)
 

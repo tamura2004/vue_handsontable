@@ -16,4 +16,8 @@ class Member < ApplicationRecord
     end
   end
 
+  def full_name
+    "#{job_title.name} #{name}"
+  end
+
 end
