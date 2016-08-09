@@ -28,7 +28,7 @@ class ProjectsController < ApplicationController
         },
         {data: "number"},
         {
-          width: 450,
+          width: 400,
           data: "name"
         },
         {data: "cost"},
