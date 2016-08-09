@@ -21,7 +21,7 @@ class MembersController < ApplicationController
       colHeaders: ["所属", "職位", "社員番号", "氏名"],
       columns: [
         {
-          width: 150,
+          width: 180,
           data: "group_name",
           type: "dropdown",
           source: Group.pluck(:name)
