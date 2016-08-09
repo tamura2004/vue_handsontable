@@ -93,7 +93,7 @@ class MembersMonthsController < ApplicationController
         format.json { render :show, status: :created, location: @members_month }
       else
         format.html { render :new }
-        format.json { render json: @members_month.errors, status: :unprocessable_entity }
+        format.json { render json: @members_month.errors.full_messages, status: :unprocessable_entity }
       end
     end
   end
@@ -107,7 +107,7 @@ class MembersMonthsController < ApplicationController
         format.json { render :show, status: :ok, location: @members_month }
       else
         format.html { render :edit }
-        format.json { render json: @members_month.errors, status: :unprocessable_entity }
+        format.json { render json: @members_month.errors.full_messages, status: :unprocessable_entity }
       end
     end
   end

@@ -32,7 +32,7 @@ class ProjectsMembersController < ApplicationController
         format.json { render :show, status: :created, location: @projects_member }
       else
         format.html { render :new }
-        format.json { render json: @projects_member.errors, status: :unprocessable_entity }
+        format.json { render json: @projects_member.errors.full_messages, status: :unprocessable_entity }
       end
     end
   end
@@ -46,7 +46,7 @@ class ProjectsMembersController < ApplicationController
         format.json { render :show, status: :ok, location: @projects_member }
       else
         format.html { render :edit }
-        format.json { render json: @projects_member.errors, status: :unprocessable_entity }
+        format.json { render json: @projects_member.errors.full_messages, status: :unprocessable_entity }
       end
     end
   end

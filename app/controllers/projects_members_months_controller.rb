@@ -119,7 +119,7 @@ class ProjectsMembersMonthsController < ApplicationController
         format.json { render json: @projects_member}
       else
         format.html { render :new }
-        format.json { render json: @projects_member.errors, status: :unprocessable_entity }
+        format.json { render json: @projects_member.errors.full_messages, status: :unprocessable_entity }
       end
     end
   end
@@ -127,32 +127,33 @@ class ProjectsMembersMonthsController < ApplicationController
   # PATCH/PUT /projects_members_months/1
   # PATCH/PUT /projects_members_months/1.json
   def update
-    error = false
+    @status = true
+
     projects_members_month_params.each do |month,cost|
       @allocation = @projects_member.projects_members_months.find_by(month:month)
       if @allocation
         if cost.to_f > 0
           @allocation.cost = cost
-          @allocation.save
+          @status = @allocation.save
         else
-          @allocation.destroy
+          @status = @allocation.destroy
         end
       else
         @allocation = ProjectsMembersMonth.new
         @allocation.projects_member = @projects_member
         @allocation.month = month
         @allocation.cost = cost
-        @allocation.save
+        @status = @allocation.save
       end
     end
 
     respond_to do |format|
-      if error
+      if @status
         format.html { render :edit }
-        format.json { head :no_content }
+        format.json { render json: @allocation, status: :ok}
       else
-        format.html { redirect_to @allocation, notice: 'successfully updated.' }
-        format.json { head :no_content }
+        format.html { redirect_to @projects_monthly_allocation, notice: 'Projects monthly allocation was successfully updated.' }
+        format.json { render json: @allocation.errors.full_messages, status: :unprocessable_entity }
       end
     end
 

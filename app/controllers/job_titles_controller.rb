@@ -40,7 +40,7 @@ class JobTitlesController < ApplicationController
         format.json { render :show, status: :created, location: @job_title }
       else
         format.html { render :new }
-        format.json { render json: @job_title.errors, status: :unprocessable_entity }
+        format.json { render json: @job_title.errors.full_messages, status: :unprocessable_entity }
       end
     end
   end
@@ -54,7 +54,7 @@ class JobTitlesController < ApplicationController
         format.json { render :show, status: :ok, location: @job_title }
       else
         format.html { render :edit }
-        format.json { render json: @job_title.errors, status: :unprocessable_entity }
+        format.json { render json: @job_title.errors.full_messages, status: :unprocessable_entity }
       end
     end
   end

@@ -54,7 +54,7 @@ class GroupsController < ApplicationController
         format.json { render :show, status: :created, location: @group }
       else
         format.html { render :new }
-        format.json { render json: @group.errors, status: :unprocessable_entity }
+        format.json { render json: @group.errors.full_messages, status: :unprocessable_entity }
       end
     end
   end
@@ -68,7 +68,7 @@ class GroupsController < ApplicationController
         format.json { render :show, status: :ok, location: @group }
       else
         format.html { render :edit }
-        format.json { render json: @group.errors, status: :unprocessable_entity }
+        format.json { render json: @group.errors.full_messages, status: :unprocessable_entity }
       end
     end
   end

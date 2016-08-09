@@ -100,7 +100,7 @@ class ProjectsMonthlyAllocationsController < ApplicationController
         format.json { render :show, status: :created, location: @projects_monthly_allocation }
       else
         format.html { render :new }
-        format.json { render json: @projects_monthly_allocation.errors, status: :unprocessable_entity }
+        format.json { render json: @projects_monthly_allocation.errors.full_messages, status: :unprocessable_entity }
       end
     end
   end
@@ -109,32 +109,33 @@ class ProjectsMonthlyAllocationsController < ApplicationController
   # PATCH/PUT /projects_monthly_allocations/1.json
   def update
 
-    error = false
+    @status = true
+
     projects_monthly_allocation_params.each do |month,cost|
-      allocation = @project.projects_monthly_allocations.find_by(month: month)
-      if allocation
+      @allocation = @project.projects_monthly_allocations.find_by(month: month)
+      if @allocation
         if cost.to_f > 0
-          allocation.cost = cost
-          allocation.save
+          @allocation.cost = cost
+          @status = @allocation.save
         else
-          allocation.destroy
+          @status = @allocation.destroy
         end
       else
-        allocation = ProjectsMonthlyAllocation.new
-        allocation.project = @project
-        allocation.month = month
-        allocation.cost = cost
-        allocation.save
+        @allocation = ProjectsMonthlyAllocation.new
+        @allocation.project = @project
+        @allocation.month = month
+        @allocation.cost = cost
+        @status = @allocation.save
       end
     end
 
     respond_to do |format|
-      if error
+      if @status
         format.html { render :edit }
-        format.json { head :no_content }
+        format.json { render json: @allocation, status: :ok}
       else
         format.html { redirect_to @projects_monthly_allocation, notice: 'Projects monthly allocation was successfully updated.' }
-        format.json { head :no_content }
+        format.json { render json: @allocation.errors.full_messages, status: :unprocessable_entity }
       end
     end
 

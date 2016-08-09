@@ -134,7 +134,7 @@ class MembersProjectsMonthsController < ApplicationController
         format.json { render json: @projects_member }
       else
         format.html { render :new }
-        format.json { render json: @projects_member.errors, status: :unprocessable_entity }
+        format.json { render json: @projects_member.errors.full_messages, status: :unprocessable_entity }
       end
     end
   end
