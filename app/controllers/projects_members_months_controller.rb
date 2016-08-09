@@ -10,7 +10,7 @@ class ProjectsMembersMonthsController < ApplicationController
     result["id"] = @project.id
     result["number"] = @project.number
     result["name"] = @project.name
-    result["cost"] = @project.name
+    result["cost"] = @project.cost
     @project.projects_monthly_allocations.each do |allocation|
       result[allocation.month] = allocation.cost
     end
