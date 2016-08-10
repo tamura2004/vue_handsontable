@@ -36,7 +36,6 @@ class ProjectsMembersMonthsController < ApplicationController
           readOnly: true,
         },
         {
-          width: 400,
           data: "name",
           disableVisualSelection: true,
           readOnly: true,
@@ -78,7 +77,6 @@ class ProjectsMembersMonthsController < ApplicationController
       ],
       columns: [
         {
-          width: 150,
           data: "member_name",
           type: "dropdown",
           source: Member.pluck(:name)

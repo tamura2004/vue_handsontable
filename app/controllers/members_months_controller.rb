@@ -40,7 +40,6 @@ class MembersMonthsController < ApplicationController
       ],
       columns: [
         {
-          width: 150,
           data: "group_name",
           disableVisualSelection: true,
           readOnly: true,

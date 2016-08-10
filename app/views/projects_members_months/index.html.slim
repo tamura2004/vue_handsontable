@@ -2,7 +2,7 @@ ol.breadcrumb
   li
     = link_to "ホーム", root_path
   li
-    = link_to "稼働予定", root_path
+    = link_to "月別工数見込み", projects_monthly_allocations_path
   li
     = link_to "案件別一覧", projects_monthly_allocations_path
   li.active = "#{@project.number} #{@project.name}"
