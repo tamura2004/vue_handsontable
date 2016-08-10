@@ -8,6 +8,8 @@ class @VueFactory
         @resource = new Resource name
         options = if gon[name] then gon[name].options else gon.options
         options.fillHandle = false
+        options.wordWrap = false
+
         @hot = new Table name, options, @records, @onChange, @onDelete
 
       methods:

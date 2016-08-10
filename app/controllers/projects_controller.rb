@@ -14,6 +14,7 @@ class ProjectsController < ApplicationController
         rd
       from projects
       left join groups on projects.group_id = groups.id
+      order by group_id, number
     SQL
 
     gon.options = {
@@ -21,14 +22,14 @@ class ProjectsController < ApplicationController
       colHeaders: ["グループ", "案件管理番号", "案件名", "承認原価", "要件定義工数"],
       columns: [
         {
-          width: 150,
+          # width: 160,
           data: "group_name",
           type: "dropdown",
           source: Group.pluck(:name)
         },
         {data: "number"},
         {
-          width: 400,
+          # width: 400,
           data: "name"
         },
         {data: "cost"},
