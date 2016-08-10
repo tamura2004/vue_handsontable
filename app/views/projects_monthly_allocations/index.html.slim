@@ -1,9 +1,6 @@
-ol.breadcrumb
-  li
-    = link_to "ホーム", root_path
-  li
-    = link_to "稼働予定", root_path
-  li.active 案件別一覧
+ul.nav.nav-tabs
+  li = link_to "要員別一覧", members_months_path
+  li.active = link_to "案件別一覧", projects_monthly_allocations_path
 
 #projects_monthly_allocations
 coffee:

@@ -1,9 +1,9 @@
-ol.breadcrumb
-  li
-    = link_to "ホーム", root_path
-  li
-    = link_to "マスター管理", root_path
-  li.active 要員一覧
+ul.nav.nav-tabs
+  li = link_to "部", departments_path
+  li = link_to "グループ", groups_path
+  li = link_to "案件", projects_path
+  li.active = link_to "要員", members_path
+  li = link_to "職位", job_titles_path
 
 #members
 coffee:

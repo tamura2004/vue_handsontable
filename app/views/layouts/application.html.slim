@@ -14,16 +14,8 @@ html lang="en"
   body
     = nav_bar fixed: :top, brand: "工数見込集計", responsice: true
       = menu_group
-        = drop_down "月別工数見込"
-          = menu_item "案件一覧", projects_monthly_allocations_path
-          = menu_item "要員一覧", members_months_path
-
-        = drop_down "マスター管理"
-          = menu_item "部", departments_path
-          = menu_item "グループ", groups_path
-          = menu_item "案件", projects_path
-          = menu_item "要員", members_path
-          = menu_item "職位", job_titles_path
+        = menu_item "月別工数見込", projects_monthly_allocations_path
+        = menu_item "マスター管理", projects_path
 
     .container
       .row
