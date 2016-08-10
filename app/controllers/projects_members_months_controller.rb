@@ -79,7 +79,7 @@ class ProjectsMembersMonthsController < ApplicationController
         {
           data: "member_name",
           type: "dropdown",
-          source: Member.pluck(:name)
+          source: Member.order(:group_id,:job_title_id,:number).pluck(:name)
         },
         *months_columns
       ],

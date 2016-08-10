@@ -14,6 +14,7 @@ html lang="en"
   body
     = nav_bar fixed: :top, brand: "工数見込集計", responsice: true
       = menu_group
+        = menu_divider
         = menu_item "月別工数見込", projects_monthly_allocations_path
         = menu_item "マスター管理", projects_path
 

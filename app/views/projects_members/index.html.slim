@@ -1,23 +1,13 @@
-h1 Listing projects_members
+#app v-text="message"
 
-table
-  thead
-    tr
-      th Project
-      th Member
-      th
-      th
-      th
+- message = "hello ruby to coffee"
 
-  tbody
-    - @projects_members.each do |projects_member|
-      tr
-        td = projects_member.project
-        td = projects_member.member
-        td = link_to 'Show', projects_member
-        td = link_to 'Edit', edit_projects_member_path(projects_member)
-        td = link_to 'Destroy', projects_member, data: { confirm: 'Are you sure?' }, method: :delete
+javascript:
+  document.message = #{message.to_json}
 
-br
-
-= link_to 'New Projects member', new_projects_member_path
+coffee:
+  $ ->
+    new Vue
+      el: "#app"
+      data:
+        message: document.message
