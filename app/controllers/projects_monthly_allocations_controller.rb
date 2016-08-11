@@ -10,8 +10,11 @@ class ProjectsMonthlyAllocationsController < ApplicationController
     Project.order(:number).each do |project|
       result = {}
       result["id"] = project.id
-      result["project_number"] = "<a href='/projects/#{project.id}/projects_members_months'>#{project.number}</a>"
-      result["project_name"] = "<a href='/projects/#{project.id}/projects_members_months'>#{project.name}</a>"
+
+      path = project_members_allocations_path(project)
+      result["project_number"] = view_context.link_to project.number, path
+      result["project_name"] = view_context.link_to project.name, path
+
       result["cost"] = project.cost
 
       sum = 0

@@ -39,7 +39,7 @@ class @VueFactory
             return unless record.id?
             @resource.delete record.id
 
-class Resource
+class @Resource
   constructor: (name) -> @resource = Vue.resource "#{name}{/id}"
   handleNormal: (response) -> console.log response.data
   handleError: (response) -> alert response.data

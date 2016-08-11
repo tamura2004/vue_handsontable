@@ -68,8 +68,8 @@ class MembersProjectsMonthsController < ApplicationController
     @member.projects_members.each do |assignment|
       result = {}
       result["id"] = assignment.id
-      result["project_number"] = assignment.project.number
-      result["project_name"] = assignment.project.name
+      result["project_number"] = assignment.project.try(:number)
+      result["project_name"] = assignment.project.try(:name)
 
       ProjectsMembersMonth.where(projects_member: assignment).each do |allocation|
         result[allocation.month] = allocation.cost
