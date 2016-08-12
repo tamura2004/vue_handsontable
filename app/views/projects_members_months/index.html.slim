@@ -9,10 +9,10 @@ ol.breadcrumb
 
 #allocations
 hr
-#projects_members_months
+#members_allocations
 hr
 = link_to "要員一括アサイン", project_assignments_path(@project), class: "btn btn-primary"
 coffee:
   $ ->
     VueFactory.create "allocations"
-    VueFactory.create "projects_members_months"
+    VueFactory.create "members_allocations"
