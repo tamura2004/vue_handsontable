@@ -7,12 +7,12 @@ ol.breadcrumb
     = link_to "案件別一覧", project_allocations_path
   li.active = "#{@project.number} #{@project.name}"
 
-#projects_monthly_allocations
+#allocations
 hr
 #projects_members_months
 hr
 = link_to "要員一括アサイン", project_assignments_path(@project), class: "btn btn-primary"
 coffee:
   $ ->
-    VueFactory.create "projects_monthly_allocations"
+    VueFactory.create "allocations"
     VueFactory.create "projects_members_months"

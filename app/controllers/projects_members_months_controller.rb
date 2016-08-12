@@ -14,9 +14,9 @@ class ProjectsMembersMonthsController < ApplicationController
     @project.projects_monthly_allocations.each do |allocation|
       result[allocation.month] = allocation.cost
     end
-    gon.projects_monthly_allocations = {}
-    gon.projects_monthly_allocations[:records] = [result]
-    gon.projects_monthly_allocations[:options] = {
+    gon.allocations = {}
+    gon.allocations[:records] = [result]
+    gon.allocations[:options] = {
       dataSchema: months_schema.merge(
         id:nil,
         number:nil,
