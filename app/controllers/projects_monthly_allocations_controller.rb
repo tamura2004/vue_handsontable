@@ -123,11 +123,13 @@ class ProjectsMonthlyAllocationsController < ApplicationController
           @status = @allocation.destroy
         end
       else
-        @allocation = ProjectsMonthlyAllocation.new
-        @allocation.project = @project
-        @allocation.month = month
-        @allocation.cost = cost
-        @status = @allocation.save
+        if cost.to_f > 0
+          @allocation = ProjectsMonthlyAllocation.new
+          @allocation.project = @project
+          @allocation.month = month
+          @allocation.cost = cost
+          @status = @allocation.save
+        end
       end
     end
 
