@@ -69,6 +69,7 @@ class ProjectsMonthlyAllocationsController < ApplicationController
       from(
         select
           a.id as id,
+          a.number as sortkey,
           '<a href="/projects/' || a.id || '/members_allocations">' || a.number || '</a>' as number,
           '<a href="/projects/' || a.id || '/members_allocations">' || a.name || '</a>' as name,
           a.cost as cost,
@@ -88,7 +89,6 @@ class ProjectsMonthlyAllocationsController < ApplicationController
         from projects as a
         left join projects_monthly_allocations as b on a.id = b.project_id
         group by a.id, a.number, a.name
-        order by a.number
       ) as c
       join(
         select
@@ -100,6 +100,7 @@ class ProjectsMonthlyAllocationsController < ApplicationController
         group by d.id
       ) as g
       on c.id = g.id
+      order by c.sortkey
     SQL
 
     gon.options = {
