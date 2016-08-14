@@ -99,6 +99,7 @@ class ProjectsMonthlyAllocationsController < ApplicationController
         group by d.id
       ) as g
       on c.id = g.id
+      order by number
     SQL
 
     gon.options = {
