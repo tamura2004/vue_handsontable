@@ -80,7 +80,7 @@ class ProjectsMonthlyAllocationsController < ApplicationController
 
     p = ProjectsMonthlyAllocation.group(:month).sum(:cost)
     m = ProjectsMembersMonth.group(:month).sum(:cost)
-    d = (p.keys|m.keys).map{|k|[k,p[k].to_i - m[k].to_i]}.to_h
+    d = (p.keys|m.keys).map{|k|[k,p[k].to_f - m[k].to_f]}.to_h
 
     pt = ProjectsMonthlyAllocation.sum(:cost)
     mt = ProjectsMembersMonth.sum(:cost)
