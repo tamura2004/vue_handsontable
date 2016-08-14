@@ -16,7 +16,7 @@ class MembersMonthsController < ApplicationController
 
       member.projects_members.each do |assignment|
         assignment.projects_members_months.each do |allocation|
-          result["m"+allocation.month] += allocation.cost.to_f
+          result[allocation.month] += allocation.cost.to_f
         end
       end
       results << result

@@ -12,7 +12,7 @@ class ProjectsMembersMonthsController < ApplicationController
     result["name"] = @project.name
     result["cost"] = @project.cost
     @project.projects_monthly_allocations.each do |allocation|
-      result["m"+allocation.month] = allocation.cost
+      result[allocation.month] = allocation.cost
     end
     gon.allocations = {}
     gon.allocations[:records] = [result]
@@ -59,7 +59,7 @@ class ProjectsMembersMonthsController < ApplicationController
       result["member_name"] = assignment.member.name
 
       ProjectsMembersMonth.where(projects_member: assignment).each do |allocation|
-        result["m"+allocation.month] = allocation.cost
+        result[allocation.month] = allocation.cost
       end
       results << result
     end

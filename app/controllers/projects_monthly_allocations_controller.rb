@@ -65,37 +65,40 @@ class ProjectsMonthlyAllocationsController < ApplicationController
     # end
 
     gon.records = ProjectsMonthlyAllocation.connection.select_all(<<-SQL).to_a
-      select
-        a.id as id,
-        '<a href="/projects/' || a.id || '/members_allocations">' || a.number || '</a>' as number,
-        '<a href="/projects/' || a.id || '/members_allocations">' || a.name || '</a>' as name,
-        a.cost as cost,
-        sum(b.cost) as monthly_allocated_cost,
-        f.cost as member_allocated_cost,
-        sum(case when b.month = '201608' then b.cost end) as m201608,
-        sum(case when b.month = '201609' then b.cost end) as m201609,
-        sum(case when b.month = '201610' then b.cost end) as m201610,
-        sum(case when b.month = '201611' then b.cost end) as m201611,
-        sum(case when b.month = '201612' then b.cost end) as m201612,
-        sum(case when b.month = '201701' then b.cost end) as m201701,
-        sum(case when b.month = '201702' then b.cost end) as m201702,
-        sum(case when b.month = '201703' then b.cost end) as m201703,
-        sum(case when b.month = '201704' then b.cost end) as m201704,
-        sum(case when b.month = '201705' then b.cost end) as m201705,
-        sum(case when b.month = '201706' then b.cost end) as m201706,
-        sum(case when b.month = '201707' then b.cost end) as m201707
-      from projects as a
-      left join projects_monthly_allocations as b on a.id = b.project_id
-      left join (
+      select *
+      from(
         select
-          c.id as id,
-          sum(e.cost) as cost
-        from projects as c
-        left join projects_members as d on c.id = d.project_id
-        left join projects_members_months as e on d.id = e.projects_member_id
-        group by c.id
-      ) as f on a.id = f.id
-      group by a.id
+          a.id as id,
+          '<a href="/projects/' || a.id || '/members_allocations">' || a.number || '</a>' as number,
+          '<a href="/projects/' || a.id || '/members_allocations">' || a.name || '</a>' as name,
+          a.cost as cost,
+          sum(b.cost) as monthly_allocated_cost,
+          sum(case when b.month = '201608' then b.cost end) as "201608",
+          sum(case when b.month = '201609' then b.cost end) as "201609",
+          sum(case when b.month = '201610' then b.cost end) as "201610",
+          sum(case when b.month = '201611' then b.cost end) as "201611",
+          sum(case when b.month = '201612' then b.cost end) as "201612",
+          sum(case when b.month = '201701' then b.cost end) as "201701",
+          sum(case when b.month = '201702' then b.cost end) as "201702",
+          sum(case when b.month = '201703' then b.cost end) as "201703",
+          sum(case when b.month = '201704' then b.cost end) as "201704",
+          sum(case when b.month = '201705' then b.cost end) as "201705",
+          sum(case when b.month = '201706' then b.cost end) as "201706",
+          sum(case when b.month = '201707' then b.cost end) as "201707"
+        from projects as a
+        left join projects_monthly_allocations as b on a.id = b.project_id
+        group by a.id
+      ) as c
+      join(
+        select
+          d.id as id,
+          sum(f.cost) as member_allocated_cost
+        from projects as d
+        left join projects_members as e on d.id = e.project_id
+        left join projects_members_months as f on e.id = f.projects_member_id
+        group by d.id
+      ) as g
+      on c.id = g.id
     SQL
 
     gon.options = {
@@ -154,8 +157,8 @@ class ProjectsMonthlyAllocationsController < ApplicationController
     p = ProjectsMonthlyAllocation.group(:month).sum(:cost)
     m = ProjectsMembersMonth.group(:month).sum(:cost)
 
-    p = p.map{|k,v|["m"+k,v]}.to_h
-    m = m.map{|k,v|["m"+k,v]}.to_h
+    p = p.map{|k,v|[k,v]}.to_h
+    m = m.map{|k,v|[k,v]}.to_h
 
     d = (p.keys|m.keys).map{|k|[k,p[k].to_f - m[k].to_f]}.to_h
 
