@@ -88,6 +88,7 @@ class ProjectsMonthlyAllocationsController < ApplicationController
         from projects as a
         left join projects_monthly_allocations as b on a.id = b.project_id
         group by a.id
+        order by a.number
       ) as c
       join(
         select
@@ -99,7 +100,6 @@ class ProjectsMonthlyAllocationsController < ApplicationController
         group by d.id
       ) as g
       on c.id = g.id
-      order by number
     SQL
 
     gon.options = {
