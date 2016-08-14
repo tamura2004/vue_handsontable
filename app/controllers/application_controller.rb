@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
     end
 
     def months_values
-      months.map{|m|m.strftime("%Y%m")}
+      months.map{|m|m.strftime("m%Y%m")}
     end
 
     def months_symbols

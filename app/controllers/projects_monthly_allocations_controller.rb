@@ -72,18 +72,18 @@ class ProjectsMonthlyAllocationsController < ApplicationController
         a.cost as cost,
         sum(b.cost) as monthly_allocated_cost,
         sum(d.cost) as member_allocated_cost,
-        sum(case when b.month = '201608' then b.cost end) as '201608',
-        sum(case when b.month = '201609' then b.cost end) as '201609',
-        sum(case when b.month = '201610' then b.cost end) as '201610',
-        sum(case when b.month = '201611' then b.cost end) as '201611',
-        sum(case when b.month = '201612' then b.cost end) as '201612',
-        sum(case when b.month = '201701' then b.cost end) as '201701',
-        sum(case when b.month = '201702' then b.cost end) as '201702',
-        sum(case when b.month = '201703' then b.cost end) as '201703',
-        sum(case when b.month = '201704' then b.cost end) as '201704',
-        sum(case when b.month = '201705' then b.cost end) as '201705',
-        sum(case when b.month = '201706' then b.cost end) as '201706',
-        sum(case when b.month = '201707' then b.cost end) as '201707'
+        sum(case when b.month = '201608' then b.cost end) as 'm201608',
+        sum(case when b.month = '201609' then b.cost end) as 'm201609',
+        sum(case when b.month = '201610' then b.cost end) as 'm201610',
+        sum(case when b.month = '201611' then b.cost end) as 'm201611',
+        sum(case when b.month = '201612' then b.cost end) as 'm201612',
+        sum(case when b.month = '201701' then b.cost end) as 'm201701',
+        sum(case when b.month = '201702' then b.cost end) as 'm201702',
+        sum(case when b.month = '201703' then b.cost end) as 'm201703',
+        sum(case when b.month = '201704' then b.cost end) as 'm201704',
+        sum(case when b.month = '201705' then b.cost end) as 'm201705',
+        sum(case when b.month = '201706' then b.cost end) as 'm201706',
+        sum(case when b.month = '201707' then b.cost end) as 'm201707'
       from projects as a
       left join projects_monthly_allocations as b on a.id = b.project_id
       left join projects_members as c on a.id = c.project_id
@@ -146,6 +146,10 @@ class ProjectsMonthlyAllocationsController < ApplicationController
 
     p = ProjectsMonthlyAllocation.group(:month).sum(:cost)
     m = ProjectsMembersMonth.group(:month).sum(:cost)
+
+    p = p.map{|k,v|["m"+k,v]}.to_h
+    m = m.map{|k,v|["m"+k,v]}.to_h
+
     d = (p.keys|m.keys).map{|k|[k,p[k].to_f - m[k].to_f]}.to_h
 
     pt = ProjectsMonthlyAllocation.sum(:cost)
