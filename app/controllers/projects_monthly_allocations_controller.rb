@@ -87,7 +87,7 @@ class ProjectsMonthlyAllocationsController < ApplicationController
           sum(case when b.month = '201707' then b.cost end) as "201707"
         from projects as a
         left join projects_monthly_allocations as b on a.id = b.project_id
-        group by a.id
+        group by a.id, a.number, a.name
         order by a.number
       ) as c
       join(
