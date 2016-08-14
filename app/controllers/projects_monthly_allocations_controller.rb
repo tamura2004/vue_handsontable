@@ -71,7 +71,7 @@ class ProjectsMonthlyAllocationsController < ApplicationController
         '<a href="/projects/' || a.id || '/members_allocations">' || a.name || '</a>' as name,
         a.cost as cost,
         sum(b.cost) as monthly_allocated_cost,
-        sum(d.cost) as member_allocated_cost,
+        f.cost as member_allocated_cost,
         sum(case when b.month = '201608' then b.cost end) as m201608,
         sum(case when b.month = '201609' then b.cost end) as m201609,
         sum(case when b.month = '201610' then b.cost end) as m201610,
@@ -86,8 +86,15 @@ class ProjectsMonthlyAllocationsController < ApplicationController
         sum(case when b.month = '201707' then b.cost end) as m201707
       from projects as a
       left join projects_monthly_allocations as b on a.id = b.project_id
-      left join projects_members as c on a.id = c.project_id
-      left join projects_members_months as d on c.id = d.projects_member_id
+      left join (
+        select
+          c.id as id,
+          sum(e.cost) as cost
+        from projects as c
+        left join projects_members as d on c.id = d.project_id
+        left join projects_members_months as e on d.id = e.projects_member_id
+        group by c.id
+      ) as f on a.id = f.id
       group by a.id
     SQL
 
