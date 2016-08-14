@@ -75,6 +75,58 @@ class ProjectsMonthlyAllocationsController < ApplicationController
       ],
     }
 
+
+    gon.projects_total = {}
+
+    p = ProjectsMonthlyAllocation.group(:month).sum(:cost)
+    m = ProjectsMembersMonth.group(:month).sum(:cost)
+    d = (p.keys|m.keys).map{|k|[k,p[k].to_i - m[k].to_i]}.to_h
+
+    pt = ProjectsMonthlyAllocation.sum(:cost)
+    mt = ProjectsMembersMonth.sum(:cost)
+    dt = pt - mt
+
+    gon.projects_total["records"] = [
+      p.merge(
+        name: "案件原価合計",
+        total: pt
+      ),
+      m.merge(
+        name: "要員割当合計",
+        total: mt
+      ),
+      d.merge(
+        name: "未割当",
+        total: dt
+      )
+    ]
+
+    gon.projects_total["options"] = {
+      dataSchema: months_schema.merge(
+        name:nil,
+        total:nil
+      ),
+      colHeaders: [
+        "区分",
+        "合計",
+        *months_headers
+      ],
+      columns: [
+        {
+          data: "name",
+          readOnly: true
+        },
+        {
+          data: "total",
+          readOnly: true,
+          type: "numeric",
+          format: "0.00"
+        },
+        *months_columns
+      ],
+    }
+
+
   end
 
   # GET /projects_monthly_allocations/1
