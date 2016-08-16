@@ -43,6 +43,14 @@ class ApplicationController < ActionController::Base
       end
     end
 
+    def months_pivot_sql
+      months_values.map{|month|
+        <<-"SQL"
+          sum(case when month = '#{month}' then cost end) as "#{month}"
+        SQL
+      }.join(",")
+    end
+
     def months_schema
       Hash[months_values.map{|m|[m,nil]}]
     end

@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :groups_projects
+
   resources :departments , except: [:new,:edit]
   resources :groups      , except: [:new,:edit]
   resources :job_titles  , except: [:new,:edit]
