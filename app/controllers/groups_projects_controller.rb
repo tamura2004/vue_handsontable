@@ -31,7 +31,7 @@ class GroupsProjectsController < ApplicationController
           ) as costs
           inner join projects on projects.id = project_id
           inner join groups on groups.id = group_id
-        )
+        ) as tmp
       group by name,label
     SQL
 
