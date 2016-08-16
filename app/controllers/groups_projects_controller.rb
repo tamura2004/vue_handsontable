@@ -15,14 +15,14 @@ class GroupsProjectsController < ApplicationController
             costs.cost
           from (
             select
-              "案件" as label,
+              '案件' as label,
               project_id,
               month,
               cost
             from projects_monthly_allocations
             union all
             select
-              "要員" as label,
+              '要員' as label,
               project_id,
               month,
               cost
