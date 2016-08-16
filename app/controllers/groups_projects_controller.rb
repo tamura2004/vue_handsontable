@@ -65,4 +65,25 @@ class GroupsProjectsController < ApplicationController
     }
 
   end
+
+  private
+
+    def pivot(records, column_key, value_key)
+      results = []
+
+      hashs.map do |hash|
+        column = hash.delete(column_key)
+        value = hash.delete(value_key)
+
+        [hash,column,value]
+      
+      end
+
+
+
+
+
+
+
+    end
 end
