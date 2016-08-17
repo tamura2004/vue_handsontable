@@ -1,6 +1,16 @@
 class GroupsProjectsController < ApplicationController
   def index
 
+
+    ProjectMonthlyAllocation.joins(:groups).group(group: {:id,:name}).select(<<-SQL)
+      groups.name as group_name,
+      '案件工数集計' as label,
+      month,
+      projects_monthly_allocations.cost as cost
+    SQL
+
+
+
     gon.records = Project.connection.select_all(<<-"SQL").to_a
       select
         name,
@@ -76,7 +86,7 @@ class GroupsProjectsController < ApplicationController
         value = hash.delete(value_key)
 
         [hash,column,value]
-      
+
       end
 
 
