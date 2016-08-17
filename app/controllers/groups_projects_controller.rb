@@ -1,99 +1,23 @@
 class GroupsProjectsController < ApplicationController
   def index
 
-
-    ProjectMonthlyAllocation.joins(:groups).group(group: {:id,:name}).select(<<-SQL)
-      groups.name as group_name,
-      '案件工数集計' as label,
-      month,
-      projects_monthly_allocations.cost as cost
-    SQL
-
-
-
-    gon.records = Project.connection.select_all(<<-"SQL").to_a
-      select
-        name,
-        label,
-        sum(cost) as total,
-        #{months_pivot_sql}
-      from (
-          select
-            groups.name as name,
-            label,
-            month,
-            costs.cost
-          from (
-            select
-              '案件' as label,
-              project_id,
-              month,
-              cost
-            from projects_monthly_allocations
-            union all
-            select
-              '要員' as label,
-              project_id,
-              month,
-              cost
-            from projects_members
-            inner join projects_members_months on projects_members.id = projects_member_id
-          ) as costs
-          inner join projects on projects.id = project_id
-          inner join groups on groups.id = group_id
-        ) as tmp
-      group by name,label
-    SQL
+    gon.records =
+      ProjectsMonthlyAllocation.pivot(:group_id).push
+        ProjectsMonthlyAllocation.pivot_total_row
 
     gon.options = {
-      dataSchema: months_schema.merge(
-        name: nil,
-        label: nil,
-        total: nil
-      ),
       colHeaders: [
         "グループ名",
-        "区分",
-        "合計",
-        *months_headers
+        *months_headers,
+        "合計"
       ],
       columns: [
-        {
-          data: "name"
-        },
-        {
-          data: "label"
-        },
-        {
-          type: "numeric",
-          format: "0.0",
-          data: "total",
-          readOnly: true
-        },
-        *months_columns
+        {data: "group_name"},
+        *months_columns,
+        {data: "total", type: "numeric", format: "0.0"}
       ],
     }
 
   end
 
-  private
-
-    def pivot(records, column_key, value_key)
-      results = []
-
-      hashs.map do |hash|
-        column = hash.delete(column_key)
-        value = hash.delete(value_key)
-
-        [hash,column,value]
-
-      end
-
-
-
-
-
-
-
-    end
 end
