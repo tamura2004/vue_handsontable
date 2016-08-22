@@ -7,19 +7,10 @@ class WorksController < ApplicationController
   def index
     @groups = Group.all
 
-    gon.records = Member.all
-      .joins(:group)
-      .joins(:job_title)
-      .joins("left join works on members.id = works.member_id")
-      .where(group: @group)
-      .select("members.id as id")
-      .select("job_titles.name as jobs_name")
-      .select("members.number as number")
-      .select("members.name as name")
-      .select("works.month as month")
-      .select("works.cost as cost")
-      .order("members.group_id,members.job_title_id")
-      .pivot(:id)
+    gon.records = [
+      *Member.member_view.where(group: @group).pivot,
+      *Member.total_view.where(group: @group).pivot
+    ]
 
     gon.options = {
       colHeaders: [

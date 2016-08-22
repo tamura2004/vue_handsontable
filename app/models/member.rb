@@ -21,23 +21,43 @@ class Member < ApplicationRecord
     "#{job_title.name} #{name}"
   end
 
+  scope :member_view, -> {
+    joins(:group)
+    .joins(:job_title)
+    .joins("left join works on members.id = works.member_id")
+    .select(<<-SQL)
+      members.id as id,
+      job_titles.name as jobs_name,
+      members.number as number,
+      members.name as name,
+      works.month as month,
+      works.cost as cost
+    SQL
+    .order("members.group_id,members.job_title_id")
+  }
+
+  scope :total_view, -> {
+    joins(:group)
+    .joins("left join works on members.id = works.member_id")
+    .select(<<-SQL)
+      1 as id,
+      '合計' as name,
+      works.month as month,
+      sum(works.cost) as cost
+    SQL
+    .group(:month)
+  }
+
   # 月、コストにより、ピボットテーブルを作成
-  scope :pivot, -> key {
-    all.group_by(&key).map{|_,rows|
+  scope :pivot, -> {
+    all.group_by(&:id).map{|_,rows|
       init = rows.first.attributes.reject{|key,_|
         %(month cost).include? key
       }.merge total: rows.map(&:cost).sum
-      rows.inject(init) do |memo,row|
+      rows.inject(init){|memo,row|
         memo.merge row.month => row.cost
-      end
-    } + [pivot_total_row]
-  }
-
-  # 合計行
-  scope :pivot_total_row, -> {
-    all.inject(name: "合計"){|memo,row|
-      memo.merge row.month => row.cost
-    }.merge total: all.map(&:cost).sum
+      }
+    }
   }
 
 end
