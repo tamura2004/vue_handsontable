@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :costs
   resources :works
   get "init_works", to: "works#seed"
 
@@ -6,6 +7,7 @@ Rails.application.routes.draw do
 
   resources :groups,except:[:new,:edit] do
     resources :works
+    resources :costs
   end
 
   resources :departments , except: [:new,:edit]

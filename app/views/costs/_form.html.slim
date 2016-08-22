@@ -1,0 +1,18 @@
+= form_for @cost do |f|
+  - if @cost.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@cost.errors.count, "error")} prohibited this cost from being saved:"
+      ul
+        - @cost.errors.full_messages.each do |message|
+          li = message
+
+  .field
+    = f.label :project
+    = f.text_field :project
+  .field
+    = f.label :month
+    = f.text_field :month
+  .field
+    = f.label :cost
+    = f.text_field :cost
+  .actions = f.submit

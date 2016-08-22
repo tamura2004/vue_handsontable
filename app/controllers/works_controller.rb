@@ -81,18 +81,6 @@ class WorksController < ApplicationController
     end
   end
 
-  def seed
-    Member.find_each do |member|
-      months_values.each do |month|
-        @work = Work.find_by(member: member, month: month)
-        unless @work
-          Work.create(member:member,month:month,cost:1)
-        end
-      end
-    end
-    redirect_to action: "index"
-  end
-
   # DELETE /works/1
   # DELETE /works/1.json
   def destroy

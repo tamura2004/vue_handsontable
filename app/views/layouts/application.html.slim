@@ -19,6 +19,7 @@ html lang="en"
         = menu_item "マスター管理", projects_path
         = menu_item "group", groups_projects_path
         = menu_item "要員管理", group_works_path(Group.first)
+        = menu_item "案件管理", group_costs_path(Group.first)
 
     .container
       .row
