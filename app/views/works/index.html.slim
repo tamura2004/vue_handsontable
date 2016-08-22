@@ -1,0 +1,11 @@
+ul.nav.nav-tabs
+  - @groups.each do |group|
+    - if @group.id == group.id
+      li.active = link_to group.name, group_works_path(group)
+    -else
+      li = link_to group.name, group_works_path(group)
+
+#works
+coffee:
+  $ ->
+    VueFactory.create "works"

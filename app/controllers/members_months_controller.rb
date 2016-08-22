@@ -24,13 +24,13 @@ class MembersMonthsController < ApplicationController
     gon.records = results
 
     gon.options = {
-      dataSchema: months_schema.merge(
-        id:nil,
-        group_name:nil,
-        job_title_name: nil,
-        number: nil,
-        name: nil
-      ),
+      # dataSchema: months_schema.merge(
+      #   id:nil,
+      #   group_name:nil,
+      #   job_title_name: nil,
+      #   number: nil,
+      #   name: nil
+      # ),
       colHeaders: [
         "所属",
         "職位",

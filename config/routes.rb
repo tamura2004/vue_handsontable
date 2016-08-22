@@ -1,15 +1,20 @@
 Rails.application.routes.draw do
+  resources :works
+  get "init_works", to: "works#seed"
+
   resources :groups_projects
 
+  resources :groups,except:[:new,:edit] do
+    resources :works
+  end
+
   resources :departments , except: [:new,:edit]
-  resources :groups      , except: [:new,:edit]
   resources :job_titles  , except: [:new,:edit]
 
   resources :members_projects_months , except: [:new,:edit]
   resources :members_months          , except: [:new,:edit]
 
   resources :members, except: [:new,:edit] do
-
     resources :assignments, except: [:new,:edit], controller: :projects_members
     resources :members_projects_months, except: [:new,:edit]
     resources :members_months, except: [:new,:edit]

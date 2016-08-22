@@ -1,0 +1,15 @@
+p#notice = notice
+
+p
+  strong Member:
+  = @work.member
+p
+  strong Month:
+  = @work.month
+p
+  strong Cost:
+  = @work.cost
+
+= link_to 'Edit', edit_work_path(@work)
+'|
+= link_to 'Back', works_path
