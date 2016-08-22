@@ -15,8 +15,8 @@ class WorksController < ApplicationController
       .select(:number)
       .joins("left join works on members.id = works.member_id")
       .order("members.group_id,members.job_title_id")
-      .group(:jobs_name,:number,:name)
-      .pivot(:id)
+      .group(:jobs_name,:number,:name,:id)
+      .pivot(:name)
 
     gon.options = {
       colHeaders: [
