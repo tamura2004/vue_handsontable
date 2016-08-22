@@ -53,7 +53,7 @@ class Member < ApplicationRecord
     all.group_by(&:id).map{|_,rows|
       init = rows.first.attributes.reject{|key,_|
         %(month cost).include? key
-      }.merge total: rows.map(&:cost).sum
+      }.merge total: rows.map(&:cost).compact.sum
       rows.inject(init){|memo,row|
         memo.merge row.month => row.cost
       }
