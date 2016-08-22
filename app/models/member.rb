@@ -21,26 +21,9 @@ class Member < ApplicationRecord
     "#{job_title.name} #{name}"
   end
 
-  scope :_total, -> {
-    select(<<-"SQL")
-      members.id as id,
-      members.name as name,
-      works.month as month,
-      sum(works.cost) as cost
-    SQL
-  }
-
-  scope :_group, -> key = nil {
-    key ? group(key, :month) : group(:month)
-  }
-
-  scope :total, -> key = nil {
-    _total._group(key)
-  }
-
   # 月、コストにより、ピボットテーブルを作成
   scope :pivot, -> key {
-    total(key).group_by(&key).map{|_,rows|
+    all.group_by(&key).map{|_,rows|
       init = rows.first.attributes.reject{|key,_|
         %(month cost).include? key
       }.merge total: rows.map(&:cost).sum
@@ -52,9 +35,9 @@ class Member < ApplicationRecord
 
   # 合計行
   scope :pivot_total_row, -> {
-    total.inject(name: "合計"){|memo,row|
+    all.inject(name: "合計"){|memo,row|
       memo.merge row.month => row.cost
-    }.merge total: total.map(&:cost).sum
+    }.merge total: all.map(&:cost).sum
   }
 
 end

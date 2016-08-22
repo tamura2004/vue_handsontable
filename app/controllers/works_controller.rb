@@ -10,13 +10,16 @@ class WorksController < ApplicationController
     gon.records = Member.all
       .joins(:group)
       .joins(:job_title)
-      .where(group: @group)
-      .select("job_titles.name as jobs_name")
-      .select(:number)
       .joins("left join works on members.id = works.member_id")
+      .where(group: @group)
+      .select("members.id as id")
+      .select("job_titles.name as jobs_name")
+      .select("members.number as number")
+      .select("members.name as name")
+      .select("works.month as month")
+      .select("works.cost as cost")
       .order("members.group_id,members.job_title_id")
-      .group(:jobs_name,:number,:name,:id)
-      .pivot(:name)
+      .pivot(:id)
 
     gon.options = {
       colHeaders: [
