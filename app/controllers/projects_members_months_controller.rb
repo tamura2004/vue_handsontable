@@ -5,17 +5,12 @@ class ProjectsMembersMonthsController < ApplicationController
   # GET /projects_members_months
   # GET /projects_members_months.json
   def index
-    # プロジェクト個別 ----------------------
-    result = {}
-    result["id"] = @project.id
-    result["number"] = @project.number
-    result["name"] = @project.name
-    result["cost"] = @project.cost
-    @project.projects_monthly_allocations.each do |allocation|
-      result[allocation.month] = allocation.cost
-    end
     gon.allocations = {}
-    gon.allocations[:records] = [result]
+    gon.allocations[:records] =
+      Project.view
+        .where(id: @project)
+        .pivot
+
     gon.allocations[:options] = {
       dataSchema: months_schema.merge(
         id:nil,
@@ -30,61 +25,38 @@ class ProjectsMembersMonthsController < ApplicationController
         *months_headers
       ],
       columns: [
+        {data: "number"},
+        {data: "name"},
         {
-          data: "number",
-          disableVisualSelection: true,
-          readOnly: true,
-        },
-        {
-          data: "name",
-          disableVisualSelection: true,
-          readOnly: true,
-        },
-        {
-          data: "cost",
+          data: "projects_cost",
           type: "numeric",
           format: "0.0",
-          disableVisualSelection: true,
-          readOnly: true,
         },
         *months_columns
       ]
     }
 
-    # 要員別明細 ---------------------------------
-    results = []
-    @project.projects_members.each do |assignment|
-      result = {}
-      result["id"] = assignment.id
-      result["member_name"] = assignment.member.name
-
-      ProjectsMembersMonth.where(projects_member: assignment).each do |allocation|
-        result[allocation.month] = allocation.cost
-      end
-      results << result
-    end
-
-    gon.records = results
+    gon.records = ProjectsMember.member_view
+      .where("projects_members.project_id = ?",@project)
+      .pivot
 
     gon.options = {
-      dataSchema: months_schema.merge(
-        id:nil,
-        member_name:nil
-      ),
       colHeaders: [
-        "要員名　　　　",
+        "所属",
+        "職位",
+        "社員番号",
+        "氏名",
         *months_headers
       ],
       columns: [
+        {data:"group"},
+        {data:"job"},
+        {data:"number"},
         {
-          data: "member_name",
-          type: "dropdown",
-          source: Member.order(:group_id,:job_title_id,:number).pluck(:name)
+          data: "name",
         },
         *months_columns
-      ],
-      minSpareRows: 1,
-      contextMenu: ["remove_row"]
+      ]
     }
   end
 

@@ -2,8 +2,7 @@ class GroupsProjectsController < ApplicationController
   def index
 
     gon.records =
-      ProjectsMonthlyAllocation.pivot(:group_id).push
-        ProjectsMonthlyAllocation.pivot_total_row
+      ProjectsMonthlyAllocation.group_view.pivot
 
     gon.options = {
       colHeaders: [
@@ -12,7 +11,7 @@ class GroupsProjectsController < ApplicationController
         "合計"
       ],
       columns: [
-        {data: "group_name"},
+        {data: "groups_name"},
         *months_columns,
         {data: "total", type: "numeric", format: "0.0"}
       ],

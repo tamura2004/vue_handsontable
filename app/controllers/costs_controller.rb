@@ -7,10 +7,8 @@ class CostsController < ApplicationController
   def index
     @groups = Group.all
 
-    gon.records = [
-      *Project.view.where(group: @group).pivot,
-      *Project.total_view.where(group: @group).pivot
-    ]
+    gon.records =
+      Project.where(group: @group).view.pivot
 
     gon.options = {
       colHeaders: [
@@ -46,17 +44,6 @@ class CostsController < ApplicationController
   # POST /costs
   # POST /costs.json
   def create
-    @cost = Cost.new(cost_params)
-
-    respond_to do |format|
-      if @cost.save
-        format.html { redirect_to @cost, notice: 'Cost was successfully created.' }
-        format.json { render :show, status: :created, location: @cost }
-      else
-        format.html { render :new }
-        format.json { render json: @cost.errors, status: :unprocessable_entity }
-      end
-    end
   end
 
   # PATCH/PUT /costs/1
@@ -92,11 +79,6 @@ class CostsController < ApplicationController
   # DELETE /costs/1
   # DELETE /costs/1.json
   def destroy
-    @cost.destroy
-    respond_to do |format|
-      format.html { redirect_to costs_url, notice: 'Cost was successfully destroyed.' }
-      format.json { head :no_content }
-    end
   end
 
   private

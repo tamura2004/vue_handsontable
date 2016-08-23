@@ -1,4 +1,6 @@
 class Project < ApplicationRecord
+  include Pivot
+
   belongs_to :group, optional: true
   has_many :projects_monthly_allocations
   has_many :projects_members
@@ -27,30 +29,6 @@ class Project < ApplicationRecord
       projects_monthly_allocations.cost as cost
     SQL
     .order("projects.number")
-  }
-
-  scope :total_view, -> {
-    joins(:group)
-    .joins("left join projects_monthly_allocations on projects.id = projects_monthly_allocations.project_id")
-    .select(<<-SQL)
-      1 as id,
-      '合計' as name,
-      projects_monthly_allocations.month as month,
-      sum(projects_monthly_allocations.cost) as cost
-    SQL
-    .group(:month)
-  }
-
-  # 月、コストにより、ピボットテーブルを作成
-  scope :pivot, -> {
-    all.group_by(&:id).map{|_,rows|
-      init = rows.first.attributes.reject{|key,_|
-        %(month cost).include? key
-      }.merge total: rows.map(&:cost).compact.sum
-      rows.inject(init){|memo,row|
-        memo.merge row.month => row.cost
-      }
-    }
   }
 
 end

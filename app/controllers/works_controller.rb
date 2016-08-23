@@ -7,10 +7,8 @@ class WorksController < ApplicationController
   def index
     @groups = Group.all
 
-    gon.records = [
-      *Member.member_view.where(group: @group).pivot,
-      *Member.total_view.where(group: @group).pivot
-    ]
+    gon.records =
+      Member.where(group: @group).view.pivot
 
     gon.options = {
       colHeaders: [
@@ -29,20 +27,6 @@ class WorksController < ApplicationController
       ],
     }
 
-  end
-
-  # GET /works/1
-  # GET /works/1.json
-  def show
-  end
-
-  # GET /works/new
-  def new
-    @work = Work.new
-  end
-
-  # GET /works/1/edit
-  def edit
   end
 
   # POST /works

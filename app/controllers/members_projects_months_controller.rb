@@ -38,25 +38,17 @@ class MembersProjectsMonthsController < ApplicationController
       columns: [
         {
           data: "group_name",
-          disableVisualSelection: true,
-          readOnly: true,
           renderer: "html"
         },
         {
           data: "job_title_name",
-          disableVisualSelection: true,
-          readOnly: true,
           renderer: "html"
         },
         {
           data: "number",
-          disableVisualSelection: true,
-          readOnly: true
         },
         {
           data: "name",
-          disableVisualSelection: true,
-          readOnly: true,
           renderer: "html"
         },
         *months_immutable_columns

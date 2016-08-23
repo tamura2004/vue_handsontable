@@ -2,7 +2,7 @@ department_names= %w(未来技術推進部 アウトレット部)
 
 department_names.each_with_index do |name,id|
   Department.seed do |s|
-    s.id = id
+    s.id = id + 1
     s.name = name
   end
 end
@@ -11,7 +11,7 @@ job_title_names = %w(部長 課長 TL CF AS ABC)
 
 job_title_names.each_with_index do |name,id|
   JobTitle.seed do |s|
-    s.id = id
+    s.id = id + 1
     s.name = name
   end
 end

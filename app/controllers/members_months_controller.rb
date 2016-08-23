@@ -4,33 +4,15 @@ class MembersMonthsController < ApplicationController
   # GET /members_months
   # GET /members_months.json
   def index
-    # @members_months = MembersMonth.all
-    results = []
-    Member.order(:group_id, :job_title_id, :number).each do |member|
-      result = Hash.new(0)
-      result["id"] = member.id
-      result["group_name"] = member.group.try(:name)
-      result["job_title_name"] = member.job_title.try(:name)
-      result["number"] = member.number
-      result["name"] = "<a href='/members/#{member.id}/members_projects_months'>#{member.name}</a>"
-
-      member.projects_members.each do |assignment|
-        assignment.projects_members_months.each do |allocation|
-          result[allocation.month] += allocation.cost.to_f
+    gon.records = ProjectsMembersMonth.member_view.pivot.map do |row|
+      row.tap do |row|
+        if row.has_key? "name"
+          row["name"] = view_context.link_to row["name"], view_context.member_members_projects_months_path(row["id"])
         end
       end
-      results << result
     end
-    gon.records = results
 
     gon.options = {
-      # dataSchema: months_schema.merge(
-      #   id:nil,
-      #   group_name:nil,
-      #   job_title_name: nil,
-      #   number: nil,
-      #   name: nil
-      # ),
       colHeaders: [
         "所属",
         "職位",
@@ -40,45 +22,27 @@ class MembersMonthsController < ApplicationController
       ],
       columns: [
         {
-          data: "group_name",
-          disableVisualSelection: true,
+          data: "group",
           readOnly: true,
           renderer: "html"
         },
         {
-          data: "job_title_name",
-          disableVisualSelection: true,
+          data: "job",
           readOnly: true,
           renderer: "html"
         },
         {
           data: "number",
-          disableVisualSelection: true,
           readOnly: true
         },
         {
           data: "name",
-          disableVisualSelection: true,
           readOnly: true,
           renderer: "html"
         },
         *months_immutable_columns
       ],
     }
-  end
-
-  # GET /members_months/1
-  # GET /members_months/1.json
-  def show
-  end
-
-  # GET /members_months/new
-  def new
-    @members_month = MembersMonth.new
-  end
-
-  # GET /members_months/1/edit
-  def edit
   end
 
   # POST /members_months

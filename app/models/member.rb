@@ -1,4 +1,6 @@
 class Member < ApplicationRecord
+  include Pivot
+
   belongs_to :group, optional: true
   belongs_to :job_title, optional: true
 
@@ -21,7 +23,7 @@ class Member < ApplicationRecord
     "#{job_title.name} #{name}"
   end
 
-  scope :member_view, -> {
+  scope :view, -> {
     joins(:group)
     .joins(:job_title)
     .joins("left join works on members.id = works.member_id")
@@ -36,28 +38,28 @@ class Member < ApplicationRecord
     .order("members.group_id,members.job_title_id")
   }
 
-  scope :total_view, -> {
-    joins(:group)
-    .joins("left join works on members.id = works.member_id")
-    .select(<<-SQL)
-      1 as id,
-      '合計' as name,
-      works.month as month,
-      sum(works.cost) as cost
-    SQL
-    .group(:month)
-  }
+  # scope :total_view, -> {
+  #   joins(:group)
+  #   .joins("left join works on members.id = works.member_id")
+  #   .select(<<-SQL)
+  #     1 as id,
+  #     '合計' as name,
+  #     works.month as month,
+  #     sum(works.cost) as cost
+  #   SQL
+  #   .group(:month)
+  # }
 
-  # 月、コストにより、ピボットテーブルを作成
-  scope :pivot, -> {
-    all.group_by(&:id).map{|_,rows|
-      init = rows.first.attributes.reject{|key,_|
-        %(month cost).include? key
-      }.merge total: rows.map(&:cost).compact.sum
-      rows.inject(init){|memo,row|
-        memo.merge row.month => row.cost
-      }
-    }
-  }
+  # # 月、コストにより、ピボットテーブルを作成
+  # scope :pivot, -> {
+  #   all.group_by(&:id).map{|_,rows|
+  #     init = rows.first.attributes.reject{|key,_|
+  #       %(month cost).include? key
+  #     }.merge total: rows.map(&:cost).compact.sum
+  #     rows.inject(init){|memo,row|
+  #       memo.merge row.month => row.cost
+  #     }
+  #   }
+  # }
 
 end
