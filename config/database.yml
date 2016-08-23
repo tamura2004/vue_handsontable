@@ -27,6 +27,7 @@ development:
   min_messages: WARNING
   database: projects_members_development
   username: tamura
+  password: tamura
 
 production:
   adapter: postgresql

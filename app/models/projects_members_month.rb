@@ -26,11 +26,11 @@ class ProjectsMembersMonth < ApplicationRecord
       members.id,
       groups.name,
       job_titles.name,
-      members.number,
-      members.name,
       projects_members_months.month
     SQL
   }
+      # members.number,
+      # members.name,
 
   scope :project_view, -> {
     select(<<-SQL)

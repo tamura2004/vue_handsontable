@@ -38,28 +38,4 @@ class Member < ApplicationRecord
     .order("members.group_id,members.job_title_id")
   }
 
-  # scope :total_view, -> {
-  #   joins(:group)
-  #   .joins("left join works on members.id = works.member_id")
-  #   .select(<<-SQL)
-  #     1 as id,
-  #     '合計' as name,
-  #     works.month as month,
-  #     sum(works.cost) as cost
-  #   SQL
-  #   .group(:month)
-  # }
-
-  # # 月、コストにより、ピボットテーブルを作成
-  # scope :pivot, -> {
-  #   all.group_by(&:id).map{|_,rows|
-  #     init = rows.first.attributes.reject{|key,_|
-  #       %(month cost).include? key
-  #     }.merge total: rows.map(&:cost).compact.sum
-  #     rows.inject(init){|memo,row|
-  #       memo.merge row.month => row.cost
-  #     }
-  #   }
-  # }
-
 end
