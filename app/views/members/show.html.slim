@@ -2,17 +2,9 @@ p#notice = notice
 
 p
   strong Name:
-  = @member.name
-p
-  strong Group:
-  = @member.group
-p
-  strong Job:
-  = @member.job
+  = raw(@member.link_name)
 p
   strong Number:
   = @member.number
 
-= link_to 'Edit', edit_member_path(@member)
-'|
 = link_to 'Back', members_path
