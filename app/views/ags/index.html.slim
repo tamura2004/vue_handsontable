@@ -1,7 +1,18 @@
-#ags
-hr
-#by_member
+.page-header
+  h4 AGS合計
+#total
+
+- @projects.each do |project|
+  .page-header
+    h4
+      small = project.number
+      = project.name
+
+  div id="p#{project.id}"
+
 coffee:
   $ ->
-    VueFactory.create "ags"
-    VueFactory.create "by_member"
+    VueFactory.create "total"
+
+    for project_key in gon.project_keys
+      VueFactory.create(project_key)

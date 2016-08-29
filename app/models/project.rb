@@ -6,6 +6,7 @@ class Project < ApplicationRecord
   has_many :projects_members
 
   has_many :assignments, class_name: "ProjectsMember"
+  has_many :members, through: :assignments
   has_many :allocations, through: :assignments, class_name: "ProjectsMembersMonth"
 
   attr_accessor :group_name

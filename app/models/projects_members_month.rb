@@ -16,19 +16,28 @@ class ProjectsMembersMonth < ApplicationRecord
       projects.name as project,
       members.name as name,
       projects_members_months.month as month,
-      sum(projects_members_months.cost) as cost
+      projects_members_months.cost as cost
     SQL
     .joins(:project)
     .joins(:member => :job_title)
     .joins(:member => :group)
     .where("job_titles.name = 'AGS'")
     .where("groups.name = 'オープン系共通基盤'")
-    .group(<<-SQL)
-      projects.number,
-      projects.name,
-      members.name,
-      projects_members_months.month
+  }
+
+  scope :ags_total_view, -> {
+    select(<<-SQL)
+      1 as number,
+      '' as project,
+      'AGS' as name,
+      projects_members_months.month as month,
+      projects_members_months.cost as cost
     SQL
+    .joins(:project)
+    .joins(:member => :job_title)
+    .joins(:member => :group)
+    .where("job_titles.name = 'AGS'")
+    .where("groups.name = 'オープン系共通基盤'")
   }
 
   scope :member_view, -> {
