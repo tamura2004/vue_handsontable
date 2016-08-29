@@ -1,6 +1,6 @@
 class ProjectsMembersMonthsController < ApplicationController
   before_action :set_project, only: [:index,:create,:update]
-  before_action :set_projects_member, only: [:destroy,:update]
+  before_action :set_projects_members_month, only: [:destroy,:update]
 
   # GET /projects_members_months
   # GET /projects_members_months.json
@@ -100,6 +100,8 @@ class ProjectsMembersMonthsController < ApplicationController
   # PATCH/PUT /projects_members_months/1.json
   def update
 
+    @projects_member = @projects_members_month.assignment
+
     # アサイン先メンバーの変更
     if params.has_key? :member_name
       @projects_member.member = Member.find_by(name: params[:member_name])
@@ -158,9 +160,9 @@ class ProjectsMembersMonthsController < ApplicationController
       @projects_members_month = ProjectsMembersMonth.find(params[:id])
     end
 
-    def set_projects_member
-      @projects_member = ProjectsMember.find(params[:id])
-    end
+    # def set_projects_member
+    #   @projects_member = ProjectsMember.find(params[:id])
+    # end
 
     def set_project
       @project = Project.find(params[:project_id])
