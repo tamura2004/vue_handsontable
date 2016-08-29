@@ -1,6 +1,10 @@
 .page-header
-  h4 AGS合計
-#total
+  h4 AGS案件集計
+#alloc
+
+.page-header
+  h4 AGS要員集計
+#work
 
 - @projects.each do |project|
   .page-header
@@ -12,7 +16,8 @@
 
 coffee:
   $ ->
-    VueFactory.create "total"
+    VueFactory.create "alloc"
+    VueFactory.create "work"
 
     for project_key in gon.project_keys
       VueFactory.create(project_key)

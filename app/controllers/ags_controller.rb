@@ -20,7 +20,7 @@ class AgsController < ApplicationController
     @project_keys = []
     @projects = []
 
-    Project.find_each do |project|
+    Project.order(:number).find_each do |project|
       if project.members.any?{|m|m.job_title.try(:name) == "AGS"}
         @projects.push project
 
@@ -39,12 +39,18 @@ class AgsController < ApplicationController
     end
 
     @variables.merge!({
-      "total" => {
-        records: ProjectsMembersMonth.ags_total_view.pivot,
+      "alloc" => {
+        records: ProjectsMembersMonth.ags_member_view.pivot,
         options: options
       }
     })
 
+    @variables.merge!({
+      "work" => {
+        records: Work.ags_view.pivot,
+        options: options
+      }
+    })
 
     @variables[:project_keys] = @project_keys
     gon.push @variables

@@ -25,6 +25,18 @@ class ProjectsMembersMonth < ApplicationRecord
     .where("groups.name = 'オープン系共通基盤'")
   }
 
+  scope :ags_member_view, -> {
+    select(<<-SQL)
+      members.name as name,
+      projects_members_months.month as month,
+      projects_members_months.cost as cost
+    SQL
+    .joins(:member => :job_title)
+    .joins(:member => :group)
+    .where("job_titles.name = 'AGS'")
+    .where("groups.name = 'オープン系共通基盤'")
+  }
+
   scope :ags_total_view, -> {
     select(<<-SQL)
       1 as number,
