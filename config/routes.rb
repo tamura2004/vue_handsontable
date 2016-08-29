@@ -14,7 +14,11 @@ Rails.application.routes.draw do
   resources :job_titles  , except: [:new,:edit]
 
   resources :members_projects_months , except: [:new,:edit]
-  resources :members_months          , except: [:new,:edit]
+  resources :members_months          , except: [:new,:edit] do
+    collection do
+      get :ags
+    end
+  end
 
   resources :members, except: [:new,:edit] do
     resources :assignments, except: [:new,:edit], controller: :projects_members
@@ -28,7 +32,14 @@ Rails.application.routes.draw do
     resources :allocations, except: [:new,:edit], controller: :projects_monthly_allocations
   end
 
-  resources :projects_allocations, except: [:new,:edit], controller: :projects_monthly_allocations
+  resources :projects_allocations, except: [:new,:edit], controller: :projects_monthly_allocations do
+    collection do
+      get :ags
+    end
+  end
+
+  get :ags, to: "ags#index"
+  
   root "projects_monthly_allocations#index"
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

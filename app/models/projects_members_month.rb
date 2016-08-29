@@ -6,8 +6,30 @@ class ProjectsMembersMonth < ApplicationRecord
 
   has_one :project, through: :assignment
   has_one :member, through: :assignment
+  has_one :job_title, through: :member
 
   validates :cost, presence: true, numericality: {greater_than: 0}
+
+  scope :ags_view, -> {
+    select(<<-SQL)
+      projects.number as number,
+      projects.name as project,
+      members.name as name,
+      projects_members_months.month as month,
+      sum(projects_members_months.cost) as cost
+    SQL
+    .joins(:project)
+    .joins(:member => :job_title)
+    .joins(:member => :group)
+    .where("job_titles.name = 'AGS'")
+    .where("groups.name = 'オープン系共通基盤'")
+    .group(<<-SQL)
+      projects.number,
+      projects.name,
+      members.name,
+      projects_members_months.month
+    SQL
+  }
 
   scope :member_view, -> {
     select(<<-SQL)
