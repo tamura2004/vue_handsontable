@@ -1,23 +1,17 @@
 class ProjectsMembersMonthsController < ApplicationController
   before_action :set_project, only: [:index,:create,:update]
-  before_action :set_projects_members_month, only: [:destroy,:update]
+  before_action :set_member, only: [:create,:update]
+  before_action :set_assignment, only: [:create,:update]
 
   # GET /projects_members_months
   # GET /projects_members_months.json
   def index
     gon.allocations = {}
-    gon.allocations[:records] =
-      Project.view
-        .where(id: @project)
-        .pivot
+    gon.allocations[:records] = Project.view
+      .where(id: @project)
+      .pivot
 
     gon.allocations[:options] = {
-      dataSchema: months_schema.merge(
-        id:nil,
-        number:nil,
-        name:nil,
-        cost:nil
-      ),
       colHeaders:[
         "案件管理番号",
         "案件名",
@@ -52,9 +46,7 @@ class ProjectsMembersMonthsController < ApplicationController
         {data:"group"},
         {data:"job"},
         {data:"number"},
-        {
-          data: "name",
-        },
+        {data: "name"},
         *months_columns
       ]
     }
@@ -62,17 +54,17 @@ class ProjectsMembersMonthsController < ApplicationController
 
   # GET /projects_members_months/1
   # GET /projects_members_months/1.json
-  def show
-  end
+  # def show
+  # end
 
   # GET /projects_members_months/new
-  def new
-    @projects_members_month = ProjectsMembersMonth.new
-  end
+  # def new
+  #   @projects_members_month = ProjectsMembersMonth.new
+  # end
 
   # GET /projects_members_months/1/edit
-  def edit
-  end
+  # def edit
+  # end
 
   # POST /projects_members_months
   # POST /projects_members_months.json
@@ -100,15 +92,13 @@ class ProjectsMembersMonthsController < ApplicationController
   # PATCH/PUT /projects_members_months/1.json
   def update
 
-    @projects_member = @projects_members_month.assignment
-
     # アサイン先メンバーの変更
-    if params.has_key? :member_name
-      @projects_member.member = Member.find_by(name: params[:member_name])
-      if @projects_member.save
-        render json: @projects_member, status: :ok
+    if projects_members_month_params.has_key? :member_name
+      @assignment.member = Member.find_by(name: projects_members_month_params[:member_name])
+      if @assignment.save
+        render json: @assignment, status: :ok
       else
-        render json: @projects_member.errors.full_messages, status: :unprocessable_entity
+        render json: @assignment.errors.full_messages, status: :unprocessable_entity
       end
 
     # アサインに紐づいた月別の工数を変更
@@ -116,7 +106,7 @@ class ProjectsMembersMonthsController < ApplicationController
       month = projects_members_month_params.keys.try(:first)
       cost = projects_members_month_params.values.try(:first)
 
-      @allocation = ProjectsMembersMonth.find_by(projects_member: @projects_member, month: month)
+      @allocation = ProjectsMembersMonth.find_by(projects_member: @assignment, month: month)
 
       # 工数を更新
       if @allocation
@@ -133,7 +123,7 @@ class ProjectsMembersMonthsController < ApplicationController
 
       # 工数を登録
       else
-        @allocation = ProjectsMembersMonth.new(projects_member: @projects_member, month: month, cost: cost)
+        @allocation = ProjectsMembersMonth.new(projects_member: @assignment, month: month, cost: cost)
         if @allocation.save
           render json: @allocation, status: :ok
         else
@@ -146,26 +136,26 @@ class ProjectsMembersMonthsController < ApplicationController
 
   # DELETE /projects_members_months/1
   # DELETE /projects_members_months/1.json
-  def destroy
-    @projects_member.destroy
-    respond_to do |format|
-      format.html { redirect_to projects_members_months_url, notice: 'Projects members month was successfully destroyed.' }
-      format.json { head :no_content }
-    end
-  end
+  # def destroy
+  #   @projects_member.destroy
+  #   respond_to do |format|
+  #     format.html { redirect_to projects_members_months_url, notice: 'Projects members month was successfully destroyed.' }
+  #     format.json { head :no_content }
+  #   end
+  # end
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_projects_members_month
-      @projects_members_month = ProjectsMembersMonth.find(params[:id])
+    def set_member
+      @member = Member.find(params[:id])
     end
-
-    # def set_projects_member
-    #   @projects_member = ProjectsMember.find(params[:id])
-    # end
 
     def set_project
       @project = Project.find(params[:project_id])
+    end
+
+    def set_assignment
+      @assignment = ProjectsMember.find_by(project: @project, member: @member)
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
