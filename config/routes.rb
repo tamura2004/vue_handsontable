@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   resources :groups,except:[:new,:edit] do
     resources :works
     resources :costs
-    resources :job_titles, only: :index do
+    resources :job_titles do
       resources :assigns, controller: "group/job_title/assigns", only: :index
     end
   end
