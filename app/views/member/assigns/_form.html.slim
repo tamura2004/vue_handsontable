@@ -1,0 +1,9 @@
+= form_for @member_assign do |f|
+  - if @member_assign.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@member_assign.errors.count, "error")} prohibited this member_assign from being saved:"
+      ul
+        - @member_assign.errors.full_messages.each do |message|
+          li = message
+
+  .actions = f.submit

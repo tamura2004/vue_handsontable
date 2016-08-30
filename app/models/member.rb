@@ -23,6 +23,14 @@ class Member < ApplicationRecord
     "#{job_title.name} #{name}"
   end
 
+  def group_name
+    group.try(:name)
+  end
+
+  def job_title_name
+    job_title.try(:name)
+  end
+
   scope :view, -> {
     joins(:group)
     .joins(:job_title)
@@ -37,5 +45,6 @@ class Member < ApplicationRecord
     SQL
     .order("members.group_id,members.job_title_id")
   }
+
 
 end

@@ -8,7 +8,13 @@ class WorksController < ApplicationController
     @groups = Group.all
 
     gon.records =
-      Member.where(group: @group).view.pivot
+      Member.where(group: @group).view.pivot.each do |row|
+        id = row["id"]
+        name = row["name"]
+        v = view_context
+        row["name"] = v.link_to name, member_assigns_path(id)
+      end
+
 
     gon.options = {
       colHeaders: [
@@ -21,7 +27,7 @@ class WorksController < ApplicationController
       columns: [
         {data: "jobs_name"},
         {data: "number"},
-        {data: "name"},
+        {data: "name", renderer: "html"},
         *months_columns,
         {data: "total", type: "numeric", format: "0.0"}
       ],

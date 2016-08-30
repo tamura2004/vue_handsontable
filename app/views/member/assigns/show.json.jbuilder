@@ -1,0 +1,1 @@
+json.partial! "member_assigns/member_assign", member_assign: @member_assign

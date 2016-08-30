@@ -1,0 +1,1 @@
+json.array! @member_assigns, partial: 'member_assigns/member_assign', as: :member_assign

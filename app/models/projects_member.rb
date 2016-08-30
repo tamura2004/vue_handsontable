@@ -22,20 +22,12 @@ class ProjectsMember < ApplicationRecord
       members.number as number,
       members.name as name,
       projects_members_months.month as month,
-      sum(projects_members_months.cost) as cost
+      projects_members_months.cost as cost
     SQL
     .joins(:project)
     .joins(:member => :job_title)
     .joins(:member => :group)
-    .joins("left join projects_members_months on projects_members_months.projects_member_id = projects_members.id")
-    .group(<<-SQL)
-      members.id,
-      groups.name,
-      job_titles.name,
-      members.number,
-      members.name,
-      projects_members_months.month
-    SQL
+    .left_joins(:projects_members_months)
   }
 
   scope :project_view, -> {
@@ -45,14 +37,11 @@ class ProjectsMember < ApplicationRecord
       projects.name as name,
       projects.cost as projects_cost,
       projects_members_months.month as month,
-      sum(projects_members_months.cost) as cost
+      projects_members_months.cost as cost
     SQL
     .joins(:project => :group)
-    .joins("left join projects_members_months on projects_members_months.id = projects_members.projects_members_month_id")
-    .group(<<-SQL)
-      projects.id,
-      projects_members_months.month
-    SQL
+    .left_joins(:projects_members_months)
   }
+
 
 end

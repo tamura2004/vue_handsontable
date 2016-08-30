@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  namespace :project do
+    get 'assigns/index'
+  end
+
   resources :costs
   resources :works
   get "init_works", to: "works#seed"
@@ -21,12 +25,18 @@ Rails.application.routes.draw do
   end
 
   resources :members, except: [:new,:edit] do
+
+    resources :assigns, controller: "member/assigns", only: :index
+
     resources :assignments, except: [:new,:edit], controller: :projects_members
     resources :members_projects_months, except: [:new,:edit]
     resources :members_months, except: [:new,:edit]
   end
 
   resources :projects, except: [:new,:edit] do
+
+    resources :assigns, controller: "project/assigns", only: :index
+
     resources :assignments, except: [:new,:edit], controller: :projects_members
     resources :members_allocations, except: [:new,:edit], controller: :projects_members_months
     resources :allocations, except: [:new,:edit], controller: :projects_monthly_allocations
