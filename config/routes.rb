@@ -13,7 +13,7 @@ Rails.application.routes.draw do
     resources :works
     resources :costs
     resources :job_titles do
-      resources :assigns, controller: "group/job_title/assigns", only: :index
+      resources :assigns, controller: "groups/job_titles/assigns", only: :index
     end
   end
 
@@ -29,7 +29,7 @@ Rails.application.routes.draw do
 
   resources :members, except: [:new,:edit] do
 
-    resources :assigns, controller: "member/assigns", only: :index
+    resources :assigns, controller: "members/assigns", only: :index
 
     resources :assignments, except: [:new,:edit], controller: :projects_members
     resources :members_projects_months, except: [:new,:edit]
@@ -38,7 +38,7 @@ Rails.application.routes.draw do
 
   resources :projects, except: [:new,:edit] do
 
-    resources :assigns, controller: "project/assigns", only: :index
+    resources :assigns, controller: "projects/assigns", only: :index
 
     resources :assignments, except: [:new,:edit], controller: :projects_members
     resources :members_allocations, except: [:new,:edit], controller: :projects_members_months

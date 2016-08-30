@@ -1,4 +1,4 @@
-class Project::AssignsController < ApplicationController
+class Projects::AssignsController < ApplicationController
   before_action :set_project, only: [:index]
 
   def index

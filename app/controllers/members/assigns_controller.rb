@@ -1,4 +1,4 @@
-class Member::AssignsController < ApplicationController
+class Members::AssignsController < ApplicationController
   before_action :set_member, only: [:index]
 
   def index

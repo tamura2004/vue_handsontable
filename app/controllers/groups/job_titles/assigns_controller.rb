@@ -1,4 +1,4 @@
-class Group::JobTitle::AssignsController < ApplicationController
+class Groups::JobTitles::AssignsController < ApplicationController
   before_action :set_job_title, only: [:index]
   before_action :set_group, only: [:index]
 
