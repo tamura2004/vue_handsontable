@@ -21,7 +21,6 @@ class Group::JobTitle::AssignsController < ApplicationController
             {data: "total", type: "numeric", format: "0.00"}
           ]
         }
-
       },
       members_projects_months: {
         records: Alloc
@@ -57,7 +56,7 @@ class Group::JobTitle::AssignsController < ApplicationController
 
   private
     def set_job_title
-      @job_title = JobTitle.find(params[:job_title_id])
+      @job_title = ::JobTitle.find(params[:job_title_id])
     end
 
     def set_group
