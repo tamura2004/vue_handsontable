@@ -18,10 +18,7 @@ Rails.application.routes.draw do
   end
 
   resources :departments , except: [:new,:edit]
-  resources :job_titles  , except: [:new,:edit] do
-    resources :assigns, controller: "job_title/assigns", only: :index
-  end
-
+  resources :job_titles  , except: [:new,:edit]
 
   resources :members_projects_months , except: [:new,:edit]
   resources :members_months          , except: [:new,:edit] do
