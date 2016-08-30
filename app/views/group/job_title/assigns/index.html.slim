@@ -1,0 +1,18 @@
+.page-header
+  h3
+    = @job_title.name
+    small = @group.name
+
+h5 要員
+#works
+hr
+h5 アサイン
+#members_projects_months
+hr
+h5 案件
+#projects_members_months
+coffee:
+  $ ->
+    VueFactory.create "works"
+    VueFactory.create "members_projects_months"
+    VueFactory.create "projects_members_months"

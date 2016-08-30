@@ -16,7 +16,7 @@ class Project::AssignsController < ApplicationController
       projects_members_months: {
         records: Alloc.select(
           :group_name,
-          :job_title_name,
+          :job_title_link,
           :member_number,
           :member_link,
           :month,
@@ -30,7 +30,7 @@ class Project::AssignsController < ApplicationController
           colHeaders: [*%w(グループ 職位 社員番号 氏名), *months_headers ],
           columns: [
             {data: "group_name"},
-            {data: "job_title_name"},
+            {data: "job_title_link", renderer: "html"},
             {data: "member_number"},
             {data: "member_link",renderer:"html"},
             *months_columns

@@ -1,0 +1,2 @@
+module JobTitle::AssinsHelper
+end

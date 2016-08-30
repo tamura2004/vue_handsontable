@@ -20,7 +20,8 @@ class CreateAllocView < ActiveRecord::Migration[5.0]
         self.month as month,
         self.cost as cost,
         '<a href="/members/' || members.id || '/assigns">' || members.name || '</a>' as member_link,
-        '<a href="/projects/' || projects.id || '/assigns">' || projects.name || '</a>' as project_link
+        '<a href="/projects/' || projects.id || '/assigns">' || projects.name || '</a>' as project_link,
+        '<a href="/groups/' || groups.id || '/job_titles/' || job_titles.id || '/assigns">' || job_titles.name || '</a>' as job_title_link
 
       from projects_members_months as self
       inner join projects_members

@@ -8,13 +8,18 @@ class WorksController < ApplicationController
     @groups = Group.all
 
     gon.records =
-      Member.where(group: @group).view.pivot.each do |row|
-        id = row["id"]
-        name = row["name"]
-        v = view_context
-        row["name"] = v.link_to name, member_assigns_path(id)
-      end
-
+      VWork
+        .where(group_id: @group)
+        .select(
+          :job_title_link,
+          :member_number,
+          :member_link,
+          :month,
+          :cost
+        )
+        .select("member_id as id")
+        .order(:job_title_id,:member_number)
+        .pivot
 
     gon.options = {
       colHeaders: [
@@ -25,9 +30,9 @@ class WorksController < ApplicationController
         "合計"
       ],
       columns: [
-        {data: "jobs_name"},
-        {data: "number"},
-        {data: "name", renderer: "html"},
+        {data: "job_title_link", renderer: "html"},
+        {data: "member_number"},
+        {data: "member_link", renderer: "html"},
         *months_columns,
         {data: "total", type: "numeric", format: "0.0"}
       ],

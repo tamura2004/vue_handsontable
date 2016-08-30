@@ -15,12 +15,10 @@ html lang="en"
     = nav_bar fixed: :top, brand: "工数見込集計", responsice: true
       = menu_group
         = menu_divider
-        = menu_item "月別工数見込", projects_allocations_path
-        = menu_item "マスター管理", projects_path
-        = menu_item "group", groups_projects_path
         = menu_item "要員管理", group_works_path(Group.first)
         = menu_item "案件管理", group_costs_path(Group.first)
-        = menu_item "ags", ags_path
+        = menu_item "月別工数見込", projects_allocations_path
+        = menu_item "マスター管理", projects_path
 
     .container
       .row

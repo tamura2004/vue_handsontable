@@ -8,7 +8,17 @@ class CostsController < ApplicationController
     @groups = Group.all
 
     gon.records =
-      Project.where(group: @group).view.pivot
+      VCost
+        .select(
+          :project_number,
+          :project_link,
+          :month,
+          :cost
+        )
+        .select("project_id as id")
+        .order(:project_number)
+        .where(group_id: @group)
+        .pivot
 
     gon.options = {
       colHeaders: [
@@ -18,8 +28,8 @@ class CostsController < ApplicationController
         "合計"
       ],
       columns: [
-        {data: "number"},
-        {data: "name"},
+        {data: "project_number"},
+        {data: "project_link", renderer: "html"},
         *months_columns,
         {data: "total", type: "numeric", format: "0.0"}
       ],
