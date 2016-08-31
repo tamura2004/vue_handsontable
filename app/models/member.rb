@@ -6,6 +6,7 @@ class Member < ApplicationRecord
 
   has_many :projects_members
   has_many :works
+  has_many :assignments, class_name: "ProjectsMember"
 
   attr_accessor :group_name, :job_title_name
 

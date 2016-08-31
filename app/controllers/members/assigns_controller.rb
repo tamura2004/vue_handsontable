@@ -5,8 +5,8 @@ class Members::AssignsController < ApplicationController
     gon.push({
       member: {
         records: [[
-          @member.group_name,
-          @member.job_title_name,
+          @member.group.try(:name),
+          @member.job_title.try(:name),
           @member.number,
           @member.name
         ]],

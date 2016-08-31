@@ -1,0 +1,46 @@
+#assignment
+  .page-header
+    h3
+      = @member.name
+      small = @member.group.try(:name)
+  .row
+    .col-xs-6 v-for="col in 2"
+      .checkbox v-for="project in projects | limitBy colLength (col*colLength)"
+        label
+          input type="checkbox" @change="handleChange(project)" v-model="project.checked"
+          | {{project.number}} {{project.name}}
+
+  = link_to "戻る", member_assigns_path(@member), class: "btn btn-primary"
+
+coffee:
+  $ ->
+    new Vue
+      el: "#assignment"
+      data:
+        member: gon.member
+        projects: gon.projects
+        assignments: gon.assignments
+        checkedMember: []
+
+      created: ->
+        @resource = new Resource "assignments"
+        for project in @projects
+          project.checked = @assignments.some((a) -> a.project_id is project.id)
+
+      computed:
+        colLength: -> Math.ceil @projects.length / 2
+
+      methods:
+        handleChange: (project) ->
+          if project.checked
+            assignment = {member_id: @member.id, project_id: project.id}
+            @resource.save assignment, (response) => @assignments.push response.data
+
+          else
+            assignment = @assignments.find (e)-> e.project_id is project.id
+            @resource.delete(assignment.id)
+
+
+
+
+

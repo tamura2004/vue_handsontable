@@ -21,13 +21,12 @@ class Project < ApplicationRecord
 
   scope :view, -> {
     joins(:group)
-    .joins("left join projects_monthly_allocations on projects.id = projects_monthly_allocations.project_id")
     .select(<<-SQL)
       projects.id as id,
       projects.number as number,
       projects.name as name,
-      projects_monthly_allocations.month as month,
-      projects_monthly_allocations.cost as cost
+      groups.name as group_name,
+      groups.id as group_id
     SQL
     .order("projects.number")
   }

@@ -1,11 +1,15 @@
 Rails.application.routes.draw do
+  namespace :members do
+    get 'projects/index'
+  end
+
   namespace :project do
     get 'assigns/index'
   end
 
   resources :costs
   resources :works
-  get "init_works", to: "works#seed"
+  # get "init_works", to: "works#seed"
 
   resources :groups_projects
 
@@ -14,6 +18,7 @@ Rails.application.routes.draw do
     resources :costs
     resources :job_titles do
       resources :assigns, controller: "groups/job_titles/assigns", only: :index
+      resources :works, controller: "works", only: :update
     end
   end
 
@@ -30,6 +35,7 @@ Rails.application.routes.draw do
   resources :members, except: [:new,:edit] do
 
     resources :assigns, controller: "members/assigns", only: :index
+    resources :projects, controller: "members/projects", only: :index
 
     resources :assignments, except: [:new,:edit], controller: :projects_members
     resources :members_projects_months, except: [:new,:edit]
@@ -54,6 +60,6 @@ Rails.application.routes.draw do
 
   get :ags, to: "ags#index"
 
-  root "projects_monthly_allocations#index"
+  root "costs#index", group_id: 1
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

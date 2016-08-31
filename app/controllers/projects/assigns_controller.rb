@@ -13,9 +13,9 @@ class Projects::AssignsController < ApplicationController
         }
       },
 
-      projects_members_months: {
+      members_allocations: {
         records: Assign.member_view
-          .select(:id)
+          .select("member_id as id")
           .where(project_id: @project.id)
           .pivot,
         options: {
