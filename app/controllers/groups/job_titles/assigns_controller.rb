@@ -39,7 +39,10 @@ class Groups::JobTitles::AssignsController < ApplicationController
         }
       },
       projects_members_months: {
-        records: Alloc.project_total_view.where(job_title_id:@job_title).pivot,
+        records: Alloc.project_view
+          .select("project_id as id")
+          .where(job_title_id:@job_title)
+          .pivot,
         options: {
           colHeaders: [*%w(案件管理番号 案件名), *months_headers, "合計" ],
           columns: [

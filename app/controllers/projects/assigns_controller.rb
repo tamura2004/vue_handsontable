@@ -14,18 +14,10 @@ class Projects::AssignsController < ApplicationController
       },
 
       projects_members_months: {
-        records: Alloc.select(
-          :group_name,
-          :job_title_link,
-          :member_number,
-          :member_link,
-          :month,
-          :cost
-        )
-        .select("assign_id as id")
-        .where(project_id: @project.id)
-        .order(:job_title_id)
-        .pivot,
+        records: Assign.member_view
+          .select(:id)
+          .where(project_id: @project.id)
+          .pivot,
         options: {
           colHeaders: [*%w(グループ 職位 社員番号 氏名), *months_headers ],
           columns: [

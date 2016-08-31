@@ -16,7 +16,10 @@ class Members::AssignsController < ApplicationController
       },
 
       members_projects_months: {
-        records: Alloc.project_view.member(@member).pivot,
+        records: Assign.project_view
+          .select(:id)
+          .where(member_id: @member.id)
+          .pivot,
         options: {
           colHeaders: ["管理番号", "案件名", *months_headers ],
           columns: [
