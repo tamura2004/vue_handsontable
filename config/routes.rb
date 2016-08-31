@@ -39,6 +39,7 @@ Rails.application.routes.draw do
   resources :projects, except: [:new,:edit] do
 
     resources :assigns, controller: "projects/assigns", only: :index
+    resources :members, controller: "projects/members", only: :index
 
     resources :assignments, except: [:new,:edit], controller: :projects_members
     resources :members_allocations, except: [:new,:edit], controller: :projects_members_months

@@ -15,7 +15,7 @@
       .checkbox v-for="member in members | limitBy colLength (col*colLength)"
         label
           input type="checkbox" @change="handleChange(member)" v-model="member.checked"
-          | {{member.name}}({{member.job_title_name}}:{{member.group_name}})
+          | {{member.member_name}}({{member.job_title_name}}:{{member.group_name}})
 
   = link_to "戻る", project_assigns_path(@project), class: "btn btn-primary"
 
