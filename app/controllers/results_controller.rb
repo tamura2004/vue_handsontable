@@ -9,7 +9,7 @@ class ResultsController < ApplicationController
       format.html do
         gon.records = Result.all
         gon.options = {
-          colHeaders: %w(社員番号 社員名 案件番号 案件名 工数)
+          colHeaders: %w(社員番号 社員名 案件番号 案件名 工数),
           columns: %w(member_number member_name project_number project_name cost).map{|a|{data: a}}
         }
       end
