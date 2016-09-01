@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
-  resources :results, only: [:index] do
-    collection do 
+  resources :results, only: [:index,:destroy] do
+    collection do
       post :upload
     end
   end
