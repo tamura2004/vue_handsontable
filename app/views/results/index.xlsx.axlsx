@@ -1,0 +1,22 @@
+widths = [1] * @attributes.size
+set_print = {fit_to_width: 1, fit_to_height: 1, orientation: :landscape}
+sheet_name = "results"
+
+workbook = xlsx_package.workbook
+
+# style
+workbook.styles.fonts.first.name = 'Meiryo'
+default = workbook.styles.add_style sz: 8, alignment: {horizontal: :left, vertical: :center}
+header = workbook.styles.add_style  sz: 8, alignment: {horizontal: :left, vertical: :center}, bg_color: 'e6eaff', b: true
+
+# 印刷の設定
+workbook.add_worksheet(name: sheet_name, page_setup: set_print) do |sheet|
+
+  # 列幅を決める
+  sheet.column_widths *widths
+  sheet.add_row @attributes, style: header
+
+  Result.pluck(*@attributes.map(&:to_sym)).each do |values|
+    sheet.add_row values, style: [default] * @attributes.size
+  end
+end

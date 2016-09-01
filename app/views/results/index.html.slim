@@ -1,5 +1,5 @@
-/ = link_to "EXCELファイルでダウンロード", pages_path(format: "xlsx"), class: "btn btn-primary"
-/ hr
+= link_to "EXCELファイルでダウンロード", results_path(format: "xlsx"), class: "btn btn-primary"
+hr
 
 = form_tag upload_results_path, multipart: true do
   = label_tag "EXCELファイルでアップロード"
