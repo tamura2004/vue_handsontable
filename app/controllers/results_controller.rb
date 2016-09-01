@@ -5,7 +5,11 @@ class ResultsController < ApplicationController
   HEADERS = ATTRIBUTES.inject({}){|memo,a| memo.merge a.to_sym => a}
 
   def index
-    @result = Result.all
+    gon.records = Result.all
+    gon.options = {
+      colHeaders: LABELS,
+      columns: ATTRIBUTES.map{|a|{data: a}}
+    }
   end
 
   def upload
