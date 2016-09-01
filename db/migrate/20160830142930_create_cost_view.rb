@@ -16,8 +16,8 @@ class CreateCostView < ActiveRecord::Migration[5.0]
         '<a href="/projects/' || projects.id || '/assigns">' || projects.name || '</a>' as project_link,
         '<a href="/groups/' || groups.id || '/assigns">' || groups.name || '</a>' as group_link
 
-      from projects_monthly_allocations
-      inner join projects
+      from projects
+      left outer join projects_monthly_allocations
       on projects_monthly_allocations.project_id = projects.id
       left join groups
       on projects.group_id = groups.id;

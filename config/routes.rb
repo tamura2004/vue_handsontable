@@ -1,4 +1,11 @@
 Rails.application.routes.draw do
+
+  resources :results, only: [:index] do
+    collection do 
+      post :upload
+    end
+  end
+
   namespace :members do
     get 'projects/index'
   end

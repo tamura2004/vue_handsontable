@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160831131639) do
+ActiveRecord::Schema.define(version: 20160901174032) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -82,6 +82,27 @@ ActiveRecord::Schema.define(version: 20160831131639) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["project_id"], name: "index_projects_monthly_allocations_on_project_id", using: :btree
+  end
+
+  create_table "results", force: :cascade do |t|
+    t.string   "month"
+    t.string   "group_number"
+    t.string   "group_name"
+    t.string   "outsource_code"
+    t.string   "company_name"
+    t.string   "member_number"
+    t.string   "member_name"
+    t.string   "project_number"
+    t.string   "project_name"
+    t.string   "proc_number"
+    t.string   "proc_name"
+    t.string   "cont_number"
+    t.string   "cont_name"
+    t.string   "system_number"
+    t.float    "cost"
+    t.string   "cost_minute"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
   end
 
   create_table "works", force: :cascade do |t|

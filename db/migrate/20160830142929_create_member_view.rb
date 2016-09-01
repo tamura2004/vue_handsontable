@@ -17,8 +17,8 @@ class CreateMemberView < ActiveRecord::Migration[5.0]
         '<a href="/groups/' || groups.id || '/job_titles/' || job_titles.id || '/assigns">' || job_titles.name || '</a>' as job_title_link,
         '<a href="/groups/' || groups.id || '/assigns">' || groups.name || '</a>' as group_link
 
-      from works
-      inner join members
+      from members
+      left outer join works
       on works.member_id = members.id
       left join job_titles
       on members.job_title_id = job_titles.id
