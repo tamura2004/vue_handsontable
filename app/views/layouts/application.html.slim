@@ -17,14 +17,18 @@ html lang="en"
         = menu_divider
         = menu_item group_works_path(Group.first)
           i.fa.fa-user 要員管理
-          
+
         = menu_item group_costs_path(Group.first)
           i.fa.fa-book 案件管理
 
         = menu_item "月別工数見込", projects_allocations_path
-        
+
         = menu_item projects_path
           i.fa.fa-gear マスター管理
+
+      = menu_group pull: :right
+        form.navbar-form.navbar-right role="search"
+          input.form-control type="text" placeholder="フィルター" v-model="query" @keydown.enter.prevent="render" @change="render"
 
     .container
       .row

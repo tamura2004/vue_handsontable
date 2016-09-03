@@ -5,7 +5,29 @@ ul.nav.nav-tabs
     -else
       li = link_to group.name, group_costs_path(group)
 
+#example
+  input v-model="msg" @change="handleChange"
+  mycomponent
+  mycomponent
+  mycomponent
+
 #costs
 coffee:
   $ ->
+
+    new Vue
+      el: "#example"
+      data:
+        msg: "hello"
+      methods:
+        handleChange: ->
+          @$broadcast("onChange",@msg)
+      components:
+        mycomponent:
+          data: ->
+            msg: ""
+          template: '<div>{{msg}}</div>'
+          events:
+            onChange: (msg) -> @msg = msg
+
     VueFactory.create "costs"
