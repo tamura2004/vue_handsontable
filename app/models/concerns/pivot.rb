@@ -10,19 +10,19 @@ module Pivot
   included do
     using ArrayPivot
 
-    scope :pivot, -> {
-      [*pivot_specify, pivot_total]
-    }
+    # scope :pivot, -> {
+    #   [*pivot_specify, pivot_total]
+    # }
 
-    scope :pivot_specify, -> {
+    scope :pivot, -> {
       all.group_by(&:header).map do |header,rows|
         rows.pivot(header)
       end
     }
 
-    scope :pivot_total, -> {
-      all.to_a.pivot({name:"合計"})
-    }
+    # scope :pivot_total, -> {
+    #   all.to_a.pivot({name:"合計"})
+    # }
 
   end
 end

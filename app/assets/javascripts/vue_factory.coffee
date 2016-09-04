@@ -10,14 +10,38 @@ class @Resource
   save: (record,cb) -> @resource.save(record).then(cb,@handleError)
   delete: (id) -> @resource.delete(id:id).then(@handleNormal,@handleError)
 
-class HandsOnTable
+class VueTable
   template: '<div></div>'
   props: ['rows','opts','ctl']
   computed:
     records: ->
-      @rows.filter (r) =>
+      # フィルタ
+      rows = @rows.filter (r) =>
         (v for k,v of r).some (v) =>
           typeof(v) is "string" and v.indexOf(@$parent.query) isnt -1
+
+      # 行合計
+      for row in rows
+        row.total = 0
+        for k,v of row
+          if k.match(/20\d\d\d\d/) and typeof(v) is "number"
+            row.total += v
+
+      # 列合計
+      total = {}
+      for row in rows
+        for k,v of row
+          if k.match(/20\d\d\d\d/)
+            if typeof(v) is "number"
+              if total[k]?
+                total[k] += v
+              else
+                total[k] = v
+          else
+            if k isnt "id"
+              total[k] = "合計"
+
+      rows.concat(total)
 
   ready: ->
     @resource = new Resource @ctl
@@ -25,12 +49,13 @@ class HandsOnTable
     @hot.loadData @records
     @hot.addHook "afterChange", @onChange
     @hot.addHook "beforeRemoveRow", @onDelete
+    @$watch "records", (n,v) => @refresh()
 
-    @$watch "records", (n,v) =>
+  methods:
+    refresh: ->
       @hot.loadData @records
       @hot.render()
 
-  methods:
     onChange: (changes,source) ->
       if source in ["edit","autofill","paste"]
         @handleChange(change) for change in changes
@@ -38,6 +63,11 @@ class HandsOnTable
     handleChange: (change)->
       [row,prop,oldVal,newVal] = change
       record = @records[row]
+
+      if oldVal is null and record.id?
+        id = @rows.find((r)->r.id is record.id).id
+        @$set "rows[id]", newVal
+
       if record.id? then @update(record,prop,newVal) else @save(record)
 
     update: (record,prop,newVal) ->
@@ -60,5 +90,5 @@ $ ->
       query: ""
 
     components:
-      htbl: new HandsOnTable
+      htbl: new VueTable
 
