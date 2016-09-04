@@ -7,6 +7,4 @@ ul.nav.nav-tabs
 
 p ※新規登録は最下段の空行に追加して下さい
 
-#projects
-coffee:
-  $ -> VueFactory.create "projects"
+htbl ctl="projects" :rows=@records.to_json :opts=@options.to_json

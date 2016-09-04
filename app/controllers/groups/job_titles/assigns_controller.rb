@@ -3,7 +3,7 @@ class Groups::JobTitles::AssignsController < ApplicationController
   before_action :set_group, only: [:index]
 
   def index
-    gon.push({
+    @data = {
       works: {
         records: VWork
           .select(:member_number,:member_link,:month,:cost)
@@ -53,7 +53,7 @@ class Groups::JobTitles::AssignsController < ApplicationController
           ]
         }
       }
-    })
+    }
 
   end
 

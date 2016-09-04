@@ -4,7 +4,7 @@ class GroupsController < ApplicationController
   # GET /groups
   # GET /groups.json
   def index
-    gon.records = Group.connection.select_all(<<-SQL).to_a
+    @records = Group.connection.select_all(<<-SQL).to_a
       select
         groups.id as id,
         departments.name as department_name,
@@ -13,7 +13,7 @@ class GroupsController < ApplicationController
       left join departments on groups.department_id = departments.id
     SQL
 
-    gon.options = {
+    @options = {
       dataSchema: {id: nil, department_name:nil, name: nil},
       colHeaders: ["部名","グループ名"],
       columns: [

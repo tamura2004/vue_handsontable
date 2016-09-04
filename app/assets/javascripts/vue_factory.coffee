@@ -1,60 +1,3 @@
-class @VueFactory
-  @create: (name) ->
-    new Vue
-      el: "body"
-      data:
-        rows: if gon[name] then gon[name].records else gon.records
-        query: ""
-      created: ->
-        @resource = new Resource name
-        options = if gon[name] then gon[name].options else gon.options
-        options.fillHandle = false
-        options.wordWrap = false
-        options.columnSorting = true
-
-        @hot = new Table name, options, @records, @onChange, @onDelete
-
-      computed:
-        records: ->
-          @rows.filter (r) =>
-            result = false
-            for k,v of r
-              if typeof(v) is "string"
-                if v.indexOf(@query) isnt -1
-                  result = true
-            result
-
-      methods:
-        onChange: (changes,source) ->
-          if source in ["edit","autofill","paste"]
-            @handleChange(change) for change in changes
-
-        handleChange: (change)->
-          [row,prop,oldVal,newVal] = change
-          record = @records[row]
-          if record.id? then @update(record,prop,newVal) else @save(record)
-
-          if name is "projects_monthly_allocations"
-            record.unallocated_cost += oldVal - newVal
-            @hot.hot.render()
-
-        update: (record,prop,newVal) ->
-          @resource.update record,prop,newVal
-
-        save: (record) ->
-          @resource.save record, (response) =>
-            record.id = response.data.id
-
-        onDelete: (index,amount) ->
-          for i in [index..(index+amount-1)]
-            record = @records[i]
-            return unless record.id?
-            @resource.delete record.id
-
-        render: ->
-          @hot.loadData @records
-          @hot.render()
-
 class @Resource
   constructor: (name) -> @resource = Vue.resource "#{name}{/id}"
   handleNormal: (response) -> console.log response.data
@@ -67,12 +10,55 @@ class @Resource
   save: (record,cb) -> @resource.save(record).then(cb,@handleError)
   delete: (id) -> @resource.delete(id:id).then(@handleNormal,@handleError)
 
-class Table
-  constructor: (@name,@options,@records,onChange,onDelete) ->
-    container = document.getElementById @name
-    @hot = new Handsontable container, @options
-    @hot.loadData(@records)
-    @hot.addHook "afterChange", onChange
-    @hot.addHook "beforeRemoveRow", onDelete
-  render: -> @hot.render()
-  loadData: (records) -> @hot.loadData(records)
+class HandsOnTable
+  template: '<div></div>'
+  props: ['rows','opts','ctl']
+  computed:
+    records: ->
+      @rows.filter (r) =>
+        (v for k,v of r).some (v) =>
+          typeof(v) is "string" and v.indexOf(@$parent.query) isnt -1
+
+  ready: ->
+    @resource = new Resource @ctl
+    @hot = new Handsontable @$el,@opts
+    @hot.loadData @records
+    @hot.addHook "afterChange", @onChange
+    @hot.addHook "beforeRemoveRow", @onDelete
+
+    @$watch "records", (n,v) =>
+      @hot.loadData @records
+      @hot.render()
+
+  methods:
+    onChange: (changes,source) ->
+      if source in ["edit","autofill","paste"]
+        @handleChange(change) for change in changes
+
+    handleChange: (change)->
+      [row,prop,oldVal,newVal] = change
+      record = @records[row]
+      if record.id? then @update(record,prop,newVal) else @save(record)
+
+    update: (record,prop,newVal) ->
+      @resource.update record,prop,newVal
+
+    save: (record) ->
+      @resource.save record, (response) =>
+        record.id = response.data.id
+
+    onDelete: (index,amount) ->
+      for i in [index..(index+amount-1)]
+        record = @records[i]
+        return unless record.id?
+        @resource.delete record.id
+
+$ ->
+  new Vue
+    el: "body"
+    data:
+      query: ""
+
+    components:
+      htbl: new HandsOnTable
+

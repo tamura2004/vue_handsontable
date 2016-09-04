@@ -1,10 +1,10 @@
 class GroupsProjectsController < ApplicationController
   def index
 
-    gon.records =
+    @records =
       ProjectsMonthlyAllocation.group_view.pivot
 
-    gon.options = {
+    @options = {
       colHeaders: [
         "グループ名",
         *months_headers,

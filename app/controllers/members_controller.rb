@@ -4,7 +4,7 @@ class MembersController < ApplicationController
   # GET /members
   # GET /members.json
   def index
-    gon.records = Member.connection.select_all(<<-SQL).to_a
+    @records = Member.connection.select_all(<<-SQL).to_a
       select
         members.id as id,
         groups.name as group_name,
@@ -17,7 +17,7 @@ class MembersController < ApplicationController
       order by group_id, job_title_id, number, name
     SQL
 
-    gon.options = {
+    @options = {
       dataSchema: {id: nil, name: nil, group_name: nil, job_title_name: nil, number: nil},
       colHeaders: ["所属", "職位", "社員番号", "氏名"],
       columns: [

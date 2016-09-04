@@ -12,9 +12,9 @@ class ProjectsMembersMonth < ApplicationRecord
 
   scope :ags_view, -> {
     select(<<-SQL)
-      projects.number as number,
-      projects.name as project,
-      members.name as name,
+      projects.number as project_number,
+      projects.name as project_name,
+      members.name as member_name,
       projects_members_months.month as month,
       projects_members_months.cost as cost
     SQL
@@ -27,7 +27,7 @@ class ProjectsMembersMonth < ApplicationRecord
 
   scope :ags_member_view, -> {
     select(<<-SQL)
-      members.name as name,
+      members.name as member_name,
       projects_members_months.month as month,
       projects_members_months.cost as cost
     SQL

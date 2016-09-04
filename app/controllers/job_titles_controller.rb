@@ -4,8 +4,8 @@ class JobTitlesController < ApplicationController
   # GET /job_titles
   # GET /job_titles.json
   def index
-    gon.records = JobTitle.all
-    gon.options = {
+    @records = JobTitle.all
+    @options = {
       dataSchema: {id: nil, name: nil},
       colHeaders: ["職位名"],
       columns: [{data: "name"}],

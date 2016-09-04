@@ -3,57 +3,28 @@ class AgsController < ApplicationController
 
   def index
 
-    options = {
+    @options = {
       colHeaders:[
         "name",
         *months_headers,
         "total"
       ],
       columns: [
-        {data:"name"},
+        {data:"member_name"},
         *months_columns,
         {data:"total", type:"numeric", format: "0.0"}
       ]
-    }
+    }.to_json
 
-    @variables = {}
-    @project_keys = []
-    @projects = []
+    @assigns =
+      Assign.where(job_title_name: "AGS")
+        .pivot
+        .group_by{|h|
+          [h["project_number"],h["project_name"]]
+        }
 
-    Project.order(:number).find_each do |project|
-      if project.members.any?{|m|m.job_title.try(:name) == "AGS"}
-        @projects.push project
-
-        key = "p#{project.id}"
-        @project_keys.push key
-
-        records = ProjectsMembersMonth.ags_view.where("projects.number = ?", project.number).pivot
-
-        @variables.merge!({
-          key => {
-            records: records,
-            options: options
-          }
-        })
-      end
-    end
-
-    @variables.merge!({
-      "alloc" => {
-        records: ProjectsMembersMonth.ags_member_view.pivot,
-        options: options
-      }
-    })
-
-    @variables.merge!({
-      "work" => {
-        records: Work.ags_view.pivot,
-        options: options
-      }
-    })
-
-    @variables[:project_keys] = @project_keys
-    gon.push @variables
+    @allocs = ProjectsMembersMonth.ags_member_view.pivot.to_json
+    @works = Work.ags_view.pivot.to_json
 
   end
 end

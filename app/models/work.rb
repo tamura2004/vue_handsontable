@@ -8,7 +8,8 @@ class Work < ApplicationRecord
 
   scope :ags_view, -> {
     select(<<-SQL)
-      members.name as name,
+      members.id as id,
+      members.name as member_name,
       works.month as month,
       works.cost as cost
     SQL

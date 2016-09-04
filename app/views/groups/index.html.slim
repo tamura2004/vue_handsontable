@@ -5,6 +5,4 @@ ul.nav.nav-tabs
   li = link_to "要員", members_path
   li = link_to "職位", job_titles_path
 
-#groups
-coffee:
-  $ -> VueFactory.create "groups"
+htbl ctl="groups" :rows=@records.to_json :opts=@options.to_json

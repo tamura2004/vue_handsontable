@@ -4,15 +4,12 @@
     small = @group.name
 
 h5 要員
-#works
+htbl ctl="works" :rows=@data[:works][:records].to_json :opts=@data[:works][:options].to_json
 hr
+
 h5 アサイン
-#members_projects_months
+htbl ctl="members_projects_months" :rows=@data[:members_projects_months][:records].to_json :opts=@data[:members_projects_months][:options].to_json
 hr
+
 h5 案件
-#projects_members_months
-coffee:
-  $ ->
-    VueFactory.create "works"
-    VueFactory.create "members_projects_months"
-    VueFactory.create "projects_members_months"
+htbl ctl="projects_members_months" :rows=@data[:projects_members_months][:records].to_json :opts=@data[:projects_members_months][:options].to_json

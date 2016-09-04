@@ -33,11 +33,7 @@ Rails.application.routes.draw do
   resources :job_titles  , except: [:new,:edit]
 
   resources :members_projects_months , except: [:new,:edit]
-  resources :members_months          , except: [:new,:edit] do
-    collection do
-      get :ags
-    end
-  end
+  resources :members_months          , except: [:new,:edit]
 
   resources :members, except: [:new,:edit] do
 

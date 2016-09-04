@@ -7,7 +7,7 @@ class CostsController < ApplicationController
   def index
     @groups = Group.all
 
-    gon.records =
+    @records =
       VCost
         .select(
           :project_number,
@@ -19,8 +19,9 @@ class CostsController < ApplicationController
         .order(:project_number)
         .where(group_id: @group)
         .pivot
+        .to_json
 
-    gon.options = {
+    @options = {
       colHeaders: [
         "案件管理番号",
         "案件名",
@@ -33,27 +34,8 @@ class CostsController < ApplicationController
         *months_columns,
         {data: "total", type: "numeric", format: "0.0"}
       ],
-    }
+    }.to_json
 
-  end
-
-  # GET /costs/1
-  # GET /costs/1.json
-  def show
-  end
-
-  # GET /costs/new
-  def new
-    @cost = Cost.new
-  end
-
-  # GET /costs/1/edit
-  def edit
-  end
-
-  # POST /costs
-  # POST /costs.json
-  def create
   end
 
   # PATCH/PUT /costs/1
@@ -84,11 +66,6 @@ class CostsController < ApplicationController
         render json: @cost.errors.full_messages, status: :unprocessable_entity
       end
     end
-  end
-
-  # DELETE /costs/1
-  # DELETE /costs/1.json
-  def destroy
   end
 
   private

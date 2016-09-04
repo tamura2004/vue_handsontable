@@ -1,52 +1,8 @@
 class MembersMonthsController < ApplicationController
   before_action :set_members_month, only: [:show, :edit, :update, :destroy]
 
-  # GET /members_months
-  # GET /members_months.json
-  def ags
-    gon.records = ProjectsMembersMonth.joins(:job_title).where(job_titles: {name: "AGS"}).member_view.pivot.map do |row|
-      row.tap do |row|
-        if row.has_key? "name"
-          row["name"] = view_context.link_to row["name"], view_context.member_members_projects_months_path(row["id"])
-        end
-      end
-    end
-
-    gon.options = {
-      colHeaders: [
-        "所属",
-        "職位",
-        "社員番号",
-        "氏名",
-        *months_headers
-      ],
-      columns: [
-        {
-          data: "group",
-          readOnly: true,
-          renderer: "html"
-        },
-        {
-          data: "job",
-          readOnly: true,
-          renderer: "html"
-        },
-        {
-          data: "number",
-          readOnly: true
-        },
-        {
-          data: "name",
-          readOnly: true,
-          renderer: "html"
-        },
-        *months_immutable_columns
-      ],
-    }
-  end
-
   def index
-    gon.records = ProjectsMembersMonth.member_view.pivot.map do |row|
+    @records = ProjectsMembersMonth.member_view.pivot.map do |row|
       row.tap do |row|
         if row.has_key? "name"
           row["name"] = view_context.link_to row["name"], view_context.member_members_projects_months_path(row["id"])
@@ -54,7 +10,7 @@ class MembersMonthsController < ApplicationController
       end
     end
 
-    gon.options = {
+    @options = {
       colHeaders: [
         "所属",
         "職位",

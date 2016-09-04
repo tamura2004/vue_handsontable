@@ -3,6 +3,4 @@ ul.nav.nav-tabs
   li = link_to "案件別一覧", projects_allocations_path
   li = link_to "グループ別一覧", groups_projects_path
 
-#members_months
-coffee:
-  $ -> VueFactory.create "members_months"
+htbl ctl="members_months" :rows=@records.to_json :opts=@options.to_json

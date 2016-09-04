@@ -5,7 +5,4 @@ ul.nav.nav-tabs
     -else
       li = link_to group.name, group_works_path(group)
 
-#works
-coffee:
-  $ ->
-    VueFactory.create "works"
+htbl ctl="works" :rows=@records.to_json :opts=@options.to_json

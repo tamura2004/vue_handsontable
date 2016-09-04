@@ -4,8 +4,8 @@ class DepartmentsController < ApplicationController
   # GET /departments
   # GET /departments.json
   def index
-    gon.records = Department.all
-    gon.options = {
+    @records = Department.all
+    @options = {
       dataSchema: {id: nil, name: nil},
       colHeaders: ["部名"],
       columns: [{data: "name"}],

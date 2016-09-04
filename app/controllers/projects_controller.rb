@@ -4,7 +4,7 @@ class ProjectsController < ApplicationController
   # GET /projects
   # GET /projects.json
   def index
-    gon.records = Project.connection.select_all(<<-SQL).to_a
+    @records = Project.connection.select_all(<<-SQL).to_a
       select
         projects.id as id,
         groups.name as group_name,
@@ -17,7 +17,7 @@ class ProjectsController < ApplicationController
       order by group_id, number
     SQL
 
-    gon.options = {
+    @options = {
       dataSchema: {id: nil, group_name: nil, number: nil, name:nil, cost:nil, rd:nil},
       colHeaders: ["グループ", "案件管理番号", "案件名", "承認原価", "要件定義工数"],
       columns: [

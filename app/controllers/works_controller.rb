@@ -7,7 +7,7 @@ class WorksController < ApplicationController
   def index
     @groups = Group.all
 
-    gon.records =
+    @records =
       VWork
         .where(group_id: @group)
         .select(
@@ -21,7 +21,7 @@ class WorksController < ApplicationController
         .order(:job_title_id,:member_number)
         .pivot
 
-    gon.options = {
+    @options = {
       colHeaders: [
         "職位",
         "社員番号",
