@@ -1,6 +1,5 @@
 class AgsController < ApplicationController
 
-
   def index
 
     @options = {
@@ -23,15 +22,15 @@ class AgsController < ApplicationController
           [h["project_number"],h["project_name"]]
         }
 
-    @allocs = ProjectsMembersMonth.ags_member_view
-      .pivot
-      .to_json
+    @allocs = HtblParamsFactory.new do |t|
+      t.model = Assign.where(job_title_name: "AGS")
+      t.id_field = :member_id
+      t.fields = [:member_link]
+    end
 
-    base = months_values.inject({}){|memo,month|memo.merge month => ""}
-
-    @works = Work.ags_view.pivot.map do |w|
-      base.merge w
-    end.to_json
+    @works = HtblParamsFactory.new do |t|
+      t.model = VWork.where(job_title_name: "AGS")
+    end
 
   end
 end

@@ -1,8 +1,8 @@
 .page-header: h4 AGS要員集計
-htbl :rows=@works :opts=@options
+htbl :rows=@works.rows :opts=@works.opts
 
 .page-header: h4 AGS案件集計
-htbl :rows=@allocs :opts=@options
+htbl :rows=@allocs.rows :opts=@allocs.opts
 
 - @assigns.each do |project,members|
   .page-header
