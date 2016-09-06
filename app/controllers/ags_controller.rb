@@ -5,9 +5,9 @@ class AgsController < ApplicationController
 
     @options = {
       colHeaders:[
-        "name",
+        "要員名",
         *months_headers,
-        "total"
+        "合計"
       ],
       columns: [
         {data:"member_name"},
@@ -23,8 +23,15 @@ class AgsController < ApplicationController
           [h["project_number"],h["project_name"]]
         }
 
-    @allocs = ProjectsMembersMonth.ags_member_view.pivot.to_json
-    @works = Work.ags_view.pivot.to_json
+    @allocs = ProjectsMembersMonth.ags_member_view
+      .pivot
+      .to_json
+
+    base = months_values.inject({}){|memo,month|memo.merge month => ""}
+
+    @works = Work.ags_view.pivot.map do |w|
+      base.merge w
+    end.to_json
 
   end
 end

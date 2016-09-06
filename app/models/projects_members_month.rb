@@ -27,6 +27,7 @@ class ProjectsMembersMonth < ApplicationRecord
 
   scope :ags_member_view, -> {
     select(<<-SQL)
+      members.id as id,
       members.name as member_name,
       projects_members_months.month as month,
       projects_members_months.cost as cost
