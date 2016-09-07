@@ -4,8 +4,10 @@ htbl :rows=@works.rows :opts=@works.opts
 .page-header: h4 AGS案件集計
 htbl :rows=@allocs.rows :opts=@allocs.opts
 
-- @assigns.each do |p|
+- @assigns.rows.each do |project,params|
   .page-header
-    h4 = htbl_params.title
+    h4
+      small = project.number
+      = project.name
 
-  htbl ctl="assigns" :rows=p.rows :opts=p.opts
+  / htbl ctl="assigns" :rows=data.to_json :opts=@assigns.opts.to_json
