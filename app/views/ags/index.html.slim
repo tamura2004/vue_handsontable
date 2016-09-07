@@ -4,11 +4,8 @@ htbl :rows=@works.rows :opts=@works.opts
 .page-header: h4 AGS案件集計
 htbl :rows=@allocs.rows :opts=@allocs.opts
 
-- @assigns.each do |project,members|
+- @assigns.each do |p|
   .page-header
-    h4
-      small = project[0]
-      | &nbsp;
-      = project[1]
+    h4 = htbl_params.title
 
-  htbl ctl="assigns" :rows=members.to_json :opts=@options
+  htbl ctl="assigns" :rows=p.rows :opts=p.opts

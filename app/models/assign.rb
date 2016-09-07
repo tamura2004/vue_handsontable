@@ -23,4 +23,12 @@ class Assign < ApplicationRecord
     .order(:job_title_id, :member_number)
   }
 
+  scope :ags, -> {
+    where(job_title_name: "AGS")
+    .where(group_name: "オープン系共通基盤")
+    .group_by do |row|
+      row.project_number + " " + row.project_name
+    end
+  }
+
 end

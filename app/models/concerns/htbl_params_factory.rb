@@ -1,12 +1,10 @@
 class HtblParamsFactory
 
   attr_writer :model,:id_field,:fields
+  attr_accessor :title
 
   def initialize
     yield self if block_given?
-    @model ||= VWork
-    @id_field ||= :member_id
-    @fields ||= [:member_number,:member_link]
 
     @rows = @model
       .select(*@fields,:month,:cost)
@@ -29,6 +27,10 @@ class HtblParamsFactory
         {data: "total", type: "numeric", format:"0.00"}
       ]
     }
+  end
+
+  def group(&block)
+    @rows.group_by(&block)
   end
 
   def rows
