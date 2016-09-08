@@ -89,7 +89,8 @@ $ ->
     el: "body"
     data:
       query: ""
-
+      state: "btn-default"
+    methods:
+      handleClick: (className) -> @state = className
     components:
       htbl: new VueTable
-

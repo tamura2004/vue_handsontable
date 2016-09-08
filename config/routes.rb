@@ -62,6 +62,7 @@ Rails.application.routes.draw do
   end
 
   get :ags, to: "ags#index"
+  get :whereareyou, to: "whereareyou#index"
 
   root "costs#index", group_id: 1
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
