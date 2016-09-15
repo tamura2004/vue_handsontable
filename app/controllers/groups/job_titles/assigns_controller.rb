@@ -4,21 +4,28 @@ class Groups::JobTitles::AssignsController < ApplicationController
 
   def index
     @works = HtblParamsFactory.new do |t|
-      t.model = VWork.where(group_id: @group)
+      t.model = VWork
+        .where(group_id: @group)
+        .where(job_title_id: @job_title)
+        .order(:member_number)
+
       t.id_field = :member_id
       t.fields = :member_number,:member_link
     end
 
     @assigns = HtblParamsFactory.new do |t|
-      t.model = Alloc.where(group_id: @group)
+      t.model = Alloc
+        .where(group_id: @group)
         .where(job_title_id: @job_title)
+        .order(:member_number)
+
       t.id_field = :member_id
       t.fields = :member_number, :member_link
     end
 
     @allocs = HtblParamsFactory.new do |t|
-      t.model = Alloc.where(job_title_id:@job_title)
-      t.id_field = :assign_id
+      t.model = Alloc.where(job_title_id: @job_title)
+      t.id_field = :project_id
       t.fields = :project_number,:project_link
     end
 

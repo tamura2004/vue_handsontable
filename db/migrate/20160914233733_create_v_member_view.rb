@@ -23,7 +23,7 @@ class CreateVMemberView < ActiveRecord::Migration[5.0]
 
   def down
     execute <<-SQL
-      drop view v_works;
+      drop view v_members;
     SQL
   end
 end

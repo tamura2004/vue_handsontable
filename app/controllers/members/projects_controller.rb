@@ -2,13 +2,13 @@ class Members::ProjectsController < ApplicationController
   before_action :set_memgber, only: [:index]
 
   def index
-    gon.projects =
+    @projects =
       Project
         .where("groups.id = ?", @member.group.try(:id))
         .view
         .map(&:attributes)
-    gon.member = @member
-    gon.assignments = @member.assignments
+
+    @assigns = @member.assignments
   end
 
   private

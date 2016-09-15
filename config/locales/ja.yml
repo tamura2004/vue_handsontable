@@ -43,6 +43,7 @@ ja:
         member_number: 社員番号
         member_name: 担当名
         group_name: グループ名
+        job_title_link: 職位名
         job_title_name: 職位名
         project_number: 案件管理番号
         project_name: 案件名
@@ -54,6 +55,7 @@ ja:
         member_number: 社員番号
         member_name: 担当名
         group_name: グループ名
+        job_title_link: 職位名
         job_title_name: 職位名
         project_number: 案件管理番号
         project_name: 案件名
@@ -63,6 +65,7 @@ ja:
 
       v_cost:
         group_name: グループ名
+        job_title_link: 職位名
         job_title_name: 職位名
         project_number: 案件管理番号
         project_name: 案件名
@@ -73,6 +76,7 @@ ja:
         member_number: 社員番号
         member_name: 担当名
         group_name: グループ名
+        job_title_link: 職位名
         job_title_name: 職位名
         member_link: 担当名
         group_link: グループ名
