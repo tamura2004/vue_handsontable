@@ -37,7 +37,6 @@ gem "execjs"
 gem "twitter-bootstrap-rails"
 gem "seed-fu"
 gem "gon"
-gem "active_decorator"
 
 gem "roo", "~> 2.4.0"
 gem "axlsx"

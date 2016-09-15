@@ -7,34 +7,11 @@ class CostsController < ApplicationController
   def index
     @groups = Group.all
 
-    @records =
-      VCost
-        .select(
-          :project_number,
-          :project_link,
-          :month,
-          :cost
-        )
-        .select("project_id as id")
-        .order(:project_number)
-        .where(group_id: @group)
-        .pivot
-        .to_json
-
-    @options = {
-      colHeaders: [
-        "案件管理番号",
-        "案件名",
-        *months_headers,
-        "合計"
-      ],
-      columns: [
-        {data: "project_number"},
-        {data: "project_link", renderer: "html"},
-        *months_columns,
-        {data: "total", type: "numeric", format: "0.0"}
-      ],
-    }.to_json
+    @costs = HtblParamsFactory.new do |t|
+      t.model = VCost.where(group_id: @group)
+      t.id_field = :project_id
+      t.fields = :project_number, :project_link
+    end
 
   end
 

@@ -1,39 +1,33 @@
 class HtblParamsFactory
 
-  attr_writer :model,:id_field,:fields
+  attr_writer :model,:id_field,:fields,:pivot
   attr_accessor :title
 
   def initialize
-    # @model,@id_field,@fields,@json,@group = model,id_field,fields,json,group
+    @pivot = true
     yield self if block_given?
 
-    # if @group.empty?
-    #   @rows = @model
-    #     .select(*@group,*@fields,:month,:cost)
-    #     .select("#{@id_field} as id")
-    #     .pivot
-    #     .group_by{|row|
-    #       @group.map{|g|row[g.to_s]}.join(" ")
-    #     }
-    #     .inject({}){|memo,h|
-    #       memo.merge h[0] => h[1].map{|row|
-    #         months_blanks.merge row.reject{|k,v|
-    #           @group.map(&:to_s).include? k
-    #         }
-    #       }
-    #     }
+    if @pivot
+      generate_rows_with_pivot
+      generate_opts_with_pivot
+    else
+      generate_rows
+      generate_opts
+    end
+  end
 
-    # else
-      @rows = @model
-        .select(*@fields,:month,:cost)
-        .select("#{@id_field} as id")
-        .pivot
+  def generate_rows_with_pivot
+    @rows = @model
+      .select(*@fields,:month,:cost)
+      .select("#{@id_field} as id")
+      .pivot
 
-      @rows.map! do |row|
-        months_blanks.merge row
-      end
-    # end
+    @rows.map! do |row|
+      months_blanks.merge row
+    end
+  end
 
+  def generate_opts_with_pivot
     @opts = {
       colHeaders: [
         *fields_headers,
@@ -45,6 +39,17 @@ class HtblParamsFactory
         *months_columns,
         {data: "total", type: "numeric", format:"0.00"}
       ]
+    }
+  end
+
+  def generate_rows
+    @rows = @model.select(*@fields)
+  end
+
+  def generate_opts
+    @opts = {
+      colHeaders: fields_headers,
+     columns: fields_columns
     }
   end
 
