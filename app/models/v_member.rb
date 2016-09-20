@@ -1,0 +1,2 @@
+class VMember < ApplicationRecord
+end

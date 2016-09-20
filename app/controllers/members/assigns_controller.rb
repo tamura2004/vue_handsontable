@@ -1,39 +1,22 @@
 class Members::AssignsController < ApplicationController
-  before_action :set_member, only: [:index]
+  before_action :set_member, only: :index
 
   def index
-    @members = {
-      records: [[
-        @member.group.try(:name),
-        @member.job_title.try(:name),
-        @member.number,
-        @member.name
-      ]],
-      options: {
-        colHeaders: %w(グループ 職位 社員番号 氏名)
-      }
-    }
+    @header = HtblParamsFactory.new do |t|
+      t.model = VWork.where(member_id: @member)
+      t.id_field = :member_id
+      t.fields = :job_title_link,:member_number,:member_link
+    end
 
-    @members_projects_months = {
-      records: Assign.project_view
-        .select(:id)
-        .where(member_id: @member.id)
-        .pivot,
-      options: {
-        colHeaders: ["管理番号", "案件名", *months_headers ],
-        columns: [
-          {data: "project_number"},
-          {data: "project_link",renderer:"html"},
-          *months_columns
-        ]
-      }
-    }
-
+    @assigns = HtblParamsFactory.new do |t|
+      t.model = Assign.where(member_id: @member)
+      t.id_field = :id
+      t.fields = :project_number, :project_link
+    end
   end
 
   private
     def set_member
       @member = Member.find(params[:member_id])
     end
-
 end

@@ -12,7 +12,13 @@ class @Resource
 
 class VueTable
   template: '<div></div>'
-  props: ['rows','opts','ctl']
+  props:
+    rows: Array
+    opts: Object
+    ctl: String
+    total:
+      type: Boolean
+      default: true
 
   computed:
     records: ->
@@ -42,7 +48,10 @@ class VueTable
             if k isnt "id"
               total[k] = "合計"
 
-      rows.concat(total)
+      if @total
+        rows.concat(total)
+      else
+        rows
 
   ready: ->
     @resource = new Resource @ctl if @ctl?

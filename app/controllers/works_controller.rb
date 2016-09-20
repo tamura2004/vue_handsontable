@@ -7,36 +7,11 @@ class WorksController < ApplicationController
   def index
     @groups = Group.all
 
-    @records =
-      VWork
-        .where(group_id: @group)
-        .select(
-          :job_title_link,
-          :member_number,
-          :member_link,
-          :month,
-          :cost
-        )
-        .select("member_id as id")
-        .order(:job_title_id,:member_number)
-        .pivot
-
-    @options = {
-      colHeaders: [
-        "職位",
-        "社員番号",
-        "氏名",
-        *months_headers,
-        "合計"
-      ],
-      columns: [
-        {data: "job_title_link", renderer: "html"},
-        {data: "member_number"},
-        {data: "member_link", renderer: "html"},
-        *months_columns,
-        {data: "total", type: "numeric", format: "0.0"}
-      ],
-    }
+    @works = HtblParamsFactory.new do |t|
+      t.model = VWork.where(group_id: @group).order(:job_title_id,:member_number)
+      t.id_field = :member_id
+      t.fields = :job_title_link, :member_number, :member_link
+    end
 
   end
 

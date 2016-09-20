@@ -1,7 +1,7 @@
-htbl ctl="projects" :rows=@project[:records].to_json :opts=@project[:options].to_json
+htbl :rows=@header.rows :opts=@header.opts :total="false"
 hr
 
-htbl ctl="members_allocations" :rows=@members_allocations[:records].to_json :opts=@members_allocations[:options].to_json
+htbl ctl="members_allocations" :rows=@assigns.rows :opts=@assigns.opts
 hr
 
 = link_to "要員アサイン", project_members_path(@project), class: "btn btn-primary"

@@ -1,11 +1,22 @@
 class HtblParamsFactory
 
-  attr_writer :model,:id_field,:fields
+  attr_writer :model,:id_field,:fields,:pivot
   attr_accessor :title
 
   def initialize
+    @pivot = true
     yield self if block_given?
 
+    if @pivot
+      generate_rows_with_pivot
+      generate_opts_with_pivot
+    else
+      generate_rows
+      generate_opts
+    end
+  end
+
+  def generate_rows_with_pivot
     @rows = @model
       .select(*@fields,:month,:cost)
       .select("#{@id_field} as id")
@@ -14,7 +25,9 @@ class HtblParamsFactory
     @rows.map! do |row|
       months_blanks.merge row
     end
+  end
 
+  def generate_opts_with_pivot
     @opts = {
       colHeaders: [
         *fields_headers,
@@ -28,6 +41,17 @@ class HtblParamsFactory
       ]
     }
 
+  end
+
+  def generate_rows
+    @rows = @model.select(*@fields)
+  end
+
+  def generate_opts
+    @opts = {
+      colHeaders: fields_headers,
+     columns: fields_columns
+    }
   end
 
   def rows

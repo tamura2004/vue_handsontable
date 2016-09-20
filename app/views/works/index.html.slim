@@ -1,8 +1,3 @@
-ul.nav.nav-tabs
-  - @groups.each do |group|
-    - if @group.id == group.id
-      li.active = link_to group.name, group_works_path(group)
-    -else
-      li = link_to group.name, group_works_path(group)
+grouptab :groups=@groups.to_json :current=@group.to_json path="works"
 
-htbl ctl="works" :rows=@records.to_json :opts=@options.to_json
+htbl ctl="works" :rows=@works.rows :opts=@works.opts
