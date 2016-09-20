@@ -4,35 +4,16 @@ class HtblParamsFactory
   attr_accessor :title
 
   def initialize
-    # @model,@id_field,@fields,@json,@group = model,id_field,fields,json,group
     yield self if block_given?
 
-    # if @group.empty?
-    #   @rows = @model
-    #     .select(*@group,*@fields,:month,:cost)
-    #     .select("#{@id_field} as id")
-    #     .pivot
-    #     .group_by{|row|
-    #       @group.map{|g|row[g.to_s]}.join(" ")
-    #     }
-    #     .inject({}){|memo,h|
-    #       memo.merge h[0] => h[1].map{|row|
-    #         months_blanks.merge row.reject{|k,v|
-    #           @group.map(&:to_s).include? k
-    #         }
-    #       }
-    #     }
+    @rows = @model
+      .select(*@fields,:month,:cost)
+      .select("#{@id_field} as id")
+      .pivot
 
-    # else
-      @rows = @model
-        .select(*@fields,:month,:cost)
-        .select("#{@id_field} as id")
-        .pivot
-
-      @rows.map! do |row|
-        months_blanks.merge row
-      end
-    # end
+    @rows.map! do |row|
+      months_blanks.merge row
+    end
 
     @opts = {
       colHeaders: [
@@ -46,6 +27,7 @@ class HtblParamsFactory
         {data: "total", type: "numeric", format:"0.00"}
       ]
     }
+
   end
 
   def rows

@@ -1,0 +1,29 @@
+h1 Listing seats
+
+table
+  thead
+    tr
+      th Job
+      th Name
+      th State
+      th Col
+      th Row
+      th
+      th
+      th
+
+  tbody
+    - @seats.each do |seat|
+      tr
+        td = seat.job
+        td = seat.name
+        td = seat.state
+        td = seat.col
+        td = seat.row
+        td = link_to 'Show', seat
+        td = link_to 'Edit', edit_seat_path(seat)
+        td = link_to 'Destroy', seat, data: { confirm: 'Are you sure?' }, method: :delete
+
+br
+
+= link_to 'New Seat', new_seat_path

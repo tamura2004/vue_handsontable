@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :seats
   resources :results, only: [:index,:destroy] do
     collection do
       post :upload
