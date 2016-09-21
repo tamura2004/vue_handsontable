@@ -14,3 +14,20 @@
  *= require_tree .
  *= require_self
  */
+
+body{
+  font-family: Meiryo;
+  margin-top: 72px;
+  margin-bottom: 72px;
+}
+
+.handsontable {
+  font-size: 12px;
+  th,td{
+    height: 12px;
+  }
+}
+
+ul.nav.nav-tabs{
+  margin-bottom: 8px;
+}

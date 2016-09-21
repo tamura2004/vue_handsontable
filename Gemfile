@@ -22,6 +22,11 @@ group :development, :test do
   gem "rails-controller-testing"
 end
 
+group :test do
+  gem "faker"
+  gem "database_cleaner"
+end
+
 group :development do
   gem 'web-console'
   gem 'listen', '~> 3.0.5'
@@ -34,12 +39,12 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem "slim-rails"
 gem "vuejs-rails"
-gem "less-rails"
-gem "therubyracer"
-gem "execjs"
+# gem "less-rails"
+# gem "therubyracer"
+# gem "execjs"
 gem "twitter-bootstrap-rails"
 gem "seed-fu"
-gem "gon"
+# gem "gon"
 
 gem "roo", "~> 2.4.0"
 gem "axlsx"

@@ -5,7 +5,7 @@ class ProjectsMembersController < ApplicationController
   # GET /projects_members
   # GET /projects_members.json
   def index
-    gon.members = Member.connection.select_all(<<-SQL).to_a
+    @members = Member.connection.select_all(<<-SQL).to_a
       select
         members.id as id,
         members.name as name,
@@ -16,8 +16,7 @@ class ProjectsMembersController < ApplicationController
       left join job_titles on members.job_title_id = job_titles.id
       order by group_id, job_title_id, number, members.name
     SQL
-    gon.project = @project
-    gon.assignments = @project.assignments
+    @assignments = @project.assignments
   end
 
   # GET /projects_members/1

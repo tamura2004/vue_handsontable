@@ -1,8 +1,8 @@
 FactoryGirl.define do
   factory :member do
-    name "MyString"
-    group nil
-    job_title nil
-    number "MyString"
+    number {rand(1000000)}
+    name {Faker::Name.name}
+    association :group
+    association :job_title
   end
 end

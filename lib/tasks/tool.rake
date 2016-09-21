@@ -1,0 +1,2 @@
+namespace :tool do
+end

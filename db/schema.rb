@@ -26,7 +26,7 @@ ActiveRecord::Schema.define(version: 20160915083939) do
     t.string   "name"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
-    t.index ["department_id"], name: "index_groups_on_department_id"
+    t.index ["department_id"], name: "index_groups_on_department_id", using: :btree
   end
 
   create_table "job_titles", force: :cascade do |t|
@@ -42,8 +42,8 @@ ActiveRecord::Schema.define(version: 20160915083939) do
     t.string   "number"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
-    t.index ["group_id"], name: "index_members_on_group_id"
-    t.index ["job_title_id"], name: "index_members_on_job_title_id"
+    t.index ["group_id"], name: "index_members_on_group_id", using: :btree
+    t.index ["job_title_id"], name: "index_members_on_job_title_id", using: :btree
   end
 
   create_table "projects", force: :cascade do |t|
@@ -54,7 +54,7 @@ ActiveRecord::Schema.define(version: 20160915083939) do
     t.float    "rd"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["group_id"], name: "index_projects_on_group_id"
+    t.index ["group_id"], name: "index_projects_on_group_id", using: :btree
   end
 
   create_table "projects_members", force: :cascade do |t|
@@ -62,8 +62,8 @@ ActiveRecord::Schema.define(version: 20160915083939) do
     t.integer  "member_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["member_id"], name: "index_projects_members_on_member_id"
-    t.index ["project_id"], name: "index_projects_members_on_project_id"
+    t.index ["member_id"], name: "index_projects_members_on_member_id", using: :btree
+    t.index ["project_id"], name: "index_projects_members_on_project_id", using: :btree
   end
 
   create_table "projects_members_months", force: :cascade do |t|
@@ -72,7 +72,7 @@ ActiveRecord::Schema.define(version: 20160915083939) do
     t.float    "cost"
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
-    t.index ["projects_member_id"], name: "index_projects_members_months_on_projects_member_id"
+    t.index ["projects_member_id"], name: "index_projects_members_months_on_projects_member_id", using: :btree
   end
 
   create_table "projects_monthly_allocations", force: :cascade do |t|
@@ -81,7 +81,7 @@ ActiveRecord::Schema.define(version: 20160915083939) do
     t.float    "cost"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["project_id"], name: "index_projects_monthly_allocations_on_project_id"
+    t.index ["project_id"], name: "index_projects_monthly_allocations_on_project_id", using: :btree
   end
 
   create_table "results", force: :cascade do |t|
@@ -113,7 +113,7 @@ ActiveRecord::Schema.define(version: 20160915083939) do
     t.integer  "row"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["state_id"], name: "index_seats_on_state_id"
+    t.index ["state_id"], name: "index_seats_on_state_id", using: :btree
   end
 
   create_table "states", force: :cascade do |t|
@@ -129,7 +129,17 @@ ActiveRecord::Schema.define(version: 20160915083939) do
     t.float    "cost"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["member_id"], name: "index_works_on_member_id"
+    t.index ["member_id"], name: "index_works_on_member_id", using: :btree
   end
 
+  add_foreign_key "groups", "departments"
+  add_foreign_key "members", "groups"
+  add_foreign_key "members", "job_titles"
+  add_foreign_key "projects", "groups"
+  add_foreign_key "projects_members", "members"
+  add_foreign_key "projects_members", "projects"
+  add_foreign_key "projects_members_months", "projects_members"
+  add_foreign_key "projects_monthly_allocations", "projects"
+  add_foreign_key "seats", "states"
+  add_foreign_key "works", "members"
 end
