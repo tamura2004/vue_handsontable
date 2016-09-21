@@ -98,7 +98,6 @@ RSpec.describe DepartmentsController, type: :controller do
         department = Department.create! valid_attributes
         put :update, params: {id: department.to_param, department: new_attributes}, session: valid_session
         department.reload
-        FactoryGirl.attributes_for(:department, name:"updated_name")
       end
 
       it "assigns the requested department as @department" do
