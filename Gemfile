@@ -20,11 +20,13 @@ group :development, :test do
   gem "rspec-rails"
   gem "factory_girl_rails"
   gem "rails-controller-testing"
+  gem "pry-rails"
 end
 
 group :test do
   gem "faker"
   gem "database_cleaner"
+  gem "simplecov"
 end
 
 group :development do
@@ -32,7 +34,7 @@ group :development do
   gem 'listen', '~> 3.0.5'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
-  gem "pry-rails"
+  gem "annotate"
 end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]

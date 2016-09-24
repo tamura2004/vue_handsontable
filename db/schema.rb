@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160915083939) do
+ActiveRecord::Schema.define(version: 20160901174032) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -105,24 +105,6 @@ ActiveRecord::Schema.define(version: 20160915083939) do
     t.datetime "updated_at",     null: false
   end
 
-  create_table "seats", force: :cascade do |t|
-    t.string   "job"
-    t.string   "name"
-    t.integer  "state_id"
-    t.integer  "col"
-    t.integer  "row"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["state_id"], name: "index_seats_on_state_id", using: :btree
-  end
-
-  create_table "states", force: :cascade do |t|
-    t.string   "label"
-    t.string   "value"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "works", force: :cascade do |t|
     t.integer  "member_id"
     t.string   "month"
@@ -140,6 +122,5 @@ ActiveRecord::Schema.define(version: 20160915083939) do
   add_foreign_key "projects_members", "projects"
   add_foreign_key "projects_members_months", "projects_members"
   add_foreign_key "projects_monthly_allocations", "projects"
-  add_foreign_key "seats", "states"
   add_foreign_key "works", "members"
 end

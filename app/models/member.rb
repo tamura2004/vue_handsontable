@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: members
+#
+#  id           :integer          not null, primary key
+#  name         :string
+#  group_id     :integer
+#  job_title_id :integer
+#  number       :string
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#
+
 class Member < ApplicationRecord
   include Pivot
 
@@ -9,28 +22,6 @@ class Member < ApplicationRecord
   has_many :assignments, class_name: "ProjectsMember"
 
   attr_accessor :group_name, :job_title_name
-
-  before_save do
-    if group_name.present?
-      self.group = Group.find_or_create_by(name: group_name)
-    end
-
-    if job_title_name.present?
-      self.job_title = JobTitle.find_or_create_by(name: job_title_name)
-    end
-  end
-
-  def full_name
-    "#{job_title.name} #{name}"
-  end
-
-  # def group_name
-  #   group.try(:name)
-  # end
-
-  # def job_title_name
-  #   job_title.try(:name)
-  # end
 
   scope :view, -> {
     joins(:group)
