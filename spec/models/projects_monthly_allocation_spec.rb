@@ -1,16 +1,18 @@
 # == Schema Information
 #
-# Table name: job_titles
+# Table name: projects_monthly_allocations
 #
 #  id         :integer          not null, primary key
-#  name       :string
+#  project_id :integer
+#  month      :string
+#  cost       :float
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
 
 require 'rails_helper'
 
-RSpec.describe JobTitle, type: :model do
-  subject{build :job_title}
+RSpec.describe ProjectsMonthlyAllocation, type: :model do
+  subject{build :projects_monthly_allocation}
   it {should be_valid}
 end

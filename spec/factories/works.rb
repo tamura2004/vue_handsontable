@@ -1,17 +1,19 @@
 # == Schema Information
 #
-# Table name: projects_members
+# Table name: works
 #
 #  id         :integer          not null, primary key
-#  project_id :integer
 #  member_id  :integer
+#  month      :string
+#  cost       :float
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
 
-require 'rails_helper'
-
-RSpec.describe ProjectsMember, type: :model do
-  subject{build :projects_member}
-  it {should be_valid}
+FactoryGirl.define do
+  factory :work do
+    member nil
+    month "MyString"
+    cost 1.5
+  end
 end

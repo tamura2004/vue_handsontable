@@ -1,16 +1,18 @@
 # == Schema Information
 #
-# Table name: job_titles
+# Table name: works
 #
 #  id         :integer          not null, primary key
-#  name       :string
+#  member_id  :integer
+#  month      :string
+#  cost       :float
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
 
 require 'rails_helper'
 
-RSpec.describe JobTitle, type: :model do
-  subject{build :job_title}
+RSpec.describe Work, type: :model do
+  subject{build :work}
   it {should be_valid}
 end

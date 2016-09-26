@@ -24,7 +24,7 @@ FactoryGirl.define do
 
   factory :project do
     name {generate :project_name}
-    group nil
+    association :group
     number {generate :project_number}
     cost 1.5
     rd 1.5

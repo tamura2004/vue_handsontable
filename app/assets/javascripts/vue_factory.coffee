@@ -93,33 +93,6 @@ class VueTable
           return unless record.id?
           @resource.delete record.id
 
-class Whereareyou
-  template: '''
-    <h4>{{member.name}}</4>
-    <select v-model="state" class="btn btn-block" :class="state">
-      <option value="btn-default">
-        <h4>田村</h4>
-        帰宅
-      </option>
-      <option value="btn-primary">
-        在籍
-      </option>
-      <option value="btn-success">
-        すぐ戻る
-      </option>
-      <option value="btn-info">
-        会議中
-      </option>
-      <option value="btn-warning">
-        休憩中
-      </option>
-      <option value="btn-danger">
-        休み
-      </option>
-    </select>
-  '''
-  props: ['member']
-
 $ ->
   new Vue
     el: "body"
@@ -127,4 +100,3 @@ $ ->
       query: ""
     components:
       htbl: new VueTable
-      wbtn: new Whereareyou

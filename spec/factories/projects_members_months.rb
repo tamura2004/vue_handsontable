@@ -15,8 +15,5 @@ FactoryGirl.define do
     association :projects_member
     month
     cost
-
-    # 別名提議
-    factory :cost
   end
 end
