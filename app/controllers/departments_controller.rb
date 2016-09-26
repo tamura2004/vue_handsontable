@@ -35,8 +35,8 @@ class DepartmentsController < ApplicationController
 
     respond_to do |format|
       if @department.save
-        format.html { redirect_to @department, notice: 'Department was successfully created.' }
-        format.json { render :show, status: :created, location: @department }
+        format.html { redirect_to @department, status: :ok, notice: 'Department was successfully created.' }
+        format.json { render :show, status: :ok, location: @department }
       else
         format.html { render :new }
         format.json { render json: @department.errors.full_messages, status: :unprocessable_entity }
@@ -49,7 +49,7 @@ class DepartmentsController < ApplicationController
   def update
     respond_to do |format|
       if @department.update(department_params)
-        format.html { redirect_to @department, notice: 'Department was successfully updated.' }
+        format.html { redirect_to @department, status: :ok, notice: 'Department was successfully updated.' }
         format.json { render :show, status: :ok, location: @department }
       else
         format.html { render :edit }
@@ -63,8 +63,8 @@ class DepartmentsController < ApplicationController
   def destroy
     @department.destroy
     respond_to do |format|
-      format.html { redirect_to departments_url, notice: 'Department was successfully destroyed.' }
-      format.json { head :no_content }
+      format.html { redirect_to departments_url, status: :ok, notice: 'Department was successfully destroyed.' }
+      format.json { head :no_content, status: :ok }
     end
   end
 

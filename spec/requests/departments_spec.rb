@@ -1,11 +1,27 @@
 require 'rails_helper'
 
 RSpec.describe "Departments", type: :request do
+  let(:id){1}
+  let(:params){{department: attributes_for(:department)}}
+  before{create :department, id: id}
+
   describe "GET /departments" do
-    it "works! (now write some real specs)" do
-      FactoryGirl.create(:group)
-      get departments_path
-      expect(response).to have_http_status(200)
-    end
+    it{should == 200}
+  end
+
+  describe "GET /departments/:id" do
+    it{should == 200}
+  end
+
+  describe "POST /departments" do
+    it {should == 200}
+  end
+
+  describe "PATCH /departments/1" do
+    it{should == 200}
+  end
+
+  describe "DELETE /departments/1" do
+    it{should == 204}
   end
 end

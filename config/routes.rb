@@ -1,6 +1,12 @@
 Rails.application.routes.draw do
 
-  resources :seats
+  resources :departments             , except: [:new,:edit]
+  resources :job_titles              , except: [:new,:edit]
+  resources :costs                   , except: [:new,:edit]
+  resources :works                   , except: [:new,:edit]
+  resources :members_projects_months , except: [:new,:edit]
+  resources :members_months          , except: [:new,:edit]
+
   resources :results, only: [:index,:destroy] do
     collection do
       post :upload
@@ -15,9 +21,6 @@ Rails.application.routes.draw do
     get 'assigns/index'
   end
 
-  resources :costs
-  resources :works
-  # get "init_works", to: "works#seed"
 
   resources :groups_projects
 
@@ -30,11 +33,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :departments , except: [:new,:edit]
-  resources :job_titles  , except: [:new,:edit]
 
-  resources :members_projects_months , except: [:new,:edit]
-  resources :members_months          , except: [:new,:edit]
 
   resources :members, except: [:new,:edit] do
 
@@ -63,7 +62,6 @@ Rails.application.routes.draw do
   end
 
   get :ags, to: "ags#index"
-  get :whereareyou, to: "whereareyou#index"
 
   root "costs#index", group_id: 1
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

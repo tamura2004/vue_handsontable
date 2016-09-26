@@ -1,12 +1,27 @@
 require 'rails_helper'
 
 RSpec.describe "Groups", type: :request do
-  describe "GET /groups" do
-    it "works! (now write some real specs)" do
-      FactoryGirl.create(:group)
+  let(:id){1}
+  let(:params){{group: attributes_for(:group)}}
+  before{create :group, id: id}
 
-      get groups_path
-      expect(response).to have_http_status(200)
-    end
+  describe "GET /groups" do
+    it{should == 200}
+  end
+
+  describe "GET /groups/:id" do
+    it{should == 200}
+  end
+
+  describe "POST /groups" do
+    it {should == 200}
+  end
+
+  describe "PATCH /groups/1" do
+    it{should == 200}
+  end
+
+  describe "DELETE /groups/1" do
+    it{should == 204}
   end
 end

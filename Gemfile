@@ -25,6 +25,8 @@ end
 group :test do
   gem "faker"
   gem "database_cleaner"
+  gem "simplecov"
+  gem "rspec-request_describer"
 end
 
 group :development do
