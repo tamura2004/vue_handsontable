@@ -29,11 +29,6 @@ class GroupsController < ApplicationController
     }
   end
 
-  # GET /groups/1.json
-  def show
-    render json: @group
-  end
-
   # POST /groups.json
   def create
     @group = Group.new(group_params)

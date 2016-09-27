@@ -1,5 +1,5 @@
 class MembersController < ApplicationController
-  before_action :set_member, only: [:show, :edit, :update, :destroy]
+  before_action :set_member, only: [:update, :destroy]
 
   # GET /members
   # GET /members.json
@@ -39,10 +39,6 @@ class MembersController < ApplicationController
       contextMenu: ["remove_row"]
     }
 
-  end
-
-  # GET /members/1.json
-  def show
   end
 
   # POST /members.json

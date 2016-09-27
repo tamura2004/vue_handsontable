@@ -17,9 +17,9 @@ class WorksController < ApplicationController
 
   # POST /works
   # POST /works.json
-  def create
-    head :no_content
-  end
+  # def create
+  #   head :no_content
+  # end
 
   # PATCH/PUT /works/1
   # PATCH/PUT /works/1.json
@@ -53,13 +53,13 @@ class WorksController < ApplicationController
 
   # DELETE /works/1
   # DELETE /works/1.json
-  def destroy
-    @work.destroy
-    respond_to do |format|
-      format.html { redirect_to works_url, notice: 'Work was successfully destroyed.' }
-      format.json { head :no_content }
-    end
-  end
+  # def destroy
+  #   @work.destroy
+  #   respond_to do |format|
+  #     format.html { redirect_to works_url, notice: 'Work was successfully destroyed.' }
+  #     format.json { head :no_content }
+  #   end
+  # end
 
   private
     # Use callbacks to share common setup or constraints between actions.

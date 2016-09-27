@@ -1,5 +1,5 @@
 class DepartmentsController < ApplicationController
-  before_action :set_department, only: [:show, :edit, :update, :destroy]
+  before_action :set_department, only: [:update, :destroy]
 
   # GET /departments
   # GET /departments.json
@@ -12,12 +12,6 @@ class DepartmentsController < ApplicationController
       minSpareRows: 1,
       contextMenu: ["remove_row"]
     }
-  end
-
-  # GET /departments/1
-  # GET /departments/1.json
-  def show
-    render json: @department
   end
 
   # POST /departments

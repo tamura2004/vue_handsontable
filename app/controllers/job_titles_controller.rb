@@ -1,5 +1,5 @@
 class JobTitlesController < ApplicationController
-  before_action :set_job_title, only: [:show, :edit, :update, :destroy]
+  before_action :set_job_title, only: [:update, :destroy]
 
   # GET /job_titles
   # GET /job_titles.json
@@ -13,16 +13,6 @@ class JobTitlesController < ApplicationController
       contextMenu: ["remove_row"]
     }
 
-  end
-
-  # GET /job_titles/1
-  # GET /job_titles/1.json
-  def show
-  end
-
-  # GET /job_titles/new
-  def new
-    @job_title = JobTitle.new
   end
 
   # POST /job_titles

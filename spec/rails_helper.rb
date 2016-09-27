@@ -16,4 +16,5 @@ RSpec.configure do |config|
   Faker::Config.locale = :ja
   config.include FactoryGirl::Syntax::Methods
   config.include RSpec::RequestDescriber
+  config.example_status_persistence_file_path = "./spec/examples.txt"
 end
