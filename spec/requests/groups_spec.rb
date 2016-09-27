@@ -22,6 +22,6 @@ RSpec.describe "Groups", type: :request do
   end
 
   describe "DELETE /groups/1" do
-    it{should == 204}
+    it{should == 200}
   end
 end

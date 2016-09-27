@@ -25,10 +25,6 @@ class JobTitlesController < ApplicationController
     @job_title = JobTitle.new
   end
 
-  # GET /job_titles/1/edit
-  def edit
-  end
-
   # POST /job_titles
   # POST /job_titles.json
   def create
@@ -36,7 +32,7 @@ class JobTitlesController < ApplicationController
 
     respond_to do |format|
       if @job_title.save
-        format.html { redirect_to @job_title, notice: 'Job title was successfully created.' }
+        format.html { redirect_to @job_title, status: :ok, notice: 'Job title was successfully created.' }
         format.json { render :show, status: :created, location: @job_title }
       else
         format.html { render :new }
@@ -50,7 +46,7 @@ class JobTitlesController < ApplicationController
   def update
     respond_to do |format|
       if @job_title.update(job_title_params)
-        format.html { redirect_to @job_title, notice: 'Job title was successfully updated.' }
+        format.html { redirect_to @job_title, status: :ok, notice: 'Job title was successfully updated.' }
         format.json { render :show, status: :ok, location: @job_title }
       else
         format.html { render :edit }
@@ -64,7 +60,7 @@ class JobTitlesController < ApplicationController
   def destroy
     @job_title.destroy
     respond_to do |format|
-      format.html { redirect_to job_titles_url, notice: 'Job title was successfully destroyed.' }
+      format.html { redirect_to job_titles_url, status: :ok, notice: 'Job title was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

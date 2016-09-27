@@ -4,6 +4,7 @@ RSpec.describe "Departments", type: :request do
   let(:id){1}
   let(:params){{department: attributes_for(:department)}}
   before{create :department, id: id}
+  before{create :group}
 
   describe "GET /departments" do
     it{should == 200}
@@ -22,6 +23,6 @@ RSpec.describe "Departments", type: :request do
   end
 
   describe "DELETE /departments/1" do
-    it{should == 204}
+    it{should == 200}
   end
 end

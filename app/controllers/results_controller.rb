@@ -7,8 +7,8 @@ class ResultsController < ApplicationController
   def index
     respond_to do |format|
       format.html do
-        gon.records = Result.all
-        gon.options = {
+        @records = Result.all
+        @options = {
           colHeaders: %w(社員番号 社員名 案件番号 案件名 工数),
           columns: %w(member_number member_name project_number project_name cost).map{|a|{data: a}},
           columnSorting: true,

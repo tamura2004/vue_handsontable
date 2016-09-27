@@ -12,7 +12,7 @@
 
 FactoryGirl.define do
   factory :work do
-    member nil
+    association :member
     month "MyString"
     cost 1.5
   end

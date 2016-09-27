@@ -4,12 +4,9 @@ RSpec.describe "JobTitles", type: :request do
   let(:id){1}
   let(:params){{job_title: attributes_for(:job_title)}}
   before{create :job_title, id: id}
+  before{create :group}
 
   describe "GET /job_titles" do
-    it{should == 200}
-  end
-
-  describe "GET /job_titles/:id" do
     it{should == 200}
   end
 
@@ -22,6 +19,6 @@ RSpec.describe "JobTitles", type: :request do
   end
 
   describe "DELETE /job_titles/1" do
-    it{should == 204}
+    it{should == 200}
   end
 end

@@ -15,7 +15,7 @@ module Pivot
     }
 
     scope :pivot, -> {
-      all.group_by(&:header).map do |header,rows|
+      all.to_a.group_by(&:header).map do |header,rows|
         rows.pivot(header)
       end
     }
