@@ -9,10 +9,6 @@ RSpec.describe "Member", type: :request do
     it{should == 200}
   end
 
-  describe "GET /members/:id.json" do
-    it{should == 200}
-  end
-
   describe "POST /members.json" do
     it {should == 201}
   end

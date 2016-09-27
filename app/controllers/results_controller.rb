@@ -27,7 +27,7 @@ class ResultsController < ApplicationController
 
   def destroy
     Result.find(params[:id]).destroy
-    render json: "ok"
+    head :no_content
   end
 
   def upload

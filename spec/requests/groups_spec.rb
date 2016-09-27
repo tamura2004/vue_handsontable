@@ -9,10 +9,6 @@ RSpec.describe "Groups", type: :request do
     it{should == 200}
   end
 
-  describe "GET /groups/:id" do
-    it{should == 200}
-  end
-
   describe "POST /groups" do
     it {should == 200}
   end
@@ -22,6 +18,6 @@ RSpec.describe "Groups", type: :request do
   end
 
   describe "DELETE /groups/1" do
-    it{should == 200}
+    it{should == 204}
   end
 end

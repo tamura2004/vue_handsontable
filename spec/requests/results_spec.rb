@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "Results", type: :request do
   let(:result){create :result}
+  before{create :group}
 
   describe "GET /results" do
     it{should == 200}

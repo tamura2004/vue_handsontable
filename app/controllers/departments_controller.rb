@@ -17,44 +17,27 @@ class DepartmentsController < ApplicationController
   # GET /departments/1
   # GET /departments/1.json
   def show
-  end
-
-  # GET /departments/new
-  def new
-    @department = Department.new
-  end
-
-  # GET /departments/1/edit
-  def edit
+    render json: @department
   end
 
   # POST /departments
   # POST /departments.json
   def create
     @department = Department.new(department_params)
-
-    respond_to do |format|
-      if @department.save
-        format.html { redirect_to @department, status: :ok, notice: 'Department was successfully created.' }
-        format.json { render :show, status: :ok, location: @department }
-      else
-        format.html { render :new }
-        format.json { render json: @department.errors.full_messages, status: :unprocessable_entity }
-      end
+    if @department.save
+      render json: @department, status: :ok
+    else
+      render json: @department.errors.full_messages, status: :unprocessable_entity
     end
   end
 
   # PATCH/PUT /departments/1
   # PATCH/PUT /departments/1.json
   def update
-    respond_to do |format|
-      if @department.update(department_params)
-        format.html { redirect_to @department, status: :ok, notice: 'Department was successfully updated.' }
-        format.json { render :show, status: :ok, location: @department }
-      else
-        format.html { render :edit }
-        format.json { render json: @department.errors.full_messages, status: :unprocessable_entity }
-      end
+    if @department.update(department_params)
+      render json: @department, status: :ok
+    else
+      render json: @department.errors.full_messages, status: :unprocessable_entity
     end
   end
 
@@ -62,10 +45,7 @@ class DepartmentsController < ApplicationController
   # DELETE /departments/1.json
   def destroy
     @department.destroy
-    respond_to do |format|
-      format.html { redirect_to departments_url, status: :ok, notice: 'Department was successfully destroyed.' }
-      format.json { head :no_content, status: :ok }
-    end
+    head :no_content
   end
 
   private
