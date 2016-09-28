@@ -1,0 +1,7 @@
+htbl ctl="costs" :rows=@header.rows :opts=@header.opts :total="false"
+hr
+
+htbl ctl="allocs" :rows=@assigns.rows :opts=@assigns.opts
+hr
+
+= link_to "要員アサイン", project_assigns_path(@project), class: "btn btn-primary"

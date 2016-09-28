@@ -1,1 +1,0 @@
-json.partial! "projects_members/projects_member", projects_member: @projects_member

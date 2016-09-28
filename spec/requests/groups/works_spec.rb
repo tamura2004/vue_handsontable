@@ -5,9 +5,6 @@ RSpec.describe "Works", type: :request do
   let(:work){create :work, month: month}
   let(:id){work.member.id}
   let(:group_id){work.member.group.id}
-  after{
-    p Work.all.map(&:attributes)
-  }
 
   describe "GET /groups/:group_id/works" do
     it{should == 200}
@@ -20,9 +17,7 @@ RSpec.describe "Works", type: :request do
 
   describe "PATCH /groups/:group_id/works/:id" do
     let(:params){{"201609" => 10}}
-    it{
-      should == 200
-    }
+    it{should == 200}
   end
 
   describe "PATCH /groups/:group_id/works/:id" do

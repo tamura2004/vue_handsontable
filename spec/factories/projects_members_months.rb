@@ -15,5 +15,7 @@ FactoryGirl.define do
     association :projects_member
     month
     cost
+
+    factory :alloc
   end
 end

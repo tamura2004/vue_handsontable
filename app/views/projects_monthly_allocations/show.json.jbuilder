@@ -1,1 +1,0 @@
-json.partial! "projects_monthly_allocations/projects_monthly_allocation", projects_monthly_allocation: @projects_monthly_allocation

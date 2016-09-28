@@ -1,9 +1,8 @@
 class WorksController < ApplicationController
   before_action :set_member, only: [:update]
-  before_action :set_group, only: [:index,:update]
+  before_action :set_group, only: [:index]
 
   # GET /works
-  # GET /works.json
   def index
     @groups = Group.all
 
@@ -15,13 +14,6 @@ class WorksController < ApplicationController
 
   end
 
-  # POST /works
-  # POST /works.json
-  # def create
-  #   head :no_content
-  # end
-
-  # PATCH/PUT /works/1
   # PATCH/PUT /works/1.json
   def update
     month = work_params.keys.try(:first)
@@ -50,16 +42,6 @@ class WorksController < ApplicationController
       end
     end
   end
-
-  # DELETE /works/1
-  # DELETE /works/1.json
-  # def destroy
-  #   @work.destroy
-  #   respond_to do |format|
-  #     format.html { redirect_to works_url, notice: 'Work was successfully destroyed.' }
-  #     format.json { head :no_content }
-  #   end
-  # end
 
   private
     # Use callbacks to share common setup or constraints between actions.

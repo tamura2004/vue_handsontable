@@ -1,0 +1,7 @@
+htbl ctl="works" :rows=@header.rows :opts=@header.opts :total="false"
+hr
+
+htbl ctl="allocs" :rows=@assigns.rows :opts=@assigns.opts
+hr
+
+= link_to "案件アサイン", member_assigns_path(@member), class: "btn btn-primary"

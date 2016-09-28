@@ -1,1 +1,0 @@
-json.array! @projects_monthly_allocations, partial: 'projects_monthly_allocations/projects_monthly_allocation', as: :projects_monthly_allocation

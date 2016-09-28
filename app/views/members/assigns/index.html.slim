@@ -1,7 +1,9 @@
-htbl :rows=@header.rows :opts=@header.opts :total="false"
-hr
+projectassign :member=@member.to_json :projects=@projects.to_json :assigns=@assigns.to_json
 
-htbl ctl="members_projects_months" :rows=@assigns.rows :opts=@assigns.opts
-hr
+= link_to "戻る", member_allocs_path(@member), class: "btn btn-primary"
 
-= link_to "案件アサイン", member_projects_path(@member), class: "btn btn-primary"
+
+
+
+
+

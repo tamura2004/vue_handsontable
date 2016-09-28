@@ -1,18 +1,26 @@
 class Projects::AssignsController < ApplicationController
-  before_action :set_project, only: :index
+  before_action :set_project, only: [:index, :create]
+  before_action :set_assign, only: :destroy
 
   def index
-    @header = HtblParamsFactory.new do |t|
-      t.model = VCost.where(project_id: @project)
-      t.id_field = :project_id
-      t.fields = :project_number, :project_link
-    end
+    @members = Member.view.map(&:attributes)
+    @assignments = @project.assignments
+  end
 
-    @assigns = HtblParamsFactory.new do |t|
-      t.model = Assign.where(project_id: @project)
-      t.id_field = :member_id
-      t.fields = :job_title_link, :member_number, :member_link
+  def create
+    @assign = ProjectsMember.new(assign_params)
+    @assign.project = @project
+
+    if @assign.save
+      render json: @assign, status: :ok
+    else
+      render json: @assign.errors.full_messages, status: :unprocessable_entity
     end
+  end
+
+  def destroy
+    @assign.destroy
+    head :no_content
   end
 
   private
@@ -20,4 +28,11 @@ class Projects::AssignsController < ApplicationController
       @project = Project.find(params[:project_id])
     end
 
+    def set_assign
+      @assign = ProjectsMember.find(params[:id])
+    end
+
+    def assign_params
+      params.require(:projects_member).permit(:project_id, :member_id)
+    end
 end

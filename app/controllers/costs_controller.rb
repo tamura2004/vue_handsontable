@@ -1,6 +1,6 @@
 class CostsController < ApplicationController
   before_action :set_project, only: [:update]
-  before_action :set_group, only: [:index,:update]
+  before_action :set_group, only: [:index]
 
   # GET /costs
   # GET /costs.json
