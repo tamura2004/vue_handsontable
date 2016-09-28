@@ -8,7 +8,7 @@ class CostsController < ApplicationController
     @groups = Group.all
 
     @costs = HtblParamsFactory.new do |t|
-      t.model = VCost.where(group_id: @group)
+      t.model = VCost.where(group_id: @group).order(:project_number)
       t.id_field = :project_id
       t.fields = :project_number, :project_link
     end
