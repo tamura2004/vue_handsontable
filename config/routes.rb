@@ -94,6 +94,7 @@ Rails.application.routes.draw do
 
     resources :job_titles do
       resources :assigns, controller: "groups/job_titles/assigns", only: :index
+      resources :allocs, controller: "groups/job_titles/assigns", only: :index
       resources :works, controller: "works", only: :update
     end
   end
