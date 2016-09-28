@@ -13,8 +13,8 @@ class CreateCostView < ActiveRecord::Migration[5.0]
         projects_monthly_allocations.id as id,
         projects_monthly_allocations.month as month,
         projects_monthly_allocations.cost as cost,
-        '<a href="/projects/' || projects.id || '/assigns">' || projects.name || '</a>' as project_link,
-        '<a href="/groups/' || groups.id || '/assigns">' || groups.name || '</a>' as group_link
+        '<a href="/projects/' || projects.id || '/allocs">' || projects.name || '</a>' as project_link,
+        '<a href="/groups/' || groups.id || '/allocs">' || groups.name || '</a>' as group_link
 
       from projects
       left outer join projects_monthly_allocations

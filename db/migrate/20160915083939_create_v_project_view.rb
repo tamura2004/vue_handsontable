@@ -10,8 +10,8 @@ class CreateVProjectView < ActiveRecord::Migration[5.0]
         projects.name as project_name,
         projects.cost as project_cost,
         projects.rd as project_rd,
-        '<a href="/projects/' || projects.id || '/assigns">' || projects.name || '</a>' as project_link,
-        '<a href="/groups/' || groups.id || '/assigns">' || groups.name || '</a>' as group_link
+        '<a href="/projects/' || projects.id || '/allocs">' || projects.name || '</a>' as project_link,
+        '<a href="/groups/' || groups.id || '/allocs">' || groups.name || '</a>' as group_link
 
       from projects
       left join groups

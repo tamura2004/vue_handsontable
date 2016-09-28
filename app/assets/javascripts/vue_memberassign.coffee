@@ -57,7 +57,7 @@ class MemberAssign
     </div>
   '''
   created: ->
-    @resource = new Resource "assignments"
+    @resource = new Resource "assigns"
     for member in @members
       member.checked = @assigns.some((a) -> a.member_id is member.id)
 

@@ -9,8 +9,8 @@ class ResultsController < ApplicationController
       format.html do
         @records = Result.all
         @options = {
-          colHeaders: %w(社員番号 社員名 案件番号 案件名 工数),
-          columns: %w(member_number member_name project_number project_name cost).map{|a|{data: a}},
+          colHeaders: %w(月 社員番号 社員名 案件番号 案件名 工数),
+          columns: %w(month member_number member_name project_number project_name cost).map{|a|{data: a}},
           columnSorting: true,
           contextMenu: ["remove_row"]
         }

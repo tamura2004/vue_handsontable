@@ -3,13 +3,14 @@ class Projects::AssignsController < ApplicationController
   before_action :set_assign, only: :destroy
 
   def index
-    @members = Member.view.map(&:attributes)
-    @assignments = @project.assignments
+    @members = VMember.where(group_id: @project.group.try(:id))
+
+    @assigns = @project.assigns
   end
 
   def create
     @assign = ProjectsMember.new(assign_params)
-    @assign.project = @project
+    # @assign.project = @project
 
     if @assign.save
       render json: @assign, status: :ok
@@ -33,6 +34,6 @@ class Projects::AssignsController < ApplicationController
     end
 
     def assign_params
-      params.require(:projects_member).permit(:project_id, :member_id)
+      params.require(:assign).permit(:project_id, :member_id)
     end
 end

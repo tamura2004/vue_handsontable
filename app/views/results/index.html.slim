@@ -7,6 +7,4 @@ hr
   = submit_tag "登録"
 hr
 
-#results
-coffee:
-  $ -> VueFactory.create "results"
+htbl :rows=@records.to_json :opts=@options.to_json

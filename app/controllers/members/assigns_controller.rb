@@ -9,12 +9,12 @@ class Members::AssignsController < ApplicationController
         .view
         .map(&:attributes)
 
-    @assigns = @member.assignments
+    @assigns = @member.assigns
   end
 
   def create
     @assign = ProjectsMember.new(assign_params)
-    @assign.member = @member
+    # @assign.member = @member
 
     if @assign.save
       render json: @assign, status: :ok
@@ -38,6 +38,6 @@ class Members::AssignsController < ApplicationController
     end
 
     def assign_params
-      params.require(:projects_member).permit(:project_id, :member_id)
+      params.require(:assign).permit(:project_id, :member_id)
     end
 end

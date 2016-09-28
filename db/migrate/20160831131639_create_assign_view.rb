@@ -18,9 +18,9 @@ class CreateAssignView < ActiveRecord::Migration[5.0]
         projects.rd as project_rd,
         projects_members_months.month as month,
         projects_members_months.cost as cost,
-        '<a href="/members/' || members.id || '/assigns">' || members.name || '</a>' as member_link,
-        '<a href="/projects/' || projects.id || '/assigns">' || projects.name || '</a>' as project_link,
-        '<a href="/groups/' || groups.id || '/job_titles/' || job_titles.id || '/assigns">' || job_titles.name || '</a>' as job_title_link
+        '<a href="/members/' || members.id || '/allocs">' || members.name || '</a>' as member_link,
+        '<a href="/projects/' || projects.id || '/allocs">' || projects.name || '</a>' as project_link,
+        '<a href="/groups/' || groups.id || '/job_titles/' || job_titles.id || '/allocs">' || job_titles.name || '</a>' as job_title_link
 
       from projects_members
       left join projects_members_months

@@ -16,12 +16,12 @@ class Project < ApplicationRecord
   include Pivot
 
   belongs_to :group, optional: true
-  has_many :projects_monthly_allocations
+  has_many :costs, class_name: "ProjectsMonthlyAllocation"
   has_many :projects_members
 
-  has_many :assignments, class_name: "ProjectsMember"
+  has_many :assigns, class_name: "ProjectsMember"
   has_many :members, through: :assignments
-  has_many :allocations, through: :assignments, class_name: "ProjectsMembersMonth"
+  has_many :allocs, through: :assignments, class_name: "ProjectsMembersMonth"
 
   attr_accessor :group_name
 

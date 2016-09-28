@@ -1,10 +1,10 @@
 require 'rails_helper'
 
-RSpec.describe "Members::Projects", type: :request do
-  let(:assign){create :projects_member}
+RSpec.describe "Members::Assigns", type: :request do
+  let(:assign){create :assign}
   let(:member_id){assign.member.id}
   let(:id){assign.id}
-  let(:params){{projects_member: build(:assign).attributes}}
+  let(:params){{assign: build(:assign).attributes}}
 
   describe "GET /members/:member_id/assigns" do
     it {should == 200}

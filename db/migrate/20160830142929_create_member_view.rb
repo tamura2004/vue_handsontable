@@ -13,9 +13,9 @@ class CreateMemberView < ActiveRecord::Migration[5.0]
         job_titles.name as job_title_name,
         works.month as month,
         works.cost as cost,
-        '<a href="/members/' || members.id || '/assigns">' || members.name || '</a>' as member_link,
-        '<a href="/groups/' || groups.id || '/job_titles/' || job_titles.id || '/assigns">' || job_titles.name || '</a>' as job_title_link,
-        '<a href="/groups/' || groups.id || '/assigns">' || groups.name || '</a>' as group_link
+        '<a href="/members/' || members.id || '/allocs">' || members.name || '</a>' as member_link,
+        '<a href="/groups/' || groups.id || '/job_titles/' || job_titles.id || '/allocs">' || job_titles.name || '</a>' as job_title_link,
+        '<a href="/groups/' || groups.id || '/allocs">' || groups.name || '</a>' as group_link
 
       from members
       left outer join works

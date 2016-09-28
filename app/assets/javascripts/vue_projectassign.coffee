@@ -55,7 +55,7 @@ class ProjectAssign
     </div>
   '''
   created: ->
-    @resource = new Resource "assignments"
+    @resource = new Resource "assigns"
     for project in @projects
       project.checked = @assigns.some((a) -> a.project_id is project.id)
 
