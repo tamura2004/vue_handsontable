@@ -1,0 +1,2 @@
+module Groups::AllocsHelper
+end

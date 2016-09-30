@@ -15,6 +15,18 @@
 require 'rails_helper'
 
 RSpec.describe Project, type: :model do
-  subject{build :project}
-  it {should be_valid}
+
+  context "valid?" do
+    subject{build :project}
+    it {should be_valid}
+  end
+
+  context "by_group_name valid" do
+    let(:group){create :group}
+    let(:project){build :project, group_name: group.name}
+
+    subject{->{project.save}}
+    it{should change{project.group_id}}
+  end
+
 end

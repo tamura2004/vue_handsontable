@@ -77,4 +77,5 @@ class ProjectsController < ApplicationController
     def project_params
       params.permit(:group_name, :number, :name, :rd, :cost)
     end
+
 end

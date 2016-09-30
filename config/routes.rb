@@ -78,8 +78,8 @@ Rails.application.routes.draw do
 
   root "costs#index", group_id: 1
 
-  resources :departments             , except: [:new,:edit]
-  resources :job_titles              , except: [:new,:edit]
+  resources :departments, except: [:new,:edit]
+  resources :job_titles, except: [:new,:edit]
 
   resources :results, only: [:index,:destroy] do
     collection do
@@ -87,10 +87,11 @@ Rails.application.routes.draw do
     end
   end
 
-
   resources :groups,except:[:new,:edit] do
     resources :works, only: [:index,:update]
     resources :costs, only: [:index,:update]
+
+    resources :allocs, only: :index, controller: "groups/allocs"
 
     resources :job_titles do
       resources :assigns, controller: "groups/job_titles/assigns", only: :index
@@ -103,21 +104,13 @@ Rails.application.routes.draw do
     resources :allocs, controller: "members/allocs", only: [:index,:update]
     resources :assigns, controller: "members/assigns", only: [:index,:create,:destroy]
     resources :works, only: :update
-    # resources :assignments, except: [:new,:edit], controller: :projects_members
-
-    # resources :members_projects_months, except: [:new,:edit]
-    # resources :members_months, except: [:new,:edit]
   end
 
   resources :projects, except: [:new,:edit] do
     resources :allocs, controller: "projects/allocs", only: [:index,:update]
     resources :assigns, controller: "projects/assigns", only: [:index,:create,:destroy]
     resources :costs, only: :update
-    # resources :assignments, except: [:new,:edit], controller: :projects_members
-
     resources :projects_members_months, only: [:update, :destroy]
-    # resources :members_allocations, except: [:new,:edit], controller: :projects_members_months
-    # resources :allocations, except: [:new,:edit], controller: :projects_monthly_allocations
   end
 
 end
