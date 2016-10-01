@@ -9,9 +9,18 @@ RSpec.describe "Project", type: :request do
     it{should == 200}
   end
 
-  describe "POST /projects.json" do
-    let(:params){attributes_for :project}
+  describe "GET /projects/new" do
+    it{should == 200}
+  end
+
+  describe "POST /projects" do
+    let(:params){{project: attributes_for(:project)}}
     it {should == 200}
+  end
+
+  describe "POST /projects" do
+    let(:params){{project: attributes_for(:project, name:"")}}
+    it {should == 422}
   end
 
   describe "PATCH /projects/:id.json" do

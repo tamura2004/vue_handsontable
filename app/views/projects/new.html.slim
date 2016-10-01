@@ -1,0 +1,6 @@
+.col-xs-6
+  = simple_form_for @project, wrapper: :horizontal_form, html:{class:"form-horizontal"} do |f|
+    = f.input :group_id, collection: Group.all
+    = f.input :number
+    = f.input :name
+    = f.button :submit

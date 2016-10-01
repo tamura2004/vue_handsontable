@@ -28,6 +28,7 @@ group :test do
   gem "database_cleaner"
   gem "simplecov"
   gem "rspec-request_describer"
+  gem "capybara"
 end
 
 group :development do
@@ -56,3 +57,4 @@ gem "axlsx"
 gem "zip-zip"
 gem "rubyzip", "= 1.1.0"
 gem "axlsx_rails"
+gem "simple_form"

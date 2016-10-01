@@ -78,4 +78,5 @@ class MembersController < ApplicationController
     def member_params
       params.permit(:name, :group_name, :job_title_name, :number)
     end
+
 end
