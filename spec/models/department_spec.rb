@@ -11,6 +11,21 @@
 require 'rails_helper'
 
 RSpec.describe Department, type: :model do
-  subject{build :department}
-  it {should be_valid}
+
+  context "適正なパラメータ" do
+    subject{build :department}
+    it {should be_valid}
+  end
+
+  context "nameは空であってはならない" do
+    subject{build :department, name: ""}
+    it{should_not be_valid}
+  end
+
+  context "nameは重複してはならない" do
+    let(:other){create :department}
+    subject{build :department, name: other.name}
+    it{should_not be_valid}
+  end
+
 end

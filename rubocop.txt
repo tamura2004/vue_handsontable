@@ -1,0 +1,1185 @@
+Inspecting 43 files
+CCCCCCCCCCCCCCCCCCCCCCCCCCCWCCCCCCCCCCCCCCC
+
+Offenses:
+
+app/controllers/application_controller.rb:1:1: C: Missing top-level class documentation comment.
+class ApplicationController < ActionController::Base
+^^^^^
+app/controllers/application_controller.rb:1:1: C: Missing frozen string literal comment.
+class ApplicationController < ActionController::Base
+^
+app/controllers/application_controller.rb:6:5: C: Inconsistent indentation detected.
+    def months ...
+    ^^^^^^^^^^
+app/controllers/application_controller.rb:7:19: C: Use Array.new with a block instead of .times.map.
+      @months ||= 12.times.map do |n| ...
+                  ^^^^^^^^^^^^^^^^^^^
+app/controllers/application_controller.rb:8:14: C: Do not use Time.local without zone. Use one of Time.zone.local, Time.current, Time.local.in_time_zone, Time.local.utc, Time.local.getlocal, Time.local.iso8601, Time.local.jisx0301, Time.local.rfc3339, Time.local.to_i, Time.local.to_f instead.
+        Time.local(2016,8).since(n.month)
+             ^^^^^
+app/controllers/application_controller.rb:8:24: C: Space missing after comma.
+        Time.local(2016,8).since(n.month)
+                       ^
+app/controllers/application_controller.rb:12:5: C: Inconsistent indentation detected.
+    def months_values ...
+    ^^^^^^^^^^^^^^^^^
+app/controllers/application_controller.rb:13:17: C: Space missing to the left of {.
+      months.map{|m|m.strftime("%Y%m")}
+                ^
+app/controllers/application_controller.rb:13:17: C: Space between { and | missing.
+      months.map{|m|m.strftime("%Y%m")}
+                ^^
+app/controllers/application_controller.rb:13:20: C: Space after closing | missing.
+      months.map{|m|m.strftime("%Y%m")}
+                   ^
+app/controllers/application_controller.rb:13:32: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      months.map{|m|m.strftime("%Y%m")}
+                               ^^^^^^
+app/controllers/application_controller.rb:13:39: C: Space missing inside }.
+      months.map{|m|m.strftime("%Y%m")}
+                                      ^
+app/controllers/application_controller.rb:16:5: C: Inconsistent indentation detected.
+    def months_symbols ...
+    ^^^^^^^^^^^^^^^^^^
+app/controllers/application_controller.rb:21:37: C: Use only ascii symbols in comments.
+  #     months.map{|m|m.strftime("%m月")}
+                                    ^
+app/controllers/application_controller.rb:57:1: C: Extra empty line detected at class body end.
+app/controllers/concerns/alloc_module.rb:1:1: C: Missing top-level module documentation comment.
+module AllocModule
+^^^^^^
+app/controllers/concerns/alloc_module.rb:1:1: C: Missing frozen string literal comment.
+module AllocModule
+^
+app/controllers/concerns/alloc_module.rb:4:3: C: Assignment Branch Condition size for update is too high. [22.72/15]
+  def update
+  ^^^
+app/controllers/concerns/alloc_module.rb:4:3: C: Method has too many lines. [22/10]
+  def update ...
+  ^^^^^^^^^^
+app/controllers/concerns/alloc_module.rb:4:3: C: Perceived complexity for update is too high. [9/7]
+  def update
+  ^^^
+app/controllers/concerns/alloc_module.rb:7:81: C: Line is too long. [81/80]
+    @alloc = ProjectsMembersMonth.find_by(projects_member: @assign, month: month)
+                                                                                ^
+app/controllers/concerns/alloc_module.rb:10:10: C: Use cost.to_f.positive? instead of cost.to_f > 0.
+      if cost.to_f > 0
+         ^^^^^^^^^^^^^
+app/controllers/concerns/alloc_module.rb:14:81: C: Line is too long. [81/80]
+          render json: @alloc.errors.full_messages, status: :unprocessable_entity
+                                                                                ^
+app/controllers/concerns/alloc_module.rb:22:81: C: Line is too long. [91/80]
+      @alloc = ProjectsMembersMonth.new(projects_member: @assign, month: month, cost: cost)
+                                                                                ^^^^^^^^^^^
+app/controllers/concerns/alloc_module.rb:31:3: C: Keep a blank line before and after private.
+  private
+  ^^^^^^^
+app/controllers/concerns/alloc_module.rb:32:5: C: Inconsistent indentation detected.
+    def set_assign ...
+    ^^^^^^^^^^^^^^
+app/controllers/concerns/alloc_module.rb:36:5: C: Inconsistent indentation detected.
+    def alloc_params ...
+    ^^^^^^^^^^^^^^^^
+app/controllers/concerns/alloc_module.rb:40:1: C: 1 trailing blank lines detected.
+app/controllers/costs_controller.rb:1:1: C: Missing top-level class documentation comment.
+class CostsController < ApplicationController
+^^^^^
+app/controllers/costs_controller.rb:1:1: C: Missing frozen string literal comment.
+class CostsController < ApplicationController
+^
+app/controllers/costs_controller.rb:15:1: C: Extra empty line detected at method body end.
+app/controllers/costs_controller.rb:20:3: C: Assignment Branch Condition size for update is too high. [22.72/15]
+  def update
+  ^^^
+app/controllers/costs_controller.rb:20:3: C: Method has too many lines. [22/10]
+  def update ...
+  ^^^^^^^^^^
+app/controllers/costs_controller.rb:20:3: C: Perceived complexity for update is too high. [9/7]
+  def update
+  ^^^
+app/controllers/costs_controller.rb:27:10: C: Use cost.to_f.positive? instead of cost.to_f > 0.
+      if cost.to_f > 0
+         ^^^^^^^^^^^^^
+app/controllers/costs_controller.rb:39:81: C: Line is too long. [88/80]
+      @cost = ProjectsMonthlyAllocation.new(project: @project, month: month, cost: cost)
+                                                                                ^^^^^^^^
+app/controllers/costs_controller.rb:48:3: C: Keep a blank line before and after private.
+  private
+  ^^^^^^^
+app/controllers/costs_controller.rb:50:5: C: Inconsistent indentation detected.
+    def set_project ...
+    ^^^^^^^^^^^^^^^
+app/controllers/costs_controller.rb:54:5: C: Inconsistent indentation detected.
+    def set_group ...
+    ^^^^^^^^^^^^^
+app/controllers/costs_controller.rb:58:81: C: Line is too long. [88/80]
+    # Never trust parameters from the scary internet, only allow the white list through.
+                                                                                ^^^^^^^^
+app/controllers/costs_controller.rb:59:5: C: Inconsistent indentation detected.
+    def cost_params ...
+    ^^^^^^^^^^^^^^^
+app/controllers/departments_controller.rb:1:1: C: Missing top-level class documentation comment.
+class DepartmentsController < ApplicationController
+^^^^^
+app/controllers/departments_controller.rb:1:1: C: Missing frozen string literal comment.
+class DepartmentsController < ApplicationController
+^
+app/controllers/departments_controller.rb:9:19: C: Space inside { missing.
+      dataSchema: {id: nil, name: nil},
+                  ^
+app/controllers/departments_controller.rb:9:38: C: Space inside } missing.
+      dataSchema: {id: nil, name: nil},
+                                     ^
+app/controllers/departments_controller.rb:10:20: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      colHeaders: ["部名"],
+                   ^^^^
+app/controllers/departments_controller.rb:11:17: C: Space inside { missing.
+      columns: [{data: "name"}],
+                ^
+app/controllers/departments_controller.rb:11:24: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      columns: [{data: "name"}],
+                       ^^^^^^
+app/controllers/departments_controller.rb:11:30: C: Space inside } missing.
+      columns: [{data: "name"}],
+                             ^
+app/controllers/departments_controller.rb:13:21: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      contextMenu: ["remove_row"]
+                    ^^^^^^^^^^^^
+app/controllers/departments_controller.rb:24:81: C: Line is too long. [82/80]
+      render json: @department.errors.full_messages, status: :unprocessable_entity
+                                                                                ^^
+app/controllers/departments_controller.rb:34:81: C: Line is too long. [82/80]
+      render json: @department.errors.full_messages, status: :unprocessable_entity
+                                                                                ^^
+app/controllers/departments_controller.rb:45:3: C: Keep a blank line before and after private.
+  private
+  ^^^^^^^
+app/controllers/departments_controller.rb:47:5: C: Inconsistent indentation detected.
+    def set_department ...
+    ^^^^^^^^^^^^^^^^^^
+app/controllers/departments_controller.rb:51:81: C: Line is too long. [88/80]
+    # Never trust parameters from the scary internet, only allow the white list through.
+                                                                                ^^^^^^^^
+app/controllers/departments_controller.rb:52:5: C: Inconsistent indentation detected.
+    def department_params ...
+    ^^^^^^^^^^^^^^^^^^^^^
+app/controllers/groups/allocs_controller.rb:1:1: C: Missing top-level class documentation comment.
+class Groups::AllocsController < ApplicationController
+^^^^^
+app/controllers/groups/allocs_controller.rb:1:1: C: Missing frozen string literal comment.
+class Groups::AllocsController < ApplicationController
+^
+app/controllers/groups/allocs_controller.rb:1:7: C: Use nested module/class definitions instead of compact style.
+class Groups::AllocsController < ApplicationController
+      ^^^^^^^^^^^^^^^^^^^^^^^^
+app/controllers/groups/allocs_controller.rb:7:9: C: Align .order with .where on line 6.
+        .order(:job_title_id, :member_number)
+        ^^^^^^
+app/controllers/groups/allocs_controller.rb:17:5: C: Inconsistent indentation detected.
+    def set_group ...
+    ^^^^^^^^^^^^^
+app/controllers/groups/allocs_controller.rb:20:1: C: Extra empty line detected at class body end.
+app/controllers/groups/job_titles/assigns_controller.rb:1:1: C: Missing top-level class documentation comment.
+class Groups::JobTitles::AssignsController < ApplicationController
+^^^^^
+app/controllers/groups/job_titles/assigns_controller.rb:1:1: C: Missing frozen string literal comment.
+class Groups::JobTitles::AssignsController < ApplicationController
+^
+app/controllers/groups/job_titles/assigns_controller.rb:1:7: C: Use nested module/class definitions instead of compact style.
+class Groups::JobTitles::AssignsController < ApplicationController
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app/controllers/groups/job_titles/assigns_controller.rb:5:3: C: Assignment Branch Condition size for index is too high. [15.62/15]
+  def index
+  ^^^
+app/controllers/groups/job_titles/assigns_controller.rb:5:3: C: Method has too many lines. [21/10]
+  def index ...
+  ^^^^^^^^^
+app/controllers/groups/job_titles/assigns_controller.rb:8:9: C: Align .where with VWork on line 7.
+        .where(group_id: @group)
+        ^^^^^^
+app/controllers/groups/job_titles/assigns_controller.rb:9:9: C: Align .where with VWork on line 7.
+        .where(job_title_id: @job_title)
+        ^^^^^^
+app/controllers/groups/job_titles/assigns_controller.rb:10:9: C: Align .order with VWork on line 7.
+        .order(:member_number)
+        ^^^^^^
+app/controllers/groups/job_titles/assigns_controller.rb:13:32: C: Space missing after comma.
+      t.fields = :member_number,:member_link
+                               ^
+app/controllers/groups/job_titles/assigns_controller.rb:18:9: C: Align .where with Alloc on line 17.
+        .where(group_id: @group)
+        ^^^^^^
+app/controllers/groups/job_titles/assigns_controller.rb:19:9: C: Align .where with Alloc on line 17.
+        .where(job_title_id: @job_title)
+        ^^^^^^
+app/controllers/groups/job_titles/assigns_controller.rb:20:9: C: Align .order with Alloc on line 17.
+        .order(:member_number)
+        ^^^^^^
+app/controllers/groups/job_titles/assigns_controller.rb:29:33: C: Space missing after comma.
+      t.fields = :project_number,:project_link
+                                ^
+app/controllers/groups/job_titles/assigns_controller.rb:31:1: C: Extra empty line detected at method body end.
+app/controllers/groups/job_titles/assigns_controller.rb:34:3: C: Keep a blank line before and after private.
+  private
+  ^^^^^^^
+app/controllers/groups/job_titles/assigns_controller.rb:35:5: C: Inconsistent indentation detected.
+    def set_job_title ...
+    ^^^^^^^^^^^^^^^^^
+app/controllers/groups/job_titles/assigns_controller.rb:39:5: C: Inconsistent indentation detected.
+    def set_group ...
+    ^^^^^^^^^^^^^
+app/controllers/groups/job_titles/assigns_controller.rb:42:1: C: Extra empty line detected at class body end.
+app/controllers/groups_controller.rb:1:1: C: Missing top-level class documentation comment.
+class GroupsController < ApplicationController
+^^^^^
+app/controllers/groups_controller.rb:1:1: C: Missing frozen string literal comment.
+class GroupsController < ApplicationController
+^
+app/controllers/groups_controller.rb:6:3: C: Method has too many lines. [22/10]
+  def index ...
+  ^^^^^^^^^
+app/controllers/groups_controller.rb:17:19: C: Space inside { missing.
+      dataSchema: {id: nil, department_name:nil, name: nil},
+                  ^
+app/controllers/groups_controller.rb:17:44: C: Space missing after colon.
+      dataSchema: {id: nil, department_name:nil, name: nil},
+                                           ^
+app/controllers/groups_controller.rb:17:59: C: Space inside } missing.
+      dataSchema: {id: nil, department_name:nil, name: nil},
+                                                          ^
+app/controllers/groups_controller.rb:18:19: C: Use %w or %W for an array of words.
+      colHeaders: ["部名","グループ名"],
+                  ^^^^^^^^^^^^^^
+app/controllers/groups_controller.rb:18:20: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      colHeaders: ["部名","グループ名"],
+                   ^^^^
+app/controllers/groups_controller.rb:18:24: C: Space missing after comma.
+      colHeaders: ["部名","グループ名"],
+                       ^
+app/controllers/groups_controller.rb:18:25: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      colHeaders: ["部名","グループ名"],
+                        ^^^^^^^
+app/controllers/groups_controller.rb:21:17: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+          data: "department_name",
+                ^^^^^^^^^^^^^^^^^
+app/controllers/groups_controller.rb:22:17: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+          type: "dropdown",
+                ^^^^^^^^^^
+app/controllers/groups_controller.rb:25:9: C: Space inside { missing.
+        {data: "name"}
+        ^
+app/controllers/groups_controller.rb:25:16: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+        {data: "name"}
+               ^^^^^^
+app/controllers/groups_controller.rb:25:22: C: Space inside } missing.
+        {data: "name"}
+                     ^
+app/controllers/groups_controller.rb:28:21: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      contextMenu: ["remove_row"]
+                    ^^^^^^^^^^^^
+app/controllers/groups_controller.rb:58:3: C: Keep a blank line before and after private.
+  private
+  ^^^^^^^
+app/controllers/groups_controller.rb:60:5: C: Inconsistent indentation detected.
+    def set_group ...
+    ^^^^^^^^^^^^^
+app/controllers/groups_controller.rb:64:81: C: Line is too long. [88/80]
+    # Never trust parameters from the scary internet, only allow the white list through.
+                                                                                ^^^^^^^^
+app/controllers/groups_controller.rb:65:5: C: Inconsistent indentation detected.
+    def group_params ...
+    ^^^^^^^^^^^^^^^^
+app/controllers/job_titles_controller.rb:1:1: C: Missing top-level class documentation comment.
+class JobTitlesController < ApplicationController
+^^^^^
+app/controllers/job_titles_controller.rb:1:1: C: Missing frozen string literal comment.
+class JobTitlesController < ApplicationController
+^
+app/controllers/job_titles_controller.rb:9:19: C: Space inside { missing.
+      dataSchema: {id: nil, name: nil},
+                  ^
+app/controllers/job_titles_controller.rb:9:38: C: Space inside } missing.
+      dataSchema: {id: nil, name: nil},
+                                     ^
+app/controllers/job_titles_controller.rb:10:20: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      colHeaders: ["職位名"],
+                   ^^^^^
+app/controllers/job_titles_controller.rb:11:17: C: Space inside { missing.
+      columns: [{data: "name"}],
+                ^
+app/controllers/job_titles_controller.rb:11:24: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      columns: [{data: "name"}],
+                       ^^^^^^
+app/controllers/job_titles_controller.rb:11:30: C: Space inside } missing.
+      columns: [{data: "name"}],
+                             ^
+app/controllers/job_titles_controller.rb:13:21: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      contextMenu: ["remove_row"]
+                    ^^^^^^^^^^^^
+app/controllers/job_titles_controller.rb:15:1: C: Extra empty line detected at method body end.
+app/controllers/job_titles_controller.rb:25:81: C: Line is too long. [106/80]
+        format.html { redirect_to @job_title, status: :ok, notice: 'Job title was successfully created.' }
+                                                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+app/controllers/job_titles_controller.rb:29:81: C: Line is too long. [99/80]
+        format.json { render json: @job_title.errors.full_messages, status: :unprocessable_entity }
+                                                                                ^^^^^^^^^^^^^^^^^^^
+app/controllers/job_titles_controller.rb:39:81: C: Line is too long. [106/80]
+        format.html { redirect_to @job_title, status: :ok, notice: 'Job title was successfully updated.' }
+                                                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+app/controllers/job_titles_controller.rb:43:81: C: Line is too long. [99/80]
+        format.json { render json: @job_title.errors.full_messages, status: :unprocessable_entity }
+                                                                                ^^^^^^^^^^^^^^^^^^^
+app/controllers/job_titles_controller.rb:53:81: C: Line is too long. [110/80]
+      format.html { redirect_to job_titles_url, status: :ok, notice: 'Job title was successfully destroyed.' }
+                                                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app/controllers/job_titles_controller.rb:58:3: C: Keep a blank line before and after private.
+  private
+  ^^^^^^^
+app/controllers/job_titles_controller.rb:60:5: C: Inconsistent indentation detected.
+    def set_job_title ...
+    ^^^^^^^^^^^^^^^^^
+app/controllers/job_titles_controller.rb:64:81: C: Line is too long. [88/80]
+    # Never trust parameters from the scary internet, only allow the white list through.
+                                                                                ^^^^^^^^
+app/controllers/job_titles_controller.rb:65:5: C: Inconsistent indentation detected.
+    def job_title_params ...
+    ^^^^^^^^^^^^^^^^^^^^
+app/controllers/members/allocs_controller.rb:1:1: C: Missing top-level class documentation comment.
+class Members::AllocsController < ApplicationController
+^^^^^
+app/controllers/members/allocs_controller.rb:1:1: C: Missing frozen string literal comment.
+class Members::AllocsController < ApplicationController
+^
+app/controllers/members/allocs_controller.rb:1:7: C: Use nested module/class definitions instead of compact style.
+class Members::AllocsController < ApplicationController
+      ^^^^^^^^^^^^^^^^^^^^^^^^^
+app/controllers/members/allocs_controller.rb:4:43: C: Space missing after comma.
+  before_action :set_member, only: [:index,:update]
+                                          ^
+app/controllers/members/allocs_controller.rb:11:33: C: Space missing after comma.
+      t.fields = :job_title_link,:member_number,:member_link
+                                ^
+app/controllers/members/allocs_controller.rb:11:48: C: Space missing after comma.
+      t.fields = :job_title_link,:member_number,:member_link
+                                               ^
+app/controllers/members/allocs_controller.rb:21:3: C: Keep a blank line before and after private.
+  private
+  ^^^^^^^
+app/controllers/members/allocs_controller.rb:22:5: C: Inconsistent indentation detected.
+    def set_member ...
+    ^^^^^^^^^^^^^^
+app/controllers/members/allocs_controller.rb:25:1: C: Extra empty line detected at class body end.
+app/controllers/members/assigns_controller.rb:1:1: C: Missing top-level class documentation comment.
+class Members::AssignsController < ApplicationController
+^^^^^
+app/controllers/members/assigns_controller.rb:1:1: C: Missing frozen string literal comment.
+class Members::AssignsController < ApplicationController
+^
+app/controllers/members/assigns_controller.rb:1:7: C: Use nested module/class definitions instead of compact style.
+class Members::AssignsController < ApplicationController
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^
+app/controllers/members/assigns_controller.rb:2:44: C: Space missing after comma.
+  before_action :set_memgber, only: [:index,:create]
+                                           ^
+app/controllers/members/assigns_controller.rb:8:9: C: Align .where with Project on line 7.
+        .where("groups.id = ?", @member.group.try(:id))
+        ^^^^^^
+app/controllers/members/assigns_controller.rb:8:16: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+        .where("groups.id = ?", @member.group.try(:id))
+               ^^^^^^^^^^^^^^^
+app/controllers/members/assigns_controller.rb:9:9: C: Align .view with Project on line 7.
+        .view
+        ^^^^^
+app/controllers/members/assigns_controller.rb:10:9: C: Align .map with Project on line 7.
+        .map(&:attributes)
+        ^^^^
+app/controllers/members/assigns_controller.rb:31:3: C: Keep a blank line before and after private.
+  private
+  ^^^^^^^
+app/controllers/members/assigns_controller.rb:32:5: C: Inconsistent indentation detected.
+    def set_memgber ...
+    ^^^^^^^^^^^^^^^
+app/controllers/members/assigns_controller.rb:36:5: C: Inconsistent indentation detected.
+    def set_assign ...
+    ^^^^^^^^^^^^^^
+app/controllers/members/assigns_controller.rb:40:5: C: Inconsistent indentation detected.
+    def assign_params ...
+    ^^^^^^^^^^^^^^^^^
+app/controllers/members_controller.rb:1:1: C: Missing top-level class documentation comment.
+class MembersController < ApplicationController
+^^^^^
+app/controllers/members_controller.rb:1:1: C: Missing frozen string literal comment.
+class MembersController < ApplicationController
+^
+app/controllers/members_controller.rb:6:3: C: Method has too many lines. [33/10]
+  def index ...
+  ^^^^^^^^^
+app/controllers/members_controller.rb:21:19: C: Space inside { missing.
+      dataSchema: {id: nil, name: nil, group_name: nil, job_title_name: nil, number: nil},
+                  ^
+app/controllers/members_controller.rb:21:81: C: Line is too long. [90/80]
+      dataSchema: {id: nil, name: nil, group_name: nil, job_title_name: nil, number: nil},
+                                                                                ^^^^^^^^^^
+app/controllers/members_controller.rb:21:89: C: Space inside } missing.
+      dataSchema: {id: nil, name: nil, group_name: nil, job_title_name: nil, number: nil},
+                                                                                        ^
+app/controllers/members_controller.rb:22:19: C: Use %w or %W for an array of words.
+      colHeaders: ["所属", "職位", "社員番号", "氏名"],
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+app/controllers/members_controller.rb:22:20: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      colHeaders: ["所属", "職位", "社員番号", "氏名"],
+                   ^^^^
+app/controllers/members_controller.rb:22:26: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      colHeaders: ["所属", "職位", "社員番号", "氏名"],
+                         ^^^^
+app/controllers/members_controller.rb:22:32: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      colHeaders: ["所属", "職位", "社員番号", "氏名"],
+                               ^^^^^^
+app/controllers/members_controller.rb:22:40: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      colHeaders: ["所属", "職位", "社員番号", "氏名"],
+                                       ^^^^
+app/controllers/members_controller.rb:25:17: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+          data: "group_name",
+                ^^^^^^^^^^^^
+app/controllers/members_controller.rb:26:17: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+          type: "dropdown",
+                ^^^^^^^^^^
+app/controllers/members_controller.rb:30:17: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+          data: "job_title_name",
+                ^^^^^^^^^^^^^^^^
+app/controllers/members_controller.rb:31:17: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+          type: "dropdown",
+                ^^^^^^^^^^
+app/controllers/members_controller.rb:34:9: C: Space inside { missing.
+        {data: "number"},
+        ^
+app/controllers/members_controller.rb:34:16: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+        {data: "number"},
+               ^^^^^^^^
+app/controllers/members_controller.rb:34:24: C: Space inside } missing.
+        {data: "number"},
+                       ^
+app/controllers/members_controller.rb:35:9: C: Space inside { missing.
+        {data: "name"}
+        ^
+app/controllers/members_controller.rb:35:16: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+        {data: "name"}
+               ^^^^^^
+app/controllers/members_controller.rb:35:22: C: Space inside } missing.
+        {data: "name"}
+                     ^
+app/controllers/members_controller.rb:39:21: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      contextMenu: ["remove_row"]
+                    ^^^^^^^^^^^^
+app/controllers/members_controller.rb:41:1: C: Extra empty line detected at method body end.
+app/controllers/members_controller.rb:71:3: C: Keep a blank line before and after private.
+  private
+  ^^^^^^^
+app/controllers/members_controller.rb:73:5: C: Inconsistent indentation detected.
+    def set_member ...
+    ^^^^^^^^^^^^^^
+app/controllers/members_controller.rb:77:81: C: Line is too long. [88/80]
+    # Never trust parameters from the scary internet, only allow the white list through.
+                                                                                ^^^^^^^^
+app/controllers/members_controller.rb:78:5: C: Inconsistent indentation detected.
+    def member_params ...
+    ^^^^^^^^^^^^^^^^^
+app/controllers/projects/allocs_controller.rb:1:1: C: Missing top-level class documentation comment.
+class Projects::AllocsController < ApplicationController
+^^^^^
+app/controllers/projects/allocs_controller.rb:1:1: C: Missing frozen string literal comment.
+class Projects::AllocsController < ApplicationController
+^
+app/controllers/projects/allocs_controller.rb:1:7: C: Use nested module/class definitions instead of compact style.
+class Projects::AllocsController < ApplicationController
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^
+app/controllers/projects/allocs_controller.rb:4:44: C: Space missing after comma.
+  before_action :set_project, only: [:index,:update]
+                                           ^
+app/controllers/projects/allocs_controller.rb:21:3: C: Keep a blank line before and after private.
+  private
+  ^^^^^^^
+app/controllers/projects/allocs_controller.rb:22:5: C: Inconsistent indentation detected.
+    def set_project ...
+    ^^^^^^^^^^^^^^^
+app/controllers/projects/allocs_controller.rb:25:1: C: Extra empty line detected at class body end.
+app/controllers/projects/allocs_controller.rb:26:4: C: Final newline missing.
+end
+   
+app/controllers/projects/assigns_controller.rb:1:1: C: Missing top-level class documentation comment.
+class Projects::AssignsController < ApplicationController
+^^^^^
+app/controllers/projects/assigns_controller.rb:1:1: C: Missing frozen string literal comment.
+class Projects::AssignsController < ApplicationController
+^
+app/controllers/projects/assigns_controller.rb:1:7: C: Use nested module/class definitions instead of compact style.
+class Projects::AssignsController < ApplicationController
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app/controllers/projects/assigns_controller.rb:27:3: C: Keep a blank line before and after private.
+  private
+  ^^^^^^^
+app/controllers/projects/assigns_controller.rb:28:5: C: Inconsistent indentation detected.
+    def set_project ...
+    ^^^^^^^^^^^^^^^
+app/controllers/projects/assigns_controller.rb:32:5: C: Inconsistent indentation detected.
+    def set_assign ...
+    ^^^^^^^^^^^^^^
+app/controllers/projects/assigns_controller.rb:36:5: C: Inconsistent indentation detected.
+    def assign_params ...
+    ^^^^^^^^^^^^^^^^^
+app/controllers/projects_controller.rb:1:1: C: Missing top-level class documentation comment.
+class ProjectsController < ApplicationController
+^^^^^
+app/controllers/projects_controller.rb:1:1: C: Missing frozen string literal comment.
+class ProjectsController < ApplicationController
+^
+app/controllers/projects_controller.rb:6:3: C: Method has too many lines. [31/10]
+  def index ...
+  ^^^^^^^^^
+app/controllers/projects_controller.rb:21:19: C: Space inside { missing.
+      dataSchema: {id: nil, group_name: nil, number: nil, name:nil, cost:nil, rd:nil},
+                  ^
+app/controllers/projects_controller.rb:21:63: C: Space missing after colon.
+      dataSchema: {id: nil, group_name: nil, number: nil, name:nil, cost:nil, rd:nil},
+                                                              ^
+app/controllers/projects_controller.rb:21:73: C: Space missing after colon.
+      dataSchema: {id: nil, group_name: nil, number: nil, name:nil, cost:nil, rd:nil},
+                                                                        ^
+app/controllers/projects_controller.rb:21:81: C: Line is too long. [86/80]
+      dataSchema: {id: nil, group_name: nil, number: nil, name:nil, cost:nil, rd:nil},
+                                                                                ^^^^^^
+app/controllers/projects_controller.rb:21:81: C: Space missing after colon.
+      dataSchema: {id: nil, group_name: nil, number: nil, name:nil, cost:nil, rd:nil},
+                                                                                ^
+app/controllers/projects_controller.rb:21:85: C: Space inside } missing.
+      dataSchema: {id: nil, group_name: nil, number: nil, name:nil, cost:nil, rd:nil},
+                                                                                    ^
+app/controllers/projects_controller.rb:22:19: C: Use %w or %W for an array of words.
+      colHeaders: ["グループ", "案件管理番号", "案件名", "承認原価", "要件定義工数"],
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app/controllers/projects_controller.rb:22:20: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      colHeaders: ["グループ", "案件管理番号", "案件名", "承認原価", "要件定義工数"],
+                   ^^^^^^
+app/controllers/projects_controller.rb:22:28: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      colHeaders: ["グループ", "案件管理番号", "案件名", "承認原価", "要件定義工数"],
+                           ^^^^^^^^
+app/controllers/projects_controller.rb:22:38: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      colHeaders: ["グループ", "案件管理番号", "案件名", "承認原価", "要件定義工数"],
+                                     ^^^^^
+app/controllers/projects_controller.rb:22:45: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      colHeaders: ["グループ", "案件管理番号", "案件名", "承認原価", "要件定義工数"],
+                                            ^^^^^^
+app/controllers/projects_controller.rb:22:53: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      colHeaders: ["グループ", "案件管理番号", "案件名", "承認原価", "要件定義工数"],
+                                                    ^^^^^^^^
+app/controllers/projects_controller.rb:25:17: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+          data: "group_name",
+                ^^^^^^^^^^^^
+app/controllers/projects_controller.rb:26:17: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+          type: "dropdown",
+                ^^^^^^^^^^
+app/controllers/projects_controller.rb:29:9: C: Space inside { missing.
+        {data: "number"},
+        ^
+app/controllers/projects_controller.rb:29:16: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+        {data: "number"},
+               ^^^^^^^^
+app/controllers/projects_controller.rb:29:24: C: Space inside } missing.
+        {data: "number"},
+                       ^
+app/controllers/projects_controller.rb:31:17: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+          data: "name"
+                ^^^^^^
+app/controllers/projects_controller.rb:33:9: C: Space inside { missing.
+        {data: "cost"},
+        ^
+app/controllers/projects_controller.rb:33:16: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+        {data: "cost"},
+               ^^^^^^
+app/controllers/projects_controller.rb:33:22: C: Space inside } missing.
+        {data: "cost"},
+                     ^
+app/controllers/projects_controller.rb:34:9: C: Space inside { missing.
+        {data: "rd"}
+        ^
+app/controllers/projects_controller.rb:34:16: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+        {data: "rd"}
+               ^^^^
+app/controllers/projects_controller.rb:34:20: C: Space inside } missing.
+        {data: "rd"}
+                   ^
+app/controllers/projects_controller.rb:37:21: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      contextMenu: ["remove_row"]
+                    ^^^^^^^^^^^^
+app/controllers/projects_controller.rb:70:3: C: Keep a blank line before and after private.
+  private
+  ^^^^^^^
+app/controllers/projects_controller.rb:72:5: C: Inconsistent indentation detected.
+    def set_project ...
+    ^^^^^^^^^^^^^^^
+app/controllers/projects_controller.rb:76:81: C: Line is too long. [88/80]
+    # Never trust parameters from the scary internet, only allow the white list through.
+                                                                                ^^^^^^^^
+app/controllers/projects_controller.rb:77:5: C: Inconsistent indentation detected.
+    def project_params ...
+    ^^^^^^^^^^^^^^^^^^
+app/controllers/projects_controller.rb:80:1: C: Extra empty line detected at class body end.
+app/controllers/results_controller.rb:1:1: C: Missing top-level class documentation comment.
+class ResultsController < ApplicationController
+^^^^^
+app/controllers/results_controller.rb:1:1: C: Missing frozen string literal comment.
+class ResultsController < ApplicationController
+^
+app/controllers/results_controller.rb:2:1: C: Extra empty line detected at class body beginning.
+app/controllers/results_controller.rb:3:16: C: Freeze mutable objects assigned to constants.
+  ATTRIBUTES = %w(month group_number group_name outsource_code company_name member_number member_name project_number project_name proc_number proc_name cont_number cont_name system_number cost cost_minute)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app/controllers/results_controller.rb:3:81: C: Line is too long. [205/80]
+  ATTRIBUTES = %w(month group_number group_name outsource_code company_name member_number member_name project_number project_name proc_number proc_name cont_number cont_name system_number cost cost_minute)
+                                                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app/controllers/results_controller.rb:4:12: C: Freeze mutable objects assigned to constants.
+  LABELS = %w(稼働年月 部署コード 部署名 外注区分 会社名 社員番号 社員名 案件番号 案件名 工程コード 工程名称 契約種別コード 契約種別名称 システムナンバー 工数 工数分)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app/controllers/results_controller.rb:4:81: C: Line is too long. [98/80]
+  LABELS = %w(稼働年月 部署コード 部署名 外注区分 会社名 社員番号 社員名 案件番号 案件名 工程コード 工程名称 契約種別コード 契約種別名称 システムナンバー 工数 工数分)
+                                                                                ^^^^^^^^^^^^^^^^^^
+app/controllers/results_controller.rb:5:34: C: Space missing to the left of {.
+  HEADERS = ATTRIBUTES.inject({}){|memo,a| memo.merge a.to_sym => a}
+                                 ^
+app/controllers/results_controller.rb:5:34: C: Space between { and | missing.
+  HEADERS = ATTRIBUTES.inject({}){|memo,a| memo.merge a.to_sym => a}
+                                 ^^
+app/controllers/results_controller.rb:5:35: C: Name inject block params |a, e|.
+  HEADERS = ATTRIBUTES.inject({}){|memo,a| memo.merge a.to_sym => a}
+                                  ^^^^^^^^
+app/controllers/results_controller.rb:5:40: C: Space missing after comma.
+  HEADERS = ATTRIBUTES.inject({}){|memo,a| memo.merge a.to_sym => a}
+                                       ^
+app/controllers/results_controller.rb:5:68: C: Space missing inside }.
+  HEADERS = ATTRIBUTES.inject({}){|memo,a| memo.merge a.to_sym => a}
+                                                                   ^
+app/controllers/results_controller.rb:7:3: C: Method has too many lines. [17/10]
+  def index ...
+  ^^^^^^^^^
+app/controllers/results_controller.rb:13:81: C: Line is too long. [106/80]
+          columns: %w(month member_number member_name project_number project_name cost).map{|a|{data: a}},
+                                                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+app/controllers/results_controller.rb:13:92: C: Space missing to the left of {.
+          columns: %w(month member_number member_name project_number project_name cost).map{|a|{data: a}},
+                                                                                           ^
+app/controllers/results_controller.rb:13:92: C: Space between { and | missing.
+          columns: %w(month member_number member_name project_number project_name cost).map{|a|{data: a}},
+                                                                                           ^^
+app/controllers/results_controller.rb:13:95: C: Space after closing | missing.
+          columns: %w(month member_number member_name project_number project_name cost).map{|a|{data: a}},
+                                                                                              ^
+app/controllers/results_controller.rb:13:96: C: Space inside { missing.
+          columns: %w(month member_number member_name project_number project_name cost).map{|a|{data: a}},
+                                                                                               ^
+app/controllers/results_controller.rb:13:104: C: Space inside } missing.
+          columns: %w(month member_number member_name project_number project_name cost).map{|a|{data: a}},
+                                                                                                       ^
+app/controllers/results_controller.rb:13:105: C: Space missing inside }.
+          columns: %w(month member_number member_name project_number project_name cost).map{|a|{data: a}},
+                                                                                                        ^
+app/controllers/results_controller.rb:15:25: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+          contextMenu: ["remove_row"]
+                        ^^^^^^^^^^^^
+app/controllers/results_controller.rb:21:44: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+        timestamp = Time.zone.now.strftime("%Y%m%d%H%M%S")
+                                           ^^^^^^^^^^^^^^
+app/controllers/results_controller.rb:23:81: C: Line is too long. [84/80]
+        response.headers['Content-Disposition'] = "attachment; filename=#{filename}"
+                                                                                ^^^^
+app/controllers/results_controller.rb:44:5: C: rescue at 44, 4 is not aligned with end at 46, 2.
+    rescue => e
+    ^^^^^^
+app/controllers/results_controller.rb:45:5: C: Use 2 (not 0) spaces for indentation.
+    render json: e.message
+    
+app/controllers/results_controller.rb:47:1: C: Extra empty line detected at class body end.
+app/controllers/works_controller.rb:1:1: C: Missing top-level class documentation comment.
+class WorksController < ApplicationController
+^^^^^
+app/controllers/works_controller.rb:1:1: C: Missing frozen string literal comment.
+class WorksController < ApplicationController
+^
+app/controllers/works_controller.rb:10:66: C: Space missing after comma.
+      t.model = VWork.where(group_id: @group).order(:job_title_id,:member_number)
+                                                                 ^
+app/controllers/works_controller.rb:10:81: C: Line is too long. [81/80]
+      t.model = VWork.where(group_id: @group).order(:job_title_id,:member_number)
+                                                                                ^
+app/controllers/works_controller.rb:14:1: C: Extra empty line detected at method body end.
+app/controllers/works_controller.rb:18:3: C: Assignment Branch Condition size for update is too high. [22.72/15]
+  def update
+  ^^^
+app/controllers/works_controller.rb:18:3: C: Method has too many lines. [22/10]
+  def update ...
+  ^^^^^^^^^^
+app/controllers/works_controller.rb:18:3: C: Perceived complexity for update is too high. [9/7]
+  def update
+  ^^^
+app/controllers/works_controller.rb:25:10: C: Use cost.to_f.positive? instead of cost.to_f > 0.
+      if cost.to_f > 0
+         ^^^^^^^^^^^^^
+app/controllers/works_controller.rb:46:3: C: Keep a blank line before and after private.
+  private
+  ^^^^^^^
+app/controllers/works_controller.rb:48:5: C: Inconsistent indentation detected.
+    def set_member ...
+    ^^^^^^^^^^^^^^
+app/controllers/works_controller.rb:52:5: C: Inconsistent indentation detected.
+    def set_group ...
+    ^^^^^^^^^^^^^
+app/controllers/works_controller.rb:56:81: C: Line is too long. [88/80]
+    # Never trust parameters from the scary internet, only allow the white list through.
+                                                                                ^^^^^^^^
+app/controllers/works_controller.rb:57:5: C: Inconsistent indentation detected.
+    def work_params ...
+    ^^^^^^^^^^^^^^^
+app/helpers/ags_helper.rb:1:1: C: Missing top-level module documentation comment.
+module AgsHelper
+^^^^^^
+app/helpers/ags_helper.rb:1:1: C: Missing frozen string literal comment.
+module AgsHelper
+^
+app/helpers/application_helper.rb:1:1: C: Missing top-level module documentation comment.
+module ApplicationHelper
+^^^^^^
+app/helpers/application_helper.rb:1:1: C: Missing frozen string literal comment.
+module ApplicationHelper
+^
+app/helpers/groups/allocs_helper.rb:1:1: C: Missing top-level module documentation comment.
+module Groups::AllocsHelper
+^^^^^^
+app/helpers/groups/allocs_helper.rb:1:1: C: Missing frozen string literal comment.
+module Groups::AllocsHelper
+^
+app/helpers/groups/allocs_helper.rb:1:8: C: Use nested module/class definitions instead of compact style.
+module Groups::AllocsHelper
+       ^^^^^^^^^^^^^^^^^^^^
+app/helpers/job_title/assins_helper.rb:1:1: C: Missing top-level module documentation comment.
+module JobTitle::AssinsHelper
+^^^^^^
+app/helpers/job_title/assins_helper.rb:1:1: C: Missing frozen string literal comment.
+module JobTitle::AssinsHelper
+^
+app/helpers/job_title/assins_helper.rb:1:8: C: Use nested module/class definitions instead of compact style.
+module JobTitle::AssinsHelper
+       ^^^^^^^^^^^^^^^^^^^^^^
+app/helpers/member/assigns_helper.rb:1:1: C: Missing top-level module documentation comment.
+module Member::AssignsHelper
+^^^^^^
+app/helpers/member/assigns_helper.rb:1:1: C: Missing frozen string literal comment.
+module Member::AssignsHelper
+^
+app/helpers/member/assigns_helper.rb:1:8: C: Use nested module/class definitions instead of compact style.
+module Member::AssignsHelper
+       ^^^^^^^^^^^^^^^^^^^^^
+app/helpers/members/projects_helper.rb:1:1: C: Missing top-level module documentation comment.
+module Members::ProjectsHelper
+^^^^^^
+app/helpers/members/projects_helper.rb:1:1: C: Missing frozen string literal comment.
+module Members::ProjectsHelper
+^
+app/helpers/members/projects_helper.rb:1:8: C: Use nested module/class definitions instead of compact style.
+module Members::ProjectsHelper
+       ^^^^^^^^^^^^^^^^^^^^^^^
+app/helpers/project/assigns_helper.rb:1:1: C: Missing top-level module documentation comment.
+module Project::AssignsHelper
+^^^^^^
+app/helpers/project/assigns_helper.rb:1:1: C: Missing frozen string literal comment.
+module Project::AssignsHelper
+^
+app/helpers/project/assigns_helper.rb:1:8: C: Use nested module/class definitions instead of compact style.
+module Project::AssignsHelper
+       ^^^^^^^^^^^^^^^^^^^^^^
+app/helpers/results_helper.rb:1:1: C: Missing top-level module documentation comment.
+module ResultsHelper
+^^^^^^
+app/helpers/results_helper.rb:1:1: C: Missing frozen string literal comment.
+module ResultsHelper
+^
+app/models/alloc.rb:1:1: C: Missing frozen string literal comment.
+# == Schema Information
+^
+app/models/alloc.rb:26:1: C: Missing top-level class documentation comment.
+class Alloc < ApplicationRecord
+^^^^^
+app/models/alloc.rb:77:1: C: Extra blank line detected.
+app/models/alloc.rb:77:1: C: Extra empty line detected at class body end.
+app/models/application_record.rb:1:1: C: Missing top-level class documentation comment.
+class ApplicationRecord < ActiveRecord::Base
+^^^^^
+app/models/application_record.rb:1:1: C: Missing frozen string literal comment.
+class ApplicationRecord < ActiveRecord::Base
+^
+app/models/assign.rb:1:1: C: Missing frozen string literal comment.
+# == Schema Information
+^
+app/models/assign.rb:25:1: C: Missing top-level class documentation comment.
+class Assign < ApplicationRecord
+^^^^^
+app/models/assign.rb:52:27: C: Use only ascii symbols in comments.
+  #   .where(group_name: "オープン系共通基盤")
+                          ^^^^^^^^^
+app/models/assign.rb:57:1: C: Extra empty line detected at class body end.
+app/models/concerns/array_pivot.rb:1:1: C: Missing top-level module documentation comment.
+module ArrayPivot
+^^^^^^
+app/models/concerns/array_pivot.rb:1:1: C: Missing frozen string literal comment.
+module ArrayPivot
+^
+app/models/concerns/array_pivot.rb:5:30: C: Space missing after comma.
+      inject(header) do |memo,row|
+                             ^
+app/models/concerns/array_pivot.rb:6:22: W: Shadowing outer local variable - memo.
+        memo.tap do |memo|
+                     ^^^^
+app/models/concerns/array_pivot.rb:12:4: C: Final newline missing.
+end
+   
+app/models/concerns/htbl_params_factory.rb:1:1: C: Missing top-level class documentation comment.
+class HtblParamsFactory
+^^^^^
+app/models/concerns/htbl_params_factory.rb:1:1: C: Carriage return character detected.
+class HtblParamsFactory ...
+^^^^^^^^^^^^^^^^^^^^^^^
+app/models/concerns/htbl_params_factory.rb:1:1: C: Missing frozen string literal comment.
+class HtblParamsFactory
+^
+app/models/concerns/htbl_params_factory.rb:2:1: C: Extra empty line detected at class body beginning.
+app/models/concerns/htbl_params_factory.rb:3:21: C: Space missing after comma.
+  attr_writer :model,:id_field,:fields
+                    ^
+app/models/concerns/htbl_params_factory.rb:3:31: C: Space missing after comma.
+  attr_writer :model,:id_field,:fields
+                              ^
+app/models/concerns/htbl_params_factory.rb:22:1: C: Trailing whitespace detected.
+app/models/concerns/htbl_params_factory.rb:23:5: C: Inconsistent indentation detected.
+    def generate_rows ...
+    ^^^^^^^^^^^^^^^^^
+app/models/concerns/htbl_params_factory.rb:25:9: C: Align .select with @model on line 24.
+        .select(*@fields,:month,:cost)
+        ^^^^^^^
+app/models/concerns/htbl_params_factory.rb:25:25: C: Space missing after comma.
+        .select(*@fields,:month,:cost)
+                        ^
+app/models/concerns/htbl_params_factory.rb:25:32: C: Space missing after comma.
+        .select(*@fields,:month,:cost)
+                               ^
+app/models/concerns/htbl_params_factory.rb:26:9: C: Align .select with @model on line 24.
+        .select("#{@id_field} as id")
+        ^^^^^^^
+app/models/concerns/htbl_params_factory.rb:27:9: C: Align .pivot with @model on line 24.
+        .pivot
+        ^^^^^^
+app/models/concerns/htbl_params_factory.rb:34:5: C: Method has too many lines. [12/10]
+    def generate_opts ...
+    ^^^^^^^^^^^^^^^^^
+app/models/concerns/htbl_params_factory.rb:34:5: C: Inconsistent indentation detected.
+    def generate_opts ...
+    ^^^^^^^^^^^^^^^^^
+app/models/concerns/htbl_params_factory.rb:39:11: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+          "合計"
+          ^^^^
+app/models/concerns/htbl_params_factory.rb:44:11: C: Space inside { missing.
+          {data: "total", type: "numeric", format:"0.00"}
+          ^
+app/models/concerns/htbl_params_factory.rb:44:18: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+          {data: "total", type: "numeric", format:"0.00"}
+                 ^^^^^^^
+app/models/concerns/htbl_params_factory.rb:44:33: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+          {data: "total", type: "numeric", format:"0.00"}
+                                ^^^^^^^^^
+app/models/concerns/htbl_params_factory.rb:44:50: C: Space missing after colon.
+          {data: "total", type: "numeric", format:"0.00"}
+                                                 ^
+app/models/concerns/htbl_params_factory.rb:44:51: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+          {data: "total", type: "numeric", format:"0.00"}
+                                                  ^^^^^^
+app/models/concerns/htbl_params_factory.rb:44:57: C: Space inside } missing.
+          {data: "total", type: "numeric", format:"0.00"}
+                                                        ^
+app/models/concerns/htbl_params_factory.rb:47:1: C: Extra empty line detected at method body end.
+app/models/concerns/htbl_params_factory.rb:49:1: C: Trailing whitespace detected.
+app/models/concerns/htbl_params_factory.rb:50:5: C: Inconsistent indentation detected.
+    def fields_headers ...
+    ^^^^^^^^^^^^^^^^^^
+app/models/concerns/htbl_params_factory.rb:56:5: C: Inconsistent indentation detected.
+    def fields_columns ...
+    ^^^^^^^^^^^^^^^^^^
+app/models/concerns/htbl_params_factory.rb:59:11: C: Space inside { missing.
+          {data: field, renderer: "html"}
+          ^
+app/models/concerns/htbl_params_factory.rb:59:35: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+          {data: field, renderer: "html"}
+                                  ^^^^^^
+app/models/concerns/htbl_params_factory.rb:59:41: C: Space inside } missing.
+          {data: field, renderer: "html"}
+                                        ^
+app/models/concerns/htbl_params_factory.rb:61:11: C: Space inside { missing.
+          {data: field}
+          ^
+app/models/concerns/htbl_params_factory.rb:61:23: C: Space inside } missing.
+          {data: field}
+                      ^
+app/models/concerns/htbl_params_factory.rb:66:5: C: Inconsistent indentation detected.
+    def months ...
+    ^^^^^^^^^^
+app/models/concerns/htbl_params_factory.rb:67:19: C: Use Array.new with a block instead of .times.map.
+      @months ||= 12.times.map do |n| ...
+                  ^^^^^^^^^^^^^^^^^^^
+app/models/concerns/htbl_params_factory.rb:68:14: C: Do not use Time.local without zone. Use one of Time.zone.local, Time.current, Time.local.in_time_zone, Time.local.utc, Time.local.getlocal, Time.local.iso8601, Time.local.jisx0301, Time.local.rfc3339, Time.local.to_i, Time.local.to_f instead.
+        Time.local(2016,8).since(n.month)
+             ^^^^^
+app/models/concerns/htbl_params_factory.rb:68:24: C: Space missing after comma.
+        Time.local(2016,8).since(n.month)
+                       ^
+app/models/concerns/htbl_params_factory.rb:72:5: C: Inconsistent indentation detected.
+    def months_values ...
+    ^^^^^^^^^^^^^^^^^
+app/models/concerns/htbl_params_factory.rb:73:17: C: Space missing to the left of {.
+      months.map{|m|m.strftime("%Y%m")}
+                ^
+app/models/concerns/htbl_params_factory.rb:73:17: C: Space between { and | missing.
+      months.map{|m|m.strftime("%Y%m")}
+                ^^
+app/models/concerns/htbl_params_factory.rb:73:20: C: Space after closing | missing.
+      months.map{|m|m.strftime("%Y%m")}
+                   ^
+app/models/concerns/htbl_params_factory.rb:73:32: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      months.map{|m|m.strftime("%Y%m")}
+                               ^^^^^^
+app/models/concerns/htbl_params_factory.rb:73:39: C: Space missing inside }.
+      months.map{|m|m.strftime("%Y%m")}
+                                      ^
+app/models/concerns/htbl_params_factory.rb:76:5: C: Inconsistent indentation detected.
+    def months_blanks ...
+    ^^^^^^^^^^^^^^^^^
+app/models/concerns/htbl_params_factory.rb:77:40: C: Space missing after comma.
+      months_values.inject({}) do |memo,m|
+                                       ^
+app/models/concerns/htbl_params_factory.rb:78:25: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+        memo.merge m => ""
+                        ^^
+app/models/concerns/htbl_params_factory.rb:82:5: C: Inconsistent indentation detected.
+    def months_headers ...
+    ^^^^^^^^^^^^^^^^^^
+app/models/concerns/htbl_params_factory.rb:83:17: C: Space missing to the left of {.
+      months.map{|m|m.strftime("%m月")}
+                ^
+app/models/concerns/htbl_params_factory.rb:83:17: C: Space between { and | missing.
+      months.map{|m|m.strftime("%m月")}
+                ^^
+app/models/concerns/htbl_params_factory.rb:83:20: C: Space after closing | missing.
+      months.map{|m|m.strftime("%m月")}
+                   ^
+app/models/concerns/htbl_params_factory.rb:83:32: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      months.map{|m|m.strftime("%m月")}
+                               ^^^^^
+app/models/concerns/htbl_params_factory.rb:83:38: C: Space missing inside }.
+      months.map{|m|m.strftime("%m月")}
+                                     ^
+app/models/concerns/htbl_params_factory.rb:86:5: C: Inconsistent indentation detected.
+    def months_columns ...
+    ^^^^^^^^^^^^^^^^^^
+app/models/concerns/htbl_params_factory.rb:90:17: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+          type: "numeric",
+                ^^^^^^^^^
+app/models/concerns/htbl_params_factory.rb:91:19: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+          format: "0.00"
+                  ^^^^^^
+app/models/concerns/htbl_params_factory.rb:96:1: C: 1 trailing blank lines detected.
+app/models/concerns/pivot.rb:1:1: C: Missing top-level module documentation comment.
+module Pivot
+^^^^^^
+app/models/concerns/pivot.rb:1:1: C: Missing frozen string literal comment.
+module Pivot
+^
+app/models/concerns/pivot.rb:5:30: C: Space missing after comma.
+    attributes.reject do |key,_|
+                             ^
+app/models/concerns/pivot.rb:13:19: C: Use the lambda method for multiline lambdas.
+    scope :pivot, -> {
+                  ^^
+app/models/concerns/pivot.rb:14:49: C: Space missing after comma.
+      all.to_a.group_by(&:header).map do |header,rows|
+                                                ^
+app/models/concerns/pivot.rb:19:1: C: Extra empty line detected at module body end.
+app/models/department.rb:1:1: C: Missing frozen string literal comment.
+# == Schema Information
+^
+app/models/department.rb:11:1: C: Missing top-level class documentation comment.
+class Department < ApplicationRecord
+^^^^^
+app/models/group.rb:1:1: C: Missing frozen string literal comment.
+# == Schema Information
+^
+app/models/group.rb:12:1: C: Missing top-level class documentation comment.
+class Group < ApplicationRecord
+^^^^^
+app/models/group.rb:23:1: C: Extra empty line detected at class body end.
+app/models/job_title.rb:1:1: C: Missing frozen string literal comment.
+# == Schema Information
+^
+app/models/member.rb:1:1: C: Missing frozen string literal comment.
+# == Schema Information
+^
+app/models/member.rb:14:1: C: Missing top-level class documentation comment.
+class Member < ApplicationRecord
+^^^^^
+app/models/member.rb:22:34: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+  has_many :assigns, class_name: "ProjectsMember"
+                                 ^^^^^^^^^^^^^^^^
+app/models/member.rb:39:1: C: Extra blank line detected.
+app/models/member.rb:39:1: C: Extra empty line detected at class body end.
+app/models/project.rb:1:1: C: Missing frozen string literal comment.
+# == Schema Information
+^
+app/models/project.rb:15:1: C: Missing top-level class documentation comment.
+class Project < ApplicationRecord
+^^^^^
+app/models/project.rb:19:32: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+  has_many :costs, class_name: "ProjectsMonthlyAllocation"
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app/models/project.rb:22:34: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+  has_many :assigns, class_name: "ProjectsMember"
+                                 ^^^^^^^^^^^^^^^^
+app/models/project.rb:24:56: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+  has_many :allocs, through: :assignments, class_name: "ProjectsMembersMonth"
+                                                       ^^^^^^^^^^^^^^^^^^^^^^
+app/models/project.rb:31:5: C: Favor modifier if usage when having a single-line body. Another good alternative is the usage of control flow &&/||.
+    if group_name.present?
+    ^^
+app/models/project.rb:36:16: C: Use the lambda method for multiline lambdas.
+  scope :view, -> {
+               ^^
+app/models/project.rb:38:5: C: Use 2 (not 0) spaces for indenting an expression spanning multiple lines.
+    .select(<<-SQL)
+    ^^^^^^^
+app/models/project.rb:45:5: C: Use 2 (not 0) spaces for indenting an expression spanning multiple lines.
+    .order("projects.number")
+    ^^^^^^
+app/models/project.rb:45:12: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    .order("projects.number")
+           ^^^^^^^^^^^^^^^^^
+app/models/project.rb:47:1: C: Extra empty line detected at class body end.
+app/models/projects_member.rb:1:1: C: Missing frozen string literal comment.
+# == Schema Information
+^
+app/models/projects_member.rb:12:1: C: Missing top-level class documentation comment.
+class ProjectsMember < ApplicationRecord
+^^^^^
+app/models/projects_member.rb:19:38: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+  has_many :allocations, class_name: "ProjectsMembersMonth"
+                                     ^^^^^^^^^^^^^^^^^^^^^^
+app/models/projects_member.rb:57:1: C: Extra blank line detected.
+app/models/projects_member.rb:57:1: C: Extra empty line detected at class body end.
+app/models/projects_members_month.rb:1:1: C: Missing frozen string literal comment.
+# == Schema Information
+^
+app/models/projects_members_month.rb:13:1: C: Missing top-level class documentation comment.
+class ProjectsMembersMonth < ApplicationRecord
+^^^^^
+app/models/projects_members_month.rb:16:31: C: Missing space after #.
+  belongs_to :projects_member #, dependent: :destroy
+                              ^^^^^^^^^^^^^^^^^^^^^^
+app/models/projects_members_month.rb:17:39: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+  belongs_to :assignment, class_name: "ProjectsMember", foreign_key: "projects_member_id"
+                                      ^^^^^^^^^^^^^^^^
+app/models/projects_members_month.rb:17:70: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+  belongs_to :assignment, class_name: "ProjectsMember", foreign_key: "projects_member_id"
+                                                                     ^^^^^^^^^^^^^^^^^^^^
+app/models/projects_members_month.rb:17:81: C: Line is too long. [89/80]
+  belongs_to :assignment, class_name: "ProjectsMember", foreign_key: "projects_member_id"
+                                                                                ^^^^^^^^^
+app/models/projects_members_month.rb:18:35: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+  belongs_to :assign, class_name: "ProjectsMember", foreign_key: "projects_member_id"
+                                  ^^^^^^^^^^^^^^^^
+app/models/projects_members_month.rb:18:66: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+  belongs_to :assign, class_name: "ProjectsMember", foreign_key: "projects_member_id"
+                                                                 ^^^^^^^^^^^^^^^^^^^^
+app/models/projects_members_month.rb:18:81: C: Line is too long. [85/80]
+  belongs_to :assign, class_name: "ProjectsMember", foreign_key: "projects_member_id"
+                                                                                ^^^^^
+app/models/projects_members_month.rb:24:50: C: Space inside { missing.
+  validates :cost, presence: true, numericality: {greater_than: 0}
+                                                 ^
+app/models/projects_members_month.rb:24:66: C: Space inside } missing.
+  validates :cost, presence: true, numericality: {greater_than: 0}
+                                                                 ^
+app/models/projects_members_month.rb:38:30: C: Use only ascii symbols in comments.
+  #   .where("groups.name = 'オープン系共通基盤'")
+                             ^^^^^^^^^
+app/models/projects_members_month.rb:51:30: C: Use only ascii symbols in comments.
+  #   .where("groups.name = 'オープン系共通基盤'")
+                             ^^^^^^^^^
+app/models/projects_members_month.rb:66:30: C: Use only ascii symbols in comments.
+  #   .where("groups.name = 'オープン系共通基盤'")
+                             ^^^^^^^^^
+app/models/projects_members_month.rb:106:1: C: Extra empty line detected at class body end.
+app/models/projects_monthly_allocation.rb:1:1: C: Missing frozen string literal comment.
+# == Schema Information
+^
+app/models/projects_monthly_allocation.rb:13:1: C: Missing top-level class documentation comment.
+class ProjectsMonthlyAllocation < ApplicationRecord
+^^^^^
+app/models/projects_monthly_allocation.rb:19:50: C: Space inside { missing.
+  validates :cost, presence: true, numericality: {greater_than: 0}
+                                                 ^
+app/models/projects_monthly_allocation.rb:19:66: C: Space inside } missing.
+  validates :cost, presence: true, numericality: {greater_than: 0}
+                                                                 ^
+app/models/projects_monthly_allocation.rb:31:1: C: Extra empty line detected at class body end.
+app/models/projects_monthly_allocation.rb:33:1: C: 4 trailing blank lines detected.
+app/models/result.rb:1:1: C: Missing frozen string literal comment.
+# == Schema Information
+^
+app/models/result.rb:26:1: C: Missing top-level class documentation comment.
+class Result < ApplicationRecord
+^^^^^
+app/models/v_cost.rb:1:1: C: Missing frozen string literal comment.
+# == Schema Information
+^
+app/models/v_cost.rb:19:1: C: Missing top-level class documentation comment.
+class VCost < ApplicationRecord
+^^^^^
+app/models/v_member.rb:1:1: C: Missing frozen string literal comment.
+# == Schema Information
+^
+app/models/v_member.rb:17:1: C: Carriage return character detected.
+class VMember < ApplicationRecord ...
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app/models/v_work.rb:1:1: C: Missing frozen string literal comment.
+# == Schema Information
+^
+app/models/v_work.rb:20:1: C: Missing top-level class documentation comment.
+class VWork < ApplicationRecord
+^^^^^
+app/models/work.rb:1:1: C: Missing frozen string literal comment.
+# == Schema Information
+^
+app/models/work.rb:13:1: C: Missing top-level class documentation comment.
+class Work < ApplicationRecord
+^^^^^
+app/models/work.rb:19:18: C: Space missing after comma.
+  validates :cost,presence: true, numericality: {greater_than: 0}
+                 ^
+app/models/work.rb:19:49: C: Space inside { missing.
+  validates :cost,presence: true, numericality: {greater_than: 0}
+                                                ^
+app/models/work.rb:19:65: C: Space inside } missing.
+  validates :cost,presence: true, numericality: {greater_than: 0}
+                                                                ^
+app/models/work.rb:31:30: C: Use only ascii symbols in comments.
+  #   .where("groups.name = 'オープン系共通基盤'")
+                             ^^^^^^^^^
+app/models/work.rb:34:1: C: Extra blank line detected.
+app/models/work.rb:35:1: C: Extra blank line detected.
+app/models/work.rb:35:1: C: Extra empty line detected at class body end.
+
+43 files inspected, 416 offenses detected
