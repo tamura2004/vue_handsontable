@@ -9,6 +9,10 @@ RSpec.describe "Project", type: :request do
     it{should == 200}
   end
 
+  describe "GET /projects/new" do
+    it{should == 200}
+  end
+
   describe "POST /projects" do
     let(:params){{project: attributes_for(:project)}}
     it {should == 200}

@@ -28,6 +28,7 @@ group :test do
   gem "database_cleaner"
   gem "simplecov"
   gem "rspec-request_describer"
+  gem "capybara"
 end
 
 group :development do

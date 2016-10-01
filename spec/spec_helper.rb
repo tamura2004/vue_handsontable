@@ -1,4 +1,5 @@
 require "simplecov"
+# require 'webrat/integrations/rspec-rails'
 SimpleCov.start "rails"
 
 RSpec.configure do |config|
