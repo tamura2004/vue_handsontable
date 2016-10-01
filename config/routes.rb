@@ -106,7 +106,7 @@ Rails.application.routes.draw do
     resources :works, only: :update
   end
 
-  resources :projects, except: [:new,:edit] do
+  resources :projects, except: [:edit] do
     resources :allocs, controller: "projects/allocs", only: [:index,:update]
     resources :assigns, controller: "projects/assigns", only: [:index,:create,:destroy]
     resources :costs, only: :update

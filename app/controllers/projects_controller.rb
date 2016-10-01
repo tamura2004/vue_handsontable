@@ -33,20 +33,23 @@ class ProjectsController < ApplicationController
         {data: "cost"},
         {data: "rd"}
       ],
-      minSpareRows: 1,
       contextMenu: ["remove_row"]
     }
+  end
+
+  def new
+    @project = Project.new
   end
 
   # POST /projects
   # POST /projects.json
   def create
-    @project = Project.new(project_params)
+    @project = Project.new(new_project_params)
 
     if @project.save
-      render json: @project, status: :ok
+      redirect_to action: :index, status: :ok
     else
-      render json: @project.errors.full_messages, status: :unprocessable_entity
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -76,6 +79,11 @@ class ProjectsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def project_params
       params.permit(:group_name, :number, :name, :rd, :cost)
+    end
+
+    # Never trust parameters from the scary internet, only allow the white list through.
+    def new_project_params
+      params.require(:project).permit(:group_name, :number, :name, :rd, :cost)
     end
 
 end

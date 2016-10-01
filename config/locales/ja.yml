@@ -28,6 +28,7 @@ ja:
           has_one: "%{record}が存在しているので削除できません"
           has_many: "%{record}が存在しているので削除できません"
     models:
+      project: 案件
       assign: 稼働計画
       v_cost: 案件工数
       v_work: 要員数
@@ -36,6 +37,11 @@ ja:
       job_title: 職位
 
     attributes:
+      project:
+        name: 案件名
+        number: 案件管理番号
+        group_id: グループ名
+
       department:
         name: 部名称
 

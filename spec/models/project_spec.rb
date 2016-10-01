@@ -23,6 +23,11 @@ RSpec.describe Project, type: :model do
     it {should be_valid}
   end
 
+  context "invalid?" do
+    subject{build :project, name: ""}
+    it {should_not be_valid}
+  end
+
   context "グループ名が存在する場合、セーブ前にグループIDがセットされること" do
     let(:project){build :project, group_id: nil, group_name: group.name}
     subject{->{project.save}}
