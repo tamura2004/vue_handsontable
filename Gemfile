@@ -57,3 +57,4 @@ gem "rubyzip", "= 1.1.0"
 gem "axlsx_rails"
 
 gem "simple_form"
+gem "font-awesome-rails"

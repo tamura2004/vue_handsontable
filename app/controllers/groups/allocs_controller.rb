@@ -6,7 +6,7 @@ class Groups::AllocsController < ApplicationController
       t.model = Alloc.where(group_id: @group)
         .order(:job_title_id, :member_number)
       t.id_field = :member_id
-      t.fields = :member_number, :job_title_link, :member_link
+      t.fields = :job_title_link, :member_number, :member_link
     end
 
     @groups = Group.all

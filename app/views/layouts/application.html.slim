@@ -14,8 +14,11 @@ html lang="en"
     = nav_bar fixed: :top, brand: "工数見込集計", responsice: true
       = menu_group
         = menu_divider
-        = menu_item group_works_path(Group.first)
-          i.fa.fa-user 要員別一覧
+        = drop_down "#{fa_icon('user')}要員別"
+          = menu_item group_allocs_path(Group.first)
+            i.fa.fa-user アサイン
+          = menu_item group_works_path(Group.first)
+            i.fa.fa-user 要員数
 
         = menu_item group_costs_path(Group.first)
           i.fa.fa-book 案件別一覧
