@@ -41,4 +41,5 @@ production:
   pool: 5
   min_messages: WARNING
   database: projects_members_production
-  username: ubuntu
+  username: tamura
+  password: tamura

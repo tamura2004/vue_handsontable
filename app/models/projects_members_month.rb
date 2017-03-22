@@ -13,7 +13,7 @@
 class ProjectsMembersMonth < ApplicationRecord
   include Pivot
 
-  belongs_to :projects_member #, dependent: :destroy
+  belongs_to :projects_member
   belongs_to :assignment, class_name: "ProjectsMember", foreign_key: "projects_member_id"
   belongs_to :assign, class_name: "ProjectsMember", foreign_key: "projects_member_id"
 
