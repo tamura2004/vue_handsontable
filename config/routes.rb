@@ -76,6 +76,8 @@
 
 Rails.application.routes.draw do
 
+  get "assigns", to: "assigns#index", as: "assigns"
+
   root "costs#index", group_id: 1
 
   resources :departments, except: [:new,:edit]

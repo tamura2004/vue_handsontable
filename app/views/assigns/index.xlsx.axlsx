@@ -1,0 +1,24 @@
+headers = %w(社員番号 社員名 グループ名 職位 案件管理番号 案件名 4月 5月 6月 7月 8月 9月 10月 11月 12月 1月 2月 3月)
+widths = [6] * 18
+set_print = {fit_to_width: 1, fit_to_height: 1, orientation: :landscape}
+sheet_name = "workplan"
+
+workbook = xlsx_package.workbook
+
+# style
+workbook.styles.fonts.first.name = 'Meiryo'
+default = workbook.styles.add_style sz: 9, alignment: {horizontal: :left, vertical: :center}
+date = workbook.styles.add_style sz: 9, alignment: {horizontal: :left, vertical: :center}, format_code: "yyyy/mm/dd"
+header = workbook.styles.add_style  sz: 9, alignment: {horizontal: :left, vertical: :center}, bg_color: 'e6eaff', b: true
+
+# 印刷の設定
+workbook.add_worksheet(name: sheet_name, page_setup: set_print) do |sheet|
+
+  # 列幅を決める
+  sheet.column_widths *widths
+  sheet.add_row headers, style: header
+
+  @assigns.each do |assign|
+    sheet.add_row assign.attributes.values, style: [default] * 18
+  end
+end

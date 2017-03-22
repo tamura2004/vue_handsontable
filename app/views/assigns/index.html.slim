@@ -1,0 +1,44 @@
+= link_to "一覧表（EXCEL）", assigns_path(format: "xlsx"), class: "btn btn-primary"
+
+table.table
+  thead
+    tr
+      td 社員番号
+      td 社員名
+      td グループ名
+      td 職位
+      td 案件管理番号
+      td 案件名
+      td 4月
+      td 5月
+      td 6月
+      td 7月
+      td 8月
+      td 9月
+      td 10月
+      td 11月
+      td 12月
+      td 1月
+      td 2月
+      td 3月
+  tbody
+    - @assigns.each do |assign|
+      tr
+        td = assign.member_number
+        td = assign.member_name
+        td = assign.group_name
+        td = assign.job_title_name
+        td = assign.project_number
+        td = assign.project_name
+        td = assign["201704"]
+        td = assign["201705"]
+        td = assign["201706"]
+        td = assign["201707"]
+        td = assign["201708"]
+        td = assign["201709"]
+        td = assign["201710"]
+        td = assign["201711"]
+        td = assign["201712"]
+        td = assign["201701"]
+        td = assign["201702"]
+        td = assign["201703"]
