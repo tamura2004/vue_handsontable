@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe "Groups::JobTitles::Works", type: :request do
-  let(:work){create :work, month: "201608"}
-  let(:params){{"201608" => 100}}
+  let(:work){create :work, month: "201704"}
+  let(:params){{"201704" => 100}}
 
   let(:group_id){work.member.group.id}
   let(:job_title_id){work.member.job_title.id}

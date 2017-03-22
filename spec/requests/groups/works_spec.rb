@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe "Works", type: :request do
-  let(:month){"201608"}
+  let(:month){"201704"}
   let(:work){create :work, month: month}
   let(:id){work.member.id}
   let(:group_id){work.member.group.id}
