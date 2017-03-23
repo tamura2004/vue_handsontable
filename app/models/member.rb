@@ -37,5 +37,4 @@ class Member < ApplicationRecord
   #   .order("members.group_id,members.job_title_id")
   # }
 
-
 end

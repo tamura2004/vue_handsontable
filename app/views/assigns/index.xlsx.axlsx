@@ -1,4 +1,4 @@
-headers = %w(社員番号 社員名 グループ名 職位 案件管理番号 案件名 4月 5月 6月 7月 8月 9月 10月 11月 12月 1月 2月 3月)
+headers = %w(グループ名 社員番号 社員名 職位 案件管理番号 案件名 4月 5月 6月 7月 8月 9月 10月 11月 12月 1月 2月 3月)
 widths = [6] * 18
 set_print = {fit_to_width: 1, fit_to_height: 1, orientation: :landscape}
 sheet_name = "workplan"
@@ -8,8 +8,11 @@ workbook = xlsx_package.workbook
 # style
 workbook.styles.fonts.first.name = 'Meiryo'
 default = workbook.styles.add_style sz: 9, alignment: {horizontal: :left, vertical: :center}
+white = workbook.styles.add_style sz: 9, fg_color: "ff", alignment: {horizontal: :left, vertical: :center}
 date = workbook.styles.add_style sz: 9, alignment: {horizontal: :left, vertical: :center}, format_code: "yyyy/mm/dd"
-header = workbook.styles.add_style  sz: 9, alignment: {horizontal: :left, vertical: :center}, bg_color: 'e6eaff', b: true
+header = workbook.styles.add_style border: { style: :thin, color: "44444444", edges: [:bottom]}, sz: 9, alignment: {horizontal: :left, vertical: :center}, bg_color: 'e6eaff', b: true
+total = workbook.styles.add_style  border: { style: :thin, color: "44444444", edges: [:bottom]}, sz: 9, alignment: {horizontal: :left, vertical: :center}, bg_color: 'ffe6ea', b: true
+total_white = workbook.styles.add_style border: { style: :thin, color: "44444444", edges: [:bottom]}, sz: 9, alignment: {horizontal: :left, vertical: :center}, bg_color: 'ffe6ea', fg_color: "ff", b: true
 
 # 印刷の設定
 workbook.add_worksheet(name: sheet_name, page_setup: set_print) do |sheet|
@@ -18,7 +21,42 @@ workbook.add_worksheet(name: sheet_name, page_setup: set_print) do |sheet|
   sheet.column_widths *widths
   sheet.add_row headers, style: header
 
-  @assigns.each do |assign|
-    sheet.add_row assign.attributes.values, style: [default] * 18
+  @members.each do |member, assigns|
+    first_line = true
+
+    assigns.each do |assign|
+      keys = [
+        "group_name",
+        "member_number",
+        "member_name",
+        "job_title_name",
+        "project_number",
+        "project_name",
+        "201704",
+        "201705",
+        "201706",
+        "201707",
+        "201708",
+        "201709",
+        "201710",
+        "201711",
+        "201712",
+        "201801",
+        "201802",
+        "201803"
+      ]
+
+      styles = []
+      if first_line
+        styles = [default] * 18
+        first_line = false
+      elsif assign.project_number == "合計"
+        styles = [total_white] * 5 + [total] * 13
+      else
+        styles = [white] * 5 + [default] * 13
+      end
+
+      sheet.add_row assign.attributes.values_at(*keys), style: styles
+    end
   end
 end
