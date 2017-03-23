@@ -11,8 +11,8 @@ default = workbook.styles.add_style sz: 9, alignment: {horizontal: :left, vertic
 white = workbook.styles.add_style sz: 9, fg_color: "ff", alignment: {horizontal: :left, vertical: :center}
 date = workbook.styles.add_style sz: 9, alignment: {horizontal: :left, vertical: :center}, format_code: "yyyy/mm/dd"
 header = workbook.styles.add_style border: { style: :thin, color: "44444444", edges: [:bottom]}, sz: 9, alignment: {horizontal: :left, vertical: :center}, bg_color: 'e6eaff', b: true
-total = workbook.styles.add_style  border: { style: :thin, color: "44444444", edges: [:bottom]}, sz: 9, alignment: {horizontal: :left, vertical: :center}, bg_color: 'ffe6ea', b: true
-total_white = workbook.styles.add_style border: { style: :thin, color: "44444444", edges: [:bottom]}, sz: 9, alignment: {horizontal: :left, vertical: :center}, bg_color: 'ffe6ea', fg_color: "ff", b: true
+total = workbook.styles.add_style  border: { style: :thin, color: "44444444", edges: [:bottom]}, sz: 9, alignment: {horizontal: :left, vertical: :center}, bg_color: 'eaffe6', b: true
+total_white = workbook.styles.add_style border: { style: :thin, color: "44444444", edges: [:bottom]}, sz: 9, alignment: {horizontal: :left, vertical: :center}, bg_color: 'eaffe6', fg_color: "ff", b: true
 
 # 印刷の設定
 workbook.add_worksheet(name: sheet_name, page_setup: set_print) do |sheet|
