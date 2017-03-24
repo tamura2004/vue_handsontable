@@ -17,6 +17,7 @@ class ProjectsMember < ApplicationRecord
 
   has_many :projects_members_months, dependent: :destroy
   has_many :allocations, class_name: "ProjectsMembersMonth"
+  has_many :allocs, class_name: "ProjectsMembersMonth"
 
   validates :member_id, presence: true
   validates :project_id, presence: true

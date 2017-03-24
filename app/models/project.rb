@@ -20,8 +20,8 @@ class Project < ApplicationRecord
   has_many :projects_members, dependent: :destroy
 
   has_many :assigns, class_name: "ProjectsMember"
-  has_many :members, through: :assignments
-  has_many :allocs, through: :assignments, class_name: "ProjectsMembersMonth"
+  has_many :members, through: :assigns
+  has_many :allocs, through: :assigns, class_name: "ProjectsMembersMonth"
 
   attr_accessor :group_name
 
