@@ -37,7 +37,8 @@ class AssignsController < ApplicationController
       },
       legend: {
         fontSize: 12,
-        verticalAlign: "bottom"
+        horizontal: "center",
+        verticalAlign: "center"
       },
       data: []
     }

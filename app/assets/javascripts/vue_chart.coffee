@@ -1,8 +1,11 @@
 class VueChart
   name: "VueChart"
-  props: ['options']
+  props: ['options', 'width', 'height']
   template: '''
-    <div id="chart" style="width:100%; height: 640px;">
+    <div
+      id="chart"
+      :style="{ width: width, height: height }"
+    >
     </div>
   '''
   created: ->

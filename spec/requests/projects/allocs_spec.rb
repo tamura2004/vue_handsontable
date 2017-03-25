@@ -15,7 +15,7 @@ RSpec.describe "Projects::Allocs", type: :request do
   end
 
   describe "PATCH /projects/:project_id/allocs/:id" do
-    let(:params){{"201609" => 20}}
+    let(:params){{"201705" => 20}}
     it{should == 200}
   end
 
