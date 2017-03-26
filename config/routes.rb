@@ -1,6 +1,8 @@
 # == Route Map
 #
 #                         Prefix Verb   URI Pattern                                                    Controller#Action
+#                        assigns GET    /assigns(.:format)                                             assigns#index
+#                  assigns_chart GET    /assigns/chart(.:format)                                       assigns#chart
 #                           root GET    /                                                              costs#index {:group_id=>1}
 #                    departments GET    /departments(.:format)                                         departments#index
 #                                POST   /departments(.:format)                                         departments#create
@@ -23,7 +25,9 @@
 #                    group_costs GET    /groups/:group_id/costs(.:format)                              costs#index
 #                     group_cost PATCH  /groups/:group_id/costs/:id(.:format)                          costs#update
 #                                PUT    /groups/:group_id/costs/:id(.:format)                          costs#update
+#                   group_allocs GET    /groups/:group_id/allocs(.:format)                             groups/allocs#index
 #        group_job_title_assigns GET    /groups/:group_id/job_titles/:job_title_id/assigns(.:format)   groups/job_titles/assigns#index
+#         group_job_title_allocs GET    /groups/:group_id/job_titles/:job_title_id/allocs(.:format)    groups/job_titles/assigns#index
 #           group_job_title_work PATCH  /groups/:group_id/job_titles/:job_title_id/works/:id(.:format) works#update
 #                                PUT    /groups/:group_id/job_titles/:job_title_id/works/:id(.:format) works#update
 #               group_job_titles GET    /groups/:group_id/job_titles(.:format)                         job_titles#index
@@ -60,11 +64,14 @@
 #                project_assigns GET    /projects/:project_id/assigns(.:format)                        projects/assigns#index
 #                                POST   /projects/:project_id/assigns(.:format)                        projects/assigns#create
 #                 project_assign DELETE /projects/:project_id/assigns/:id(.:format)                    projects/assigns#destroy
+#                   project_cost PATCH  /projects/:project_id/costs/:id(.:format)                      costs#update
+#                                PUT    /projects/:project_id/costs/:id(.:format)                      costs#update
 # project_projects_members_month PATCH  /projects/:project_id/projects_members_months/:id(.:format)    projects_members_months#update
 #                                PUT    /projects/:project_id/projects_members_months/:id(.:format)    projects_members_months#update
 #                                DELETE /projects/:project_id/projects_members_months/:id(.:format)    projects_members_months#destroy
 #                       projects GET    /projects(.:format)                                            projects#index
 #                                POST   /projects(.:format)                                            projects#create
+#                    new_project GET    /projects/new(.:format)                                        projects#new
 #                        project GET    /projects/:id(.:format)                                        projects#show
 #                                PATCH  /projects/:id(.:format)                                        projects#update
 #                                PUT    /projects/:id(.:format)                                        projects#update

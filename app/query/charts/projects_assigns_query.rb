@@ -32,7 +32,6 @@ Charts::ProjectsAssignsQuery = <<-SQL
 
       group by projects.id, projects.number, projects.name
       having sum(assign.cost) > 0
-      order by sum(assign.cost) desc
     ) as projects
 
     cross join unnest(array[
@@ -61,6 +60,6 @@ Charts::ProjectsAssignsQuery = <<-SQL
 
   group by projects.id, projects.number, projects.name, total_cost, base_month
 
-  order by projects.number, projects.id, base_month;
+  order by projects.total_cost desc, projects.number, projects.id, base_month;
 
 SQL
