@@ -27,47 +27,10 @@ class AssignsController < ApplicationController
   end
 
   def chart
+    # 案件別要員割当
     @assigns = Assign.project_chart.map(&:attributes).group_by{|a|a["project_name"]}
-    @options = {
-      animationEnabled: true,
-      theme: "theme4",
-      title: {
-        text: "案件別要員アサイン"
-      },
-      legend: {
-        reversed: true,
-        dockInsidePlotArea: true,
-        fontSize: 12,
-        verticalAlign: "center"
-      },
-      data: []
-    }
 
-    @assigns.each do |project_name, assigns|
-      series = {
-        type: "stackedArea",
-        markerType: "none",
-        indexLabelFontSize: 9,
-        # indexLabelFontColor: "white",
-        dataPoints: []
-      }
-
-      assigns.each do |assign|
-        point = { label: assign["month"], y: assign["cost"] || 0 }
-        if assign["month"] == "201705" && assign["total_cost"] > 5
-          point[:indexLabel] = project_name
-          point[:indexLabelPlacement] = "inside"
-        end
-        series[:dataPoints] << point
-        if assign["total_cost"] > 5
-          series[:legendText] = "#{project_name}：#{assign['total_cost']}人月"
-          series[:showInLegend] = true
-        end
-      end
-
-      @options[:data] << series
-    end
-
+    # 要員数
     @works =
       Work.joins(:member)
         .merge(Member.where(group_id: 1))
@@ -76,23 +39,7 @@ class AssignsController < ApplicationController
         .group(:month)
         .sum(:cost)
 
-    series = {
-      type: "line",
-      markerSize: 12,
-      lineThickness: 4,
-      dataPoints: []
-    }
-
-    @works.each do |month, cost|
-      point = { label: month, y: cost || 0 }
-      if month == "201707"
-        point[:indexLabel] = "要員数"
-      end
-      series[:dataPoints] << point
-    end
-
-    @options[:data] << series
-
+    # 案件工数
     @costs = ProjectsMonthlyAllocation.joins(:group)
       .merge(Group.where(id: 1))
       .where("month > ?", "201703")
@@ -100,22 +47,76 @@ class AssignsController < ApplicationController
       .order(:month)
       .sum(:cost)
 
-    series = {
-      type: "line",
-      markerSize: 12,
-      lineThickness: 4,
-      dataPoints: []
-    }
+    # グラフビルダ    
+    @options = ChartBuilder.build("案件アサイン") do |chart|
+      @assigns.each do |project_name, assigns|
+        chart.add_series do |series|
+          assigns.each do |assign|
+            series.add_point(assign["month"], assign["cost"]) do |point|
 
-    @costs.each do |month, cost|
-      point = { label: month, y: cost || 0 }
-      if month == "201710"
-        point[:indexLabel] = "案件工数"
+              if assign["month"] == "201705" && assign["total_cost"] > 3
+                series[:legendText] = "#{project_name}：#{assign['total_cost']}人月"
+                series[:showInLegend] = true
+                point[:indexLabel] = project_name
+                point[:indexLabelPlacement] = "inside"
+              end
+
+            end
+          end
+        end
       end
-      series[:dataPoints] << point
+
+      chart.add_series(:line) do |series|
+        @works.each do |month, cost|
+          series.add_point(month, cost) do |point|
+            point[:indexLabel] = "要員数" if month == "201707"
+          end
+        end
+      end
+
+      chart.add_series(:line) do |series|
+        @costs.each do |month, cost|
+          series.add_point(month, cost) do |point|
+            point[:indexLabel] = "案件受注" if month == "201707"
+          end
+        end
+      end
     end
+  end
 
-    @options[:data] << series
+  def member_chart
+    @members = ProjectsMembersMonth.joins(:member)
+      .where("month > ?", "201703")
+      .group("members.job_title_id")
+      .group("members.number")
+      .group("members.name")
+      .group(:month)
+      .order("members.job_title_id")
+      .order("members.number")
+      .order(:month)
+      .sum(:cost)
+      .group_by{|k,v|k[2]}
 
+    @options = @members.map do |name, assigns|
+      ChartBuilder.build(name) do |chart|
+        chart.add_series(:line) do |series|
+          months_values.each do |base_month|
+            exists = false
+            assigns.each do |assign, cost|
+              job_title_id, member_number, member_name, month = *assign
+              if base_month == month
+                series.add_point(month, cost)
+                exists = true
+                break
+              end
+            end
+            if !exists
+              series.add_point(base_month, 0)
+            end
+          end
+        end
+      end
+    end
   end
 end
+

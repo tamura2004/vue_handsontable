@@ -1,13 +1,13 @@
 class VueChart
   name: "VueChart"
-  props: ['options']
+  props: ['options', 'width', 'height', 'uuid']
   template: '''
-    <div id="chart" style="width:100%; height: 640px;">
+    <div :id="uuid" :style="{width: width, height: height}">
     </div>
   '''
   created: ->
     Vue.nextTick =>
-      chart = new CanvasJS.Chart "chart", this.options
+      chart = new CanvasJS.Chart this.uuid, this.options
       chart.render()
 
 Vue.component "vuechart", new VueChart

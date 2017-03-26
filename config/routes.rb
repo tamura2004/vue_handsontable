@@ -85,6 +85,7 @@ Rails.application.routes.draw do
 
   get "assigns", to: "assigns#index", as: "assigns"
   get "assigns/chart", to: "assigns#chart"
+  get "assigns/member_chart", to: "assigns#member_chart"
 
   root "costs#index", group_id: 1
 

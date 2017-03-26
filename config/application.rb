@@ -13,5 +13,6 @@ module VueHandsontable
     # -- all .rb files in that directory are automatically loaded.
     config.i18n.default_locale = :ja
     config.autoload_paths << "#{Rails.root}/app/query/"
+    config.autoload_paths << "#{Rails.root}/app/builder/"
   end
 end

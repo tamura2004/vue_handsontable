@@ -1,0 +1,8 @@
+h1 要員別アサイン状況
+.row
+  - x = @options.size / 4
+  - 4.times do |col|
+    .col-xs-3
+      - @options.each_with_index do |option, i|
+        - if i % 4 == col
+          VueChart :options=option.to_json width="100%" height="180px" uuid=SecureRandom.uuid
