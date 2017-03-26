@@ -16,7 +16,7 @@ RSpec.describe "Works", type: :request do
   end
 
   describe "PATCH /groups/:group_id/works/:id" do
-    let(:params){{"201609" => 10}}
+    let(:params){{"201705" => 10}}
     it{should == 200}
   end
 
