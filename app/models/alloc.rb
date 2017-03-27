@@ -25,4 +25,25 @@
 
 class Alloc < ApplicationRecord
   include Pivot
+
+  scope :recent, -> {
+    where("month > ?", "201703")
+    .order
+  }
+
+  scope :project_subtotal, -> {
+    recent
+    .group(:project_id)
+    .group(:month)
+    .order(:project_id)
+    .order(:month)
+    .sum(:cost)
+  }
+
+  scope :project_total, -> {
+    recent
+    .group(:project_id)
+    .order("sum(cost) desc")
+    .sum(:cost)
+  }
 end

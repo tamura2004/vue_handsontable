@@ -1,5 +1,6 @@
 class SeriesBuilder
   attr_accessor :series
+  delegate :[]=, to: :series
 
   POINTS = [
     { label: "201704", y: 0 },
@@ -36,13 +37,6 @@ class SeriesBuilder
     yield self if block_given?
   end
 
-  def add_point(label, y)
-    PointBuilder.new(label, y) do |point|
-      yield point if block_given?
-      @series[:dataPoints] << point
-    end
-  end
-
   def set_point(label, y)
     @series[:dataPoints].each do |point|
       if point[:label] == label
@@ -51,10 +45,6 @@ class SeriesBuilder
         break
       end
     end
-  end
-
-  def []=(key, value)
-    @series[key] = value
   end
 
 end

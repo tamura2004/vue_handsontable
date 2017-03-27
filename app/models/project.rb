@@ -45,4 +45,8 @@ class Project < ApplicationRecord
     .order("projects.number")
   }
 
+  scope :id_table, -> {
+    all.group_by(&:id)
+  }
+
 end
