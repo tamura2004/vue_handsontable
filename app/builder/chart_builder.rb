@@ -5,7 +5,9 @@ class ChartBuilder
     animationEnabled: true,
     theme: "theme4",
     title: {
-      text: "タイトル未設定"
+      text: "タイトル未設定",
+      dockInsidePlotArea: true,
+      fontSize: 16
     },
     legend: {
       reversed: true,

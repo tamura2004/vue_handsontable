@@ -52,7 +52,7 @@ class AssignsController < ApplicationController
       @assigns.each do |project_name, assigns|
         chart.add_series do |series|
           assigns.each do |assign|
-            series.add_point(assign["month"], assign["cost"]) do |point|
+            series.set_point(assign["month"], assign["cost"]) do |point|
 
               if assign["month"] == "201705" && assign["total_cost"] > 3
                 series[:legendText] = "#{project_name}：#{assign['total_cost']}人月"
@@ -68,7 +68,7 @@ class AssignsController < ApplicationController
 
       chart.add_series(:line) do |series|
         @works.each do |month, cost|
-          series.add_point(month, cost) do |point|
+          series.set_point(month, cost) do |point|
             point[:indexLabel] = "要員数" if month == "201707"
           end
         end
@@ -76,7 +76,7 @@ class AssignsController < ApplicationController
 
       chart.add_series(:line) do |series|
         @costs.each do |month, cost|
-          series.add_point(month, cost) do |point|
+          series.set_point(month, cost) do |point|
             point[:indexLabel] = "案件受注" if month == "201707"
           end
         end
@@ -97,22 +97,28 @@ class AssignsController < ApplicationController
       .sum(:cost)
       .group_by{|k,v|k[2]}
 
+    @works = Work.joins(:member)
+      .where("month > ?", "201703")
+      .group("members.name")
+      .group(:month)
+      .order("members.name")
+      .order(:month)
+      .sum(:cost)
+      .group_by{|k,v|k[0]}
+
     @options = @members.map do |name, assigns|
       ChartBuilder.build(name) do |chart|
         chart.add_series(:line) do |series|
-          months_values.each do |base_month|
-            exists = false
-            assigns.each do |assign, cost|
-              job_title_id, member_number, member_name, month = *assign
-              if base_month == month
-                series.add_point(month, cost)
-                exists = true
-                break
-              end
-            end
-            if !exists
-              series.add_point(base_month, 0)
-            end
+          assigns.each do |assign, cost|
+            job_title_id, member_number, member_name, month = *assign
+            series.set_point(month, cost)
+          end
+        end
+        next unless @works[name]
+        chart.add_series(:line) do |series|
+          @works[name].each do |works, cost|
+            _, month = *works
+            series.set_point(month, cost)
           end
         end
       end
