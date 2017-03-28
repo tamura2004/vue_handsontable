@@ -1,0 +1,15 @@
+h1 案件別アサイン状況
+.row
+  - x = @options.size / 4
+  - 4.times do |col|
+    .col-xs-3
+      - @options.each_with_index do |option, i|
+        - if i % 4 == col
+          div
+            hr
+            = link_to option[:link_label], project_allocs_path(option[:link_id])
+            VueChart :options=option.to_json width="100%" height="180px" uuid=SecureRandom.uuid
+
+pre
+  code
+    = JSON.pretty_generate(@options)

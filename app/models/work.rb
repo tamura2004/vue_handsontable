@@ -18,4 +18,15 @@ class Work < ApplicationRecord
 
   validates :cost,presence: true, numericality: {greater_than: 0}
 
+  scope :member_chart, -> {
+    joins(:member)
+    .where("month > ?", "201703")
+    .group("members.id")
+    .group("members.name")
+    .group(:month)
+    .order("members.name")
+    .order(:month)
+    .sum(:cost)
+    .group_by{|k,v|[k[0],k[1]]}
+  }
 end

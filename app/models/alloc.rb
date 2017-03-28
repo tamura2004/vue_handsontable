@@ -23,12 +23,12 @@
 #  job_title_link :text
 #
 
+
 class Alloc < ApplicationRecord
   include Pivot
 
   scope :recent, -> {
     where("month > ?", "201703")
-    .order
   }
 
   scope :project_subtotal, -> {
@@ -46,4 +46,5 @@ class Alloc < ApplicationRecord
     .order("sum(cost) desc")
     .sum(:cost)
   }
+
 end

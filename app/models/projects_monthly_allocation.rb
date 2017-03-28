@@ -18,8 +18,17 @@ class ProjectsMonthlyAllocation < ApplicationRecord
 
   validates :cost, presence: true, numericality: {greater_than: 0}
 
+  scope :project_chart, -> {
+    joins(:project)
+    .where("month > ?", "201703")
+    .group("projects.id")
+    .group("projects.number")
+    .group("projects.name")
+    .group(:month)
+    .order("projects.number")
+    .order(:month)
+    .sum(:cost)
+    .group_by{|k,v|[k[0],k[1],k[2]]}
+  }
+
 end
-
-
-
-

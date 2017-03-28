@@ -1,5 +1,6 @@
 class ChartBuilder
   attr_accessor :chart
+  delegate :[]=, to: :chart
 
   DEFAULT_CHART = {
     animationEnabled: true,

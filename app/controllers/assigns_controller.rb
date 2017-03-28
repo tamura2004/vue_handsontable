@@ -85,44 +85,71 @@ class AssignsController < ApplicationController
   end
 
   def member_chart
-    @members = ProjectsMembersMonth.joins(:member)
-      .where("month > ?", "201703")
-      .group("members.job_title_id")
-      .group("members.number")
-      .group("members.name")
-      .group(:month)
-      .order("members.job_title_id")
-      .order("members.number")
-      .order(:month)
-      .sum(:cost)
-      .group_by{|k,v|k[2]}
-
-    @works = Work.joins(:member)
-      .where("month > ?", "201703")
-      .group("members.name")
-      .group(:month)
-      .order("members.name")
-      .order(:month)
-      .sum(:cost)
-      .group_by{|k,v|k[0]}
+    @members = ProjectsMembersMonth.member_chart
+    @works = Work.member_chart
 
     @options = @members.map do |name, assigns|
-      ChartBuilder.build(name) do |chart|
+      ChartBuilder.build("") do |chart|
+        chart[:link_id] = name[0]
+        chart[:link_label] = name[1]
         chart.add_series(:line) do |series|
           assigns.each do |assign, cost|
-            job_title_id, member_number, member_name, month = *assign
+            job_title_id, member_id, member_number, member_name, month = *assign
             series.set_point(month, cost)
           end
         end
         next unless @works[name]
         chart.add_series(:line) do |series|
           @works[name].each do |works, cost|
-            _, month = *works
+            _, _, month = *works
             series.set_point(month, cost)
           end
         end
       end
     end
   end
+
+  def project_chart
+    @projects = ProjectsMembersMonth.project_chart
+    @plans = ProjectsMonthlyAllocation.project_chart
+
+    @options = @projects.map do |name, assigns|
+      ChartBuilder.build("") do |chart|
+        chart[:link_id] = name[0]
+        chart[:link_label] = name[1] + name[2]
+        chart.add_series(:line) do |series|
+          assigns.each do |assign, cost|
+            id, project_number, project_name, month = *assign
+            series.set_point(month, cost)
+          end
+        end
+        if @plans[name]
+          chart.add_series(:line) do |series|
+            @plans[name].each do |plan, cost|
+              _, _, _, month = *plan
+              series.set_point(month, cost)
+            end
+          end
+          puts @plans.delete(name)
+        end
+      end
+    end
+
+    # puts JSON.pretty_generate(@plans)
+
+    @options += @plans.map do |key, plans|
+      ChartBuilder.build("") do |chart|
+        chart[:link_id] = key[0]
+        chart[:link_label] = key[1] + key[2]
+        chart.add_series(:line) do |series|
+          plans.each do |plan, cost|
+            id, number, name, month = *plan
+            series.set_point(month, cost)
+          end
+        end
+      end
+    end
+  end
+
 end
 
