@@ -34,7 +34,7 @@ class MaBody
     <div class="row">
       <div class="col-xs-3" v-for="col in 4">
         <ma-detail
-          v-for="member in members | limitBy colLength (col*colLength)"
+          v-for="member in members | limitBy colLength (col*colLength) | filterBy $root.query"
           :member="member"
           :handle="handle"
         >

@@ -1,0 +1,47 @@
+/ pre
+/   code
+/     = JSON.pretty_generate(@members)
+
+
+= link_to "一覧表（EXCEL）", assigns_member_report_path(format: "xlsx"), class: "btn btn-primary"
+
+- @members.each do |member, assigns|
+  div(v-show="$root.query === '' || ~'#{member}'.indexOf($root.query)")
+    hr
+    h5 = member
+    table.table.table-condensed
+      thead
+        tr
+          td グループ名
+          td 案件管理番号
+          td 案件名
+          td 4月
+          td 5月
+          td 6月
+          td 7月
+          td 8月
+          td 9月
+          td 10月
+          td 11月
+          td 12月
+          td 1月
+          td 2月
+          td 3月
+      tbody
+        - assigns.each do |assign|
+          tr
+            td = assign.group_name
+            td = assign.project_number
+            td = assign.project_name
+            td = assign["201704"]
+            td = assign["201705"]
+            td = assign["201706"]
+            td = assign["201707"]
+            td = assign["201708"]
+            td = assign["201709"]
+            td = assign["201710"]
+            td = assign["201711"]
+            td = assign["201712"]
+            td = assign["201801"]
+            td = assign["201802"]
+            td = assign["201803"]

@@ -1,5 +1,6 @@
 class AssignsController < ApplicationController
-  def index
+
+  def member_report
     @assigns = Assign.report
     @members_assigns = Assign.report_by_member
 
@@ -130,7 +131,7 @@ class AssignsController < ApplicationController
               series.set_point(month, cost)
             end
           end
-          puts @plans.delete(name)
+          @plans.delete(name)
         end
       end
     end

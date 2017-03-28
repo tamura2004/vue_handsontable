@@ -32,7 +32,7 @@ class PaBody
     <div class="row">
       <div class="col-xs-6" v-for="col in 2">
         <pa-detail
-          v-for="project in projects | limitBy colLength (col*colLength)"
+          v-for="project in projects | limitBy colLength (col*colLength) | filterBy $root.query"
           :project="project"
           :handle="handle"
         >

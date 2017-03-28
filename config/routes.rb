@@ -1,8 +1,10 @@
 # == Route Map
 #
 #                         Prefix Verb   URI Pattern                                                    Controller#Action
-#                        assigns GET    /assigns(.:format)                                             assigns#index
+#          assigns_member_report GET    /assigns/member_report(.:format)                               assigns#member_report
 #                  assigns_chart GET    /assigns/chart(.:format)                                       assigns#chart
+#           assigns_member_chart GET    /assigns/member_chart(.:format)                                assigns#member_chart
+#          assigns_project_chart GET    /assigns/project_chart(.:format)                               assigns#project_chart
 #                           root GET    /                                                              costs#index {:group_id=>1}
 #                    departments GET    /departments(.:format)                                         departments#index
 #                                POST   /departments(.:format)                                         departments#create
@@ -83,7 +85,7 @@
 
 Rails.application.routes.draw do
 
-  get "assigns", to: "assigns#index", as: "assigns"
+  get "assigns/member_report", to: "assigns#member_report"
   get "assigns/chart", to: "assigns#chart"
   get "assigns/member_chart", to: "assigns#member_chart"
   get "assigns/project_chart", to: "assigns#project_chart"

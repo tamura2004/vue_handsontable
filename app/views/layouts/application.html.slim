@@ -27,16 +27,16 @@ html lang="en"
           i.fa.fa-gear マスター管理
 
         = drop_down "#{fa_icon('file-text-o')}帳票"
-          = menu_item assigns_path
+          = menu_item assigns_member_report_path
             i.fa.fa-file-text-o 要員別アサイン集計
 
         = drop_down "#{fa_icon('bar-chart')}グラフ"
           = menu_item assigns_chart_path
-            i.fa.fa-bar-chart 案件別・要員アサイン
+            i.fa.fa-area-chart 全体アサイン
           = menu_item assigns_member_chart_path
-            i.fa.fa-bar-chart 要員別アサイン
+            i.fa.fa-user 要員別アサイン
           = menu_item assigns_project_chart_path
-            i.fa.fa-bar-chart 案件別アサイン
+            i.fa.fa-rocket 案件別アサイン
 
       = menu_group pull: :right
         form.navbar-form.navbar-right role="search"
