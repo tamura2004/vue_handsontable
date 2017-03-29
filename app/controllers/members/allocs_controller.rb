@@ -6,13 +6,13 @@ class Members::AllocsController < ApplicationController
 
   def index
     @header = HtblParamsFactory.new do |t|
-      t.model = VWork.where(member_id: @member)
+      t.model = VWork.where(member_id: @member).where("month > ?", "201703")
       t.id_field = :member_id
       t.fields = :job_title_link,:member_number,:member_link
     end
 
     @assigns = HtblParamsFactory.new do |t|
-      t.model = Assign.where(member_id: @member).order(:project_number)
+      t.model = Assign.where(member_id: @member).where("month > ?", "201703").order(:project_number)
       t.id_field = :id
       t.fields = :project_number, :project_link
     end
