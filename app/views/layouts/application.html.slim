@@ -38,6 +38,10 @@ html lang="en"
           = menu_item assigns_project_chart_path
             i.fa.fa-rocket 案件別アサイン
 
+        = menu_item "http://192.168.21.13:33336/"
+            i.fa.fa-phone もしもしオープン基盤
+
+
       = menu_group pull: :right
         form.navbar-form.navbar-right role="search"
           input.form-control type="text" placeholder="絞り込み検索" v-model="query"

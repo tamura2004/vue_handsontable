@@ -12,7 +12,7 @@ class Members::AllocsController < ApplicationController
     end
 
     @assigns = HtblParamsFactory.new do |t|
-      t.model = Assign.where(member_id: @member).where("month > ?", "201703").order(:project_number)
+      t.model = Assign.where(member_id: @member).where("month > ? or month is null", "201703").order(:project_number)
       t.id_field = :id
       t.fields = :project_number, :project_link
     end

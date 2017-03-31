@@ -100,7 +100,7 @@ class AssignsController < ApplicationController
           end
         end
         next unless @works[name]
-        chart.add_series(:line) do |series|
+        chart.add_series(:stackedArea) do |series|
           @works[name].each do |works, cost|
             _, _, month = *works
             series.set_point(month, cost)
@@ -125,7 +125,7 @@ class AssignsController < ApplicationController
           end
         end
         if @plans[name]
-          chart.add_series(:line) do |series|
+          chart.add_series(:stackedArea) do |series|
             @plans[name].each do |plan, cost|
               _, _, _, month = *plan
               series.set_point(month, cost)
@@ -142,7 +142,7 @@ class AssignsController < ApplicationController
       ChartBuilder.build("") do |chart|
         chart[:link_id] = key[0]
         chart[:link_label] = key[1] + key[2]
-        chart.add_series(:line) do |series|
+        chart.add_series(:stackedArea) do |series|
           plans.each do |plan, cost|
             id, number, name, month = *plan
             series.set_point(month, cost)
