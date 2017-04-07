@@ -85,6 +85,7 @@
 
 Rails.application.routes.draw do
 
+  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   get "assigns/member_report", to: "assigns#member_report"
   get "assigns/chart", to: "assigns#chart"
   get "assigns/member_chart", to: "assigns#member_chart"
