@@ -1,10 +1,15 @@
 class Plan < ApplicationRecord
   validates :category, uniqueness: { scope: [:main_group_name, :project_number, :project_name, :accuracy, :dept_name, :group_name, :sub_number, :system_name, :contract_type, :company_name, :member_rank]}
 
+
+  scope :project, -> (project_number) {
+    find_by_sql([Summary::PlansQuery, project_number])
+  }
+
   scope :compare_with_spro, -> {
     find_by_sql <<-SQL
       select
-        'SPRO' as category,
+        -99 as category,
         project_number,
         project_name,
         sum(m1) as t1,
@@ -29,7 +34,7 @@ class Plan < ApplicationRecord
         project_name
       union all
       select
-        'WORKPLAN' as category,
+        projects.id as category,
         projects.number as project_number,
         projects.name as project_name,
 
@@ -61,8 +66,10 @@ class Plan < ApplicationRecord
 
       order by
         project_number,
-        category;
+        category
     SQL
   }
+        # project_number,
+        # category;
 
 end
