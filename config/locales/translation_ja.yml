@@ -16,6 +16,7 @@ ja:
       v_member: Vメンバー  #g
       v_work: Vワーク  #g
       work: 作業  #g
+      plan: 計画  #g
 
     attributes:
       alloc:
@@ -163,3 +164,48 @@ ja:
         group: :activerecord.models.group  #g
         member: :activerecord.models.member  #g
         month: 月  #g
+
+      plan:
+        accuracy: 正確さ  #g
+        category: カテゴリー  #g
+        company_name: 会社名  #g
+        contract_type: 契約タイプ  #g
+        cost_rate_landing: 原価ランディング  #g
+        cost_rate_plan: コストレートプラン  #g
+        dept_name: 部門名  #g
+        gross_profit_divergence: 粗利益の相違  #g
+        gross_profit_landing: 粗利益ランディング  #g
+        gross_profit_plan: 粗利益計画  #g
+        group_name: グループ名  #g
+        m1: M1  #g
+        m10: M10  #g
+        m11: M11  #g
+        m12: M12  #g
+        m2: M2  #g
+        m3: M3  #g
+        m4: M4  #g
+        m5: M5  #g
+        m6: M6  #g
+        m7: M7  #g
+        m8: M8  #g
+        m9: M9  #g
+        main_group_name: メイングループ名  #g
+        manhour_development_plan: マンハウア開発計画  #g
+        manhour_divergence: 万華鏡の発散  #g
+        manhour_ernings: Manhour ernings  #g
+        manhour_landing: マンハウの着陸  #g
+        manhour_last_month_landing: 先月のManhour着陸  #g
+        manhour_performance: 万華鏡のパフォーマンス  #g
+        member_rank: メンバーランク  #g
+        money_development_plan: マネー開発計画  #g
+        money_divergence: お金の相違  #g
+        money_ernings: お金の暴力  #g
+        money_landing: マネーランディング  #g
+        money_last_month_landing: 先月の入金  #g
+        money_performance: マネーパフォーマンス  #g
+        project_name: プロジェクト名  #g
+        project_number: プロジェクト番号  #g
+        sub_number: サブ番号  #g
+        system_name: システム名  #g
+        to_be_confirmed: 確認する  #g
+        unit_price: 単価  #g
