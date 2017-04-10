@@ -11,6 +11,7 @@ class Plan < ApplicationRecord
 
   after_save do |plan|
     if project = Project.find_by(number: plan.project_number)
+      # 名称が類似している場合一致させる
       d = Levenshtein.normalized_distance(project.name, plan.project_name)
       if 0 < d && d < 0.8
         project.update(name: plan.project_name)
