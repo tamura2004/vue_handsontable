@@ -70,7 +70,15 @@ class AssignsController < ApplicationController
       chart.add_series(:line) do |series|
         @works.each do |month, cost|
           series.set_point(month, cost) do |point|
-            point[:indexLabel] = "要員数" if month == "201707"
+            point[:indexLabel] = "要員数" if month == "201709"
+          end
+        end
+      end
+
+      chart.add_series(:line) do |series|
+        @works.each do |month, cost|
+          series.set_point(month, cost + 3) do |point|
+            point[:indexLabel] = "要員数(残業込)" if month == "201709"
           end
         end
       end
@@ -78,7 +86,7 @@ class AssignsController < ApplicationController
       chart.add_series(:line) do |series|
         @costs.each do |month, cost|
           series.set_point(month, cost) do |point|
-            point[:indexLabel] = "案件受注" if month == "201707"
+            point[:indexLabel] = "案件受注" if month == "201709"
           end
         end
       end

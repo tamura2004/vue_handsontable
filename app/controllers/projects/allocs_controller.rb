@@ -5,6 +5,8 @@ class Projects::AllocsController < ApplicationController
   before_action :set_assign, only: [:update]
 
   def index
+    @plan = Plan.project(@project.number)&.first
+
     @header = HtblParamsFactory.new do |t|
       t.model = VCost.where(project_id: @project)
       t.id_field = :project_id

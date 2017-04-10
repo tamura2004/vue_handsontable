@@ -1,0 +1,165 @@
+ja:
+  activerecord:
+    models:
+      alloc: Alloc  #g
+      assign: 割り当てます  #g
+      department: 部門  #g
+      group: グループ  #g
+      job_title: 職名  #g
+      member: メンバー  #g
+      project: プロジェクト  #g
+      projects_member: プロジェクトメンバー  #g
+      projects_members_month: プロジェクトメンバー月  #g
+      projects_monthly_allocation: プロジェクトの月間割り当て  #g
+      result: 結果  #g
+      v_cost: Vコスト  #g
+      v_member: Vメンバー  #g
+      v_work: Vワーク  #g
+      work: 作業  #g
+
+    attributes:
+      alloc:
+        cost: コスト  #g
+        group_name: グループ名  #g
+        id: イド  #g
+        job_title_link: 役職のリンク  #g
+        job_title_name: 役職名  #g
+        member_link: メンバーリンク  #g
+        member_name: メンバー名  #g
+        member_number: 会員番号  #g
+        month: 月  #g
+        project_cost: プロジェクト費用  #g
+        project_link: プロジェクトリンク  #g
+        project_name: プロジェクト名  #g
+        project_number: プロジェクト番号  #g
+        project_rd: プロジェクト  #g
+
+      assign:
+        cost: コスト  #g
+        group_name: グループ名  #g
+        id: イド  #g
+        job_title_link: 役職のリンク  #g
+        job_title_name: 役職名  #g
+        member_link: メンバーリンク  #g
+        member_name: メンバー名  #g
+        member_number: 会員番号  #g
+        month: 月  #g
+        project_cost: プロジェクト費用  #g
+        project_link: プロジェクトリンク  #g
+        project_name: プロジェクト名  #g
+        project_number: プロジェクト番号  #g
+        project_rd: プロジェクト  #g
+
+      department:
+        name: 名  #g
+
+      group:
+        department: :activerecord.models.department  #g
+        members: メンバー  #g
+        name: 名  #g
+        projects: プロジェクト  #g
+
+      job_title:
+        name: 名  #g
+
+      member:
+        assigns: 割り当て  #g
+        group: :activerecord.models.group  #g
+        job_title: :activerecord.models.job_title  #g
+        name: 名  #g
+        number: 数  #g
+        projects_members: プロジェクトメンバー  #g
+        works: 作品  #g
+
+      project:
+        allocs: Allocs  #g
+        assigns: 割り当て  #g
+        cost: コスト  #g
+        costs: コスト  #g
+        group: :activerecord.models.group  #g
+        members: メンバー  #g
+        name: 名  #g
+        number: 数  #g
+        projects_members: プロジェクトメンバー  #g
+        rd: Rd  #g
+
+      projects_member:
+        allocations: 割り当て  #g
+        allocs: Allocs  #g
+        member: :activerecord.models.member  #g
+        project: :activerecord.models.project  #g
+        projects_members_months: プロジェクトメンバー月間  #g
+
+      projects_members_month:
+        assign: :activerecord.models.assign  #g
+        assignment: :activerecord.models.assignment  #g
+        cost: コスト  #g
+        job_title: :activerecord.models.job_title  #g
+        member: :activerecord.models.member  #g
+        month: 月  #g
+        project: :activerecord.models.project  #g
+        projects_member: :activerecord.models.projects_member  #g
+
+      projects_monthly_allocation:
+        cost: コスト  #g
+        group: :activerecord.models.group  #g
+        month: 月  #g
+        project: :activerecord.models.project  #g
+
+      result:
+        company_name: 会社名  #g
+        cont_name: 継続名  #g
+        cont_number: コンタクト番号  #g
+        cost: コスト  #g
+        cost_minute: コスト分  #g
+        group_name: グループ名  #g
+        group_number: グループ番号  #g
+        member_name: メンバー名  #g
+        member_number: 会員番号  #g
+        month: 月  #g
+        outsource_code: コードをアウトソーシングする  #g
+        proc_name: Proc name  #g
+        proc_number: Proc番号  #g
+        project_name: プロジェクト名  #g
+        project_number: プロジェクト番号  #g
+        system_number: システム番号  #g
+
+      v_cost:
+        cost: コスト  #g
+        group_link: グループリンク  #g
+        group_name: グループ名  #g
+        id: イド  #g
+        month: 月  #g
+        project_cost: プロジェクト費用  #g
+        project_link: プロジェクトリンク  #g
+        project_name: プロジェクト名  #g
+        project_number: プロジェクト番号  #g
+        project_rd: プロジェクト  #g
+
+      v_member:
+        group_link: グループリンク  #g
+        group_name: グループ名  #g
+        id: イド  #g
+        job_title_link: 役職のリンク  #g
+        job_title_name: 役職名  #g
+        member_link: メンバーリンク  #g
+        member_name: メンバー名  #g
+        member_number: 会員番号  #g
+
+      v_work:
+        cost: コスト  #g
+        group_link: グループリンク  #g
+        group_name: グループ名  #g
+        id: イド  #g
+        job_title_link: 役職のリンク  #g
+        job_title_name: 役職名  #g
+        member_link: メンバーリンク  #g
+        member_name: メンバー名  #g
+        member_number: 会員番号  #g
+        month: 月  #g
+
+      work:
+        cost: コスト  #g
+        group: :activerecord.models.group  #g
+        member: :activerecord.models.member  #g
+        month: 月  #g

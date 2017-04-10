@@ -1,0 +1,39 @@
+table.table
+  tr
+    th 区分
+    th 案件管理番号
+    th 案件名
+    th 4月
+    th 5月
+    th 6月
+    th 7月
+    th 8月
+    th 9月
+    th 10月
+    th 11月
+    th 12月
+    th 1月
+    th 2月
+    th 3月
+  - @plans.each do |plan|
+    tr class="#{plan.category == "-99" ? 'danger' : 'default'}"
+      - if plan.category == "-99"
+        td SPRO
+        td = plan.project_number
+      - else
+        td WP#{plan.category}
+        td = link_to plan.project_number, project_allocs_path(plan.category)
+      td = plan.project_name
+      td = plan.t1&.round(2)
+      td = plan.t2&.round(2)
+      td = plan.t3&.round(2)
+      td = plan.t4&.round(2)
+      td = plan.t5&.round(2)
+      td = plan.t6&.round(2)
+      td = plan.t7&.round(2)
+      td = plan.t8&.round(2)
+      td = plan.t9&.round(2)
+      td = plan.t10&.round(2)
+      td = plan.t11&.round(2)
+      td = plan.t12&.round(2)
+

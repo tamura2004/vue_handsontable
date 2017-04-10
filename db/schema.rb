@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160915083939) do
+ActiveRecord::Schema.define(version: 20170404083818) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,6 +44,54 @@ ActiveRecord::Schema.define(version: 20160915083939) do
     t.datetime "updated_at",   null: false
     t.index ["group_id"], name: "index_members_on_group_id", using: :btree
     t.index ["job_title_id"], name: "index_members_on_job_title_id", using: :btree
+  end
+
+  create_table "plans", force: :cascade do |t|
+    t.string   "category"
+    t.string   "main_group_name"
+    t.string   "project_number"
+    t.string   "project_name"
+    t.string   "accuracy"
+    t.string   "dept_name"
+    t.string   "group_name"
+    t.string   "sub_number"
+    t.string   "system_name"
+    t.string   "contract_type"
+    t.string   "company_name"
+    t.string   "member_rank"
+    t.integer  "unit_price"
+    t.float    "manhour_last_month_landing"
+    t.float    "manhour_performance"
+    t.float    "manhour_development_plan"
+    t.float    "manhour_landing"
+    t.float    "manhour_divergence"
+    t.float    "manhour_ernings"
+    t.float    "money_last_month_landing"
+    t.float    "money_performance"
+    t.float    "money_development_plan"
+    t.float    "money_landing"
+    t.float    "money_divergence"
+    t.float    "money_ernings"
+    t.float    "cost_rate_plan"
+    t.float    "cost_rate_landing"
+    t.float    "gross_profit_plan"
+    t.float    "gross_profit_landing"
+    t.float    "gross_profit_divergence"
+    t.string   "to_be_confirmed"
+    t.float    "m1"
+    t.float    "m2"
+    t.float    "m3"
+    t.float    "m4"
+    t.float    "m5"
+    t.float    "m6"
+    t.float    "m7"
+    t.float    "m8"
+    t.float    "m9"
+    t.float    "m10"
+    t.float    "m11"
+    t.float    "m12"
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
   end
 
   create_table "projects", force: :cascade do |t|
