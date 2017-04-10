@@ -13,6 +13,10 @@
 class ProjectsMembersMonth < ApplicationRecord
   include Pivot
 
+  rails_admin do
+    visible false
+  end
+
   belongs_to :projects_member
   belongs_to :assignment, class_name: "ProjectsMember", foreign_key: "projects_member_id"
   belongs_to :assign, class_name: "ProjectsMember", foreign_key: "projects_member_id"

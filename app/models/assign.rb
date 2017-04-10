@@ -25,6 +25,10 @@
 class Assign < ApplicationRecord
   include Pivot
 
+  rails_admin do
+    visible false
+  end
+
   scope :project_chart, -> {
     find_by_sql(Charts::ProjectsAssignsQuery)
   }

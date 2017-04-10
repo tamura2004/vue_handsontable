@@ -15,4 +15,7 @@
 #
 
 class VMember < ApplicationRecord
+  rails_admin do
+    visible false
+  end
 end

@@ -114,6 +114,7 @@ GEM
       less (~> 2.6.0)
       sprockets (> 2, < 4)
       tilt
+    levenshtein (0.2.2)
     listen (3.0.8)
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
@@ -312,6 +313,7 @@ DEPENDENCIES
   i18n_generators
   jbuilder (~> 2.5)
   jquery-rails
+  levenshtein
   listen (~> 3.0.5)
   pg
   pry-rails

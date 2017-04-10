@@ -2,10 +2,10 @@ ja:
   activerecord:
     models:
       alloc: Alloc  #g
-      assign: 割り当てます  #g
-      department: 部門  #g
+      assign: アサイン  #g
+      department: 部  #g
       group: グループ  #g
-      job_title: 職名  #g
+      job_title: 職位  #g
       member: メンバー  #g
       project: プロジェクト  #g
       projects_member: プロジェクトメンバー  #g
@@ -16,7 +16,7 @@ ja:
       v_member: Vメンバー  #g
       v_work: Vワーク  #g
       work: 作業  #g
-      plan: 計画  #g
+      plan: 収支管理  #g
 
     attributes:
       alloc:
@@ -52,23 +52,23 @@ ja:
         project_rd: プロジェクト  #g
 
       department:
-        name: 名  #g
+        name: 名称  #g
 
       group:
         department: :activerecord.models.department  #g
         members: メンバー  #g
-        name: 名  #g
+        name: 名称  #g
         projects: プロジェクト  #g
 
       job_title:
-        name: 名  #g
+        name: 職位名  #g
 
       member:
         assigns: 割り当て  #g
         group: :activerecord.models.group  #g
         job_title: :activerecord.models.job_title  #g
-        name: 名  #g
-        number: 数  #g
+        name: 氏名  #g
+        number: 社員番号  #g
         projects_members: プロジェクトメンバー  #g
         works: 作品  #g
 
@@ -79,10 +79,10 @@ ja:
         costs: コスト  #g
         group: :activerecord.models.group  #g
         members: メンバー  #g
-        name: 名  #g
-        number: 数  #g
+        name: 案件名  #g
+        number: 案件管理番号  #g
         projects_members: プロジェクトメンバー  #g
-        rd: Rd  #g
+        rd: 要件定義工数  #g
 
       projects_member:
         allocations: 割り当て  #g

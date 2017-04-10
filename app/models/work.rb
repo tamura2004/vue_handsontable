@@ -13,6 +13,10 @@
 class Work < ApplicationRecord
   include Pivot
 
+  rails_admin do
+    visible false
+  end
+
   belongs_to :member
   has_one :group, through: :member
 

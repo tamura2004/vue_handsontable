@@ -63,3 +63,5 @@ gem "font-awesome-rails"
 gem "rails_admin"
 gem "rails_admin-i18n"
 gem "i18n_generators"
+
+gem "levenshtein"

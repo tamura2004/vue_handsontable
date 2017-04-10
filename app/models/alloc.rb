@@ -27,6 +27,10 @@
 class Alloc < ApplicationRecord
   include Pivot
 
+  rails_admin do
+    visible false
+  end
+
   scope :recent, -> {
     where("month > ?", "201703")
   }

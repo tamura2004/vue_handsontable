@@ -12,6 +12,10 @@
 class ProjectsMember < ApplicationRecord
   include Pivot
 
+  rails_admin do
+    visible false
+  end
+
   belongs_to :project
   belongs_to :member
 
