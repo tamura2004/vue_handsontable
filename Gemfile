@@ -65,3 +65,4 @@ gem "rails_admin-i18n"
 gem "i18n_generators"
 
 gem "levenshtein"
+
