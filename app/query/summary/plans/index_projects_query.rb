@@ -1,6 +1,6 @@
-Summary::PlansQuery = <<-SQL
+Summary::Plans::IndexProjectsQuery = <<-SQL
   select
-    -99 as category,
+    category,
     project_number,
     project_name,
     sum(m1) as t1,
@@ -18,11 +18,12 @@ Summary::PlansQuery = <<-SQL
   from
     plans
   where
-    project_number = ? and
     m1 + m2 + m3 + m4 + m5 + m6 + m7 + m8 + m9 + m10 + m11 + m12 > 0
   group by
     category,
     project_number,
     project_name
-
+  order by
+    category,
+    project_number
 SQL

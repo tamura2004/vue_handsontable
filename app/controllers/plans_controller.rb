@@ -1,7 +1,15 @@
 class PlansController < ApplicationController
 
   def index
+    @plans = Plan.projects
+  end
+
+  def compare
     @plans = Plan.compare_with_spro
+  end
+
+  def gantt
+    @options = Plan.gantt
   end
 
   def new

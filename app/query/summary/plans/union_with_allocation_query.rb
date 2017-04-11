@@ -1,4 +1,4 @@
-Summary::CompareWithSproQuery = <<-SQL
+Summary::Plans::UnionWithAllocationQuery = <<-SQL
   select
     -99 as category,
     project_number,
