@@ -1,7 +1,7 @@
 class PlansController < ApplicationController
 
   def index
-    @plans = Plan.projects
+    @plans = PlanDecorator.decorate_collection(Plan.projects)
   end
 
   def compare

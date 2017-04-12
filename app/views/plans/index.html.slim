@@ -18,11 +18,10 @@ table.table.table-condensed
       th 3月
   tbody
     - @plans.each do |plan|
-      tr(v-show="$root.query === '' || ~'#{plan[:project_number]}'.indexOf($root.query) || ~'#{plan[:project_name]}'.indexOf($root.query) || ~'#{plan[:category]}'.indexOf($root.query)")
+      tr(v-show="#{plan.filter}")
         td = plan.category
         td = link_to plan.project_number, project_allocs_path(plan.category)
         td = plan.project_name
         - 12.times do |i|
-          - cost = plan["t#{i+1}"]
-          td(class="#{ cost > 0 ? 'bar' : '' }") = cost > 0 ? cost&.round(2) : ""
+          td(class="#{ plan.schedule_color(i) }") = plan.schedule_cost(i)
 

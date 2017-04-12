@@ -65,4 +65,4 @@ gem "rails_admin-i18n"
 gem "i18n_generators"
 
 gem "levenshtein"
-
+gem "draper", '>= 3.0.0.pre1'
