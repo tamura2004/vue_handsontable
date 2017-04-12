@@ -14,16 +14,24 @@ class PlanDecorator < Draper::Decorator
     "$root.query === '' || ~'#{model.project_number}'.indexOf($root.query) || ~'#{model.project_name}'.indexOf($root.query) || ~'#{model.category}'.indexOf($root.query)"
   end
 
+  def row_color
+    model.category == '-99' ? 'danger' : 'default'
+  end
+
+  def costs
+    12.times.map { |i| CostDecorator.decorate(cost(i)) }
+  end
+
   def cost(i)
     model["t#{i+1}"]
   end
 
-  def schedule_color(i)
-    cost(i) > 0 ? 'bar' : ''
-  end
+  # def schedule_color(i)
+  #   cost(i) > 0 ? 'bar' : ''
+  # end
 
-  def schedule_cost(i)
-    cost(i) > 0 ? cost(i)&.round(2) : ""
-  end
+  # def schedule_cost(i)
+  #   cost(i) > 0 ? cost(i)&.round(2) : ""
+  # end
 
 end

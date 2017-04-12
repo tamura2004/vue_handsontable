@@ -5,11 +5,7 @@ class PlansController < ApplicationController
   end
 
   def compare
-    @plans = Plan.compare_with_spro
-  end
-
-  def gantt
-    @options = Plan.gantt
+    @plans = PlanDecorator.decorate_collection(Plan.compare_with_spro)
   end
 
   def new
@@ -28,7 +24,7 @@ class PlansController < ApplicationController
 
     xlsx.each_row_streaming do |row|
       @attr = Hash[ALL_KEYS.zip(row.map(&:value))]
-      @key = @attr.reject{|k,v| !PRIME_KEYS.include?(k) }
+      @key = @attr.reject{|k,_| !PRIME_KEYS.include?(k) }
   
       next if @attr[:contract_type] =~ /合計/
       next if @attr[:contract_type] =~ /契約形態/

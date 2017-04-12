@@ -18,10 +18,10 @@ table.table.table-condensed
       th 3月
   tbody
     - @plans.each do |plan|
-      tr(v-show="#{plan.filter}")
+      tr(v-show="#{ plan.filter }")
         td = plan.category
         td = link_to plan.project_number, project_allocs_path(plan.category)
         td = plan.project_name
-        - 12.times do |i|
-          td(class="#{ plan.schedule_color(i) }") = plan.schedule_cost(i)
+        - plan.costs.each do |cost|
+          td(class="#{ cost.color }") = cost.decimal
 
