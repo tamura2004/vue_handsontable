@@ -1,5 +1,7 @@
 class GroupTab
   props: ['groups','current','path']
+  methods:
+    url: (group) -> "/groups/#{group.id}/#{@path}"
   template: '''
     <ul class="nav nav-tabs">
       <li
@@ -7,7 +9,7 @@ class GroupTab
         :class="{'active':group.id == current.id}"
       >
         <a
-          href="/groups/{{group.id}}/{{path}}"
+          :href="url(group)"
         >
           {{group.name}}
         </a>

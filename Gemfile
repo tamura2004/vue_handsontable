@@ -44,7 +44,7 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem "slim-rails"
-gem "vuejs-rails"
+gem "vuejs-rails", '= 1.0.24'
 # gem "less-rails"
 # gem "therubyracer"
 # gem "execjs"
