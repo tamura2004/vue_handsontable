@@ -1,21 +1,12 @@
 table.table.table-condensed
   thead
     tr
-      th 区分
-      th 案件管理番号
-      th 案件名
-      th 4月
-      th 5月
-      th 6月
-      th 7月
-      th 8月
-      th 9月
-      th 10月
-      th 11月
-      th 12月
-      th 1月
-      th 2月
-      th 3月
+      td 区分
+      td 案件管理番号
+      td 案件名
+      - MonthTypes.each do |enum|
+        td = enum.t
+
   tbody
     - @plans.each do |plan|
       tr(v-show="#{ plan.filter }")
