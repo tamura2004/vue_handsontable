@@ -30,4 +30,12 @@ class ProjectsMember < ApplicationRecord
     scope: [:project_id]
   }
 
+  scope :recent, -> {
+    joins(:allocs)
+    .includes(:project)
+    .includes(:member)
+    .where("projects_members_months.month > ?","201703")
+  }
+
+
 end

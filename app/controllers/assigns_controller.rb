@@ -27,6 +27,12 @@ class AssignsController < ApplicationController
     end
   end
 
+  def projects_report
+    @assigns = ProjectsMemberDecorator.decorate_collection(
+      ProjectsMember.recent
+    )
+  end
+
   def chart
     # 案件別要員割当
     @assigns = Assign.project_chart.map(&:attributes).group_by{|a|a["project_name"]}

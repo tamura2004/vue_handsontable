@@ -49,4 +49,8 @@ class Project < ApplicationRecord
     all.group_by(&:id)
   }
 
+  def full_name
+    [number, name].join(" ")
+  end
+
 end

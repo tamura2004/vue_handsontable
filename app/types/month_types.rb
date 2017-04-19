@@ -1,15 +1,32 @@
-class MonthTypes < Inum::Base
-  define :APR, 201704
-  define :MAY, 201705
-  define :JUN, 201706
-  define :JUL, 201707
-  define :AUG, 201708
-  define :SEP, 201709
-  define :OCT, 201710
-  define :NOV, 201711
-  define :DEC, 201712
-  define :JAN, 201801
-  define :FEB, 201802
-  define :MAR, 201803
-end
 
+class MonthTypes < Inum::Base
+  define :APR, 0
+  define :MAY, 1
+  define :JUN, 2
+  define :JUL, 3
+  define :AUG, 4
+  define :SEP, 5
+  define :OCT, 6
+  define :NOV, 7
+  define :DEC, 8
+  define :JAN, 9
+  define :FEB, 10
+  define :MAR, 11
+
+  def key
+    Date.new(2017,4,1).months_since(value).strftime("%Y%m")
+  end
+
+  def self.keys
+    map(&:key)
+  end
+
+  def self.parse(object)
+    if enum = @enums.find{|enum|enum.key == object}
+      enum
+    else
+      super(object)
+    end
+  end
+
+end

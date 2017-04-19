@@ -26,6 +26,8 @@ html lang="en"
         = drop_down "#{fa_icon('file-text-o')}帳票"
           = menu_item assigns_member_report_path
             i.fa.fa-file-text-o 要員別アサイン集計
+          = menu_item assigns_projects_report_path
+            i.fa.fa-file-text-o 案件別アサイン集計
 
         = drop_down "#{fa_icon('bar-chart')}グラフ"
           = menu_item assigns_chart_path
