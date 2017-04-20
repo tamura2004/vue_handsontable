@@ -57,6 +57,6 @@ class CostsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def cost_params
-      params.permit(months_symbols)
+      params.permit(*MonthTypes.keys.map(&:to_sym))
     end
 end

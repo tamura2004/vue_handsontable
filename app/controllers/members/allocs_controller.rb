@@ -38,7 +38,7 @@ class Members::AllocsController < ApplicationController
           end
         end
         chart.add_series(:line) do |series|
-          months_values.each do |month|
+          MonthTypes.keys.each do |month|
             series.set_point(month, 1.2) do |point|
               if month == "201710"
                 point[:indexLabel] = "残業含む"
@@ -47,7 +47,7 @@ class Members::AllocsController < ApplicationController
           end
         end
         chart.add_series(:line) do |series|
-          months_values.each do |month|
+          MonthTypes.keys.each do |month|
             series.set_point(month, 1.0) do |point|
               if month == "201712"
                 point[:indexLabel] = "残業なし"

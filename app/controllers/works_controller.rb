@@ -55,6 +55,6 @@ class WorksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def work_params
-      params.permit(months_symbols)
+      params.permit(MonthTypes.keys.map(&:to_sym))
     end
 end

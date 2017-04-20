@@ -35,14 +35,15 @@ class HtblParamsFactory
       @opts = {
         colHeaders: [
           *fields_headers,
-          *months_headers,
+          *MonthTypes.to_a.map(&:t),
           "合計"
         ],
         columns: [
           *fields_columns,
           *months_columns,
           {data: "total", type: "numeric", format:"0.00"}
-        ]
+        ],
+        columnSorting: true
       }
 
     end
@@ -63,24 +64,14 @@ class HtblParamsFactory
       end
     end
 
-    def months
-      @months ||= 12.times.map do |n|
-        Time.local(2017,4).since(n.month)
-      end
-    end
-
     def months_values
-      months.map{|m|m.strftime("%Y%m")}
+      MonthTypes.keys
     end
 
     def months_blanks
       months_values.inject({}) do |memo,m|
         memo.merge m => ""
       end
-    end
-
-    def months_headers
-      months.map{|m|m.strftime("%m月")}
     end
 
     def months_columns

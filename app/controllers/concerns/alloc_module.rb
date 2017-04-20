@@ -34,7 +34,7 @@ module AllocModule
     end
 
     def alloc_params
-      params.permit(*months_symbols)
+      params.permit(*MonthTypes.keys.map(&:to_sym))
     end
 end
 
