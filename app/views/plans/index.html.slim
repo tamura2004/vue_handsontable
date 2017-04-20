@@ -11,7 +11,10 @@ table.table.table-condensed
     - @plans.each do |plan|
       tr(v-show="#{ plan.filter }")
         td = plan.category
-        td = link_to plan.project_number, project_allocs_path(plan.category)
+        - if plan.project_id
+          td = link_to plan.project_number, project_allocs_path(plan.project_id)
+        - else
+          td = plan.project_number
         td = plan.project_name
         - plan.costs.each do |cost|
           td(class="#{ cost.color }") = cost.decimal

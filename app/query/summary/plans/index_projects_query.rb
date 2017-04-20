@@ -1,6 +1,7 @@
 Summary::Plans::IndexProjectsQuery = <<-SQL
   select
     category,
+    max(projects.id) as project_id,
     project_number,
     project_name,
     sum(m1) as t1,
@@ -17,6 +18,8 @@ Summary::Plans::IndexProjectsQuery = <<-SQL
     sum(m12) as t12
   from
     plans
+  left join projects
+    on projects.number = project_number and projects.name = project_name
   where
     m1 + m2 + m3 + m4 + m5 + m6 + m7 + m8 + m9 + m10 + m11 + m12 > 0
   group by
