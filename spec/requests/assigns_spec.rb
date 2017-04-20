@@ -8,6 +8,10 @@ RSpec.describe "Assign", type: :request do
     it{should == 200}
   end
 
+  describe "GET /assigns/projects_report" do
+    it{should == 200}
+  end
+
   describe "GET /assigns/chart" do
     it{should == 200}
   end
