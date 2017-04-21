@@ -3,18 +3,11 @@ class Members::AssignsController < ApplicationController
   before_action :set_assign, only: :destroy
 
   def index
-    @projects =
-      Project
-        .where("groups.id = ?", @member.group.try(:id))
-        .view
-        .map(&:attributes)
-
-    @assigns = @member.assigns
+    @projects = Project.same_group(@member)
   end
 
   def create
     @assign = ProjectsMember.new(assign_params)
-    # @assign.member = @member
 
     if @assign.save
       render json: @assign, status: :ok

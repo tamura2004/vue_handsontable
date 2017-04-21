@@ -5,4 +5,8 @@ class ProjectDecorator < Draper::Decorator
     [number, name].join.to_json
   end
 
+  def full_name
+    [number, name].join(" ")
+  end
+
 end

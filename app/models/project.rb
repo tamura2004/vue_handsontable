@@ -27,30 +27,22 @@ class Project < ApplicationRecord
 
   validates :name, presence: true
 
-  before_save do
-    if group_name.present?
-      self.group = Group.find_by(name: group_name)
-    end
-  end
+  before_save Projects::BeforeSaveCallback.new
 
-  scope :view, -> {
-    joins(:group)
-    .select(<<-SQL)
-      projects.id as id,
-      projects.number as number,
-      projects.name as name,
-      groups.name as group_name,
-      groups.id as group_id
-    SQL
-    .order("projects.number")
+  scope :same_group, -> member {
+    where(group: member.group_id)
   }
 
-  scope :id_table, -> {
-    all.group_by(&:id)
-  }
-
-  def full_name
-    [number, name].join(" ")
-  end
+  # scope :view, -> {
+  #   joins(:group)
+  #   .select(<<-SQL)
+  #     projects.id as id,
+  #     projects.number as number,
+  #     projects.name as name,
+  #     groups.name as group_name,
+  #     groups.id as group_id
+  #   SQL
+  #   .order("projects.number")
+  # }
 
 end

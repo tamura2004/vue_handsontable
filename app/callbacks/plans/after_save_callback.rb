@@ -7,8 +7,10 @@ class Plans::AfterSaveCallback
       if 0.3 < distance
         project.update(name: plan.project_name)
       end
+
     elsif project = Project.find_by(name: plan.project_name)
       project.update(number: plan.project_number)
+
     else
       Project.create(group_id: 1, number: plan.project_number, name: plan.project_name)
     end
