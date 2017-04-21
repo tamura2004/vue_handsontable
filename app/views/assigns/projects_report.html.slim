@@ -1,17 +1,18 @@
 - @assigns.sort_by{|a|a.project.number}.group_by(&:project).each do |project,assigns|
-  hr
-  h5 = link_to project.full_name, project_allocs_path(project.id)
-  table.table.table-condensed style="table-layout:fixed;"
-    thead
-      tr
-        th style="width: 100px;" 社員番号
-        th style="width: 150px;" 社員名
-        - MonthTypes.each do |enum|
-          th = enum.t
-    tbody
-      - assigns.group_by(&:member).each do |member,assigns|
+  div(v-show="$root.query === '' || ~'#{project.number}'.indexOf($root.query) || ~'#{project.name}'.indexOf($root.query)")
+    hr
+    h5 = link_to project.full_name, project_allocs_path(project.id)
+    table.table.table-condensed style="table-layout:fixed;"
+      thead
         tr
-          td = member.number
-          td = link_to member.name, member_allocs_path(member.id)
-          - assigns.first.costs.each do |cost|
-            td = cost
+          th style="width: 100px;" 社員番号
+          th style="width: 150px;" 社員名
+          - MonthTypes.each do |enum|
+            th = enum.t
+      tbody
+        - assigns.group_by(&:member).each do |member,assigns|
+          tr
+            td = member.number
+            td = link_to member.name, member_allocs_path(member.id)
+            - assigns.first.costs.each do |cost|
+              td = cost
