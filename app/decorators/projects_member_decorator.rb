@@ -1,5 +1,7 @@
 class ProjectsMemberDecorator < Draper::Decorator
   delegate_all
+  decorates_association :project
+  decorates_association :member
 
   def costs
     Array.new(12,0).tap do |array|

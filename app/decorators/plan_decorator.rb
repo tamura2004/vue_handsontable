@@ -11,7 +11,12 @@ class PlanDecorator < Draper::Decorator
   #   end
 
   def filter
-    "$root.query === '' || ~'#{model.project_number}'.indexOf($root.query) || ~'#{model.project_name}'.indexOf($root.query) || ~'#{model.category}'.indexOf($root.query)"
+    <<-JAVASCRIPT
+      $root.query === '' ||
+      ~'#{model.project_number}'.indexOf($root.query) ||
+      ~'#{model.project_name}'.indexOf($root.query) ||
+      ~'#{model.category}'.indexOf($root.query)
+    JAVASCRIPT
   end
 
   def row_color
@@ -25,13 +30,5 @@ class PlanDecorator < Draper::Decorator
   def cost(i)
     model["t#{i+1}"]
   end
-
-  # def schedule_color(i)
-  #   cost(i) > 0 ? 'bar' : ''
-  # end
-
-  # def schedule_cost(i)
-  #   cost(i) > 0 ? cost(i)&.round(2) : ""
-  # end
 
 end
