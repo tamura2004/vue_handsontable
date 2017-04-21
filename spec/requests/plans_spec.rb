@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe "Plans", type: :request do
   before { create :group, { id: 1 } }
   before { create :plan }
+  let(:params){{ plan: attributes_for(:plan) }}
 
   describe "GET /plans" do
     it{should == 200}

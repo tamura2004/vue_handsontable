@@ -63,39 +63,6 @@ class Plan < ApplicationRecord
     find_by_sql(Summary::Plans::UnionWithAllocationQuery)
   }
 
-  scope :gantt, -> {
-    RangeBarChartBuilder.build("案件スケジュール") do |chart|
-      projects.each do |plan|
-        chart.add_bar(plan) #if plan.start_month
-      end
-    end
-  }
+  after_save Plans::AfterSaveCallback.new
 
-  def start_month
-    [t1,t2,t3,t4,t5,t6,t7,t8,t9,t10,t11,t12].each_with_index do |cost, index|
-      # return Date.new(2017,4,1).months_since(index) if cost && cost > 0
-      index if cost && cost > 0
-    end
-    nil
-  end
-
-  def end_month
-    [t1,t2,t3,t4,t5,t6,t7,t8,t9,t10,t11,t12].reverse.each_with_index do |cost, index|
-      # return Date.new(2017,4,1).months_since(11 - index) if cost && cost > 0
-      11 - index if cost && cost > 0
-    end
-    nil
-  end
-
-  after_save do |plan|
-    if project = Project.find_by(number: plan.project_number)
-      # 名称が類似している場合一致させる
-      d = Levenshtein.normalized_distance(project.name, plan.project_name)
-      if 0 < d && d < 0.8
-        project.update(name: plan.project_name)
-      end
-    else
-      Project.create(group_id: 1, number: plan.project_number, name: plan.project_name)
-    end
-  end
 end

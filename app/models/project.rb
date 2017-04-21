@@ -16,7 +16,7 @@ class Project < ApplicationRecord
   include Pivot
 
   belongs_to :group, optional: true
-  has_many :costs, class_name: "ProjectsMonthlyAllocation"
+  has_many :costs, class_name: "ProjectsMonthlyAllocation", dependent: :destroy
   has_many :projects_members, dependent: :destroy
 
   has_many :assigns, class_name: "ProjectsMember"
