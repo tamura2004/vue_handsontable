@@ -1,5 +1,5 @@
 - @assigns.sort_by{|a|a.project.number}.group_by(&:project).each do |project,assigns|
-  div(v-show="$root.query === '' || ~'#{project.number}'.indexOf($root.query) || ~'#{project.name}'.indexOf($root.query)")
+  incrementalsearch :text=project.text_for_search
     hr
     h5 = link_to project.full_name, project_allocs_path(project.id)
     table.table.table-condensed style="table-layout:fixed;"

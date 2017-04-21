@@ -6,17 +6,17 @@
 = link_to "一覧表（EXCEL）", assigns_member_report_path(format: "xlsx"), class: "btn btn-primary"
 
 - @members.each do |member, assigns|
-  div(v-show="$root.query === '' || ~'#{member}'.indexOf($root.query)")
+  incrementalsearch :text=member.to_json
     hr
     h5 = member
     table.table.table-condensed
       thead
-        th
-          td グループ名
-          td 案件管理番号
-          td 案件名
+        tr
+          th グループ名
+          th 案件管理番号
+          th 案件名
           - MonthTypes.each do |enum|
-            td = enum.t
+            th = enum.t
 
       tbody
         - assigns.each do |assign|
