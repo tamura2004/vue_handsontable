@@ -1,8 +1,9 @@
-class ProjectsDecorator < Draper::CollectionDecorator
+class MembersDecorator < Draper::CollectionDecorator
 
   HEADERS = [
-    "案件管理番号",
-    "案件名",
+    "職位",
+    "社員番号",
+    "社員名",
     *MonthTypes.map(&:t),
     "合計"
   ]
@@ -11,8 +12,9 @@ class ProjectsDecorator < Draper::CollectionDecorator
     HandsonTableBuilder.encode do |json|
       json.colHeaders HEADERS
       json.columns do
-        json.column! data: "project_number"
-        json.column! data: "project_link", renderer: "html"
+        json.column! data: "job_title_link", renderer: "html"
+        json.column! data: "member_number"
+        json.column! data: "member_link", renderer: "html"
         MonthTypes.keys.each do |month|
           json.column! data: month, type: "numeric", format: "0.00"
         end
@@ -22,10 +24,18 @@ class ProjectsDecorator < Draper::CollectionDecorator
     end
   end
 
+  def works_rows
+    Jbuilder.encode do |json|
+      json.array! map{ |member|
+        member.works_row
+      }
+    end
+  end
+
   def allocs_rows
     Jbuilder.encode do |json|
-      json.array! map { |project|
-        project.allocs_row
+      json.array! map { |member|
+        member.allocs_row
       }
     end
   end

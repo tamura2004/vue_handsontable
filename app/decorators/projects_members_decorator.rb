@@ -1,4 +1,4 @@
-class ProjectsDecorator < Draper::CollectionDecorator
+class ProjectsMembersDecorator < Draper::CollectionDecorator
 
   HEADERS = [
     "案件管理番号",
@@ -24,8 +24,8 @@ class ProjectsDecorator < Draper::CollectionDecorator
 
   def allocs_rows
     Jbuilder.encode do |json|
-      json.array! map { |project|
-        project.allocs_row
+      json.array! map { |assign|
+        assign.allocs_row
       }
     end
   end

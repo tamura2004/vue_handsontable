@@ -98,7 +98,7 @@ Rails.application.routes.draw do
   get "assigns/member_chart", to: "assigns#member_chart"
   get "assigns/project_chart", to: "assigns#project_chart"
 
-  root "costs#index", group_id: 1
+  root "assigns#projects_report"
 
   resources :departments, except: [:new,:edit]
   resources :job_titles, except: [:new,:edit]

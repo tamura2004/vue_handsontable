@@ -3,31 +3,23 @@ class Groups::JobTitles::AssignsController < ApplicationController
   before_action :set_group, only: [:index]
 
   def index
-    @works = HtblParamsFactory.new do |t|
-      t.model = VWork
-        .where(group_id: @group)
-        .where(job_title_id: @job_title)
-        .order(:member_number)
+    @members = Member.where(group_id: @group)
+      .where(job_title_id: @job_title)
+      .includes(:works)
+      .includes(:assigns)
+      .includes(:allocs)
+      .includes(:group)
+      .includes(:job_title)
+      .order(:number)
+      .decorate
 
-      t.id_field = :member_id
-      t.fields = :member_number,:member_link
-    end
-
-    @assigns = HtblParamsFactory.new do |t|
-      t.model = Alloc
-        .where(group_id: @group)
-        .where(job_title_id: @job_title)
-        .order(:member_number)
-
-      t.id_field = :member_id
-      t.fields = :member_number, :member_link
-    end
-
-    @allocs = HtblParamsFactory.new do |t|
-      t.model = Alloc.where(job_title_id: @job_title)
-      t.id_field = :project_id
-      t.fields = :project_number,:project_link
-    end
+    @projects = Project.where(group_id: @group)
+      .merge(Member.where job_title_id: @job_title)
+      .joins(:members)
+      .includes(:assigns)
+      .includes(:allocs)
+      .order(:number)
+      .decorate
 
   end
 

@@ -69,3 +69,6 @@ gem "draper", '>= 3.0.0.pre1'
 
 gem "inum"
 gem "inum_types", git: "https://github.com/tamura2004/inum_types.git"
+
+gem "lodash-rails"
+gem "bullet"

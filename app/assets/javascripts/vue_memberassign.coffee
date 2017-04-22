@@ -20,8 +20,8 @@ class MaDetail
           v-model="member.checked"
         />
         {{member.job_title_name}}
-        {{member.member_number}}
-        {{member.member_name}}
+        {{member.number}}
+        {{member.name}}
       </label>
     </div>
   '''
@@ -68,7 +68,7 @@ class MemberAssign
         @resource.save assignment, (response) => @assigns.push response.data
 
       else
-        assignment = @assigns.find (e)-> e.member_id is member.id
+        assignment = _.find @assigns, (e) -> e.member_id is member.id
         @resource.delete(assignment.id)
 
 Vue.component "ma", new MemberAssign

@@ -33,16 +33,4 @@ class Project < ApplicationRecord
     where(group: member.group_id)
   }
 
-  # scope :view, -> {
-  #   joins(:group)
-  #   .select(<<-SQL)
-  #     projects.id as id,
-  #     projects.number as number,
-  #     projects.name as name,
-  #     groups.name as group_name,
-  #     groups.id as group_id
-  #   SQL
-  #   .order("projects.number")
-  # }
-
 end

@@ -3,7 +3,9 @@ class PaHeader
   template: '''
     <div class="page-header">
       <h3>
+        {{member.number}}
         {{member.name}}
+        {{member.job_title_name}}
         <small>{{member.group_name}}</small>
       </h3>
     </div>
@@ -66,7 +68,7 @@ class ProjectAssign
         @resource.save assignment, (response) => @assigns.push response.data
 
       else
-        assignment = @assigns.find (e)-> e.project_id is project.id
+        assignment = _.find @assigns, (e)-> e.project_id is project.id
         @resource.delete(assignment.id)
 
 Vue.component "projectassign", new ProjectAssign

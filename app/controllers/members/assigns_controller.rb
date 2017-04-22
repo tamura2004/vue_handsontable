@@ -23,7 +23,7 @@ class Members::AssignsController < ApplicationController
 
   private
     def set_memgber
-      @member = Member.find(params[:member_id])
+      @member = Member.find(params[:member_id]).decorate
     end
 
     def set_assign

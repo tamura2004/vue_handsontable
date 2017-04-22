@@ -3,7 +3,7 @@ class Projects::AssignsController < ApplicationController
   before_action :set_assign, only: :destroy
 
   def index
-    @members = VMember.where(group_id: @project.group.try(:id)).order(:job_title_id).order(:member_number)
+    @members = Member.same_group(@project)
 
     @assigns = @project.assigns
   end

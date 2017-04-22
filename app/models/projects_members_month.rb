@@ -28,7 +28,7 @@ class ProjectsMembersMonth < ApplicationRecord
   validates :cost, presence: true, numericality: {greater_than: 0}
 
   scope :recent, -> {
-    where("month > ?", "201703")
+    where(month: MonthTypes.keys)
     .includes(:assign)
     .includes(:project)
     .includes(:member)

@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require twitter/bootstrap
 //= require handsontable/dist/handsontable.full
+//= require lodash
 //= require vue
 //= require vue-resource
 //= require_tree .

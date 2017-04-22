@@ -28,9 +28,7 @@ class AssignsController < ApplicationController
   end
 
   def projects_report
-    @assigns = ProjectsMemberDecorator.decorate_collection(
-      ProjectsMember.recent
-    )
+    @assigns = ProjectsMember.recent.decorate
   end
 
   def chart

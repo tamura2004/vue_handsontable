@@ -29,4 +29,26 @@ class MonthTypes < Inum::Base
     end
   end
 
+  def self.add_series(chart, at, label, cost)
+    chart.add_series(:line) do |series|
+      keys.each do |month|
+        series.set_point(month, cost) do |point|
+          if month == at
+            point[:indexLabel] = label
+          end
+        end
+      end
+    end
+  end
+
+  def self.fill(models)
+    Array.new(12,0).tap do |array|
+      models.each do |model|
+        if enum = parse(model.month)
+          array[enum.value] += model.cost
+        end
+      end
+    end
+  end
+
 end

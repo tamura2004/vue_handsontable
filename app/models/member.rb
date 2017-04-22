@@ -21,20 +21,13 @@ class Member < ApplicationRecord
   has_many :works, dependent: :destroy
   has_many :assigns, class_name: "ProjectsMember"
   has_many :projects_members, dependent: :destroy
+  has_many :projects, through: :projects_members
+  has_many :allocs, through: :assigns
 
   attr_accessor :group_name, :job_title_name
 
-  # scope :view, -> {
-  #   joins(:group)
-  #   .joins(:job_title)
-  #   .select(<<-SQL)
-  #     members.id as id,
-  #     groups.name as group_name,
-  #     job_titles.name as job_title_name,
-  #     members.number as member_number,
-  #     members.name as member_name
-  #   SQL
-  #   .order("members.group_id,members.job_title_id")
-  # }
+  scope :same_group, -> project {
+    where(group: project.group_id)
+  }
 
 end

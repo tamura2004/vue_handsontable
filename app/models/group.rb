@@ -21,4 +21,8 @@ class Group < ApplicationRecord
     end
   end
 
+  # scope :id_is, -> id {
+  #   where(id: id)
+  # }
+
 end

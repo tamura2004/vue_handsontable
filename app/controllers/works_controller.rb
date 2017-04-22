@@ -5,13 +5,12 @@ class WorksController < ApplicationController
   # GET /works
   def index
     @groups = Group.all
-
-    @works = HtblParamsFactory.new do |t|
-      t.model = VWork.where(group_id: @group).order(:job_title_id,:member_number)
-      t.id_field = :member_id
-      t.fields = :job_title_link, :member_number, :member_link
-    end
-
+    @members = Member.where(group_id: @group)
+      .includes(:works)
+      .includes(:group)
+      .includes(:job_title)
+      .order(:job_title_id, :number)
+      .decorate
   end
 
   # PATCH/PUT /works/1.json
