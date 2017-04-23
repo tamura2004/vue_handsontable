@@ -14,13 +14,7 @@ class ProjectDecorator < Draper::Decorator
   end
 
   def full_allocs
-    @full_allocs ||= Array.new(12,0).tap do |array|
-      allocs.each do |alloc|
-        if enum = MonthTypes.parse(alloc.month)
-          array[enum.value] += alloc.cost
-        end
-      end
-    end
+    MonthTypes.fill(allocs)
   end
 
   def total_allocs
@@ -28,14 +22,7 @@ class ProjectDecorator < Draper::Decorator
   end
 
   def allocs_row
-    HandsonTableBuilder.build do |obj|
-      obj.id id
-      obj.project_number number
-      obj.project_link link
-      MonthTypes.each do |enum|1
-        obj.set! enum.key, full_allocs[enum.value]
-      end
-    end
+    h.render "projects/row.json", project: self, cols: full_allocs
   end
 
   def add_series(chart, name)
@@ -51,6 +38,10 @@ class ProjectDecorator < Draper::Decorator
         end
       end
     end
+  end
+
+  def hoge
+    return h.render "projects/hoge", object: object
   end
 
 end

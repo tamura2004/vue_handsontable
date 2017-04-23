@@ -14,5 +14,5 @@
           tr
             td = member.number
             td = link_to member.name, member_allocs_path(member.id)
-            - assigns.first.costs.each do |cost|
+            - assigns.first.full_allocs.each do |cost|
               td = cost

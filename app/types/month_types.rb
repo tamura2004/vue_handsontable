@@ -41,14 +41,18 @@ class MonthTypes < Inum::Base
     end
   end
 
-  def self.fill(models)
+  def self.fill(cols)
     Array.new(12,0).tap do |array|
-      models.each do |model|
-        if enum = parse(model.month)
-          array[enum.value] += model.cost
+      cols.each do |col|
+        if enum = parse(col.month)
+          array[enum.value] += col.cost
         end
       end
     end
+  end
+
+  def to_pair(cols)
+    [key, cols[value]]
   end
 
 end

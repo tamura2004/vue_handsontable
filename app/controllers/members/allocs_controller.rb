@@ -5,7 +5,6 @@ class Members::AllocsController < ApplicationController
   before_action :set_assign, only: [:update]
 
   def index
-
     @assigns = ProjectsMember.where(member_id: @member)
       .eager_load(:project)
       .eager_load(:allocs)
@@ -13,7 +12,6 @@ class Members::AllocsController < ApplicationController
       .decorate
 
     @member = @member.decorate
-
   end
 
   private

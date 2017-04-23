@@ -8,14 +8,7 @@ class ProjectsMemberDecorator < Draper::Decorator
   end
 
   def allocs_row
-    HandsonTableBuilder.build do |obj|
-      obj.id id
-      obj.project_number project.number
-      obj.project_link project.link
-      full_allocs.each_with_index do |cost, i|
-        obj.set! MonthTypes.parse(i).key, cost.zero? ? "" : cost
-      end
-    end
+    h.render "assigns/row.json", assign: self, cols: full_allocs
   end
 
   def add_series(chart, name)

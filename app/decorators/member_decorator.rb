@@ -8,62 +8,40 @@ class MemberDecorator < Draper::Decorator
     [number, name, job_title.name].join.to_json
   end
 
-  def to_vue
-    Jbuilder.encode do |json|
-      json.id id
-      json.number number
-      json.name name
-      json.job_title_name job_title.try(:name)
-      json.group_name group.try(:name)
-    end
+  def job_title_name
+    job_title.try(:name) || ""
+  end
+
+  def group_name
+    group.try(:name) || ""
   end
 
   def link
     h.link_to name, h.member_allocs_path(id)
   end
 
+  def job_title_link
+    job_title&.link(group)
+  end
+
   def full_works
-    @full_works ||= Array.new(12,"").tap do |array|
-      works.each do |work|
-        if enum = MonthTypes.parse(work.month)
-          array[enum.value] = work.cost
-        end
-      end
-    end
+    MonthTypes.fill(works)
   end
 
   def full_allocs
-    @full_allocs ||= Array.new(12,"").tap do |array|
-      allocs.each do |alloc|
-        if enum = MonthTypes.parse(alloc.month)
-          array[enum.value] = array[enum.value].to_i + alloc.cost
-        end
-      end
-    end
+    MonthTypes.fill(allocs)
+  end
+
+  def label
+    h.render "members/assigns/label.json", member: self, cols: full_works
   end
 
   def works_row
-    HandsonTableBuilder.build do |obj|
-      obj.id id
-      obj.member_number number
-      obj.member_link link
-      obj.job_title_link job_title&.link(group)
-      MonthTypes.each do |enum|
-        obj.set! enum.key, full_works[enum.value]
-      end
-    end
+    h.render "members/row.json", member: self, cols: full_works
   end
 
   def allocs_row
-    HandsonTableBuilder.build do |obj|
-      obj.id id
-      obj.member_number number
-      obj.member_link link
-      obj.job_title_link job_title&.link(group)
-      MonthTypes.each do |enum|
-        obj.set! enum.key, full_allocs[enum.value]
-      end
-    end
+    h.render "members/row.json", member: self, cols: full_allocs
   end
 
   def chart_options
