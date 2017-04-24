@@ -1,8 +1,4 @@
-p = Json::MonthTypesPresenter.new(assign, json)
-
-assign.instance_eval do
-  json.id id
-  json.project_number project.number
-  json.project_link project.link
-  p.to_row(cols)
+json.array! assigns do |assign|
+  json.extract! assign, :id, :project_number, :project_link
+  json.merge! assign.allocs.pivot
 end

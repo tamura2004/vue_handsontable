@@ -40,8 +40,8 @@ class ProjectDecorator < Draper::Decorator
     end
   end
 
-  def hoge
-    return h.render "projects/hoge", object: object
-  end
+  # def hoge
+  #   return h.render "projects/hoge", object: object
+  # end
 
 end

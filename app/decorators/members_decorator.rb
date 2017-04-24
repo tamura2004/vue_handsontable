@@ -25,22 +25,11 @@ class MembersDecorator < Draper::CollectionDecorator
   end
 
   def works_rows
-    h.render "/members/works/rows.json", members: self
-    # h.render partial: ""
-    # Jbuilder.encode do |json|
-    #   json.array! map{ |member|
-    #     member.works_row
-    #   }
-    # end
+    h.render "/members/works/row.json", members: self
   end
 
   def allocs_rows
-    h.render partial: "/members/row.json", collection: self, as: :member, locals: { coltype: :full_allocs }
-    # Jbuilder.encode do |json|
-    #   json.array! map { |member|
-    #     member.allocs_row
-    #   }
-    # end
+    h.render "/members/allocs/row.json", members: self
   end
 
 end

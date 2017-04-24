@@ -23,11 +23,7 @@ class ProjectsMembersDecorator < Draper::CollectionDecorator
   end
 
   def allocs_rows
-    Jbuilder.encode do |json|
-      json.array! map { |assign|
-        assign.allocs_row
-      }
-    end
+    h.render "/assigns/row.json", assigns: self
   end
 
 end

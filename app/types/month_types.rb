@@ -28,17 +28,21 @@ class MonthTypes < Inum::Base
     end
   end
 
-  def self.pivot(cols: [], key: :month, value: :cost)
-    Array.new(12,0).tap do |array|
+  def self.costs(cols: [])
+    Array.new(12, 0).tap do |array|
       cols.each do |col|
-        if enum = parse(col.send(key))
-          array[enum.value] += col.send(value)
+        if enum = parse(col.month)
+          array[enum.value] += col.cost
         end
       end
       array.map! do |value|
-        value.zero? ? "" : value.round(2)
+        value.zero? ? "" : value
       end
     end
+  end
+
+  def self.pivot(cols: [])
+    Hash[keys.zip(costs(cols: cols))]
   end
 
   def self.add_series(chart, at, label, cost)
@@ -52,19 +56,5 @@ class MonthTypes < Inum::Base
       end
     end
   end
-
-  # def self.fill(cols)
-  #   Array.new(12,0).tap do |array|
-  #     cols.each do |col|
-  #       if enum = parse(col.month)
-  #         array[enum.value] += col.cost
-  #       end
-  #     end
-  #   end
-  # end
-
-  # def to_pair(cols)
-  #   [key, cols[value].zero? ? "" : cols[value]]
-  # end
 
 end

@@ -3,6 +3,20 @@ class MemberDecorator < Draper::Decorator
   decorates_association :job_title
   decorates_association :projects
   decorates_association :assigns
+  decorates_association :allocs
+  decorates_association :works
+
+  def member_number
+    number
+  end
+
+  def member_name
+    name
+  end
+
+  def member_link
+    link
+  end
 
   def text_for_search
     [number, name, job_title.name].join.to_json
@@ -25,23 +39,15 @@ class MemberDecorator < Draper::Decorator
   end
 
   def full_works
-    MonthTypes.pivot(cols: works, key: :month, value: :cost)
+    MonthTypes.pivot(cols: works)
   end
 
   def full_allocs
-    MonthTypes.pivot(cols: allocs, key: :month, value: :cost)
+    MonthTypes.pivot(cols: allocs)
   end
 
   def label
-    h.render "members/assigns/label.json", member: self, cols: full_works
-  end
-
-  def works_row
-    JSON.parse h.render("members/row.json", member: self, cols: full_works)
-  end
-
-  def allocs_row
-    h.render "members/row.json", member: self, cols: full_allocs
+    h.render "members/assigns/label.json", member: self
   end
 
   def chart_options

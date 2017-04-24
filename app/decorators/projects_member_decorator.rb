@@ -2,14 +2,24 @@ class ProjectsMemberDecorator < Draper::Decorator
   delegate_all
   decorates_association :project
   decorates_association :member
+  decorates_association :allocs
 
   def full_allocs
-    MonthTypes.pivot(cols: allocs, key: :month, value: :cost)
+    MonthTypes.costs(cols: allocs)
   end
 
-  def allocs_row
-    h.render "assigns/row.json", assign: self, cols: full_allocs
+  def project_number
+    project.try(:number)
   end
+
+  def project_link
+    project.try(:link)
+  end
+
+
+  # def allocs_row
+  #   h.render "assigns/row.json", assign: self, cols: full_allocs
+  # end
 
   def add_series(chart, name)
     chart.add_series(:stackedArea) do |series|
