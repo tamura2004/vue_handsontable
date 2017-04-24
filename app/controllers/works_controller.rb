@@ -10,7 +10,7 @@ class WorksController < ApplicationController
       .includes(:group)
       .includes(:job_title)
       .order(:job_title_id, :number)
-      .decorate
+      .decorate        
   end
 
   # PATCH/PUT /works/1.json

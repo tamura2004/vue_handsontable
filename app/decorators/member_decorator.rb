@@ -25,11 +25,11 @@ class MemberDecorator < Draper::Decorator
   end
 
   def full_works
-    MonthTypes.fill(works)
+    MonthTypes.pivot(cols: works, key: :month, value: :cost)
   end
 
   def full_allocs
-    MonthTypes.fill(allocs)
+    MonthTypes.pivot(cols: allocs, key: :month, value: :cost)
   end
 
   def label
@@ -37,7 +37,7 @@ class MemberDecorator < Draper::Decorator
   end
 
   def works_row
-    h.render "members/row.json", member: self, cols: full_works
+    JSON.parse h.render("members/row.json", member: self, cols: full_works)
   end
 
   def allocs_row

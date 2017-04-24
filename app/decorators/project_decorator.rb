@@ -14,7 +14,7 @@ class ProjectDecorator < Draper::Decorator
   end
 
   def full_allocs
-    MonthTypes.fill(allocs)
+    MonthTypes.pivot(cols: allocs, key: :month, value: :cost)
   end
 
   def total_allocs
