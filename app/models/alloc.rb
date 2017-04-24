@@ -24,31 +24,31 @@
 #
 
 
-class Alloc < ApplicationRecord
-  include Pivot
+# class Alloc < ApplicationRecord
+  # include Pivot
 
-  rails_admin do
-    visible false
-  end
+  # rails_admin do
+  #   visible false
+  # end
 
-  scope :recent, -> {
-    where("month > ?", "201703")
-  }
+  # scope :recent, -> {
+  #   where("month > ?", "201703")
+  # }
 
-  scope :project_subtotal, -> {
-    recent
-    .group(:project_id)
-    .group(:month)
-    .order(:project_id)
-    .order(:month)
-    .sum(:cost)
-  }
+  # scope :project_subtotal, -> {
+  #   recent
+  #   .group(:project_id)
+  #   .group(:month)
+  #   .order(:project_id)
+  #   .order(:month)
+  #   .sum(:cost)
+  # }
 
-  scope :project_total, -> {
-    recent
-    .group(:project_id)
-    .order("sum(cost) desc")
-    .sum(:cost)
-  }
+  # scope :project_total, -> {
+  #   recent
+  #   .group(:project_id)
+  #   .order("sum(cost) desc")
+  #   .sum(:cost)
+  # }
 
-end
+# end
