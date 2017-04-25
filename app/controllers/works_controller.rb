@@ -5,12 +5,7 @@ class WorksController < ApplicationController
   # GET /works
   def index
     @groups = Group.all
-    @members = Member.where(group_id: @group)
-      .includes(:works)
-      .includes(:group)
-      .includes(:job_title)
-      .order(:job_title_id, :number)
-      .decorate        
+    @members = Member.where(group_id: @group).with_works.decorate
   end
 
   # PATCH/PUT /works/1.json

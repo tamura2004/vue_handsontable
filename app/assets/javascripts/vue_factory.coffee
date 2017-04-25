@@ -32,7 +32,10 @@ class VueTable
         row.total = 0
         for k,v of row
           if k.match(/20\d\d\d\d/) and typeof(v) is "number"
-            row.total += v
+            if v is 0
+              row[k] = ""
+            else
+              row.total += v
 
       # 列合計
       total = {}

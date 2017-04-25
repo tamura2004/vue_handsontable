@@ -21,31 +21,10 @@ workbook.add_worksheet(name: sheet_name, page_setup: set_print) do |sheet|
   sheet.column_widths *widths
   sheet.add_row headers, style: header
 
-  @members.each do |member, assigns|
+  @assigns.group_by(&:member).each do |member, assigns|
     first_line = true
 
     assigns.each do |assign|
-      keys = [
-        "group_name",
-        "member_number",
-        "member_name",
-        "job_title_name",
-        "project_number",
-        "project_name",
-        "201704",
-        "201705",
-        "201706",
-        "201707",
-        "201708",
-        "201709",
-        "201710",
-        "201711",
-        "201712",
-        "201801",
-        "201802",
-        "201803"
-      ]
-
       styles = []
       if first_line
         styles = [default] * 18
@@ -56,7 +35,12 @@ workbook.add_worksheet(name: sheet_name, page_setup: set_print) do |sheet|
         styles = [white] * 5 + [default] * 13
       end
 
-      sheet.add_row assign.attributes.values_at(*keys), style: styles
+      row = Jbuilder.new do |obj|
+        obj.extract! assign, :group_name, :member_number, :member_name, :job_title_name, :project_number, :project_name
+        obj.merge! assign.allocs.pivot
+      end.attributes!
+
+      sheet.add_row row.values, style: styles
     end
   end
 end

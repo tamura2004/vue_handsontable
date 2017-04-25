@@ -1,28 +1,21 @@
-/ pre
-/   code
-/     = JSON.pretty_generate(@members)
-
-
 = link_to "一覧表（EXCEL）", assigns_member_report_path(format: "xlsx"), class: "btn btn-primary"
 
-- @members.each do |member, assigns|
-  incrementalsearch :text=member.to_json
+- @assigns.sort_by{|a|a.member.number}.group_by(&:member).each do |member,assigns|
+  incrementalsearch :text=member.text_for_search
     hr
-    h5 = member
-    table.table.table-condensed
+    h5 = link_to member.full_name, member_allocs_path(member.id)
+    table.table.table-condensed style="table-layout:fixed;"
       thead
         tr
-          th グループ名
-          th 案件管理番号
-          th 案件名
+          th style="width: 100px;" 案件番号
+          th style="width: 150px;" 案件名
           - MonthTypes.each do |enum|
             th = enum.t
-
       tbody
         - assigns.each do |assign|
+          - project = assign.project
           tr
-            td = assign.group_name
-            td = assign.project_number
-            td = assign.project_name
-            - MonthTypes.each do |enum|
-              td = assign[enum.key]
+            td = project.number
+            td = link_to project.name, project_allocs_path(project.id)
+            - assign.allocs.pivot.values.each do |cost|
+              td = cost

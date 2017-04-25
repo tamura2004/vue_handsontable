@@ -16,6 +16,29 @@ class ProjectsMemberDecorator < Draper::Decorator
     project.try(:link)
   end
 
+  def group_name
+    member.try(:group).try(:name)
+  end
+
+  def member_number
+    member.try(:number)
+  end
+
+  def member_name
+    member.try(:name)
+  end
+
+  def job_title_name
+    member.try(:job_title).try(:name)
+  end
+
+  def project_number
+    project.try(:number)
+  end
+
+  def project_name
+    project.try(:name)
+  end
 
   # def allocs_row
   #   h.render "assigns/row.json", assign: self, cols: full_allocs

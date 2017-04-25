@@ -30,4 +30,11 @@ class Member < ApplicationRecord
     where(group: project.group_id)
   }
 
+  scope :with_works, -> {
+    eager_load(:works)
+    .eager_load(:group)
+    .eager_load(:job_title)
+    .order(:job_title_id, :number)
+  }
+
 end

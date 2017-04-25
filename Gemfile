@@ -72,3 +72,4 @@ gem "inum_types", git: "https://github.com/tamura2004/inum_types.git"
 
 gem "lodash-rails"
 gem "bullet"
+gem "rack-mini-profiler"

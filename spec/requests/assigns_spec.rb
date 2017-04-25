@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "Assign", type: :request do
   before { create :group, { id: 1 } }
-  before { create :assign }
+  before { create :alloc }
 
   describe "GET /assigns/member_report" do
     it{should == 200}

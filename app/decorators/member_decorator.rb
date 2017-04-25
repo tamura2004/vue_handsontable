@@ -19,7 +19,11 @@ class MemberDecorator < Draper::Decorator
   end
 
   def text_for_search
-    [number, name, job_title.name].join.to_json
+    full_name.to_json
+  end
+
+  def full_name
+    [number, name].join(" ")
   end
 
   def job_title_name

@@ -4,7 +4,7 @@ class Plans::AfterSaveCallback
     if project = Project.find_by(number: plan.project_number)
       # 名称が類似している場合一致させる
       distance = Levenshtein.normalized_distance(project.name, plan.project_name)
-      if 0.3 < distance
+      if distance < 0.3 && 0 < distance
         project.update(name: plan.project_name)
       end
 

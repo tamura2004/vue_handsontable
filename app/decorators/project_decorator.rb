@@ -13,17 +13,17 @@ class ProjectDecorator < Draper::Decorator
     h.link_to name, h.project_allocs_path(id)
   end
 
-  def full_allocs
-    MonthTypes.pivot(cols: allocs, key: :month, value: :cost)
-  end
+  # def full_allocs
+  #   MonthTypes.pivot(cols: allocs, key: :month, value: :cost)
+  # end
 
-  def total_allocs
-    allocs.sum(:cost)
-  end
+  # def total_allocs
+  #   allocs.sum(:cost)
+  # end
 
-  def allocs_row
-    h.render "projects/row.json", project: self, cols: full_allocs
-  end
+  # def allocs_row
+  #   h.render "projects/row.json", project: self, cols: full_allocs
+  # end
 
   def add_series(chart, name)
     chart.add_series(:stackedArea) do |series|
