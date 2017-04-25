@@ -28,15 +28,17 @@ class MonthTypes < Inum::Base
     end
   end
 
-  def self.costs(cols: [])
+  def self.costs(cols: [], zero_to_blank: false)
     Array.new(12, 0).tap do |array|
       cols.each do |col|
         if enum = parse(col.month)
           array[enum.value] += col.cost
         end
       end
-      array.map! do |value|
-        value.zero? ? "" : value
+      if zero_to_blank
+        array.map! do |value|
+          value.zero? ? "" : value
+        end
       end
     end
   end

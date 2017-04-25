@@ -10,10 +10,10 @@
           - MonthTypes.each do |enum|
             th = enum.t
       tbody
-        - assigns.group_by(&:member).each do |member,assigns|
-          - assigns.each do |assign|
-            tr
-              td = member.number
-              td = link_to member.name, member_allocs_path(member.id)
-              - assign.full_allocs.each do |cost|
-                td = cost
+        - assigns.each do |assign|
+          - member = assign.member
+          tr
+            td = member.number
+            td = link_to member.name, member_allocs_path(member.id)
+            - assign.allocs.pivot.values.each do |cost|
+              td = cost
