@@ -1,6 +1,8 @@
 class ProjectDecorator < Draper::Decorator
   delegate_all
-
+  decorates_association :assigns
+  decorates_association :allocs
+  
   def text_for_search
     [number, name].join.to_json
   end
@@ -11,6 +13,18 @@ class ProjectDecorator < Draper::Decorator
 
   def link
     h.link_to name, h.project_allocs_path(id)
+  end
+
+  def project_number
+    number
+  end
+
+  def project_name
+    name
+  end
+
+  def project_link
+    link
   end
 
   # def full_allocs

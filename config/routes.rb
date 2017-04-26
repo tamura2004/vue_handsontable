@@ -1,11 +1,17 @@
 # == Route Map
 #
 #                         Prefix Verb   URI Pattern                                                    Controller#Action
+#                    rails_admin        /admin                                                         RailsAdmin::Engine
+#                      plans_new GET    /plans/new(.:format)                                           plans#new
+#                          plans GET    /plans(.:format)                                               plans#index
+#                                POST   /plans(.:format)                                               plans#create
+#                  plans_compare GET    /plans/compare(.:format)                                       plans#compare
 #          assigns_member_report GET    /assigns/member_report(.:format)                               assigns#member_report
+#        assigns_projects_report GET    /assigns/projects_report(.:format)                             assigns#projects_report
 #                  assigns_chart GET    /assigns/chart(.:format)                                       assigns#chart
 #           assigns_member_chart GET    /assigns/member_chart(.:format)                                assigns#member_chart
 #          assigns_project_chart GET    /assigns/project_chart(.:format)                               assigns#project_chart
-#                           root GET    /                                                              costs#index {:group_id=>1}
+#                           root GET    /                                                              assigns#projects_report
 #                    departments GET    /departments(.:format)                                         departments#index
 #                                POST   /departments(.:format)                                         departments#create
 #                     department GET    /departments/:id(.:format)                                     departments#show
@@ -78,6 +84,18 @@
 #                                PATCH  /projects/:id(.:format)                                        projects#update
 #                                PUT    /projects/:id(.:format)                                        projects#update
 #                                DELETE /projects/:id(.:format)                                        projects#destroy
+#
+# Routes for RailsAdmin::Engine:
+#   dashboard GET         /                                      rails_admin/main#dashboard
+#       index GET|POST    /:model_name(.:format)                 rails_admin/main#index
+#         new GET|POST    /:model_name/new(.:format)             rails_admin/main#new
+#      export GET|POST    /:model_name/export(.:format)          rails_admin/main#export
+# bulk_delete POST|DELETE /:model_name/bulk_delete(.:format)     rails_admin/main#bulk_delete
+# bulk_action POST        /:model_name/bulk_action(.:format)     rails_admin/main#bulk_action
+#        show GET         /:model_name/:id(.:format)             rails_admin/main#show
+#        edit GET|PUT     /:model_name/:id/edit(.:format)        rails_admin/main#edit
+#      delete GET|DELETE  /:model_name/:id/delete(.:format)      rails_admin/main#delete
+# show_in_app GET         /:model_name/:id/show_in_app(.:format) rails_admin/main#show_in_app
 #
 
 # No route matches [PUT] "/projects/27/assignment/1"

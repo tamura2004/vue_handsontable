@@ -13,8 +13,6 @@
 #
 
 class Project < ApplicationRecord
-  include Pivot
-
   belongs_to :group, optional: true
   has_many :costs, class_name: "ProjectsMonthlyAllocation", dependent: :destroy
   has_many :projects_members, dependent: :destroy
@@ -31,6 +29,14 @@ class Project < ApplicationRecord
 
   scope :same_group, -> member {
     where(group: member.group_id)
+  }
+
+  scope :with_allocs, -> {
+    eager_load(:members)
+    .eager_load(:group)
+    .eager_load(:assigns)
+    .eager_load(:allocs)
+    .order(:number)
   }
 
 end

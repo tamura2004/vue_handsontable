@@ -37,4 +37,3 @@ module AllocModule
       params.permit(*MonthTypes.keys.map(&:to_sym))
     end
 end
-

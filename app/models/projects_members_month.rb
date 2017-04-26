@@ -11,8 +11,6 @@
 #
 
 class ProjectsMembersMonth < ApplicationRecord
-  include Pivot
-
   rails_admin do
     visible false
   end
@@ -71,7 +69,6 @@ class ProjectsMembersMonth < ApplicationRecord
     .group(:month)
     .sum(:cost)
     .group_by{|k,_|[k[1],k[2]]}
-
   }
 
 end

@@ -10,8 +10,6 @@
 #
 
 class ProjectsMember < ApplicationRecord
-  include Pivot
-
   rails_admin do
     visible false
   end
@@ -19,6 +17,7 @@ class ProjectsMember < ApplicationRecord
   belongs_to :project
   belongs_to :member
   has_one :job_title, through: :member
+  has_one :group, through: :member
 
   has_many :projects_members_months, dependent: :destroy
   has_many :allocations, class_name: "ProjectsMembersMonth"
@@ -36,7 +35,7 @@ class ProjectsMember < ApplicationRecord
     .eager_load(:project)
     .eager_load(:member)
     .eager_load(:job_title)
-    .includes(:job_title)
+    .eager_load(:group)
     .where("projects_members_months.month > ?","201703")
   }
 

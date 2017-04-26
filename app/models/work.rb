@@ -11,8 +11,6 @@
 #
 
 class Work < ApplicationRecord
-  include Pivot
-
   rails_admin do
     visible false
   end

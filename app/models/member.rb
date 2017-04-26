@@ -12,12 +12,9 @@
 #
 
 class Member < ApplicationRecord
-  include Pivot
-
   belongs_to :group, optional: true
   belongs_to :job_title, optional: true
 
-  # has_many :projects_members
   has_many :works, dependent: :destroy
   has_many :assigns, class_name: "ProjectsMember"
   has_many :projects_members, dependent: :destroy
@@ -36,5 +33,15 @@ class Member < ApplicationRecord
     .eager_load(:job_title)
     .order(:job_title_id, :number)
   }
+
+  scope :with_allocs, -> {
+    eager_load(:assigns)
+    .eager_load(:allocs)
+    .eager_load(:projects)
+    .eager_load(:group)
+    .eager_load(:job_title)
+    .order(:job_title_id, :number)
+  }
+
 
 end

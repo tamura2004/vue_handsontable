@@ -1,6 +1,6 @@
 VueChart :options=@member.chart_options.to_json width="100%" height="480px" uuid=SecureRandom.uuid
 
-htbl ctl="allocs" :rows=@assigns.allocs_rows :opts=@assigns.htbl_options
+htbl ctl="allocs" :rows=@members.allocs_rows :opts=@members.htbl_options
 hr
 
 = link_to "案件アサイン", member_assigns_path(@member), class: "btn btn-primary"

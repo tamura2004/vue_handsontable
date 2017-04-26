@@ -5,18 +5,12 @@ class Members::AllocsController < ApplicationController
   before_action :set_assign, only: [:update]
 
   def index
-    @assigns = ProjectsMember.where(member_id: @member)
-      .eager_load(:project)
-      .eager_load(:allocs)
-      .order("projects.number")
-      .decorate
-
-    @member = @member.decorate
+    @members = Project.with_allocs.merge(Member.where(id: @member)).decorate
   end
 
   private
     def set_member
-      @member = Member.find(params[:member_id])
+      @member = Member.find(params[:member_id]).decorate
     end
 
 end

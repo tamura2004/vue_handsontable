@@ -1,3 +1,5 @@
+h3 = @project.full_name
+
 - if @plan
   table.table
     thead
@@ -34,10 +36,10 @@
         td = @plan.t12
 
 
-htbl ctl="costs" :rows=@header.rows :opts=@header.opts :total="false"
-hr
+/ htbl ctl="costs" :rows=@header.rows :opts=@header.opts :total="false"
+/ hr
 
-htbl ctl="allocs" :rows=@assigns.rows :opts=@assigns.opts
+htbl ctl="allocs" :rows=@members.allocs_rows :opts=@members.htbl_options
 hr
 
 = link_to "要員アサイン", project_assigns_path(@project), class: "btn btn-primary"

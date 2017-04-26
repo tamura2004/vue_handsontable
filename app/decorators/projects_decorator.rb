@@ -23,12 +23,7 @@ class ProjectsDecorator < Draper::CollectionDecorator
   end
 
   def allocs_rows
-    h.render partial: "projects/allocs/row.json", collection: self, as: :project
-    # Jbuilder.encode do |json|
-    #   json.array! map { |project|
-    #     project.allocs_row
-    #   }
-    # end
+    h.render "projects/allocs/row.json", projects: self
   end
 
 end

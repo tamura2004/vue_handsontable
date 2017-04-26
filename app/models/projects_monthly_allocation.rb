@@ -11,8 +11,6 @@
 #
 
 class ProjectsMonthlyAllocation < ApplicationRecord
-  include Pivot
-
   rails_admin do
     visible false
   end

@@ -15,10 +15,7 @@ class Groups::JobTitles::AssignsController < ApplicationController
 
     @projects = Project.where(group_id: @group)
       .merge(Member.where job_title_id: @job_title)
-      .joins(:members)
-      .includes(:assigns)
-      .includes(:allocs)
-      .order(:number)
+      .with_allocs
       .decorate
 
   end
