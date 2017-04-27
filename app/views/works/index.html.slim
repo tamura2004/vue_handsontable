@@ -4,8 +4,3 @@ grouptab :groups=@groups.to_json :current=@group.to_json path="works"
 
 htbl ctl="works" :rows=@members.works_rows :opts=@htbl_options
 
-pre
-  code
-    = JSON.pretty_generate(JSON.parse @htbl_options)
-    = @members.works_rows
-

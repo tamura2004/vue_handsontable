@@ -25,7 +25,7 @@ class VueTable
       # フィルタ
       rows = @rows.filter (r) =>
         (v for k,v of r).some (v) =>
-          typeof(v) is "string" and v.indexOf(@$parent.query) isnt -1
+          typeof(v) is "string" and v.indexOf(@$root.query) isnt -1
 
       # 行合計
       for row in rows
@@ -59,6 +59,8 @@ class VueTable
   ready: ->
     @resource = new Resource @ctl if @ctl?
     @hot = new Handsontable @$el,@opts
+    console.log "==================================="
+    console.dir @records
     @hot.loadData @records
     @hot.addHook "afterChange", @onChange
     @hot.addHook "beforeRemoveRow", @onDelete

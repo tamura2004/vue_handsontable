@@ -1,12 +1,13 @@
 class HtblBuilder < Jbuilder
 
-  def column!(data: nil, renderer: nil, type: nil, format: nil)
+  def column!(data: nil, renderer: nil, type: nil, format: nil, width: nil)
     ignore_nil!
     child! do
       set! :data, data
       set! :renderer, renderer
       set! :type, type
       set! :format, format
+      set! :width, width
     end
   end
 
