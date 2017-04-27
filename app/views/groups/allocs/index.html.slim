@@ -2,4 +2,4 @@ h1 メンバー別アサイン状況
 
 grouptab :groups=@groups.to_json :current=@group.to_json path="allocs"
 
-htbl :rows=@members.allocs_rows :opts=@members.htbl_options
+htbl :rows=Htbl::MembersBuilder.allocs(@members) :opts=@opts

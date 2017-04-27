@@ -39,7 +39,7 @@ h3 = @project.full_name
 / htbl ctl="costs" :rows=@header.rows :opts=@header.opts :total="false"
 / hr
 
-htbl ctl="allocs" :rows=@members.allocs_rows :opts=@members.htbl_options
+htbl ctl="allocs" :rows=@members.allocs_rows :opts=@members_htbl_options
 hr
 
 = link_to "要員アサイン", project_assigns_path(@project), class: "btn btn-primary"

@@ -22,19 +22,23 @@ class ProjectsMembersDecorator < Draper::CollectionDecorator
     end
   end
 
-  def members
-    MembersDecorator.new(map(&:member))
-  end
+  # def members
+  #   MembersDecorator.new(map(&:member))
+  # end
 
-  def projects
-    ProjectsDecorator.new(map(&:project))
-  end
+  # def projects
+  #   ProjectsDecorator.new(map(&:project))
+  # end
 
   # def allocs_rows
   #   h.render "/assigns/row.json", assigns: self
   # end
 
-  # def members_allocs_rows
-  #   h.render "/assigns/members/row.json", assigns: self
-  # end
+  def members_allocs_rows
+    h.render "/assigns/members/row.json", assigns: self
+  end
+
+  def projects_allocs_rows
+    h.render "/assigns/projects/row.json", assigns: self
+  end
 end

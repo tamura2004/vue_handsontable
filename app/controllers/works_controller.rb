@@ -6,6 +6,7 @@ class WorksController < ApplicationController
   def index
     @groups = Group.all
     @members = Member.where(group_id: @group).with_works.decorate
+    @htbl_options = Htbl::MembersBuilder.htbl_options
   end
 
   # PATCH/PUT /works/1.json

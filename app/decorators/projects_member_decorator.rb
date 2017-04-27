@@ -28,8 +28,16 @@ class ProjectsMemberDecorator < Draper::Decorator
     member.try(:name)
   end
 
+  def member_link
+    member.try(:link)
+  end
+
   def job_title_name
     member.try(:job_title).try(:name)
+  end
+
+  def job_title_link
+    member.job_title.link(group)
   end
 
   def project_number
@@ -38,6 +46,14 @@ class ProjectsMemberDecorator < Draper::Decorator
 
   def project_name
     project.try(:name)
+  end
+
+  def member_allocs_pivot
+    member.allocs.pivot
+  end
+
+  def project_allocs_pivot
+    project.allocs.pivot
   end
 
   # def allocs_row

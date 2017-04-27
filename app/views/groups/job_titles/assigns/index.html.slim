@@ -4,12 +4,12 @@
     small = @group.name
 
 h5 要員
-htbl ctl="works" :rows=@members.works_rows :opts=@members.htbl_options
+htbl ctl="works" :rows=@members_works.works_rows :opts=@members_htbl_options
 hr
 
 h5 アサイン
-htbl :rows=@members.allocs_rows :opts=@members.htbl_options
+htbl :rows=@members_allocs.allocs_rows :opts=@members_htbl_options
 hr
 
 h5 案件
-htbl :rows=@projects.allocs_rows :opts=@projects.htbl_options
+htbl :rows=@projects.allocs_rows :opts=@projects_htbl_options

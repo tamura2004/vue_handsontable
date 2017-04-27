@@ -3,13 +3,10 @@ class Groups::AllocsController < ApplicationController
 
   def index
     @groups = Group.all
-    @members = Member.where(group_id: @group)
-      .includes(:group)
-      .includes(:job_title)
-      .includes(:assigns)
-      .includes(:allocs)
-      .order(:job_title_id, :number)
-      .decorate   
+    @members = Member.with_allocs
+      .where(group_id: @group)
+      .decorate
+    @opts = Htbl::MembersBuilder.htbl_options
   end
 
   private

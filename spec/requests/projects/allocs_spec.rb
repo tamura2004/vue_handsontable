@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe "Projects::Allocs", type: :request do
-  let(:alloc) { create :alloc }
+  let(:alloc) { create :alloc , month: "201704", cost: 200}
   let(:id) { alloc.assign.id }
   let(:project_id) { alloc.project.id }
 
