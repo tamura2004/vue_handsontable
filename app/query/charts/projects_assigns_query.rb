@@ -1,5 +1,6 @@
 Charts::ProjectsAssignsQuery = <<-SQL
   select
+    1 as id,
     projects.id as project_id,
     projects.number as project_number,
     projects.name as project_name,
