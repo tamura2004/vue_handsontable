@@ -65,7 +65,7 @@ class MemberDecorator < Draper::Decorator
   end
 
   def projects_circle_chart_options
-    total = Work.where(member_id: id).find_by(month: "201705").cost
+    total = Work.where(member_id: id).find_by(month: "201705")&.cost || 0
     ChartBuilder.build("") do |chart|
       chart.add_series(:circle) do |series|
         assigns.each do |assign|

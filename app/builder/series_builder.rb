@@ -31,7 +31,8 @@ class SeriesBuilder
       dataPoints: POINTS
     },
     circle: {
-      type: "doughnut",
+      type: "pie",
+      radius: "70%",
       startAngle: -90,
       indexLabelFontSize: 16,
       dataPoints: []
