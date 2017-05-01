@@ -48,4 +48,12 @@ class ProjectsMember < ApplicationRecord
     .where("projects_members_months.month > ?","201703")
   }
 
+  scope :with_all_allocs, -> {
+    eager_load(:allocs)
+    .eager_load(:project)
+    .eager_load(:member)
+    .eager_load(:job_title)
+    .eager_load(:group)
+  }
+
 end

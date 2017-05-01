@@ -69,9 +69,11 @@ class MemberDecorator < Draper::Decorator
     ChartBuilder.build("") do |chart|
       chart.add_series(:circle) do |series|
         assigns.each do |assign|
-          if cost = assign.allocs.first&.cost
-            series.set_pie(assign.project_name, cost)
-            total -= cost
+          assign.allocs.each do |alloc|
+            if alloc.month == "201705" && alloc.cost > 0
+              series.set_pie(assign.project_name, alloc.cost)
+              total -= alloc.cost
+            end
           end
         end
         if total > 0.1

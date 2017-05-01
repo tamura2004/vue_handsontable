@@ -5,7 +5,7 @@ class Members::AllocsController < ApplicationController
   before_action :set_assign, only: [:update]
 
   def index
-    @assigns = ProjectsMember.with_allocs.where(member_id: @member).decorate
+    @assigns = ProjectsMember.with_all_allocs.where(member_id: @member).decorate
   end
 
   private
