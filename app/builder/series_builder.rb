@@ -29,6 +29,12 @@ class SeriesBuilder
       markerSize:12,
       lineThickness: 4,
       dataPoints: POINTS
+    },
+    circle: {
+      type: "doughnut",
+      startAngle: -90,
+      indexLabelFontSize: 16,
+      dataPoints: []
     }
   }
 
@@ -45,6 +51,11 @@ class SeriesBuilder
         break
       end
     end
+  end
+
+  def set_pie(indexLabel, y, options={})
+    options.merge!({ indexLabel: indexLabel, y: y})
+    @series[:dataPoints] << options
   end
 
 end

@@ -56,10 +56,6 @@ class ProjectsMemberDecorator < Draper::Decorator
     project.allocs.pivot
   end
 
-  # def allocs_row
-  #   h.render "assigns/row.json", assign: self, cols: full_allocs
-  # end
-
   def add_series(chart, name)
     chart.add_series(:stackedArea) do |series|
       full_allocs.each_with_index do |cost, i|

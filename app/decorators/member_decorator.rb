@@ -64,4 +64,21 @@ class MemberDecorator < Draper::Decorator
     end
   end
 
+  def projects_circle_chart_options
+    total = Work.where(member_id: id).find_by(month: "201705").cost
+    ChartBuilder.build("") do |chart|
+      chart.add_series(:circle) do |series|
+        assigns.each do |assign|
+          if cost = assign.allocs.first&.cost
+            series.set_pie(assign.project_name, cost)
+            total -= cost
+          end
+        end
+        if total > 0.1
+          series.set_pie("未割り当て", total, indexLabelFontSize: 24, indexLabelFontColor: "red")
+        end
+      end
+    end
+  end
+
 end

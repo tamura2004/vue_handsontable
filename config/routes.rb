@@ -110,16 +110,22 @@ Rails.application.routes.draw do
   post "plans", to: "plans#create"
   get "plans/compare", to: "plans#compare"
 
-  get "assigns/member_report", to: "assigns#member_report"
-  get "assigns/projects_report", to: "assigns#projects_report"
-  get "assigns/chart", to: "assigns#chart"
-  get "assigns/member_chart", to: "assigns#member_chart"
-  get "assigns/project_chart", to: "assigns#project_chart"
+  get "assigns/member_report"
+  get "assigns/projects_report"
+  get "assigns/chart"
+  get "assigns/member_chart"
+  get "assigns/project_chart"
 
   root "assigns#projects_report"
 
-  resources :departments, except: [:new,:edit]
-  resources :job_titles, except: [:new,:edit]
+  namespace :members do
+    namespace :projects do
+      get "allocs/circle_chart"
+    end
+  end
+
+  # resources :departments, except: [:new,:edit]
+  # resources :job_titles, except: [:new,:edit]
 
   resources :results, only: [:index,:destroy] do
     collection do

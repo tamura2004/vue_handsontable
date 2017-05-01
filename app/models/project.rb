@@ -39,4 +39,9 @@ class Project < ApplicationRecord
     .order(:number)
   }
 
+  scope :recent, -> {
+    includes(:allocs)
+    .merge(ProjectsMembersMonth.where(month: MonthTypes.keys))
+  }
+
 end

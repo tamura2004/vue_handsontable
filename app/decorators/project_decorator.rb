@@ -27,18 +27,6 @@ class ProjectDecorator < Draper::Decorator
     link
   end
 
-  # def full_allocs
-  #   MonthTypes.pivot(cols: allocs, key: :month, value: :cost)
-  # end
-
-  # def total_allocs
-  #   allocs.sum(:cost)
-  # end
-
-  # def allocs_row
-  #   h.render "projects/row.json", project: self, cols: full_allocs
-  # end
-
   def add_series(chart, name)
     chart.add_series(:stackedArea) do |series|
       full_allocs.each_with_index do |cost, i|
@@ -54,8 +42,12 @@ class ProjectDecorator < Draper::Decorator
     end
   end
 
-  # def hoge
-  #   return h.render "projects/hoge", object: object
-  # end
+  def chart_options
+    ChartBuilder.build("FY2017案件アサイン計画：#{number} #{name}") do |chart|
+      [*assigns, nil].each_cons(2) do |assign, next_assign|
+        assign.add_series(chart, next_assign ? next_assign.member.name : "")
+      end
+    end
+  end
 
 end
