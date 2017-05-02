@@ -1,19 +1,26 @@
-- @assigns.sort_by{|a|a.project.number}.group_by(&:project).each do |project,assigns|
-  incrementalsearch :text=project.text_for_search
-    hr
-    h5 = link_to project.full_name, project_allocs_path(project.id)
-    table.table.table-condensed style="table-layout:fixed;"
-      thead
-        tr
-          th style="width: 100px;" 社員番号
-          th style="width: 150px;" 社員名
-          - MonthTypes.each do |enum|
-            th = enum.t
-      tbody
-        - assigns.each do |assign|
-          - member = assign.member
-          tr
-            td = member.number
-            td = link_to member.name, member_allocs_path(member.id)
-            - assign.allocs.pivot.values.each do |cost|
-              td = cost
+.container
+  - @assigns.sort_by{|a|a.project.number}.group_by(&:project).each do |project,assigns|
+    incrementalsearch :text=project.text_for_search
+      hr
+      h5 = link_to project.full_name, project_allocs_path(project.id)
+      table.table.table-condensed style="table-layout:fixed;"
+        thead
+          tr.active
+            th style="width: 100px;" 社員番号
+            th style="width: 150px;" 社員名
+            - MonthTypes.each do |enum|
+              th = enum.t
+        tbody
+          - assigns.each do |assign|
+            - member = assign.member
+            tr
+              td = member.number
+              td = link_to member.name, member_allocs_path(member.id)
+              - assign.allocs.pivot.values.each do |cost|
+                td = cost
+          tr.success
+            td 合計
+            td 合計
+            - project.allocs.pivot.values.each do |cost|
+              td = cost.round(2)
+

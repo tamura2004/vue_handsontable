@@ -1,21 +1,22 @@
-table.table.table-condensed
-  thead
-    tr
-      td 区分
-      td 案件管理番号
-      td 案件名
-      - MonthTypes.each do |enum|
-        td = enum.t
+.container
+  table.table.table-condensed
+    thead
+      tr
+        td 区分
+        td 案件管理番号
+        td 案件名
+        - MonthTypes.each do |enum|
+          td = enum.t
 
-  tbody
-    - @plans.each do |plan|
-      tr(v-show="#{ plan.filter }")
-        td = plan.category
-        - if plan.project_id
-          td = link_to plan.project_number, project_allocs_path(plan.project_id)
-        - else
-          td = plan.project_number
-        td = plan.project_name
-        - plan.costs.each do |cost|
-          td(class="#{ cost.color }") = cost.decimal
+    tbody
+      - @plans.each do |plan|
+        tr(v-show="#{ plan.filter }")
+          td = plan.category
+          - if plan.project_id
+            td = link_to plan.project_number, project_allocs_path(plan.project_id)
+          - else
+            td = plan.project_number
+          td = plan.project_name
+          - plan.costs.each do |cost|
+            td(class="#{ cost.color }") = cost.decimal
 
