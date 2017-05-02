@@ -1,5 +1,6 @@
 class ProjectsMemberDecorator < Draper::Decorator
   delegate_all
+
   decorates_association :project
   decorates_association :member
   decorates_association :allocs

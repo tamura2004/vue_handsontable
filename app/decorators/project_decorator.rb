@@ -27,21 +27,6 @@ class ProjectDecorator < Draper::Decorator
     link
   end
 
-  def add_series(chart, name)
-    chart.add_series(:stackedArea) do |series|
-      full_allocs.each_with_index do |cost, i|
-        month = MonthTypes.parse(i).key
-        series.set_point(month, cost) do |point|
-          if month == "201705"
-            point[:indexLabel] = name
-            point[:indexLabelPlacement] = "outside"
-            point[:indexLabelFontSize] = 12
-          end
-        end
-      end
-    end
-  end
-
   def chart_options
     ChartBuilder.build("FY2017案件アサイン計画：#{number} #{name}") do |chart|
       [*assigns, nil].each_cons(2) do |assign, next_assign|

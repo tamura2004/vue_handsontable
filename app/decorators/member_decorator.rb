@@ -54,6 +54,11 @@ class MemberDecorator < Draper::Decorator
     h.render "members/assigns/label.json", member: self
   end
 
+  def work_cost(month = nil)
+    month ||= Date.today.strftime("%Y%m")
+    works.find_by(month: month)&.cost || 0
+  end
+
   def chart_options
     ChartBuilder.build("FY2017案件アサイン計画：#{number} #{name}") do |chart|
       [*assigns, nil].each_cons(2) do |assign, next_assign|
@@ -65,7 +70,7 @@ class MemberDecorator < Draper::Decorator
   end
 
   def projects_circle_chart_options
-    total = works&.first&.cost || 0
+    total = work_cost
     ChartBuilder.build("") do |chart|
       chart.add_series(:circle) do |series|
         assigns.each do |assign|
