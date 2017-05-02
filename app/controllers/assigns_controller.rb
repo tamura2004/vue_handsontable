@@ -20,7 +20,7 @@ class AssignsController < ApplicationController
 
   def chart
     # 案件別要員割当
-    @assigns = Assign.project_chart.map(&:attributes).group_by{|a|a["project_name"]}
+    @assigns = Project.project_chart.map(&:attributes).group_by{|a|a["project_name"]}
 
     # 要員数
     @works =

@@ -43,5 +43,9 @@ class Project < ApplicationRecord
     includes(:allocs)
     .merge(ProjectsMembersMonth.where(month: MonthTypes.keys))
   }
+  
+  scope :project_chart, -> {
+    find_by_sql(Charts::ProjectsAssignsQuery)
+  }
 
 end
