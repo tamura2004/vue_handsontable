@@ -1,6 +1,6 @@
-VueChart :options=@member.chart_options.to_json width="100%" height="480px" uuid=SecureRandom.uuid
+VueChart :options=Chart::StackedAreaBuilder.build(@member).to_json width="100%" height="480px" uuid=SecureRandom.uuid
 
-htbl ctl="allocs" :rows=Htbl::ProjectsBuilder.allocs(@assigns) :opts=Htbl::ProjectsBuilder.htbl_options
+htbl ctl="allocs" :rows=Htbl::ProjectsBuilder.allocs(@member.assigns) :opts=Htbl::ProjectsBuilder.htbl_options
 hr
 
 = link_to "案件アサイン", member_assigns_path(@member), class: "btn btn-primary"

@@ -1,4 +1,4 @@
-class Htbl::MembersBuilder < HtblBuilder
+class Htbl::MembersBuilder < Htbl::BaseBuilder
 
   HEADERS = [
     "職位",

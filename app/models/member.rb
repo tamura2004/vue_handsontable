@@ -15,13 +15,18 @@ class Member < ApplicationRecord
   belongs_to :group, optional: true
   belongs_to :job_title, optional: true
 
-  has_many :works, dependent: :destroy
-  has_many :assigns, class_name: "ProjectsMember"
-  has_many :projects_members, dependent: :destroy
-  has_many :projects, through: :projects_members
-  has_many :allocs, -> { where month: MonthTypes.keys }, through: :assigns
+  has_many :works, -> { recent }, dependent: :destroy
+  has_many :allocs, -> { recent }, through: :assigns
+  has_many :assigns
+  has_many :projects, through: :assigns
 
   attr_accessor :group_name, :job_title_name
+
+  scope :recent, -> {
+    distinct
+    .joins(:works)
+    .merge(Work.recent)
+  }
 
   scope :same_group, -> project {
     where(group: project.group_id)
@@ -48,7 +53,7 @@ class Member < ApplicationRecord
     .eager_load(:works)
     .where("works.month = ?", "201705")
     .joins(:allocs)
-    .where("projects_members_months.month = ?", "201705")
+    .where("allocs.month = ?", "201705")
   }
 
 end

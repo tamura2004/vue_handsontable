@@ -59,8 +59,6 @@ class VueTable
   ready: ->
     @resource = new Resource @ctl if @ctl?
     @hot = new Handsontable @$el,@opts
-    console.log "==================================="
-    console.dir @records
     @hot.loadData @records
     @hot.addHook "afterChange", @onChange
     @hot.addHook "beforeRemoveRow", @onDelete

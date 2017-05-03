@@ -29,26 +29,26 @@ Summary::Plans::UnionWithAllocationQuery = <<-SQL
     projects.number as project_number,
     projects.name as project_name,
 
-    sum(case when projects_members_months.month = '201704' then projects_members_months.cost else 0 end) as t1,
-    sum(case when projects_members_months.month = '201705' then projects_members_months.cost else 0 end) as t2,
-    sum(case when projects_members_months.month = '201706' then projects_members_months.cost else 0 end) as t3,
-    sum(case when projects_members_months.month = '201707' then projects_members_months.cost else 0 end) as t4,
-    sum(case when projects_members_months.month = '201708' then projects_members_months.cost else 0 end) as t5,
-    sum(case when projects_members_months.month = '201709' then projects_members_months.cost else 0 end) as t6,
-    sum(case when projects_members_months.month = '201710' then projects_members_months.cost else 0 end) as t7,
-    sum(case when projects_members_months.month = '201711' then projects_members_months.cost else 0 end) as t8,
-    sum(case when projects_members_months.month = '201712' then projects_members_months.cost else 0 end) as t9,
-    sum(case when projects_members_months.month = '201801' then projects_members_months.cost else 0 end) as t10,
-    sum(case when projects_members_months.month = '201802' then projects_members_months.cost else 0 end) as t11,
-    sum(case when projects_members_months.month = '201803' then projects_members_months.cost else 0 end) as t12
+    sum(case when allocs.month = '201704' then allocs.cost else 0 end) as t1,
+    sum(case when allocs.month = '201705' then allocs.cost else 0 end) as t2,
+    sum(case when allocs.month = '201706' then allocs.cost else 0 end) as t3,
+    sum(case when allocs.month = '201707' then allocs.cost else 0 end) as t4,
+    sum(case when allocs.month = '201708' then allocs.cost else 0 end) as t5,
+    sum(case when allocs.month = '201709' then allocs.cost else 0 end) as t6,
+    sum(case when allocs.month = '201710' then allocs.cost else 0 end) as t7,
+    sum(case when allocs.month = '201711' then allocs.cost else 0 end) as t8,
+    sum(case when allocs.month = '201712' then allocs.cost else 0 end) as t9,
+    sum(case when allocs.month = '201801' then allocs.cost else 0 end) as t10,
+    sum(case when allocs.month = '201802' then allocs.cost else 0 end) as t11,
+    sum(case when allocs.month = '201803' then allocs.cost else 0 end) as t12
 
-  from projects_members_months
-  left join projects_members
-    on projects_members_months.projects_member_id = projects_members.id
+  from allocs
+  left join assigns
+    on allocs.assign_id = assigns.id
   inner join projects
-    on projects_members.project_id = projects.id
+    on assigns.project_id = projects.id
 
-  where projects_members_months.month > '201703'
+  where allocs.month > '201703'
 
   group by
     category,

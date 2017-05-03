@@ -1,4 +1,4 @@
-class Htbl::ProjectsBuilder < HtblBuilder
+class Htbl::ProjectsBuilder < Htbl::BaseBuilder
 
   HEADERS = [
     "案件管理番号",

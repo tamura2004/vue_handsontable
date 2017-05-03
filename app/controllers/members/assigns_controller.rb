@@ -7,7 +7,7 @@ class Members::AssignsController < ApplicationController
   end
 
   def create
-    @assign = ProjectsMember.new(assign_params)
+    @assign = Assign.new(assign_params)
 
     if @assign.save
       render json: @assign, status: :ok
@@ -27,7 +27,7 @@ class Members::AssignsController < ApplicationController
     end
 
     def set_assign
-      @assign = ProjectsMember.find(params[:id])
+      @assign = Assign.find(params[:id])
     end
 
     def assign_params

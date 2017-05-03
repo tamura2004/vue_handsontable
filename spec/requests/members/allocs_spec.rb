@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe "Members::Assigns", type: :request do
   let(:alloc){create :alloc,month:"201704",cost:10}
   let(:id){alloc.assign.id}
-  let(:member_id){alloc.projects_member.member.id}
+  let(:member_id){alloc.assign.member.id}
 
   describe "GET /members/:member_id/allocs" do
     it{should == 200}

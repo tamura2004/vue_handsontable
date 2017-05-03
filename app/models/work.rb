@@ -19,7 +19,11 @@ class Work < ApplicationRecord
   has_one :group, through: :member
   has_one :job_title, through: :member
 
-  validates :cost,presence: true, numericality: {greater_than: 0}
+  validates :cost, presence: true, numericality: {greater_than: 0}
+
+  scope :recent, -> {
+    where(month: MonthTypes.keys)
+  }
 
   scope :member_chart, -> {
     joins(:member)
@@ -32,4 +36,5 @@ class Work < ApplicationRecord
     .sum(:cost)
     .group_by{|k,v|[k[0],k[1]]}
   }
+
 end

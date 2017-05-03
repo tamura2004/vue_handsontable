@@ -1,19 +1,17 @@
 # == Schema Information
 #
-# Table name: departments
+# Table name: projects_members
 #
 #  id         :integer          not null, primary key
-#  name       :string
+#  project_id :integer
+#  member_id  :integer
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
 
 FactoryGirl.define do
-  sequence :department_name do |n|
-    "第#{n}開発部"
-  end
-
-  factory :department do
-    name { generate :department_name }
+  factory :assign do
+    association :project
+    association :member
   end
 end

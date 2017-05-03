@@ -13,6 +13,7 @@ class Group < ApplicationRecord
   belongs_to :department, optional: true
   has_many :projects
   has_many :members
+
   attr_accessor :department_name
 
   before_save do

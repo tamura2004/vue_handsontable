@@ -59,19 +59,9 @@ class MemberDecorator < Draper::Decorator
     works.find_by(month: month)&.cost || 0
   end
 
-  def chart_options
-    ChartBuilder.build("FY2017案件アサイン計画：#{number} #{name}") do |chart|
-      [*assigns, nil].each_cons(2) do |assign, next_assign|
-        assign.add_series(chart, next_assign ? next_assign.project.name : "")
-      end
-      MonthTypes.add_series(chart, "201710", "残業含む", 1.2)
-      MonthTypes.add_series(chart, "201712", "残業なし", 1.0)
-    end
-  end
-
   def projects_circle_chart_options
     total = work_cost
-    ChartBuilder.build("") do |chart|
+    Chart::BaseBuilder.build("") do |chart|
       chart.add_series(:circle) do |series|
         assigns.each do |assign|
           assign.allocs.each do |alloc|

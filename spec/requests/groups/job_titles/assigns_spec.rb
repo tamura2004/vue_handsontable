@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe "Groups::JobTitles::Assigns", type: :request do
-  let(:alloc){create :projects_members_month}
+  let(:alloc){create :alloc}
   let(:group_id){alloc.member.group.id}
   let(:job_title_id){alloc.member.job_title.id}
 

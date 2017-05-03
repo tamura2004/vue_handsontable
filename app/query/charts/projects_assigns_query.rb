@@ -6,7 +6,7 @@ Charts::ProjectsAssignsQuery = <<-SQL
     projects.name as project_name,
     projects.total_cost as total_cost,
     base_month as month,
-    sum(assign.cost) as cost
+    sum(allocs.cost) as cost
 
   from (
     select
@@ -21,18 +21,18 @@ Charts::ProjectsAssignsQuery = <<-SQL
         projects.id as id,
         projects.number as number,
         projects.name as name,
-        sum(assign.cost) as total_cost
+        sum(allocs.cost) as total_cost
 
       from projects
 
-      left outer join projects_members as alloc
-        on projects.id = alloc.project_id
+      left outer join assigns
+        on projects.id = assigns.project_id
 
-      left outer join projects_members_months as assign
-        on assign.projects_member_id = alloc.id and assign.month > '201702'
+      left outer join allocs
+        on allocs.assign_id = assigns.id and allocs.month > '201702'
 
       group by projects.id, projects.number, projects.name
-      having sum(assign.cost) > 0
+      having sum(allocs.cost) > 0
     ) as projects
 
     cross join unnest(array[
@@ -53,11 +53,11 @@ Charts::ProjectsAssignsQuery = <<-SQL
     order by total_cost desc, number, base_month
   ) as projects
 
-  left outer join projects_members as alloc
-    on projects.id = alloc.project_id
+  left outer join assigns
+    on projects.id = assigns.project_id
 
-  left outer join projects_members_months as assign
-    on assign.projects_member_id = alloc.id and assign.month = base_month
+  left outer join allocs
+    on allocs.assign_id = assigns.id and allocs.month = base_month
 
   group by projects.id, projects.number, projects.name, total_cost, base_month
 

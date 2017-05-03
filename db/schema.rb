@@ -10,10 +10,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170502082110) do
+ActiveRecord::Schema.define(version: 20170502122850) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "allocs", force: :cascade do |t|
+    t.integer  "assign_id"
+    t.string   "month"
+    t.float    "cost"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["assign_id"], name: "index_allocs_on_assign_id", using: :btree
+    t.index ["month"], name: "index_allocs_on_month", using: :btree
+  end
+
+  create_table "assigns", force: :cascade do |t|
+    t.integer  "project_id"
+    t.integer  "member_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["member_id"], name: "index_assigns_on_member_id", using: :btree
+    t.index ["project_id"], name: "index_assigns_on_project_id", using: :btree
+  end
 
   create_table "departments", force: :cascade do |t|
     t.string   "name"
@@ -105,24 +124,6 @@ ActiveRecord::Schema.define(version: 20170502082110) do
     t.index ["group_id"], name: "index_projects_on_group_id", using: :btree
   end
 
-  create_table "projects_members", force: :cascade do |t|
-    t.integer  "project_id"
-    t.integer  "member_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["member_id"], name: "index_projects_members_on_member_id", using: :btree
-    t.index ["project_id"], name: "index_projects_members_on_project_id", using: :btree
-  end
-
-  create_table "projects_members_months", force: :cascade do |t|
-    t.integer  "projects_member_id"
-    t.string   "month"
-    t.float    "cost"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
-    t.index ["projects_member_id"], name: "index_projects_members_months_on_projects_member_id", using: :btree
-  end
-
   create_table "projects_monthly_allocations", force: :cascade do |t|
     t.integer  "project_id"
     t.string   "month"
@@ -162,13 +163,13 @@ ActiveRecord::Schema.define(version: 20170502082110) do
     t.index ["member_id"], name: "index_works_on_member_id", using: :btree
   end
 
+  add_foreign_key "allocs", "assigns"
+  add_foreign_key "assigns", "members"
+  add_foreign_key "assigns", "projects"
   add_foreign_key "groups", "departments"
   add_foreign_key "members", "groups"
   add_foreign_key "members", "job_titles"
   add_foreign_key "projects", "groups"
-  add_foreign_key "projects_members", "members"
-  add_foreign_key "projects_members", "projects"
-  add_foreign_key "projects_members_months", "projects_members"
   add_foreign_key "projects_monthly_allocations", "projects"
   add_foreign_key "works", "members"
 end

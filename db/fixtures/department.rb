@@ -58,13 +58,13 @@ Member.seed do |s|
   s.group_id = 1
 end
 
-ProjectsMember.seed do |s|
+Assign.seed do |s|
   s.id = 1
   s.member_id = 1
   s.project_id = 1
 end
 
-ProjectsMembersMonth.seed do |s|
+Alloc.seed do |s|
   s.projects_member_id = 1
   s.month = "201608"
   s.cost = 1.2

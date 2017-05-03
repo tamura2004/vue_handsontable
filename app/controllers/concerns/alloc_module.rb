@@ -4,7 +4,7 @@ module AllocModule
   def update
     month = alloc_params.keys.try(:first)
     cost = alloc_params.values.try(:first)
-    @alloc = ProjectsMembersMonth.find_by(projects_member: @assign, month: month)
+    @alloc = Alloc.find_by(assign: @assign, month: month)
 
     if @alloc
       if cost.to_f > 0
@@ -19,7 +19,7 @@ module AllocModule
       end
 
     else
-      @alloc = ProjectsMembersMonth.new(projects_member: @assign, month: month, cost: cost)
+      @alloc = Alloc.new(assign: @assign, month: month, cost: cost)
       if @alloc.save
         render json: @alloc, status: :ok
       else
@@ -30,7 +30,7 @@ module AllocModule
 
   private
     def set_assign
-      @assign = ProjectsMember.find(params[:id])
+      @assign = Assign.find(params[:id])
     end
 
     def alloc_params
