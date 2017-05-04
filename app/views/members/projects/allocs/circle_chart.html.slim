@@ -8,4 +8,9 @@ h1 2017年5月の要員別アサイン状況
           incrementalsearch :text=member[:link_label].to_json
             hr
             = link_to member.full_name, member_allocs_path(member.id), style: "font-size: 24px;"
-            VueChart :options=member.projects_circle_chart_options.to_json width="100%" height="360px" uuid=SecureRandom.uuid
+            VueChart {
+              width="100%"
+              height="360px"
+              uuid=SecureRandom.uuid
+              :options=Chart::MemberAllocsPieDirector.build(member).to_json
+            }

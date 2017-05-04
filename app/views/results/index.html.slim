@@ -7,4 +7,8 @@ hr
   = submit_tag "登録"
 hr
 
-htbl :rows=@records.to_json :opts=@options.to_json
+htbl {
+  :rows=@records.to_json
+  :opts=@options.to_json
+}
+

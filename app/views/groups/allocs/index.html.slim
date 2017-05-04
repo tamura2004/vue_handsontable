@@ -1,5 +1,13 @@
 h1 メンバー別アサイン状況
 
-grouptab :groups=@groups.to_json :current=@group.to_json path="allocs"
+grouptab {
+  :groups=@groups.to_json
+  :current=@group.to_json
+  path="allocs"
+}
 
-htbl :rows=Htbl::MembersBuilder.allocs(@members) :opts=@opts
+htbl {
+  :rows=Htbl::MembersBuilder.allocs(@members)
+  :opts=Htbl::MembersBuilder.htbl_options
+}
+

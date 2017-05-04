@@ -24,7 +24,7 @@ class Htbl::ProjectsBuilder < Htbl::BaseBuilder
     encode do |json|
       json.array! assigns do |assign|
         json.extract! assign, :id, :project_number, :project_link
-        json.merge! assign.allocs.pivot
+        json.merge! ::MonthTypes.pivot(cols: assign.allocs)
       end
     end
   end

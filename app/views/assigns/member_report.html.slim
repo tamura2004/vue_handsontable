@@ -5,20 +5,8 @@
     hr
     h5 = link_to member.full_name, member_allocs_path(member.id)
 
-    htbl  ctl="allocs" :rows=Htbl::ProjectsBuilder.allocs(assigns) :opts=Htbl::ProjectsBuilder.htbl_options
-
-    / table.table.table-condensed style="table-layout:fixed;"
-    /   thead
-    /     tr
-    /       th style="width: 100px;" 案件番号
-    /       th style="width: 150px;" 案件名
-    /       - MonthTypes.each do |enum|
-    /         th = enum.t
-    /   tbody
-    /     - assigns.each do |assign|
-    /       - project = assign.project
-    /       tr
-    /         td = project.number
-    /         td = link_to project.name, project_allocs_path(project.id)
-    /         - assign.allocs.pivot.values.each do |cost|
-    /           td = cost
+    htbl  {
+      ctl="allocs"
+      :rows=Htbl::ProjectsBuilder.allocs(assigns)
+      :opts=Htbl::ProjectsBuilder.htbl_options
+    }

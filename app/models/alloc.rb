@@ -55,15 +55,4 @@ class Alloc < ApplicationRecord
     .group_by{|k,v|[k[0],k[1],k[2]]}
   }
 
-  scope :members_projects_chart, -> {
-    joins(:member)
-    .joins(:project)
-    .group("members.id")
-    .group("projects.number")
-    .group("projects.name")
-    .group(:month)
-    .sum(:cost)
-    .group_by{|k,_|[k[1],k[2]]}
-  }
-
 end

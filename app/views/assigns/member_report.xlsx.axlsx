@@ -37,7 +37,7 @@ workbook.add_worksheet(name: sheet_name, page_setup: set_print) do |sheet|
 
       row = Jbuilder.new do |obj|
         obj.extract! assign, :group_name, :member_number, :member_name, :job_title_name, :project_number, :project_name
-        obj.merge! assign.allocs.pivot
+        obj.merge! MonthTypes.pivot(cols: assign.allocs)
       end.attributes!
 
       sheet.add_row row.values, style: styles

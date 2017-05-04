@@ -1,4 +1,9 @@
-VueChart :options=Chart::StackedAreaBuilder.build(@project).to_json width="100%" height="480px" uuid=SecureRandom.uuid
+VueChart {
+  width="100%"
+  height="480px"
+  uuid=SecureRandom.uuid
+  :options=Chart::StackedAreaDirector.build(@project).to_json
+}
 
 h3 = @project.full_name
 
@@ -41,7 +46,12 @@ h3 = @project.full_name
 / htbl ctl="costs" :rows=@header.rows :opts=@header.opts :total="false"
 / hr
 
-htbl ctl="allocs" :rows=Htbl::MembersBuilder.allocs(@assigns) :opts=Htbl::MembersBuilder.htbl_options
+htbl {
+  ctl="allocs"
+  :rows=Htbl::MembersBuilder.allocs(@assigns)
+  :opts=Htbl::MembersBuilder.htbl_options
+}
+
 hr
 
 = link_to "要員アサイン", project_assigns_path(@project), class: "btn btn-primary"

@@ -26,7 +26,7 @@ class Htbl::MembersBuilder < Htbl::BaseBuilder
     encode do |json|
       json.array! members do |member|
         json.extract! member, :id, :member_number, :member_link, :job_title_link
-        json.merge! member.allocs.pivot
+        json.merge! ::MonthTypes.pivot(cols: member.allocs)
       end
     end
   end
@@ -35,7 +35,7 @@ class Htbl::MembersBuilder < Htbl::BaseBuilder
     encode do |json|
       json.array! members do |member|
         json.extract! member, :id, :member_number, :member_link, :job_title_link
-        json.merge! member.works.pivot
+        json.merge! ::MonthTypes.pivot(cols: member.works)
       end
     end
   end

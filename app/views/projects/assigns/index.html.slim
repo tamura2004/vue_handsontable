@@ -1,3 +1,7 @@
-ma :project=@project.to_json :members=@members.to_json :assigns=@project.assigns.to_json
+ma {
+  :project=@project.to_json
+  :members=@members.to_json
+  :assigns=@project.assigns.to_json
+}
 
 = link_to "戻る", project_allocs_path(@project), class: "btn btn-primary"

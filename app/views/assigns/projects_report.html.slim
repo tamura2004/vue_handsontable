@@ -16,11 +16,11 @@
             tr
               td = member.number
               td = link_to member.name, member_allocs_path(member.id)
-              - assign.allocs.pivot.values.each do |cost|
+              - MonthTypes.pivot(cols: assign.allocs).values.each do |cost|
                 td = cost
           tr.success
             td 合計
             td 合計
-            - project.allocs.pivot.values.each do |cost|
+            - MonthTypes.pivot(cols: project.allocs).values.each do |cost|
               td = cost.round(2)
 

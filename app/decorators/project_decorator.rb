@@ -1,7 +1,6 @@
 class ProjectDecorator < Draper::Decorator
   delegate_all
   decorates_association :assigns
-  decorates_association :allocs
   
   def text_for_search
     [number, name].join.to_json

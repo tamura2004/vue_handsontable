@@ -113,9 +113,6 @@ Rails.application.routes.draw do
     end
   end
 
-  # resources :departments, except: [:new,:edit]
-  # resources :job_titles, except: [:new,:edit]
-
   resources :results, only: [:index,:destroy] do
     collection do
       post :upload

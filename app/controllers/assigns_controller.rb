@@ -42,7 +42,7 @@ class AssignsController < ApplicationController
     # グラフビルダ    
     @options = Chart::BaseBuilder.build("案件アサイン") do |chart|
       @assigns.each do |project_name, assigns|
-        chart.add_series do |series|
+        Chart::StackedAreaSeriesBuilder.build(chart) do |series|
           assigns.each do |assign|
             series.set_point(assign["month"], assign["cost"]) do |point|
 
@@ -58,7 +58,7 @@ class AssignsController < ApplicationController
         end
       end
 
-      chart.add_series(type: :line) do |series|
+      Chart::LineSeriesBuilder.build(chart) do |series|
         @works.each do |month, cost|
           series.set_point(month, cost) do |point|
             point[:indexLabel] = "要員数" if month == "201709"
@@ -66,7 +66,7 @@ class AssignsController < ApplicationController
         end
       end
 
-      chart.add_series(type: :line) do |series|
+      Chart::LineSeriesBuilder.build(chart) do |series|
         @works.each do |month, cost|
           series.set_point(month, cost + 3) do |point|
             point[:indexLabel] = "要員数(残業込)" if month == "201709"
@@ -74,7 +74,7 @@ class AssignsController < ApplicationController
         end
       end
 
-      chart.add_series(type: :line) do |series|
+      Chart::LineSeriesBuilder.build(chart) do |series|
         @costs.each do |month, cost|
           series.set_point(month, cost) do |point|
             point[:indexLabel] = "案件受注" if month == "201709"
@@ -92,18 +92,20 @@ class AssignsController < ApplicationController
       Chart::BaseBuilder.build("") do |chart|
         chart[:link_id] = name[0]
         chart[:link_label] = name[1]
-        chart.add_series(type: :line) do |series|
+        Chart::LineSeriesBuilder.build(chart) do |series|
           assigns.each do |assign, cost|
             job_title_id, member_id, member_number, member_name, month = *assign
             series.set_point(month, cost)
           end
         end
+
         next unless @works[name]
-        chart.add_series(models: @works[name]) do |series, works, cost|
-          # @works[name].each do |works, cost|
+
+        Chart::StackedAreaSeriesBuilder.build(chart) do |series|
+          @works[name].each do |works, cost|
             _, _, month = *works
             series.set_point(month, cost)
-          # end
+          end
         end
       end
     end
@@ -117,14 +119,14 @@ class AssignsController < ApplicationController
       Chart::BaseBuilder.build("") do |chart|
         chart[:link_id] = name[0]
         chart[:link_label] = name[1] + name[2]
-        chart.add_series(type: :line) do |series|
+        Chart::LineSeriesBuilder.build(chart) do |series|
           assigns.each do |assign, cost|
             id, project_number, project_name, month = *assign
             series.set_point(month, cost)
           end
         end
         if @plans[name]
-          chart.add_series(type: :stackedArea) do |series|
+          Chart::StackedAreaSeriesBuilder.build(chart) do |series|
             @plans[name].each do |plan, cost|
               _, _, _, month = *plan
               series.set_point(month, cost)
@@ -141,7 +143,7 @@ class AssignsController < ApplicationController
       Chart::BaseBuilder.build("") do |chart|
         chart[:link_id] = key[0]
         chart[:link_label] = key[1] + key[2]
-        chart.add_series(type: :stackedArea) do |series|
+        Chart::StackedAreaSeriesBuilder.build(chart) do |series|
           plans.each do |plan, cost|
             id, number, name, month = *plan
             series.set_point(month, cost)

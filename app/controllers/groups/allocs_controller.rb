@@ -6,7 +6,6 @@ class Groups::AllocsController < ApplicationController
     @members = Member.with_allocs
       .where(group_id: @group)
       .decorate
-    @opts = Htbl::MembersBuilder.htbl_options
   end
 
   private

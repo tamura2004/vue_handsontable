@@ -48,7 +48,7 @@ class MonthTypes < Inum::Base
   end
 
   def self.add_series(chart, at, label, cost)
-    chart.add_series(:line) do |series|
+    Chart::LineSeriesBuilder.build(chart) do |series|
       keys.each do |month|
         series.set_point(month, cost) do |point|
           if month == at

@@ -1,5 +1,5 @@
 module Chart
-  class StackedAreaBuilder
+  class StackedAreaDirector
     def self.build(object)
       assigns = object.assigns.recent
       other = (object.kind_of? Member) ? :project : :member
@@ -11,11 +11,11 @@ module Chart
       end
 
       BaseBuilder.build("#{object.decorate.full_name}") do |chart|
-        chart.add_series do |series|
+        StackedAreaSeriesBuilder.build(chart) do |series|
           series.set_label(labels.first)
         end
         assigns.each_with_index do |assign, i|
-          chart.add_series do |series|
+          StackedAreaSeriesBuilder.build(chart) do |series|
             if label = labels[i+1]
               series.set_label(label)
             end

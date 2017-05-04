@@ -1,17 +1,8 @@
-def hoge(xs)
-  y = 10
+require "ostruct"
 
-  xs.each do |x|
-    yield y,*x
-  end
-end
+o = OpenStruct.new
 
-hs = {a:1,b:2}
+o.a = 1
+o.b = 2
 
-hoge(hs) do |y,x1,x2|
-  p [y,x1,x2]
-end
-
-hoge([1,2,3]) do |y,x1|
-  p [y,x1]
-end
+p o.to_h.to_json
