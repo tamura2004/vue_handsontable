@@ -33,8 +33,8 @@ class Chart::MonthlySeriesBuilder  < Chart::SeriesBuilder
     end
   end
   
-  def set_label(month: "", name: "")
-    label = LABEL.deep_dup.merge(indexLabel: name)
+  def set_label(month: "", name: "", **options)
+    label = LABEL.deep_dup.merge(indexLabel: name).merge(options)
     @series[:dataPoints].each do |point|
       if point[:label] == month
         point.merge!(label)

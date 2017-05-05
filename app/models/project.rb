@@ -43,8 +43,4 @@ class Project < ApplicationRecord
     .merge(Alloc.recent)
   }
   
-  scope :project_chart, -> {
-    find_by_sql(Charts::ProjectsAssignsQuery)
-  }
-
 end

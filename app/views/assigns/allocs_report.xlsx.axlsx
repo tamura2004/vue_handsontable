@@ -1,0 +1,29 @@
+headers = %w(グループ名 社員番号 社員名 職位 案件管理番号 案件名 月 稼働)
+widths = [6] * 8
+set_print = {fit_to_width: 1, fit_to_height: 1, orientation: :landscape}
+sheet_name = "workplan"
+
+workbook = xlsx_package.workbook
+
+# style
+workbook.styles.fonts.first.name = 'Meiryo'
+header = workbook.styles.add_style border: { style: :thin, color: "44444444", edges: [:bottom]}, sz: 9, alignment: {horizontal: :left, vertical: :center}, bg_color: 'e6eaff', b: true
+default = workbook.styles.add_style sz: 9, alignment: {horizontal: :left, vertical: :center}
+date = workbook.styles.add_style sz: 9, alignment: {horizontal: :left, vertical: :center}, format_code: "yyyy/mm"
+styles = [default] * 6 + [date] + [default]
+
+# 印刷の設定
+workbook.add_worksheet(name: sheet_name, page_setup: set_print) do |sheet|
+
+  # 列幅を決める
+  sheet.column_widths *widths
+  sheet.add_row headers, style: header
+
+  @allocs.each do |alloc|
+    row = Jbuilder.new do |obj|
+      obj.extract! alloc.decorate, :group_name, :member_number, :member_name, :job_title_name, :project_number, :project_name, :date, :cost
+    end.attributes!
+
+    sheet.add_row row.values, style: styles
+  end
+end

@@ -44,13 +44,13 @@ class AssignDecorator < Draper::Decorator
     project&.name
   end
 
-  def add_series(chart, name, label)
-    Chart::StackedAreaSeriesBuilder.build(chart) do |series|
-      MonthTypes.costs(cols: allocs).each_with_index do |cost, i|
-        options = MonthTypes.parse(i).key == label[:month] ? label[:options] : {}
-        series.set_point(month, cost, options)
-      end
-    end
-  end
+  # def add_series(chart, name, label)
+  #   Chart::StackedAreaSeriesBuilder.build(chart) do |series|
+  #     MonthTypes.costs(cols: allocs).each_with_index do |cost, i|
+  #       options = MonthTypes.parse(i).key == label[:month] ? label[:options] : {}
+  #       series.set_point(month, cost, options)
+  #     end
+  #   end
+  # end
 
 end

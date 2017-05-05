@@ -100,6 +100,7 @@ Rails.application.routes.draw do
   get "plans/compare", to: "plans#compare"
 
   get "assigns/member_report"
+  get "assigns/allocs_report"
   get "assigns/projects_report"
   get "assigns/chart"
   get "assigns/member_chart"

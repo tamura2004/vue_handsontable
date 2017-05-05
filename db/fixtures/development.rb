@@ -1,6 +1,7 @@
 Alloc.delete_all
 Assign.delete_all
 Work.delete_all
+Plan.delete_all
 
 Department.seed do |s|
   s.id = 1
@@ -24,17 +25,19 @@ end
   end
 end
 
-6.times do |id|
+ACTIONS = %w(更改 構築 機能追加 改善)
+
+12.times do |id|
   Project.seed do |s|
     s.id = id
     name = [Faker::University, Faker::Company].sample.name
     s.group_id = Group.ids.sample
     s.number = sprintf("27%08d-00-a",rand(100000000))
-    s.name = sprintf("%sシステムの更改", name)
+    s.name = sprintf("%sシステムの%s", name, ACTIONS.sample)
   end
 end
 
-6.times do |id|
+24.times do |id|
   Member.seed do |s|
     s.id = id
     s.number = "b%06d" % rand(1000000)
@@ -54,16 +57,14 @@ Member.find_each do |member|
   end
 end
 
-
 Member.find_each do |member|
-  Project.ids.sample(3).each do |project_id|
+  Project.ids.sample(rand(5)+1).each do |project_id|
     Assign.seed do |s|
       s.member_id = member.id
       s.project_id = project_id
     end
   end
 end
-
 
 Member.find_each do |member|
   member.assigns.each do |assign|
@@ -73,6 +74,23 @@ Member.find_each do |member|
         s.month = month
         s.cost = (rand(5)/5.0 + 0.2).round(2)
       end
+    end
+  end
+end
+
+Project.find_each do |project|
+  Plan.seed do |s|
+    s.category = "plan"
+    s.project_number = project.number
+    s.project_name = project.name
+
+    12.times do |i|
+      s.send("m#{i+1}=", 0)
+    end
+
+    ::MonthTypes.submonth.each do |month|
+      field = "m%d=" % (MonthTypes.parse(month).value + 1)
+      s.send(field, rand(5)/5.0 + 0.2)
     end
   end
 end

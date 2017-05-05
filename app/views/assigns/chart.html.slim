@@ -1,6 +1,7 @@
+H1 案件全体アサイングラフ
 VueChart {
   width="100%"
   height="640px"
   uuid=SecureRandom.uuid
-  :options=@options.to_json
+  :options=Chart::ProjectsAllocsStackedAreaDirector.build(@projects, @works, @plans_costs).to_json
 }

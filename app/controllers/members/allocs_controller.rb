@@ -5,9 +5,6 @@ class Members::AllocsController < ApplicationController
   before_action :set_assign, only: [:update]
 
   def index
-    # 割当のまだない案件も表示する
-    # @assigns = @member.assigns
-    # @works = @member.works
   end
 
   private

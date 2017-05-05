@@ -16,30 +16,30 @@ html lang="en"
         = menu_divider
 
         = drop_down "#{fa_icon('user')}要員別"
-          = menu_item group_works_path(Group.first)
-            i.fa.fa-user 要員数
-          = menu_item group_allocs_path(Group.first)
-            i.fa.fa-user アサイン
-          = menu_item assigns_member_report_path
-            i.fa.fa-file-text-o 明細票
           = menu_item assigns_member_chart_path
-            i.fa.fa-area-chart グラフ
+            i.fa.fa-line-chart アサイン過不足グラフ
           = menu_item members_projects_allocs_circle_chart_path
             i.fa.fa-pie-chart ５月割当状況円グラフ
+          = menu_item group_works_path(Group.first)
+            i.fa.fa-table 要員数
+          = menu_item group_allocs_path(Group.first)
+            i.fa.fa-table アサイン集計
+          = menu_item assigns_member_report_path
+            i.fa.fa-table 個人別案件明細
 
         = drop_down "#{fa_icon('file-text-o')}案件別"
-          = menu_item plans_new_path
-              i.fa.fa-upload アップロード
-          = menu_item plans_path
-              i.fa.fa-file-text-o SPROスケジュール表
-          = menu_item plans_compare_path
-              i.fa.fa-file-text-o SPRO比較表       
-          = menu_item assigns_projects_report_path
-            i.fa.fa-file-text-o 明細表
           = menu_item assigns_chart_path
             i.fa.fa-area-chart 全体アサイングラフ
           = menu_item assigns_project_chart_path
-            i.fa.fa-rocket 案件別アサイングラフ
+            i.fa.fa-line-chart アサイン過不足グラフ
+          = menu_item assigns_projects_report_path
+            i.fa.fa-table 案件別要員明細
+          = menu_item plans_path
+            i.fa.fa-table SPROスケジュール表
+          = menu_item plans_compare_path
+            i.fa.fa-table SPRO比較表       
+          = menu_item plans_new_path
+            i.fa.fa-upload 計画アップロード
 
         = menu_item rails_admin_path
           i.fa.fa-gear マスター管理

@@ -3,7 +3,8 @@
 ## Requirements:
 
 - ruby 2.3+
-- yarn or npm
+- yarn
+- postgresql
 
 ## Getting Started:
 
@@ -15,6 +16,13 @@ rails db:create
 rails db:migrate
 rails db:seed_fu
 yarn
+bundle exec rspec
 rails s
 ```
 
+### install yarn
+[https://yarnpkg.com/lang/en/docs/install/](https://yarnpkg.com/lang/en/docs/install/)
+
+```
+choco install yarn
+```
