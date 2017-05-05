@@ -1,24 +1,18 @@
-# README
+# Installation
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Requirements:
 
-Things you may want to cover:
+- ruby 2.3+
+- yarn or npm
 
-* Ruby version
+## Getting Started:
 
-* System dependencies
+  git clone https://github.com/tamura2004/vue_handsontable.git workplan
+  cd workplan
+  bundle install
+  rails db:create
+  rails db:migrate
+  rails db:seed_fu
+  yarn
+  rails s
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...

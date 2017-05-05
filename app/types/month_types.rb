@@ -59,4 +59,9 @@ class MonthTypes < Inum::Base
     end
   end
 
+  def self.submonth
+    pair = values.combination(2).to_a.sample
+    Range.new(*pair).to_a.map{|i| parse(i).key }
+  end
+
 end
