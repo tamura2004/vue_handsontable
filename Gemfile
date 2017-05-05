@@ -6,12 +6,8 @@ gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.2'
 
 gem 'jquery-rails'
-# gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
-
-group :production do
-  gem "pg"
-end
+gem "pg"
 
 group :development, :test do
   gem 'byebug', platform: :mri
@@ -46,12 +42,8 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem "slim-rails"
 gem "vuejs-rails", '= 1.0.24'
-# gem "less-rails"
-# gem "therubyracer"
-# gem "execjs"
 gem "twitter-bootstrap-rails"
 gem "seed-fu"
-# gem "gon"
 
 gem "roo", "~> 2.4.0"
 gem "axlsx"
@@ -75,5 +67,5 @@ gem "lodash-rails"
 gem "bullet"
 gem "rack-mini-profiler"
 gem "yajl-ruby"
-gem "flamegraph"
-gem "stackprof"
+# gem "flamegraph"
+# gem "stackprof"
