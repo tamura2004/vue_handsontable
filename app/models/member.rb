@@ -28,6 +28,11 @@ class Member < ApplicationRecord
     .merge(Work.recent)
   }
 
+  scope :job_order, -> {
+    joins(:job_title)
+    .order(:job_title_id, :number)
+  }
+
   scope :same_group, -> project {
     where(group: project.group_id)
   }

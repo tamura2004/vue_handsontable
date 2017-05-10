@@ -32,7 +32,7 @@ class AssignsController < ApplicationController
   end
 
   def member_chart
-    @members = Member.recent.decorate
+    @members = Member.recent.where(group_id: 1).job_order.decorate
   end
 
   def project_chart

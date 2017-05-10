@@ -11,9 +11,9 @@
 #
 
 class Alloc < ApplicationRecord
-  rails_admin do
-    visible false
-  end
+  # rails_admin do
+  #   visible false
+  # end
 
   belongs_to :assign
 
