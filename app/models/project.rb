@@ -15,9 +15,9 @@
 class Project < ApplicationRecord
   belongs_to :group, optional: true
 
-  has_many :assigns
+  has_many :assigns, dependent: :destroy
   has_many :members, through: :assigns
-  has_many :allocs, through: :assigns
+  has_many :allocs, through: :assigns, dependent: :destroy
 
   attr_accessor :group_name
 

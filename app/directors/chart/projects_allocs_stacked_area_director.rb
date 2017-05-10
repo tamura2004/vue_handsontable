@@ -11,12 +11,18 @@ module Chart
 
       BaseBuilder.build do |chart|
         StackedAreaSeriesBuilder.build(chart) do |series|
-          series.set_label(labels.first)
+          series.set_label(labels.first.merge({
+            indexLabelFontSize: 9,
+            indexLabelMaxWidth: 240
+          }))
         end
         projects.each_with_index do |project, i|
           StackedAreaSeriesBuilder.build(chart) do |series|
             if label = labels[i+1]
-              series.set_label(label)
+              series.set_label(label.merge({
+            indexLabelFontSize: 9,
+            indexLabelMaxWidth: 240
+          }))
             end
             ::MonthTypes.pivot(cols: project.allocs).each do |month, cost|
               series.set_point(month, cost)
@@ -27,14 +33,14 @@ module Chart
         Chart::LineSeriesBuilder.build(chart) do |series|
           ::MonthTypes.pivot(cols: works).each do |month, cost|
             series.set_point(month, cost)
-            series.set_label(month: "201712", name: "要員数", indexLabelFontSize: 24)
+            series.set_label(month: "201712", name: "要員数", indexLabelFontSize: 18)
           end
         end
 
         Chart::LineSeriesBuilder.build(chart) do |series|
           ::MonthTypes.pivot(cols: works).each do |month, cost|
             series.set_point(month, cost + 3)
-            series.set_label(month: "201711", name: "要員数(残業込み)", indexLabelFontSize: 24)
+            series.set_label(month: "201711", name: "要員数(残業込み)", indexLabelFontSize: 18)
           end
         end
 
@@ -42,7 +48,7 @@ module Chart
           plans_costs.each_with_index do |cost, i|
             month = MonthTypes.parse(i).key
             series.set_point(month, cost)
-            series.set_label(month: "201801", name: "案件受注", indexLabelFontSize: 24)
+            series.set_label(month: "201801", name: "案件受注", indexLabelFontSize: 18)
           end
         end
 
