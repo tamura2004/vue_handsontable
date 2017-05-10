@@ -5,7 +5,8 @@ class WorksController < ApplicationController
   # GET /works
   def index
     @groups = Group.all
-    @members = Member.where(group_id: @group).with_works.decorate
+    @sofia_members = Member.where(group_id: @group).sofia.with_works.decorate
+    @bp_members = Member.where(group_id: @group).bp.with_works.decorate
     @htbl_options = Htbl::MembersBuilder.htbl_options
   end
 

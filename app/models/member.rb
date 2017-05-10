@@ -15,7 +15,7 @@ class Member < ApplicationRecord
   belongs_to :group, optional: true
   belongs_to :job_title, optional: true
 
-  has_many :works, -> { recent }, dependent: :destroy
+  has_many :works, dependent: :destroy
   has_many :allocs, -> { recent }, through: :assigns
   has_many :assigns
   has_many :projects, through: :assigns
@@ -32,6 +32,15 @@ class Member < ApplicationRecord
     joins(:job_title)
     .order(:job_title_id, :number)
   }
+
+  scope :sofia, -> {
+    where("job_title_id <= 8")
+  }
+
+  scope :bp, -> {
+    where("job_title_id > 8")
+  }
+
 
   scope :same_group, -> project {
     where(group: project.group_id)

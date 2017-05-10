@@ -6,9 +6,21 @@ grouptab {
   path="works"
 }
 
+h2 sofia
+
 htbl {
   ctl="works"
-  :rows=Htbl::MembersBuilder.works(@members)
+  :rows=Htbl::MembersBuilder.works(@sofia_members)
+  :opts=Htbl::MembersBuilder.htbl_options
+}
+
+hr
+
+h2 BP
+
+htbl {
+  ctl="works"
+  :rows=Htbl::MembersBuilder.works(@bp_members)
   :opts=Htbl::MembersBuilder.htbl_options
 }
 

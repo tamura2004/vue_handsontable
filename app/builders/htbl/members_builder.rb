@@ -13,9 +13,9 @@ class Htbl::MembersBuilder < Htbl::BaseBuilder
       json.colHeaders HEADERS
       json.columnSorting true
       json.columns do
-        json.column! data: "job_title_link", renderer: "html"
-        json.column! data: "member_number"
-        json.column! data: "member_link", renderer: "html"
+        json.column! data: "job_title_link", renderer: "html", width: "50px"
+        json.column! data: "member_number", width: "70px"
+        json.column! data: "member_link", renderer: "html", width: "100px"
         json.months_columns!
         json.column! data: "total", type: "numeric", format: "0.00"
       end
