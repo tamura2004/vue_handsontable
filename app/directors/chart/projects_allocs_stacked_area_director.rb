@@ -11,10 +11,12 @@ module Chart
 
       BaseBuilder.build do |chart|
         StackedAreaSeriesBuilder.build(chart) do |series|
-          series.set_label(labels.first.merge({
-            indexLabelFontSize: 9,
-            indexLabelMaxWidth: 240
-          }))
+          if label = labels.first
+            series.set_label(label.merge({
+              indexLabelFontSize: 9,
+              indexLabelMaxWidth: 240
+            }))
+          end
         end
         projects.each_with_index do |project, i|
           StackedAreaSeriesBuilder.build(chart) do |series|

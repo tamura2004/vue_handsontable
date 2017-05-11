@@ -51,7 +51,7 @@
 #
 
 class Plan < ApplicationRecord
-  validates :category, uniqueness: { scope: [:main_group_name, :project_number, :project_name, :accuracy, :dept_name, :group_name, :sub_number, :system_name, :contract_type, :company_name, :member_rank]}
+  validates :category, uniqueness: { scope: [:main_group_name, :project_number, :project_name, :accuracy, :dept_name, :group_name, :sub_number, :system_name, :contract_type, :company_name, :member_rank, :month]}
 
   scope :projects, -> { find_by_sql Summary::Plans::IndexProjectsQuery }
 
@@ -70,5 +70,39 @@ class Plan < ApplicationRecord
   }
 
   after_save Plans::AfterSaveCallback.new
+
+  def self.migrate!
+    find_each do |plan|
+      plan.migrate!
+    end
+  end
+
+  def migrate!
+    project = Project.find_or_create_by(number: project_number) do |project|
+      project.name = project_name
+      project.group_id = 1
+    end
+
+    12.times do |i|
+      cost = self["m#{i+1}"]
+      if cost > 0
+        Plan.find_or_create_by(project_id: project, month: MonthTypes.parse(i).key) do |plan|
+          plan.cost = cost
+          plan.category = category
+          plan.main_group_name = main_group_name
+          plan.project_number = project_number
+          plan.project_name = project_name
+          plan.accuracy = accuracy
+          plan.dept_name = dept_name
+          plan.group_name = group_name
+          plan.sub_number = sub_number
+          plan.system_name = system_name
+          plan.contract_type = contract_type
+          plan.company_name = company_name
+          plan.member_rank = member_rank
+        end
+      end
+    end
+  end
 
 end
