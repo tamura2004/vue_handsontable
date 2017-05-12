@@ -78,31 +78,56 @@ class Plan < ApplicationRecord
   end
 
   def migrate!
-    project = Project.find_or_create_by(number: project_number) do |project|
-      project.name = project_name
-      project.group_id = 1
+    category_id = Category.find_or_create_by(name: category).id
+
+    project = Project.find_or_create_by(number: project_number)
+    project.update_attributes({
+      name: project_name,
+      category_id: category_id
+    })
+
+    self.project_id = project.id
+
+    if system_name =~ /\[(.*)\]/
+      system = System.find_or_create_by(number: $1)
+      self.system_id = system.id
     end
 
-    12.times do |i|
-      cost = self["m#{i+1}"]
-      if cost > 0
-        Plan.find_or_create_by(project_id: project, month: MonthTypes.parse(i).key) do |plan|
-          plan.cost = cost
-          plan.category = category
-          plan.main_group_name = main_group_name
-          plan.project_number = project_number
-          plan.project_name = project_name
-          plan.accuracy = accuracy
-          plan.dept_name = dept_name
-          plan.group_name = group_name
-          plan.sub_number = sub_number
-          plan.system_name = system_name
-          plan.contract_type = contract_type
-          plan.company_name = company_name
-          plan.member_rank = member_rank
-        end
-      end
-    end
+    save
+
+  #   match = system_name&.scan(/\[(.*)\](.*)/)
+  #   system = nil
+  #   system_id = nil
+  #   unless match.nil? || match.empty?
+  #     number, name = *match.first
+  #     system = System.find_or_create_by(number: number) do |system|
+  #       system.name = name
+  #     end
+  #   end
+
+  #   12.times do |i|
+  #     cost = self["m#{i+1}"]
+  #     if cost > 0
+  #       plan = Plan.find_or_create_by(project_id: project, month: MonthTypes.parse(i).key)
+  #       plan.update_attributes({
+  #         cost: cost,
+  #         category: category,
+  #         main_group_name: main_group_name,
+  #         project_number: project_number,
+  #         project_name: project_name,
+  #         accuracy: accuracy,
+  #         dept_name: dept_name,
+  #         group_name: group_name,
+  #         sub_number: sub_number,
+  #         system_name: system_name,
+  #         contract_type: contract_type,
+  #         company_name: company_name,
+  #         member_rank: member_rank,
+  #         system_id: system.id,
+  #         system_id: project.id
+  #       })
+  #     end
+  #   end
   end
 
 end
