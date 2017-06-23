@@ -6,7 +6,7 @@ module Chart
         PieSeriesBuilder.build(chart) do |series|
           member.assigns.each do |assign|
             assign.allocs.each do |alloc|
-              if alloc.month == "201705" && alloc.cost > 0
+              if alloc.month == "201706" && alloc.cost > 0
                 series.set_pie(assign.project_name, alloc.cost)
                 total -= alloc.cost
               end

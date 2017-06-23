@@ -1,5 +1,6 @@
 class Members::Projects::AllocsController < ApplicationController
   def circle_chart
-    @members = Member.circle_chart.decorate
+    @month = params[:month] || Date.today.strftime("%Y%m")
+    @members = Member.circle_chart(@month).decorate
   end
 end

@@ -62,12 +62,12 @@ class Member < ApplicationRecord
     .order(:job_title_id, :number)
   }
 
-  scope :circle_chart, -> {
+  scope :circle_chart, -> month {
     with_allocs
     .eager_load(:works)
-    .where("works.month = ?", "201705")
+    .where("works.month = ?", month)
     .joins(:allocs)
-    .where("allocs.month = ?", "201705")
+    .where("allocs.month = ?", month)
   }
 
 end

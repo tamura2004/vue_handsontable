@@ -19,7 +19,18 @@ Summary::Plans::ShowProjectQuery = <<-SQL
     plans
   where
     project_number = ? and
-    m1 + m2 + m3 + m4 + m5 + m6 + m7 + m8 + m9 + m10 + m11 + m12 > 0
+    m1 > 0 or
+    m2 > 0 or
+    m3 > 0 or
+    m4 > 0 or
+    m5 > 0 or
+    m6 > 0 or
+    m7 > 0 or
+    m8 > 0 or
+    m9 > 0 or
+    m10 > 0 or
+    m11 > 0 or
+    m12 > 0
   group by
     category,
     project_number,

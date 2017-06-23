@@ -14,5 +14,5 @@ table.table.table-condensed
         td = link_to plan.project_number, project_allocs_path(plan.category)
         td = plan.project_name
         - plan.costs.each do |cost|
-          td = cost&.round(2)
+          td = cost.round2
 
