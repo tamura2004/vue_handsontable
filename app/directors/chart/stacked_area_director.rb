@@ -12,7 +12,7 @@ module Chart
 
       BaseBuilder.build("#{object.decorate.full_name}") do |chart|
         StackedAreaSeriesBuilder.build(chart) do |series|
-          series.set_label(labels.first)
+          series.set_label(labels.first) unless labels.empty?
         end
         assigns.each_with_index do |assign, i|
           StackedAreaSeriesBuilder.build(chart) do |series|

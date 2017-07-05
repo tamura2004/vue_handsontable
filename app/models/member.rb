@@ -33,8 +33,12 @@ class Member < ApplicationRecord
     .order(:job_title_id, :number)
   }
 
+  scope :admin, -> {
+    where("job_title_id <= 2")
+  }
+
   scope :sofia, -> {
-    where("job_title_id <= 8")
+    where("3 <= job_title_id and job_title_id <= 8")
   }
 
   scope :bp, -> {
