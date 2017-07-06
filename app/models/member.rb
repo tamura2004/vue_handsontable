@@ -45,6 +45,10 @@ class Member < ApplicationRecord
     where("job_title_id > 8")
   }
 
+  scope :worker, -> {
+    where("3 <= job_title_id")
+  }
+
 
   scope :same_group, -> project {
     where(group: project.group_id)
