@@ -32,7 +32,7 @@ class Assign < ApplicationRecord
     .eager_load(:member)
     .eager_load(:job_title)
     .eager_load(:group)
-    .where("allocs.month > ?","201703")
+    # .where("allocs.month > ?","201703")
   }
 
 end
