@@ -12,7 +12,7 @@ class Plans::AfterSaveCallback
       project.update(number: plan.project_number)
 
     else
-      Project.create(group_id: 1, number: plan.project_number, name: plan.project_name)
+      Project.create(group_id: current_group.id, number: plan.project_number, name: plan.project_name)
     end
   end
 

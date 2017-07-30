@@ -14,7 +14,6 @@ html lang="en"
     = nav_bar fixed: :top, brand: "工数見込集計", responsice: true
       = menu_group
         = menu_divider
-
         = drop_down "#{fa_icon('user')}要員別"
           = menu_item assigns_member_chart_path
             i.fa.fa-line-chart アサイン過不足グラフ
@@ -46,13 +45,19 @@ html lang="en"
         = menu_item rails_admin_path
           i.fa.fa-gear マスター管理
 
-
       = menu_group pull: :right
         form.navbar-form.navbar-right role="search"
           input.form-control type="text" placeholder="絞り込み検索" v-model="query"
+
+        - label = current_group ? current_group.name : "グループ選択"
+        = drop_down label
+          - Group.all.each do |group|
+            = menu_item login_path(group_id: group.id)
+              i.fa.fa-user = group.name
 
     .container-fluid
       .row
         .col-lg-12
           = bootstrap_flash
-          = yield
+          - if current_group
+            = yield

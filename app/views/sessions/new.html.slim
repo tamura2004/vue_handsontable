@@ -1,0 +1,9 @@
+.page-header
+  h1 ログイン
+  = form_for @form, url: :session, html: { class: "form form-horizontal plan" } do |f|
+    .form-group
+      = f.label "グループを選択"
+      = f.collection_select :group_id, Group.all, :id, :name
+
+    .form-group
+      = f.submit nil, :class => 'btn btn-primary'

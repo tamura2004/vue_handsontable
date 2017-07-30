@@ -47,7 +47,7 @@ class WorksController < ApplicationController
     end
 
     def set_group
-      @group = Group.find(params[:group_id])
+      @group = current_group
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

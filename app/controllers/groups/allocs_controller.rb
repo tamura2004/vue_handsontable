@@ -11,7 +11,7 @@ class Groups::AllocsController < ApplicationController
   private
 
     def set_group
-      @group = Group.find(params[:group_id])
+      @group = current_group
     end
 
 end
