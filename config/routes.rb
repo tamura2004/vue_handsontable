@@ -95,7 +95,6 @@ Rails.application.routes.draw do
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
 
 
-  # get "login" => "sessions#new", as: :login
   get "login" => "sessions#create", as: :login
   delete "session" => "sessions#destroy", as: :logout
 

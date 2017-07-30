@@ -2,7 +2,6 @@ class Groups::AllocsController < ApplicationController
   before_action :set_group, only: :index
 
   def index
-    @groups = Group.all
     @members = Member.with_allocs
       .where(group_id: @group)
       .decorate

@@ -3,9 +3,12 @@ class ApplicationController < ActionController::Base
 
   private
   def current_group
-    if id = session[:group_id]
-      @current_group ||= Group.find(id)
-    end
+    id = cookies.signed[:group_id] || session[:group_id] || 1
+    @current_group ||= Group.find(id)
+  end
+
+  def current_members
+    Member.where(group_id: current_group.id)
   end
 
   helper_method :current_group

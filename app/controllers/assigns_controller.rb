@@ -1,7 +1,7 @@
 class AssignsController < ApplicationController
 
   def member_report
-    @assigns = Assign.recent.decorate
+    @assigns = Assign.joins(:member).merge(current_members).recent.decorate
 
     respond_to do |format|
       format.html
@@ -22,7 +22,7 @@ class AssignsController < ApplicationController
   end
 
   def projects_report
-    @assigns = Assign.recent.decorate
+    @assigns = Assign.joins(:member).merge(current_members).recent.decorate
   end
 
   def chart
@@ -36,7 +36,7 @@ class AssignsController < ApplicationController
   end
 
   def project_chart
-    @projects = Project.recent.decorate
+    @projects = Project.recent.where(group_id: current_group.id).decorate
   end
 
   private
