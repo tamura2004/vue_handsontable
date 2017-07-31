@@ -41,7 +41,7 @@ module Chart
 
         Chart::LineSeriesBuilder.build(chart) do |series|
           ::MonthTypes.pivot(cols: works).each do |month, cost|
-            series.set_point(month, cost + 3)
+            series.set_point(month, cost * 1.2)
             series.set_label(month: "201711", name: "要員数(残業込み)", indexLabelFontSize: 18)
           end
         end
