@@ -1,16 +1,16 @@
-h1 = "#{@month}の要員別アサイン状況"
+h5 = "#{@month}の要員別アサイン状況"
 .row
-  - x = @members.size / 4
-  - 4.times do |col|
-    .col-xs-3
+
+  - 6.times do |col|
+    .col-xs-2
       - @members.each_with_index do |member, i|
-        - if i % 4 == col
+        - if i % 6 == col
           incrementalsearch :text=member[:link_label].to_json
             hr
-            = link_to member.full_name, member_allocs_path(member.id), style: "font-size: 24px;"
+            = link_to member.full_name, member_allocs_path(member.id), style: "font-size: 16px;"
             VueChart {
               width="100%"
-              height="360px"
+              height="240px"
               uuid=SecureRandom.uuid
               :options=Chart::MemberAllocsPieDirector.build(member, @month).to_json
             }

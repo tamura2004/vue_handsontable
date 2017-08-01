@@ -13,7 +13,7 @@ module Chart
             end
           end
           if total > 0.1
-            series.set_pie("未割り当て", total, indexLabelFontSize: 24, indexLabelFontColor: "red")
+            series.set_pie("不足#{total.round(2)}人月", total, indexLabelFontSize: 16, indexLabelFontColor: "red")
           end
         end
       end

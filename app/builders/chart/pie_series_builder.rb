@@ -5,7 +5,7 @@ module Chart
         type: "pie",
         radius: "70%",
         startAngle: -90,
-        indexLabelFontSize: 16,
+        indexLabelFontSize: 12,
         dataPoints: []
       }
     end
