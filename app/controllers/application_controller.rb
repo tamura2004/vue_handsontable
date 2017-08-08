@@ -7,6 +7,10 @@ class ApplicationController < ActionController::Base
     @current_group ||= Group.find(id)
   end
 
+  def current_month
+    Date.today.strftime("%Y%m")
+  end
+
   def current_members
     Member.where(group_id: current_group.id)
   end

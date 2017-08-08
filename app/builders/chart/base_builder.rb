@@ -17,6 +17,12 @@ module Chart
         fontSize: 12,
         verticalAlign: "center"
       },
+      axisX: {
+        labelFontSize: 12
+      },
+      axisY: {
+        labelFontSize: 12
+      },
       data: []
     }
 

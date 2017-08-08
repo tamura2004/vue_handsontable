@@ -1,7 +1,7 @@
 class AssignsController < ApplicationController
 
   def member_report
-    @assigns = Assign.joins(:member).merge(current_members).recent.decorate
+    @assigns = Assign.joins(:member).merge(current_members.worker).recent.decorate
 
     respond_to do |format|
       format.html
@@ -27,12 +27,12 @@ class AssignsController < ApplicationController
 
   def chart
     @projects = Project.recent.where(group_id: current_group.id).decorate
-    @works = Work.joins(:member).merge(Member.worker.where(group_id: current_group.id)).recent
+    @works = Work.joins(:member).merge(current_members.worker).recent
     @plans_costs = Plan.where.not(m1: nil).costs
   end
 
   def member_chart
-    @members = Member.recent.where(group_id: current_group.id).job_order.decorate
+    @members = current_members.worker.decorate
   end
 
   def project_chart
