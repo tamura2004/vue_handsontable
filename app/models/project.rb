@@ -40,7 +40,7 @@ class Project < ApplicationRecord
   scope :recent, -> {
     distinct
     .joins(:allocs)
-    .merge(Alloc.recent)
+    .merge(Alloc.where("month > ?", Date.today.strftime("%Y%m")))
   }
   
 end

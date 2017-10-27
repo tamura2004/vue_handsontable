@@ -25,6 +25,6 @@ rails s
 
 ```
 choco install yarn
-pg_dump mydatabase --data-only --inserts > seeds.sql
+pg_dump projects_members_development --data-only --inserts > 20170809backup.sql
 ```
 

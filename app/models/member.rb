@@ -73,9 +73,7 @@ class Member < ApplicationRecord
   scope :circle_chart, -> month {
     with_allocs
     .eager_load(:works)
-    .where("works.month = ?", month)
     .joins(:allocs)
-    .where("allocs.month = ?", month)
   }
 
 end

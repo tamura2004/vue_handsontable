@@ -13,6 +13,9 @@ class ApplicationController < ActionController::Base
 
   def current_members
     Member.where(group_id: current_group.id)
+      .joins(:works)
+      .where("works.month = ?", current_month)
+      .order(:job_title_id,:number)
   end
 
   helper_method :current_group
