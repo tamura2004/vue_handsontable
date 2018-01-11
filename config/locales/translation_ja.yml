@@ -83,6 +83,8 @@ ja:
         number: 案件管理番号  #g
         projects_members: プロジェクトメンバー  #g
         rd: 要件定義工数  #g
+        start_month: 開発着手承認月
+        end_month: 開発完了月
 
       projects_member:
         allocations: 割り当て  #g

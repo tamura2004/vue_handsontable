@@ -40,4 +40,11 @@ RailsAdmin.config do |config|
     # history_index
     # history_show
   end
+
+  config.model "Project" do
+    include_fields_if do
+      not name.match /_at$|rd|cost|category/
+    end
+  end
+
 end

@@ -42,5 +42,10 @@ class Project < ApplicationRecord
     .joins(:allocs)
     .merge(Alloc.where("month > ?", Date.today.strftime("%Y%m")))
   }
+
+  scope :available, -> {
+    where("end_month >= ?", Date.today.strftime("%Y%m"))
+      .order(:number, :name)
+  }
   
 end

@@ -37,7 +37,7 @@ class AssignsController < ApplicationController
   end
 
   def project_chart
-    @projects = Project.recent.where(group_id: current_group.id).decorate
+    @projects = Project.available.recent.where(group_id: current_group.id).decorate
   end
 
   private

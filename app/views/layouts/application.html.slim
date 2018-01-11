@@ -33,8 +33,8 @@ html lang="en"
             i.fa.fa-area-chart 全体アサイングラフ
           = menu_item assigns_project_chart_path
             i.fa.fa-line-chart アサイン過不足グラフ
-          = menu_item assigns_projects_report_path
-            i.fa.fa-table 案件別要員明細
+          = menu_item projects_path
+            i.fa.fa-table 案件一覧
 
           - if current_group.id == 1
             = menu_item plans_path
@@ -43,6 +43,9 @@ html lang="en"
               i.fa.fa-table SPRO比較表       
             = menu_item plans_new_path
               i.fa.fa-upload 計画アップロード
+
+        = menu_item rails_admin_path
+          i.fa.fa-gear マスター管理
 
         = menu_item rails_admin_path
           i.fa.fa-gear マスター管理

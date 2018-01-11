@@ -3,7 +3,7 @@ class Members::AssignsController < ApplicationController
   before_action :set_assign, only: :destroy
 
   def index
-    @projects = Project.same_group(@member)
+    @projects = Project.available.same_group(@member)
   end
 
   def create

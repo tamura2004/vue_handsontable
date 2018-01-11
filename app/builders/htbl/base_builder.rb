@@ -1,6 +1,6 @@
 class Htbl::BaseBuilder < Jbuilder
 
-  def column!(data: nil, renderer: nil, type: nil, format: nil, width: nil)
+  def column!(data: nil, renderer: nil, type: nil, format: nil, width: nil, dateFormat: nil)
     ignore_nil!
     child! do
       set! :data, data
@@ -8,6 +8,7 @@ class Htbl::BaseBuilder < Jbuilder
       set! :type, type
       set! :format, format
       set! :width, width
+      set! :dateFormat, dateFormat
     end
   end
 
