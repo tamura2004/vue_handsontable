@@ -110,7 +110,7 @@ Rails.application.routes.draw do
   get "assigns/member_chart"
   get "assigns/project_chart"
 
-  root "members/projects/allocs#circle_chart"
+  root "assigns#member_chart"
 
   namespace :members do
     namespace :projects do

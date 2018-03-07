@@ -4,14 +4,14 @@ html lang="en"
     meta charset="utf-8"
     meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"
     meta name="viewport" content="width=device-width, initial-scale=1.0"
-    title 工数見込集計
+    title 案件アサイン管理
     = csrf_meta_tags
     = stylesheet_link_tag "application", :media => "all"
     = javascript_include_tag "application"
 
 
   body
-    = nav_bar fixed: :top, brand: "工数見込集計", responsice: true
+    = nav_bar fixed: :top, brand: "案件アサイン管理", responsice: true
       = menu_group
         = menu_divider
         = drop_down "#{fa_icon('user')}要員別"

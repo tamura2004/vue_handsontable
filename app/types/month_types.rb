@@ -11,6 +11,9 @@ class MonthTypes < Inum::Base
   define :JAN, 9
   define :FEB, 10
   define :MAR, 11
+  define :APR2, 12
+  define :MAY2, 13
+  define :JUN2, 14
 
   def key
     Date.new(2017,4,1).months_since(value).strftime("%Y%m")
@@ -29,7 +32,7 @@ class MonthTypes < Inum::Base
   end
 
   def self.costs(cols: [], zero_to_blank: false)
-    Array.new(12, 0).tap do |array|
+    Array.new(15, 0).tap do |array|
       cols.each do |col|
         if enum = parse(col.month)
           array[enum.value] += col.cost

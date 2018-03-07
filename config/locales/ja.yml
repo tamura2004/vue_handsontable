@@ -13,6 +13,9 @@ ja:
     jan: '1月'
     feb: '2月'
     mar: '3月'
+    apr2: '4月'
+    may2: '5月'
+    jun2: '6月'
   activerecord:
     errors:
       messages:

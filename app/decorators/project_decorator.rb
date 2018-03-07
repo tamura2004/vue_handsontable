@@ -26,12 +26,4 @@ class ProjectDecorator < Draper::Decorator
     link
   end
 
-  def month
-    if end_month.present?
-      "%s-%s" % [end_month[0,4], end_month[4,2]]
-    else
-      ""
-    end
-  end
-
 end
