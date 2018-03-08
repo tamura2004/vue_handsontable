@@ -1,9 +1,9 @@
 h1 要員別アサイン状況
 .row
-  - 6.times do |col|
-    .col-xs-2
+  - 4.times do |col|
+    .col-xs-3
       - @members.each_with_index do |member, i|
-        - if i % 6 == col
+        - if i % 4 == col
           - options = Chart::MemberWorksAllocsComboDirector.build(member)
           incrementalsearch :text=options[:link_label].to_json
             hr
