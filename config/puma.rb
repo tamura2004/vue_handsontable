@@ -4,7 +4,7 @@
 # the maximum value specified for Puma. Default is set to 5 threads for minimum
 # and maximum, this matches the default thread size of Active Record.
 #
-patn = "#{File.expand_path("../..",__FILE__)}"
+path = File.expand_path("../..",__FILE__)
 name = File.basename(path)
 home = ENV.fetch("HOME"){"/home/ogisui"}
 
