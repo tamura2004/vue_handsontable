@@ -1,0 +1,17 @@
+## rails
+public/assets/*
+.ruby-version
+
+## environment
+.bundle
+vendor/bundle
+.git*
+
+## log
+log/*
+
+## osX
+.DS_STORE
+
+## docker
+.dockerignore

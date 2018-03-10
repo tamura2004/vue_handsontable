@@ -21,29 +21,22 @@
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 
-test:
+default: &default
   adapter: postgresql
   encoding: unicode
   pool: 5
-  min_messages: WARNING
-  database: projects_members_test
-  username: tamura
-  password: tamura
+  username: <%= ENV.fetch("DB_USERNAME") {"tamura"} %>
+  password: <%= ENV.fetch("DB_PASSWORD") {"tamura"} %>
+  host: <%= ENV.fetch("DB_HOST") {"localhost"} %>
+
+test:
+  <<: *default
+  database: test_work
 
 development:
-  adapter: postgresql
-  encoding: unicode
-  pool: 5
-  min_messages: WARNING
-  database: projects_members_development
-  username: tamura
-  password: tamura
+  <<: *default
+  database: dev_work
 
 production:
-  adapter: postgresql
-  encoding: unicode
-  pool: 5
-  min_messages: WARNING
-  database: projects_members_production
-  username: tamura
-  password: tamura
+  <<: *default
+  database: prod_work
