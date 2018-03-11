@@ -1,22 +1,25 @@
 class MonthTypes < Inum::Base
-  define :APR, 0
-  define :MAY, 1
-  define :JUN, 2
-  define :JUL, 3
-  define :AUG, 4
-  define :SEP, 5
-  define :OCT, 6
-  define :NOV, 7
-  define :DEC, 8
-  define :JAN, 9
-  define :FEB, 10
-  define :MAR, 11
-  define :APR2, 12
-  define :MAY2, 13
-  define :JUN2, 14
+  # define :APR, 0
+  # define :MAY, 1
+  # define :JUN, 2
+  # define :JUL, 3
+  # define :AUG, 4
+  # define :SEP, 5
+  # define :FEB, 10
+  define :MAR, 0
+  define :APR, 1
+  define :MAY, 2
+  define :JUN, 3
+  define :JUL, 4
+  define :AUG, 5
+  define :SEP, 6
+  define :OCT, 7
+  define :NOV, 8
+  define :DEC, 9
+  define :JAN, 10
 
   def key
-    Date.new(2017,4,1).months_since(value).strftime("%Y%m")
+    Date.new(2018,3,1).months_since(value).strftime("%Y%m")
   end
 
   def self.keys

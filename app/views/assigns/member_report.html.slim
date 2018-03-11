@@ -1,7 +1,7 @@
 = link_to "一覧表（EXCEL）", assigns_member_report_path(format: "xlsx"), class: "btn btn-primary"
 = link_to "一覧表正規化済（EXCEL）", assigns_allocs_report_path(format: "xlsx"), class: "btn btn-primary"
 
-- @assigns.sort_by{|a|a.member.number}.group_by(&:member).each do |member,assigns|
+- @assigns.group_by(&:member).each do |member,assigns|
   incrementalsearch :text=member.text_for_search
     hr
     h5 = link_to member.full_name, member_allocs_path(member.id)

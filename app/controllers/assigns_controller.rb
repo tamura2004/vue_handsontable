@@ -1,7 +1,8 @@
 class AssignsController < ApplicationController
 
   def member_report
-    @assigns = Assign.joins(:member).merge(current_members.worker).recent.decorate
+    # @assigns = Assign.joins(:member).merge(current_members.worker).recent.decorate
+    @assigns = Assign.joins(:member).recent.decorate
 
     respond_to do |format|
       format.html
