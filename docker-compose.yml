@@ -2,8 +2,20 @@ version: '3'
 services:
   web:
     build: .
-    command: puma
-    volumes:
-      - .:/myapp
+    command: rails s -b 0.0.0.0
     ports:
       - "3000:3000"
+    links:
+      - db
+    environment:
+      DATABASE_USER: postgres
+      DATABASE_PASSWORD:
+      DATABASE_HOST: db
+      DB_USERNAME: postgres
+      DB_PASSWORD:
+      DB_HOST: db
+  db:
+    image: postgres
+    ports:
+      - "5432"
+

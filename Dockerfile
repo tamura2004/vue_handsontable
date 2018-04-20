@@ -1,20 +1,23 @@
 FROM ruby:2.4
 
-RUN apt-get update -qq && apt-get install -y \
-	build-essential \
-	libpq-dev \
-	nodejs
+RUN apt-get update -qq && \
+	apt-get install -y --no-install-recommends \
+		build-essential \
+		libpq-dev \
+		npm \
+		nodejs && \
+		rm -rf /var/lib/apt/lists/*
 
-ENV APP /vue_handsontable
+ENV APP /app
 
-RUN mkdir $APP
+RUN mkdir -p $APP
 WORKDIR $APP
+ADD Gemfile $APP/
+ADD Gemfile.lock $APP/
 
-ADD Gemfile ${APP}/Gemfile
-ADD Gemfile.lock ${APP}/Gemfile.lock
-RUN bundle
+ENV NOKOGIRI_USE_SYSTEM_LIBRARIES "YES"
+RUN bundle install
 
 ADD . $APP
-
-
-
+RUN mkdir -p /root/run/
+RUN touch /root/run/app.pid

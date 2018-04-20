@@ -12,8 +12,13 @@ module Chart
         StackedAreaSeriesBuilder.build(chart) do |series|
           @costs = Plan.where(project_number: project.number).costs
           @costs.each_with_index do |cost, i|
-            month = MonthTypes.parse(i).key
-            series.set_point(month, cost)
+            monthType = MonthTypes.parse(i)
+            if monthType.nil?
+              puts i
+            else
+              month = monthType.key
+              series.set_point(month, cost)
+            end
           end
         end
       end

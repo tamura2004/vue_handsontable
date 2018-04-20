@@ -32,27 +32,27 @@ module Chart
           end
         end
 
-        Chart::LineSeriesBuilder.build(chart) do |series|
-          ::MonthTypes.pivot(cols: works).each do |month, cost|
-            series.set_point(month, cost)
-            series.set_label(month: "201712", name: "要員数", indexLabelFontSize: 18)
-          end
-        end
+        # Chart::LineSeriesBuilder.build(chart) do |series|
+        #   ::MonthTypes.pivot(cols: works).each do |month, cost|
+        #     series.set_point(month, cost)
+        #     series.set_label(month: "201712", name: "要員数", indexLabelFontSize: 18)
+        #   end
+        # end
 
-        Chart::LineSeriesBuilder.build(chart) do |series|
-          ::MonthTypes.pivot(cols: works).each do |month, cost|
-            series.set_point(month, cost * 1.2)
-            series.set_label(month: "201711", name: "要員数(残業込み)", indexLabelFontSize: 18)
-          end
-        end
+        # Chart::LineSeriesBuilder.build(chart) do |series|
+        #   ::MonthTypes.pivot(cols: works).each do |month, cost|
+        #     series.set_point(month, cost * 1.2)
+        #     series.set_label(month: "201711", name: "要員数(残業込み)", indexLabelFontSize: 18)
+        #   end
+        # end
 
-        Chart::LineSeriesBuilder.build(chart) do |series|
-          plans_costs.each_with_index do |cost, i|
-            month = MonthTypes.parse(i).key
-            series.set_point(month, cost)
-            series.set_label(month: "201801", name: "案件受注", indexLabelFontSize: 18)
-          end
-        end
+        # Chart::LineSeriesBuilder.build(chart) do |series|
+        #   plans_costs.each_with_index do |cost, i|
+        #     month = MonthTypes.parse(i).key
+        #     series.set_point(month, cost)
+        #     series.set_label(month: "201801", name: "案件受注", indexLabelFontSize: 18)
+        #   end
+        # end
 
       end
     end

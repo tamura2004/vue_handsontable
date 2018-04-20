@@ -17,6 +17,7 @@ class MonthTypes < Inum::Base
   define :NOV, 8
   define :DEC, 9
   define :JAN, 10
+  define :FEB, 11
 
   def key
     Date.new(2018,3,1).months_since(value).strftime("%Y%m")
