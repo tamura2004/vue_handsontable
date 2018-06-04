@@ -41,7 +41,7 @@ v4.2.6
 $ npm -v
 3.5.2
 
-$ bundle install --without test development
+$ bundle install --without test development --path vendor/bundle
 $ rails -v
 Rails 5.0.2
 
@@ -67,11 +67,11 @@ $ RAILS_ENV=production rails assets:precompile
 $ sudo apt-get install nginx
 $ sudo rm /etc/nginx/sites-enabled/default
 $ sudo ln -sf  /home/ubuntu/workplan/nginx.conf /etc/nginx/conf.d/nginx.conf
-$ nginx -s reload
+$ sudo nginx -s reload
 
 Allow connection to Azure Database for Postgresql
 
-$ sudo ln -sf /home/ubuntu/workplan/puma.service /etc/systemd/system/puma.service
+$ sudo cp /home/ubuntu/workplan/puma.service /etc/systemd/system/puma.service
 $ sudo systemctl daemon-reload
 $ sudo systemctl enable puma.service
 $ sudo systemctl start puma.service
