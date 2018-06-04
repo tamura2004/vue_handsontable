@@ -8,7 +8,7 @@
 
 ## Getting Started:
 
-- Ubuntu 16.04.4 LTS 
+- Ubuntu 18.04 LTS 
 
 ```
 $ cd
@@ -18,45 +18,28 @@ $ pwd
 $ mkdir run
 
 $ cat /etc/issue
-Ubuntu 16.04.4 LTS
+Ubuntu 18.04 LTS
 
 $ git clone https://github.com/tamura2004/vue_handsontable.git workplan
 $ cd workplan
 $ sudo apt-get update
 $ sudo apt-get install -y --no-install-recommends ruby ruby-dev
 $ ruby -v
-bundle install --without test development
+ruby 2.5.1p57 (2018-03-29 revision 63029) [x86_64-linux-gnu]
 
 $ gem -v
-2.5.2.1
+2.7.6
 
+$ sudo gem install bundler
 $ bundle -v
-Bundler version 1.11.2
+Bundler version 1.16.2
 
-$ sudo apt-get install -y --no-install-recommends libgdbm-dev ruby build-essential npm nodejs
-
-$ sudo add-apt-repository "deb http://apt.postgresql.org/pub/repos/apt/ $(lsb_release -sc)-pgdg main"
-$ wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
-$ sudo apt-get update
-$ sudo apt-get install postgresql-9.6 postgresql-client-9.6
-$ pg_dump --version
-$ sudo su - postgres
-$ psql
-$ create user tamura with password 'tamura' createdb;
-
-$ rails db:create
-$ rails db:migrate
-$ rails db:seed
-
+$ sudo apt-get install -y --no-install-recommends npm nodejs
 $ nodejs -v
-v4.2.6
+v8.10.0
 
 $ npm -v
 3.5.2
-
-$ bundle install --without test development --path vendor/bundle
-$ rails -v
-Rails 5.0.2
 
 $ sudo npm cache clean
 $ sudo npm install n -g
@@ -64,8 +47,43 @@ $ sudo n stable
 $ sudo ln -sf /usr/local/bin/node /usr/bin/node
 $ node -v
 v10.2.1
-
 $ sudo apt-get purge -y nodejs npm
+
+$ sudo apt-get install -y --no-install-recommends libgdbm-dev build-essential postgresql libpq-dev
+$ psql --version
+psql (PostgreSQL) 10.4 (Ubuntu 10.4-0ubuntu0.18.04)
+
+$ pg_dump --version
+pg_dump (PostgreSQL) 10.4 (Ubuntu 10.4-0ubuntu0.18.04)
+
+$ sudo apt-get install zlib1g-dev
+$ bundle install --without test development --path vendor/bundle
+
+$ sudo su - postgres
+$ psql
+$ create user tamura with password 'tamura' createdb;
+
+$ vim /etc/postgresql/9.6/main/postgresql.conf
+shared_buffers = 1600MB
+temp_buffers = 32MB
+work_mem = 32MB
+maintenance_work_mem = 128MB
+wal_buffers = 16MB
+
+$ sudo service postgresql restart
+
+$ RAILS_ENV=production bundle exec rails db:create
+$ RAILS_ENV=production bundle exec rails db:migrate
+$ DISABLE_DATABASE_ENVIRONMENT_CHECK=1 RAILS_ENV=production bundle exec rails db:reset
+
+$ scp -i key seeds.sql ubuntu@workplan.sofia3dd.net:~/workplan/tmp/seeds.sql
+
+$ RAILS_ENV=production bundle exec rails db:seed
+
+$ rails -v
+Rails 5.0.7
+
+
 
 $ curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
 $ echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
@@ -78,11 +96,12 @@ $ yarn
 $ RAILS_ENV=production rails assets:precompile
 
 $ sudo apt-get install nginx
+$ nginx -v
+nginx version: nginx/1.14.0 (Ubuntu)
+
 $ sudo rm /etc/nginx/sites-enabled/default
 $ sudo ln -sf  /home/ubuntu/workplan/nginx.conf /etc/nginx/conf.d/nginx.conf
 $ sudo nginx -s reload
-
-Allow connection to Azure Database for Postgresql
 
 $ sudo cp /home/ubuntu/workplan/puma.service /etc/systemd/system/puma.service
 $ sudo systemctl daemon-reload
@@ -90,13 +109,5 @@ $ sudo systemctl enable puma.service
 $ sudo systemctl start puma.service
 $ sudo systemctl status puma.service
 
-```
-
-### install yarn
-[https://yarnpkg.com/lang/en/docs/install/](https://yarnpkg.com/lang/en/docs/install/)
-
-```
-choco install yarn
-pg_dump projects_members_development --data-only --inserts > 20170809backup.sql
 ```
 
