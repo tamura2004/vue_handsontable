@@ -66,23 +66,16 @@ $ RAILS_ENV=production rails assets:precompile
 
 $ sudo apt-get install nginx
 $ sudo rm /etc/nginx/sites-enabled/default
-$ sudo cp workplan.conf /etc/nginx/conf.d/
+$ sudo ln -sf  /home/ubuntu/workplan/nginx.conf /etc/nginx/conf.d/nginx.conf
 $ nginx -s reload
 
-$ cd ~
-$ wget https://raw.githubusercontent.com/puma/puma/master/tools/jungle/upstart/puma-manager.conf
-$ wget https://raw.githubusercontent.com/puma/puma/master/tools/jungle/upstart/puma.conf
+Allow connection to Azure Database for Postgresql
 
-Open downloaded puma.conf file and set your system’s user account for setuid and setguid. (in our case we use root account, but it’s recommended to use a less-priviliged account):
-
-setuid root
-setgid root
-
-$ sudo cp puma.conf puma-manager.conf /etc/init
-$ sudo touch /etc/puma.conf
-
-
-
+$ sudo ln -sf /home/ubuntu/workplan/puma.service /etc/systemd/system/puma.service
+$ sudo systemctl daemon-reload
+$ sudo systemctl enable puma.service
+$ sudo systemctl start puma.service
+$ sudo systemctl status puma.service
 
 ```
 
