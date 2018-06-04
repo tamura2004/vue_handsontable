@@ -7,7 +7,7 @@ Type=simple
 User=root
 WorkingDirectory=/home/ubuntu/workplan
 Environment="RAILS_ENV=production"
-ExecStart=/usr/local/bin/puma -C /home/ubuntu/workplan/config/puma.rb
+ExecStart=/usr/bin/bundle exec puma -C /home/ubuntu/workplan/config/puma.rb
 TimeoutSec=300
 Restart=always
 
