@@ -9,16 +9,23 @@ import (
 
 func main() {
 	filename := time.Now().Format("../tmp/20060102backup.sql")
-	out, err := exec.Command("pg_dump", "--inserts", "-a" , "--exclude-table-data=schema_migrations","projects_members_development").Output()
-
-	if err != nil {
-		log.Fatal(out,err)
-	}
+	out, err := exec.Command(
+		"pg_dump",
+		"--inserts",
+		"-a" ,
+		"--data-only",
+		"--exclude-table-data=schema_migrations",
+		"--exclude-table-data=ar_internal_metadata",
+		"prod_work"
+	).Output()
+	handleErr(err)
 
 	err = ioutil.WriteFile(filename, out, 0666)
+	handleErr(err)
+}
 
+func handleErr(err error){
 	if err != nil {
 		log.Fatal(err)
 	}
-
 }

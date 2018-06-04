@@ -33,7 +33,20 @@ $ gem -v
 $ bundle -v
 Bundler version 1.11.2
 
-$ sudo apt-get install -y --no-install-recommends libgdbm-dev ruby build-essential libpq-dev npm nodejs
+$ sudo apt-get install -y --no-install-recommends libgdbm-dev ruby build-essential npm nodejs
+
+$ sudo add-apt-repository "deb http://apt.postgresql.org/pub/repos/apt/ $(lsb_release -sc)-pgdg main"
+$ wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
+$ sudo apt-get update
+$ sudo apt-get install postgresql-9.6 postgresql-client-9.6
+$ pg_dump --version
+$ sudo su - postgres
+$ psql
+$ create user tamura with password 'tamura' createdb;
+
+$ rails db:create
+$ rails db:migrate
+$ rails db:seed
 
 $ nodejs -v
 v4.2.6
