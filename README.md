@@ -51,10 +51,10 @@ $ sudo apt-get purge -y nodejs npm
 
 $ sudo apt-get install -y --no-install-recommends libgdbm-dev build-essential postgresql libpq-dev
 $ psql --version
-psql (PostgreSQL) 10.4 (Ubuntu 10.4-0ubuntu0.18.04)
+psql (PostgreSQL) 10.3 (Ubuntu 10.4-0ubuntu0.18.04)
 
 $ pg_dump --version
-pg_dump (PostgreSQL) 10.4 (Ubuntu 10.4-0ubuntu0.18.04)
+pg_dump (PostgreSQL) 10.3 (Ubuntu 10.4-0ubuntu0.18.04)
 
 $ sudo apt-get install zlib1g-dev
 $ bundle install --without test development --path vendor/bundle
@@ -63,7 +63,7 @@ $ sudo su - postgres
 $ psql
 $ create user tamura with password 'tamura' createdb;
 
-$ vim /etc/postgresql/9.6/main/postgresql.conf
+$ vim /etc/postgresql/10/main/postgresql.conf
 shared_buffers = 1600MB
 temp_buffers = 32MB
 work_mem = 32MB
@@ -82,8 +82,6 @@ $ RAILS_ENV=production bundle exec rails db:seed
 
 $ rails -v
 Rails 5.0.7
-
-
 
 $ curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
 $ echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list

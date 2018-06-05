@@ -31,3 +31,6 @@ node_modules/
 
 # Ignore unix domain socket
 /run/*
+
+# Ignore precompile asset
+/public/assets
