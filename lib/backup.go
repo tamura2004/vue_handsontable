@@ -11,10 +11,10 @@ func main() {
 	filename := time.Now().Format("../tmp/20060102backup.sql")
 	out, err := exec.Command(
 		"pg_dump",
-		"-U".
+		"-U",
 		"tamura"
 		"--inserts",
-		"-a" ,
+		"-a",
 		"--data-only",
 		"--exclude-table-data=schema_migrations",
 		"--exclude-table-data=ar_internal_metadata",
