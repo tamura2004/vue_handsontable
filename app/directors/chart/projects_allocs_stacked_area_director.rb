@@ -61,7 +61,11 @@ module Chart
       month_value_total = allocs.inject(0) do |acc, alloc|
         acc += MonthTypes.parse(alloc.month).value
       end
-      weighted_averate_month = MonthTypes.parse(month_value_total/allocs.size).key
+      if allocs.size.zero?
+        "201809"
+      else
+        weighted_averate_month = MonthTypes.parse(month_value_total/allocs.size).key
+      end
     end
 
   end

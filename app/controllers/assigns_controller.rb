@@ -28,7 +28,7 @@ class AssignsController < ApplicationController
   end
 
   def chart
-    @projects = Project.recent.where(group_id: current_group.id).decorate
+    @projects = Project.available.where(group: current_group).decorate
     @works = Work.joins(:member).merge(current_members.worker).recent
     @plans_costs = Plan.where.not(m1: nil).costs
   end
@@ -38,7 +38,7 @@ class AssignsController < ApplicationController
   end
 
   def project_chart
-    @projects = Project.available.recent.where(group_id: current_group.id).decorate
+    @projects = Project.available.where(group: current_group).decorate
   end
 
   private

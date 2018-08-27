@@ -17,8 +17,7 @@ html lang="en"
         = drop_down "#{fa_icon('user')}要員別"
           = menu_item assigns_member_chart_path
             i.fa.fa-line-chart アサイン過不足グラフ
-          - 6.times do |i|
-            - month = Date.today.months_since(i).strftime("%Y%m")
+          - MonthTypes.keys.each do |month|
             = menu_item members_projects_allocs_circle_chart_path(month: month)
               i.fa.fa-pie-chart = "#{month}割当状況円グラフ"
           = menu_item group_works_path(Group.first)

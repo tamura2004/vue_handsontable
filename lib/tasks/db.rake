@@ -53,6 +53,7 @@ namespace :db do
 
 			project = Project.find_or_create_by(number: project_number, group: intra) do |p|
 				p.name = project_name
+				p.end_month = "201903"
 			end
 
 			assign = Assign.find_or_create_by(member: member, project: project)
