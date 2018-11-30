@@ -1,18 +1,18 @@
 class Chart::MonthlySeriesBuilder  < Chart::SeriesBuilder
 
   POINTS = [
-    { label: "201803", y: 0 },
-    { label: "201804", y: 0 },
-    { label: "201805", y: 0 },
-    { label: "201806", y: 0 },
-    { label: "201807", y: 0 },
-    { label: "201808", y: 0 },
     { label: "201809", y: 0 },
     { label: "201810", y: 0 },
     { label: "201811", y: 0 },
     { label: "201812", y: 0 },
     { label: "201901", y: 0 },
-    { label: "201902", y: 0 }
+    { label: "201902", y: 0 },
+    { label: "201903", y: 0 },
+    { label: "201904", y: 0 },
+    { label: "201905", y: 0 },
+    { label: "201906", y: 0 },
+    { label: "201907", y: 0 },
+    { label: "201908", y: 0 }
   ]
 
   LABEL = {
