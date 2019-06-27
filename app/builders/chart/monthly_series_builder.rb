@@ -5,14 +5,14 @@ class Chart::MonthlySeriesBuilder  < Chart::SeriesBuilder
     { label: "201905", y: 0 },
     { label: "201906", y: 0 },
     { label: "201907", y: 0 },
-    { label: "201908", y: 0 }
+    { label: "201908", y: 0 },
     { label: "201909", y: 0 },
     { label: "201910", y: 0 },
     { label: "201911", y: 0 },
     { label: "201912", y: 0 },
     { label: "202001", y: 0 },
     { label: "202002", y: 0 },
-    { label: "202003", y: 0 },
+    { label: "202003", y: 0 }
   ]
 
   LABEL = {
