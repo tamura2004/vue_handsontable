@@ -50,50 +50,50 @@
 #  updated_at                 :datetime         not null
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :plan do
-    category                   "MyString"
-    main_group_name            "MyString"
-    project_number             "MyString"
-    project_name               "MyString"
-    accuracy                   "MyString"
-    dept_name                  "MyString"
-    group_name                 "MyString"
-    sub_number                 "MyString"
-    system_name                "MyString"
-    contract_type              "MyString"
-    company_name               "MyString"
-    member_rank                "MyString"
-    unit_price                 10
-    manhour_last_month_landing 0.5
-    manhour_performance        0.5
-    manhour_development_plan   0.5
-    manhour_landing            0.5
-    manhour_divergence         0.5
-    manhour_ernings            0.5
-    money_last_month_landing   0.5
-    money_performance          0.5
-    money_development_plan     0.5
-    money_landing              0.5
-    money_divergence           0.5
-    money_ernings              0.5
-    cost_rate_plan             0.5
-    cost_rate_landing          0.5
-    gross_profit_plan          0.5
-    gross_profit_landing       0.5
-    gross_profit_divergence    0.5
-    to_be_confirmed            "MyString"
-    m1                         0.5
-    m2                         0.5
-    m3                         0.5
-    m4                         0.5
-    m5                         0.5
-    m6                         0.5
-    m7                         0.5
-    m8                         0.5
-    m9                         0.5
-    m10                        0.5
-    m11                        0.5
-    m12                        0.5
+    category                   { "MyString" }
+    main_group_name            { "MyString" }
+    project_number             { "MyString" }
+    project_name               { "MyString" }
+    accuracy                   { "MyString" }
+    dept_name                  { "MyString" }
+    group_name                 { "MyString" }
+    sub_number                 { "MyString" }
+    system_name                { "MyString" }
+    contract_type              { "MyString" }
+    company_name               { "MyString" }
+    member_rank                { "MyString" }
+    unit_price                 { 10 }
+    manhour_last_month_landing { 0.5 }
+    manhour_performance        { 0.5 }
+    manhour_development_plan   { 0.5 }
+    manhour_landing            { 0.5 }
+    manhour_divergence         { 0.5 }
+    manhour_ernings            { 0.5 }
+    money_last_month_landing   { 0.5 }
+    money_performance          { 0.5 }
+    money_development_plan     { 0.5 }
+    money_landing              { 0.5 }
+    money_divergence           { 0.5 }
+    money_ernings              { 0.5 }
+    cost_rate_plan             { 0.5 }
+    cost_rate_landing          { 0.5 }
+    gross_profit_plan          { 0.5 }
+    gross_profit_landing       { 0.5 }
+    gross_profit_divergence    { 0.5 }
+    to_be_confirmed            { "MyString" }
+    m1                         { 0.5 }
+    m2                         { 0.5 }
+    m3                         { 0.5 }
+    m4                         { 0.5 }
+    m5                         { 0.5 }
+    m6                         { 0.5 }
+    m7                         { 0.5 }
+    m8                         { 0.5 }
+    m9                         { 0.5 }
+    m10                        { 0.5 }
+    m11                        { 0.5 }
+    m12                        { 0.5 }
   end
 end

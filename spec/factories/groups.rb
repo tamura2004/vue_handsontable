@@ -9,7 +9,7 @@
 #  updated_at    :datetime         not null
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   sequence :group_name do |n|
     "第#{n}グループ"
   end

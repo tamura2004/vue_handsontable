@@ -14,7 +14,7 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
 
   Faker::Config.locale = :ja
-  config.include FactoryGirl::Syntax::Methods
+  config.include FactoryBot::Syntax::Methods
   config.include RSpec::RequestDescriber
   config.example_status_persistence_file_path = "./spec/examples.txt"
 end

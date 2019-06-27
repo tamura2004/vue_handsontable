@@ -8,7 +8,7 @@
 #  updated_at :datetime         not null
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   sequence :department_name do |n|
     "第#{n}開発部"
   end

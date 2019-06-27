@@ -51,7 +51,7 @@ namespace :tool do
     Rails.root.join("spec","models").children.each do |path|
       modelname = path.basename(".rb").to_s.gsub(/_spec/,"")
       pattern = /pending.*$/
-      replacement = "subject{FactoryGirl.build :#{modelname}}\n"
+      replacement = "subject{FactoryBot.build :#{modelname}}\n"
       replacement += "\tit{should be_valid}\n"
       FileUtils.sed_i path.to_s, pattern, replacement
     end
@@ -86,7 +86,7 @@ namespace :tool do
       FileUtils.sed_i path.to_s, pattern, replacement
 
       pattern = /skip.*attributes valid.*$/
-      replacement = "FactoryGirl.attributes_for :#{modelname}"
+      replacement = "FactoryBot.attributes_for :#{modelname}"
       FileUtils.sed_i path.to_s, pattern, replacement
 
       pattern = /_controller/

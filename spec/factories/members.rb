@@ -11,7 +11,7 @@
 #  updated_at   :datetime         not null
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   sequence :member_number do |n|
     "%06d" % n
   end

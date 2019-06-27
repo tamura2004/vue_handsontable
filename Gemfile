@@ -13,11 +13,13 @@ gem 'puma', '~> 3.0'
 group :development, :test do
   gem 'byebug', platform: :mri
   gem "rspec-rails"
-  gem "factory_girl_rails"
+  gem "factory_bot_rails"
   gem "rails-controller-testing"
   gem "pry-rails"
   gem "pry-byebug"
   gem "faker"
+  gem "rubocop-rspec"
+  gem "rubocop"
 end
 
 group :test do
@@ -34,7 +36,6 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem "spring-commands-rspec"
   gem "annotate"
-  gem "rubocop"
   # gem "rails-erd"
 end
 

@@ -10,10 +10,10 @@
 #  updated_at :datetime         not null
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :work do
     association :member
-    month "MyString"
-    cost 1.5
+    month { "MyString" }
+    cost { 1.5 }
   end
 end
