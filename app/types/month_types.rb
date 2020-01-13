@@ -1,19 +1,28 @@
 class MonthTypes < Inum::Base
-  define :APR, 0
-  define :MAY, 1
-  define :JUN, 2
-  define :JUL, 3
-  define :AUG, 4
-  define :SEP, 5
-  define :OCT, 6
-  define :NOV, 7
-  define :DEC, 8
-  define :JAN, 9
-  define :FEB, 10
-  define :MAR, 11
+  # 処理範囲を当月の３ヶ月前〜９ヶ月後に設定する。
+  SYMS = %i(JAN FEB MAR APR MAY JUN JUL AUG SEP OCT NOV DEC)
+  MONTH = Time.now.month + (12 - 3) - 1 #MOD12で3ヶ月前(0 origin)
+  12.times do |i|
+    j = (i + MONTH) % 12;
+    define SYMS[j], i
+  end
+
+  # define :JAN, 0
+  # define :FEB, 1
+  # define :MAR, 2
+  # define :APR, 3
+  # define :MAY, 4
+  # define :JUN, 5
+  # define :JUL, 6
+  # define :AUG, 7
+  # define :SEP, 8
+  # define :OCT, 9
+  # define :NOV, 10
+  # define :DEC, 11
 
   def key
-    Date.new(2019, 4, 1).months_since(value).strftime("%Y%m")
+    Date.today.months_ago(3).months_since(value).strftime("%Y%m")
+    # Date.new(2020, 1, 1).months_since(value).strftime("%Y%m")
   end
 
   def self.keys

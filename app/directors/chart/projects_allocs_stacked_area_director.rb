@@ -39,7 +39,7 @@ module Chart
         acc += MonthTypes.parse(alloc.month).value
       end
       if allocs.size.zero?
-        "201903"
+        "201912"
       else
         weighted_averate_month = MonthTypes.parse(month_value_total/allocs.size).key
       end

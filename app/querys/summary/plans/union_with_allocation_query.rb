@@ -40,18 +40,18 @@ Summary::Plans::UnionWithAllocationQuery = <<-SQL
     projects.number as project_number,
     projects.name as project_name,
 
-    sum(case when allocs.month = '201904' then allocs.cost else 0 end) as t1,
-    sum(case when allocs.month = '201905' then allocs.cost else 0 end) as t2,
-    sum(case when allocs.month = '201906' then allocs.cost else 0 end) as t3,
-    sum(case when allocs.month = '201907' then allocs.cost else 0 end) as t4,
-    sum(case when allocs.month = '201908' then allocs.cost else 0 end) as t5,
-    sum(case when allocs.month = '201909' then allocs.cost else 0 end) as t6,
-    sum(case when allocs.month = '201910' then allocs.cost else 0 end) as t7,
-    sum(case when allocs.month = '201911' then allocs.cost else 0 end) as t8,
-    sum(case when allocs.month = '201912' then allocs.cost else 0 end) as t9,
-    sum(case when allocs.month = '202001' then allocs.cost else 0 end) as t10,
-    sum(case when allocs.month = '202002' then allocs.cost else 0 end) as t11,
-    sum(case when allocs.month = '202003' then allocs.cost else 0 end) as t12
+    sum(case when allocs.month = '202001' then allocs.cost else 0 end) as t1,
+    sum(case when allocs.month = '202002' then allocs.cost else 0 end) as t2,
+    sum(case when allocs.month = '202003' then allocs.cost else 0 end) as t3,
+    sum(case when allocs.month = '202004' then allocs.cost else 0 end) as t4,
+    sum(case when allocs.month = '202005' then allocs.cost else 0 end) as t5,
+    sum(case when allocs.month = '202006' then allocs.cost else 0 end) as t6,
+    sum(case when allocs.month = '202007' then allocs.cost else 0 end) as t7,
+    sum(case when allocs.month = '202008' then allocs.cost else 0 end) as t8,
+    sum(case when allocs.month = '202009' then allocs.cost else 0 end) as t9,
+    sum(case when allocs.month = '202010' then allocs.cost else 0 end) as t10,
+    sum(case when allocs.month = '202011' then allocs.cost else 0 end) as t11,
+    sum(case when allocs.month = '202012' then allocs.cost else 0 end) as t12
 
   from allocs
   left join assigns
