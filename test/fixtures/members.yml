@@ -15,16 +15,16 @@ one:
   name: one
   group: one
   job_title: one
-  number: MyString
+  number: "a001"
 
 two:
   name: two
   group: two
   job_title: two
-  number: MyString
+  number: "a002"
 
 three:
   name: three
   group: three
   job_title: three
-  number: MyString
+  number: "a003"
