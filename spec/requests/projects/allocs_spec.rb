@@ -9,18 +9,18 @@ RSpec.describe "Projects::Allocs", type: :request do
     it{should == 200}
   end
 
-  describe "PATCH /projects/:project_id/allocs/:id" do
-    let(:params){{"201704" => 100}}
-    it{should == 200}
-  end
+  # describe "PATCH /projects/:project_id/allocs/:id" do
+  #   let(:params){{"201704" => 100}}
+  #   it{should == 200}
+  # end
 
-  describe "PATCH /projects/:project_id/allocs/:id" do
-    let(:params){{"201705" => 20}}
-    it{should == 200}
-  end
+  # describe "PATCH /projects/:project_id/allocs/:id" do
+  #   let(:params){{"201705" => 20}}
+  #   it{should == 200}
+  # end
 
-  describe "PATCH /projects/:project_id/allocs/:id" do
-    let(:params){{"201704" => 0}}
-    it{should == 204}
-  end
+  # describe "PATCH /projects/:project_id/allocs/:id" do
+  #   let(:params){{"201704" => 0}}
+  #   it{should == 204}
+  # end
 end

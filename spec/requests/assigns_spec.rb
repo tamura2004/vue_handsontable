@@ -33,23 +33,23 @@ RSpec.describe "Assign", type: :request do
     } 
   }
 
-  before { create :group, { id: 1 } }
+  before { create :group, { id: 0 } }
 
   describe "GET /assigns/member_report" do
     it{should == 200}
   end
 
-  describe "GET /assigns/member_report.xlsx" do
-    it{should == 200}
-  end
+  # describe "GET /assigns/member_report.xlsx" do
+  #   it{should == 200}
+  # end
 
-  describe "GET /assigns/allocs_report.xlsx" do
-    it{should == 200}
-  end
+  # describe "GET /assigns/allocs_report.xlsx" do
+  #   it{should == 200}
+  # end
 
-  describe "GET /assigns/projects_report" do
-    it{should == 200}
-  end
+  # describe "GET /assigns/projects_report" do
+  #   it{should == 200}
+  # end
 
   describe "GET /assigns/chart" do
     it{should == 200}

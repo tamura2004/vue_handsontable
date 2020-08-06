@@ -8,7 +8,7 @@ RSpec.describe "Groups::JobTitles::Works", type: :request do
   let(:job_title_id){work.member.job_title.id}
   let(:id){work.member.id}
 
-  describe "PATCH /groups/:group_id/job_titles/:job_title_id/works/:id" do
-    it{should == 200}
-  end
+  # describe "PATCH /groups/:group_id/job_titles/:job_title_id/works/:id" do
+  #   it{should == 200}
+  # end
 end

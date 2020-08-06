@@ -1,0 +1,30 @@
+# == Schema Information
+#
+# Table name: members
+#
+#  id           :integer          not null, primary key
+#  name         :string
+#  group_id     :integer
+#  job_title_id :integer
+#  number       :string
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#
+
+one:
+  name: one
+  group: one
+  job_title: one
+  number: MyString
+
+two:
+  name: two
+  group: two
+  job_title: two
+  number: MyString
+
+three:
+  name: three
+  group: three
+  job_title: three
+  number: MyString

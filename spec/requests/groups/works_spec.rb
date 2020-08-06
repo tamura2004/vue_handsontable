@@ -10,19 +10,19 @@ RSpec.describe "Works", type: :request do
     it{should == 200}
   end
 
-  describe "PATCH /groups/:group_id/works/:id" do
-    let(:params){{month => 10}}
-    it{should == 200}
-  end
+  # describe "PATCH /groups/:group_id/works/:id" do
+  #   let(:params){{month => 10}}
+  #   it{should == 200}
+  # end
 
-  describe "PATCH /groups/:group_id/works/:id" do
-    let(:params){{"201705" => 10}}
-    it{should == 200}
-  end
+  # describe "PATCH /groups/:group_id/works/:id" do
+  #   let(:params){{"201705" => 10}}
+  #   it{should == 200}
+  # end
 
-  describe "PATCH /groups/:group_id/works/:id" do
-    let(:params){{month => 0}}
-    it{should == 204}
-  end
+  # describe "PATCH /groups/:group_id/works/:id" do
+  #   let(:params){{month => 0}}
+  #   it{should == 204}
+  # end
 
 end

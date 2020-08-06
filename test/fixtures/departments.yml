@@ -8,7 +8,8 @@
 #  updated_at :datetime         not null
 #
 
-class Department < ApplicationRecord
-  has_many :groups
-  validates :name, uniqueness: true, presence: true
-end
+one:
+  name: one
+
+two:
+  name: two

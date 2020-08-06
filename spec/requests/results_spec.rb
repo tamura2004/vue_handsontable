@@ -8,9 +8,9 @@ RSpec.describe "Results", type: :request do
     it{should == 200}
   end
 
-  describe "GET /results.xlsx" do
-    it{should == 200}
-  end
+  # describe "GET /results.xlsx" do
+  #   it{should == 200}
+  # end
 
   describe "POST /results/upload" do
     it{should == 200}

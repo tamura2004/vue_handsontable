@@ -9,13 +9,18 @@
 #  updated_at    :datetime         not null
 #
 
-FactoryBot.define do
-  sequence :group_name do |n|
-    "第#{n}グループ"
-  end
+one:
+  department: one
+  name: one
 
-  factory :group do
-    name { generate :group_name }
-    association :department
-  end
-end
+two:
+  department: one
+  name: two
+
+three:
+  department: two
+  name: three
+
+four:
+  department: two
+  name: four

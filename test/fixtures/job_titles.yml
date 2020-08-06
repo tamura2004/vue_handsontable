@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: departments
+# Table name: job_titles
 #
 #  id         :integer          not null, primary key
 #  name       :string
@@ -8,7 +8,14 @@
 #  updated_at :datetime         not null
 #
 
-class Department < ApplicationRecord
-  has_many :groups
-  validates :name, uniqueness: true, presence: true
-end
+one:
+  id: 2
+  name: one
+
+two:
+  id: 8
+  name: two
+
+three:
+  id: 9
+  name: three
