@@ -23,7 +23,7 @@ class DepartmentTest < ActiveSupport::TestCase
   end
   
   test "名前が重複しなければ適正である" do
-    departments(:one).destroy
+    departments(:one).update(name: "other")
     assert @department.valid?
   end
 

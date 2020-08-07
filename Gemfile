@@ -2,16 +2,17 @@ source 'http://rubygems.org'
 
 ruby "2.7.1"
 
-gem 'rails', '~> 5.2.0'
+gem 'rails', '~> 6.0.0'
 gem 'sass-rails'
 gem 'uglifier'
 gem 'coffee-rails'
 
 gem 'jquery-rails'
 gem 'jbuilder'
-gem 'puma', '~> 3.12'
+gem 'puma'
 
 gem "bootsnap"
+gem "webpacker"
 
 group :production do
   gem "pg"

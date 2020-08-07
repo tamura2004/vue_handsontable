@@ -1,6 +1,10 @@
 {
   "dependencies": {
+    "@rails/webpacker": "5.1.1",
     "handsontable": "^0.31.1",
     "moment": "^2.19.3"
+  },
+  "devDependencies": {
+    "webpack-dev-server": "^3.11.0"
   }
 }
