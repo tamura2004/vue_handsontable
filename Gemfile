@@ -16,21 +16,20 @@ end
 group :development, :test do
   gem "sqlite3", "~> 1.3.6"
   gem 'byebug', platform: :mri
-  gem "rspec-rails"
   gem "factory_bot_rails"
   gem "rails-controller-testing"
   gem "pry-rails"
   gem "pry-byebug"
   gem "faker"
-  gem "rubocop-rspec"
   gem "rubocop"
 end
 
 group :test do
   gem "database_cleaner"
   gem "simplecov"
-  gem "rspec-request_describer"
   gem "capybara"
+  gem "guard"
+  gem "guard-minitest"
 end
 
 group :development do
@@ -38,7 +37,6 @@ group :development do
   gem 'listen'
   gem 'spring'
   gem 'spring-watcher-listen'
-  gem "spring-commands-rspec"
   gem "annotate"
   # gem "rails-erd"
 end
@@ -51,10 +49,10 @@ gem "twitter-bootstrap-rails"
 gem "seed-fu"
 
 # gem "roo", "~> 2.4.0"
-gem "axlsx", "~> 2.0.0"
+gem "caxlsx"
 # gem "zip-zip"
-gem "rubyzip", "= 0.9.9"
-gem "axlsx_rails"
+gem "rubyzip"
+gem "caxlsx_rails"
 gem "simple_form"
 gem "font-awesome-rails"
 

@@ -23,7 +23,7 @@ class AssignsController < ApplicationController
   end
 
   def projects_report
-    @member = current_members.joins(:work).merge(Work.where("month > ?", current_month))
+    @member = current_members.joins(:works).merge(Work.where("works.month > ?", current_month))
     @assigns = Assign.joins(:member).merge(@member).recent.decorate
   end
 
@@ -49,4 +49,3 @@ class AssignsController < ApplicationController
     end
 
 end
-
