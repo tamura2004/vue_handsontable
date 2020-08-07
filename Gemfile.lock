@@ -336,6 +336,7 @@ GEM
     unicode-display_width (1.7.0)
     uniform_notifier (1.13.0)
     vuejs-rails (2.5.13)
+    warning (1.1.0)
     websocket-driver (0.7.3)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
@@ -393,6 +394,7 @@ DEPENDENCIES
   tzinfo-data
   uglifier
   vuejs-rails
+  warning
   yajl-ruby
 
 RUBY VERSION
