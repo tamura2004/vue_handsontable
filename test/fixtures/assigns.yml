@@ -9,9 +9,10 @@
 #  updated_at :datetime         not null
 #
 
-require 'rails_helper'
+one:
+  project: one
+  member: one
 
-RSpec.describe Assign, type: :model do
-  subject { build :assign }
-  it { should be_valid }
-end
+two:
+  project: two
+  member: two

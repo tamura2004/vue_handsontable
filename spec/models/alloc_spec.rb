@@ -1,13 +1,13 @@
 # == Schema Information
 #
-# Table name: projects_members_months
+# Table name: allocs
 #
-#  id                 :integer          not null, primary key
-#  projects_member_id :integer
-#  month              :string
-#  cost               :float
-#  created_at         :datetime         not null
-#  updated_at         :datetime         not null
+#  id         :integer          not null, primary key
+#  assign_id  :integer
+#  month      :string
+#  cost       :float
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
 #
 
 require 'rails_helper'

@@ -18,7 +18,7 @@ class MemberTest < ActiveSupport::TestCase
     @member = Member.new
   end
 
-  test "is valid" do
+  test "適正である" do
     assert @member.valid?
   end
 
@@ -32,13 +32,13 @@ class MemberTest < ActiveSupport::TestCase
     projects
     works
   ]
-  
+
   instance_methods.each do |method|
-    test "has instance #{method}" do
-      assert_respond_to @member, method 
+    test "インスタンスメソッドを持つ #{method}" do
+      assert_respond_to @member, method
     end
   end
-  
+
   static_methods = %i[
     admin
     bp
@@ -51,9 +51,9 @@ class MemberTest < ActiveSupport::TestCase
     with_works
     worker
   ]
-  
+
   static_methods.each do |method|
-    test "has static #{method}" do
+    test "スタティックメソッドを持つ #{method}" do
       assert_respond_to Member, method
     end
   end

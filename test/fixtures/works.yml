@@ -1,19 +1,21 @@
 # == Schema Information
 #
-# Table name: allocs
+# Table name: works
 #
 #  id         :integer          not null, primary key
-#  assign_id  :integer
+#  member_id  :integer
 #  month      :string
 #  cost       :float
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
 
-FactoryBot.define do
-  factory :alloc do
-    association :assign
-    month
-    cost
-  end
-end
+one:
+  member: one
+  month: <%= Date.today.strftime('%Y%m') %>
+  cost: 0.1
+
+one:
+  member: two
+  month: <%= Date.today.strftime('%Y%m') %>
+  cost: 0.1

@@ -48,6 +48,10 @@
 #  m12                        :float
 #  created_at                 :datetime         not null
 #  updated_at                 :datetime         not null
+#  project_id                 :integer
+#  month                      :string
+#  cost                       :float
+#  system_id                  :integer
 #
 
 class Plan < ApplicationRecord

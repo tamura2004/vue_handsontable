@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: projects_members
+# Table name: assigns
 #
 #  id         :integer          not null, primary key
 #  project_id :integer

@@ -1,20 +1,16 @@
 # == Schema Information
 #
-# Table name: projects_members_months
+# Table name: allocs
 #
-#  id                 :integer          not null, primary key
-#  projects_member_id :integer
-#  month              :string
-#  cost               :float
-#  created_at         :datetime         not null
-#  updated_at         :datetime         not null
+#  id         :integer          not null, primary key
+#  assign_id  :integer
+#  month      :string
+#  cost       :float
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
 #
 
 class Alloc < ApplicationRecord
-  # rails_admin do
-  #   visible false
-  # end
-
   belongs_to :assign
 
   has_one :project, through: :assign

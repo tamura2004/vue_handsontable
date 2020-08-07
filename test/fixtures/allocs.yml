@@ -10,10 +10,12 @@
 #  updated_at :datetime         not null
 #
 
-FactoryBot.define do
-  factory :alloc do
-    association :assign
-    month
-    cost
-  end
-end
+one:
+  assign: one
+  month: <%= Date.today.strftime('%Y%m') %>
+  cost: 0.1
+
+two:
+  assign: two
+  month: <%= Date.today.strftime('%Y%m') %>
+  cost: 0.1

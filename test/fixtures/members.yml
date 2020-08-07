@@ -15,16 +15,16 @@ one:
   name: one
   group: one
   job_title: one
-  number: "a001"
+  number: one
 
 two:
   name: two
   group: two
   job_title: two
-  number: "a002"
+  number: two
 
 three:
   name: three
   group: three
   job_title: three
-  number: "a003"
+  number: three
