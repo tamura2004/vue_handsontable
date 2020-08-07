@@ -10,7 +10,7 @@ html lang="en"
     = javascript_include_tag "application"
 
 
-  body
+  body: #app
     = nav_bar fixed: :top, brand: "案件アサイン管理"
       = menu_group
         = menu_divider
@@ -39,7 +39,7 @@ html lang="en"
           /   = menu_item plans_path
           /     i.fa.fa-table SPROスケジュール表
           /   = menu_item plans_compare_path
-          /     i.fa.fa-table SPRO比較表       
+          /     i.fa.fa-table SPRO比較表
           /   = menu_item plans_new_path
           /     i.fa.fa-upload 計画アップロード
 

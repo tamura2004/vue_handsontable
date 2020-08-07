@@ -15,7 +15,7 @@ class Work < ApplicationRecord
   #   visible false
   # end
 
-  belongs_to :member
+  belongs_to :member, optional: true
   has_one :group, through: :member
   has_one :job_title, through: :member
 

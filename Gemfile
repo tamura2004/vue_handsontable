@@ -1,6 +1,8 @@
 source 'http://rubygems.org'
 
-gem 'rails', '~> 5.1.5'
+ruby "2.7.1"
+
+gem 'rails', '~> 5.2.0'
 gem 'sass-rails'
 gem 'uglifier'
 gem 'coffee-rails'
@@ -9,12 +11,14 @@ gem 'jquery-rails'
 gem 'jbuilder'
 gem 'puma', '~> 3.12'
 
+gem "bootsnap"
+
 group :production do
   gem "pg"
 end
 
 group :development, :test do
-  gem "sqlite3", "~> 1.3.6"
+  gem "sqlite3"
   gem 'byebug', platform: :mri
   gem "pry-rails"
   gem "pry-byebug"

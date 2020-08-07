@@ -98,7 +98,7 @@ class VueTable
 
 $ ->
   new Vue
-    el: "body"
+    el: "#app"
     data:
       query: ""
     components:

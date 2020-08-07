@@ -11,7 +11,7 @@
 #
 
 class Alloc < ApplicationRecord
-  belongs_to :assign
+  belongs_to :assign, optional: true
 
   has_one :project, through: :assign
   has_one :member, through: :assign

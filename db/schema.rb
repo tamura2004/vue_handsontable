@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171027052325) do
+ActiveRecord::Schema.define(version: 2017_10_27_052325) do
 
   create_table "allocs", force: :cascade do |t|
     t.integer "assign_id"
