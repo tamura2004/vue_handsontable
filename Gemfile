@@ -1,12 +1,12 @@
 source 'http://rubygems.org'
 
 gem 'rails', '~> 5.1.5'
-gem 'sass-rails', '~> 5.0'
-gem 'uglifier', '>= 1.3.0'
-gem 'coffee-rails', '~> 4.2'
+gem 'sass-rails'
+gem 'uglifier'
+gem 'coffee-rails'
 
 gem 'jquery-rails'
-gem 'jbuilder', '~> 2.5'
+gem 'jbuilder'
 gem 'puma', '~> 3.12'
 
 group :production do
@@ -35,9 +35,9 @@ end
 
 group :development do
   gem 'web-console'
-  gem 'listen', '~> 3.0.5'
+  gem 'listen'
   gem 'spring'
-  gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'spring-watcher-listen'
   gem "spring-commands-rspec"
   gem "annotate"
   # gem "rails-erd"
@@ -46,14 +46,14 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem "slim-rails"
-gem "vuejs-rails", '= 1.0.24'
+gem "vuejs-rails"
 gem "twitter-bootstrap-rails"
 gem "seed-fu"
 
-gem "roo", "~> 2.4.0"
-gem "axlsx"
-gem "zip-zip"
-gem "rubyzip", "1.3.0"
+# gem "roo", "~> 2.4.0"
+gem "axlsx", "~> 2.0.0"
+# gem "zip-zip"
+gem "rubyzip", "= 0.9.9"
 gem "axlsx_rails"
 gem "simple_form"
 gem "font-awesome-rails"
@@ -63,7 +63,7 @@ gem "rails_admin-i18n"
 gem "i18n_generators"
 
 gem "levenshtein"
-gem "draper", '>= 3.0.0.pre1'
+gem "draper"
 
 gem "inum"
 gem "inum_types", git: "https://github.com/tamura2004/inum_types.git"
@@ -73,5 +73,4 @@ gem "bullet"
 gem "rack-mini-profiler"
 gem "yajl-ruby"
 gem "dotenv-rails"
-# gem "flamegraph"
-# gem "stackprof"
+gem "multi_json"

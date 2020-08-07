@@ -16,8 +16,8 @@ class Member < ApplicationRecord
   belongs_to :job_title, optional: true
 
   has_many :works, dependent: :destroy
-  has_many :allocs, -> { recent }, through: :assigns
   has_many :assigns
+  has_many :allocs, -> { recent }, through: :assigns
   has_many :projects, through: :assigns
 
   attr_accessor :group_name, :job_title_name

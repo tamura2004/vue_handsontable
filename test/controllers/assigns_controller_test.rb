@@ -6,6 +6,11 @@ class AssignsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  test "メンバー毎の帳票：エクセル添付ファイル" do
+    get assigns_member_report_url(format: "xlsx")
+    assert_response :success
+  end
+
   test "全体グラフ" do
     get assigns_chart_url
     assert_response :success
