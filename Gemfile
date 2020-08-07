@@ -16,8 +16,6 @@ end
 group :development, :test do
   gem "sqlite3", "~> 1.3.6"
   gem 'byebug', platform: :mri
-  gem "factory_bot_rails"
-  gem "rails-controller-testing"
   gem "pry-rails"
   gem "pry-byebug"
   gem "faker"

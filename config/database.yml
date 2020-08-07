@@ -28,11 +28,11 @@ default: &default
 
 test:
   <<: *default
-  database: test_work
+  database: db/test.sqlite3
 
 development:
   <<: *default
-  database: dev_work
+  database: db/development.sqlite3
 
 production:
   adapter: postgresql
