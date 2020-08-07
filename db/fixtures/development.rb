@@ -8,11 +8,11 @@ Department.seed do |s|
   s.name = Faker::University.name
 end
 
-job_title_names = %w(部長 課長 TL CF AS)
+job_title_names = %w(部長 課長 PM TL CF AS BP)
 
 job_title_names.each_with_index do |name,id|
   JobTitle.seed do |s|
-    s.id = id + 1
+    s.id = id + 3
     s.name = name
   end
 end
@@ -37,7 +37,7 @@ ACTIONS = %w(更改 構築 機能追加 改善)
   end
 end
 
-24.times do |id|
+240.times do |id|
   Member.seed do |s|
     s.id = id
     s.number = "b%06d" % rand(1000000)

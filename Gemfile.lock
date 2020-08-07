@@ -61,7 +61,6 @@ GEM
       rake (>= 10.4, < 14.0)
     arel (9.0.0)
     ast (2.4.1)
-    bindex (0.8.1)
     bootsnap (1.4.7)
       msgpack (~> 1.0)
     builder (3.2.4)
@@ -337,11 +336,6 @@ GEM
     unicode-display_width (1.7.0)
     uniform_notifier (1.13.0)
     vuejs-rails (2.5.13)
-    web-console (3.7.0)
-      actionview (>= 5.0)
-      activemodel (>= 5.0)
-      bindex (>= 0.4.0)
-      railties (>= 5.0)
     websocket-driver (0.7.3)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
@@ -399,7 +393,6 @@ DEPENDENCIES
   tzinfo-data
   uglifier
   vuejs-rails
-  web-console
   yajl-ruby
 
 RUBY VERSION
