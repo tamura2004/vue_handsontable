@@ -21,8 +21,8 @@ end
 group :development, :test do
   gem "sqlite3"
   gem 'byebug', platform: :mri
-  gem "pry-rails"
-  gem "pry-byebug"
+  # gem "pry-rails"
+  # gem "pry-byebug"
   gem "faker"
   gem "rubocop"
 end
