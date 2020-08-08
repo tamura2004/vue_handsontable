@@ -180,6 +180,7 @@ ActiveRecord::Schema.define(version: 2020_08_07_135916) do
     t.index ["member_id"], name: "index_works_on_member_id"
   end
 
+  add_foreign_key "allocs", "assigns"
   add_foreign_key "assigns", "members"
   add_foreign_key "assigns", "projects"
   add_foreign_key "groups", "departments"

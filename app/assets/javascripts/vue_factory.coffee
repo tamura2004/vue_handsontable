@@ -11,7 +11,7 @@ class @Resource
   delete: (id) -> @resource.delete(id:id).then(@handleNormal,@handleError)
 
 class VueTable
-  template: '<div></div>'
+  template: '<div id="htbl"></div>'
   props:
     rows: Array
     opts: Object
@@ -56,8 +56,9 @@ class VueTable
       else
         rows
 
-  ready: ->
+  mounted: ->
     @resource = new Resource @ctl if @ctl?
+    console.log(@$el)
     @hot = new Handsontable @$el,@opts
     @hot.loadData @records
     @hot.addHook "afterChange", @onChange

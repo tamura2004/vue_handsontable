@@ -37,7 +37,7 @@ ACTIONS = %w(更改 構築 機能追加 改善)
   end
 end
 
-240.times do |id|
+30.times do |id|
   Member.seed do |s|
     s.id = id
     s.number = "b%06d" % rand(1000000)
