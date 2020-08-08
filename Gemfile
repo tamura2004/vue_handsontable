@@ -31,8 +31,8 @@ group :test do
   gem "database_cleaner"
   gem "simplecov"
   gem "capybara"
-  gem "guard"
-  gem "guard-minitest"
+  # gem "guard"
+  # gem "guard-minitest"
 end
 
 group :development do
@@ -70,7 +70,7 @@ gem "inum_types", git: "https://github.com/tamura2004/inum_types.git"
 
 gem "lodash-rails"
 gem "bullet"
-gem "rack-mini-profiler"
+# gem "rack-mini-profiler"
 gem "yajl-ruby"
 gem "dotenv-rails"
 gem "multi_json"
