@@ -10,18 +10,9 @@
 #
 
 one:
-  id: 1
   department: one
   name: one
 
 two:
   department: one
   name: two
-
-three:
-  department: two
-  name: three
-
-four:
-  department: two
-  name: four

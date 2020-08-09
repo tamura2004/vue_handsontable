@@ -20,13 +20,17 @@ class AssignTest < ActiveSupport::TestCase
   end
 
   test "メンバーとプロジェクトの重複はエラー" do
-    assert @assign.invalid?
-    assert @assign.errors.messages[:member_id].present?
-  end
-
-  test "重複がなければ適正である" do
-    @assign.member = assigns(:two).member
-    assert @assign.valid?
+    Member.find_each do |member|
+      Project.find_each do |project|
+        assign = Assign.new(member: member, project: project)
+        if Assign.find_by(member: member, project: project)
+          assert assign.invalid?
+          assert assign.errors.messages[:member_id].present?
+        else
+          assert assign.valid?
+        end
+      end
+    end
   end
 
   test "メンバーが必要" do

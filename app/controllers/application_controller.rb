@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
   # end
 
   def current_group
-    id = cookies.signed[:group_id] || session[:group_id] || 1
+    id = cookies.signed[:group_id] || session[:group_id] || Group.first&.id
     @current_group ||= Group.find(id)
   end
 

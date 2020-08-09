@@ -150,4 +150,9 @@ Rails.application.routes.draw do
     resources :projects_members_months, only: [:update, :destroy]
   end
 
+  namespace :api, { format: "json" } do
+    namespace :v1 do
+      resources :assigns
+    end
+  end
 end

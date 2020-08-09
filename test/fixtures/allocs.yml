@@ -17,5 +17,6 @@ one:
 
 two:
   assign: two
-  month: <%= Date.today.strftime('%Y%m') %>
-  cost: 0.1
+  month: <%= Date.today.since(1.month).strftime('%Y%m') %>
+  cost: 0.2
+

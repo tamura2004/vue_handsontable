@@ -10,9 +10,9 @@
 #
 
 one:
-  project: one
   member: one
+  project: one
 
 two:
+  member: one
   project: two
-  member: two

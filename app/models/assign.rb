@@ -35,4 +35,23 @@ class Assign < ApplicationRecord
     # .where("allocs.month > ?","201703")
   }
 
+  SQL = <<~SQL
+    select
+      assigns.id as id,
+      assigns.member_id,
+      members.name as member_name,
+      assigns.project_id,
+      projects.name as project_name,
+      allocs.id as alloc_id,
+      allocs.cost,
+      allocs.month
+    from assigns
+    inner join members on members.id = member_id
+    inner join projects on projects.id = project_id
+    left outer join allocs on allocs.assign_id = assigns.id
+  SQL
+
+  def self.by_member
+    find_by_sql(SQL)
+  end
 end
