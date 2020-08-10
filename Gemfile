@@ -25,6 +25,7 @@ group :development, :test do
   # gem "pry-byebug"
   gem "faker"
   gem "rubocop"
+  gem "hirb"
 end
 
 group :test do

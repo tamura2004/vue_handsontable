@@ -32,9 +32,10 @@ class PaBody
     paDetail: new PaDetail
   template: '''
     <div class="row">
-      <div class="col-xs-6" v-for="col in 2">
+      <div class="col-xs-6" v-for="col in 2" :key="col">
         <pa-detail
-          v-for="project in projects | limitBy colLength (col*colLength) | filterBy $root.query"
+          v-for="project in filteredProjects(col)"
+          :key = "project.number"
           :project="project"
           :handle="handle"
         >
@@ -44,6 +45,16 @@ class PaBody
   '''
   computed:
     colLength: -> Math.ceil @projects.length / 2
+    filteredProjects: ->
+      (col) ->
+        ans = []
+        for project, i in @projects
+          continue if i % 2 != col - 1
+          { name, number } = project
+          q = @$root.query
+          continue if name.indexOf(q) == -1 && number.indexOf(q) == -1
+          ans.push project
+        ans
 
 class ProjectAssign
   props: ['member','projects','assigns']

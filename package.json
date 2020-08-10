@@ -1,9 +1,11 @@
 {
   "dependencies": {
     "@rails/webpacker": "5.1.1",
+    "axios": "^0.19.2",
     "handsontable": "^0.31.1",
     "moment": "^2.19.3",
     "vue": "^2.6.11",
+    "vue-cookies": "^1.7.3",
     "vue-loader": "^15.9.3",
     "vue-template-compiler": "^2.6.11"
   },

@@ -14,23 +14,23 @@
 one:
   name: one
   group: one
-  job_title: one
+  job_title_id: 3
   number: one
 
 two:
   name: two
   group: one
-  job_title: two
+  job_title_id: 4
   number: two
 
 three:
   name: three
   group: two
-  job_title: three
+  job_title_id: 5
   number: three
 
 four:
   name: four
   group: two
-  job_title: four
+  job_title_id: 6
   number: four

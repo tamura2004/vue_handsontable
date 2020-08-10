@@ -58,7 +58,6 @@ class VueTable
 
   mounted: ->
     @resource = new Resource @ctl if @ctl?
-    console.log(@$el)
     @hot = new Handsontable @$el,@opts
     @hot.loadData @records
     @hot.addHook "afterChange", @onChange

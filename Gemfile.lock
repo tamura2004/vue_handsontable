@@ -131,6 +131,7 @@ GEM
     haml (5.1.2)
       temple (>= 0.8.0)
       tilt
+    hirb (0.7.3)
     htmlentities (4.3.4)
     i18n (1.8.5)
       concurrent-ruby (~> 1.0)
@@ -354,6 +355,7 @@ DEPENDENCIES
   draper
   faker
   font-awesome-rails
+  hirb
   i18n_generators
   inum
   inum_types!

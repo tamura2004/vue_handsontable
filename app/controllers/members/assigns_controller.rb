@@ -1,5 +1,5 @@
 class Members::AssignsController < ApplicationController
-  before_action :set_memgber, only: [:index,:create]
+  before_action :set_member, only: [:index,:create]
   before_action :set_assign, only: :destroy
 
   def index
@@ -22,7 +22,7 @@ class Members::AssignsController < ApplicationController
   end
 
   private
-    def set_memgber
+    def set_member
       @member = Member.find(params[:member_id]).decorate
     end
 

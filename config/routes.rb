@@ -151,8 +151,24 @@ Rails.application.routes.draw do
   end
 
   namespace :api, { format: "json" } do
+  # namespace :api do
     namespace :v1 do
-      resources :assigns
+      resources :assigns, only: [:index]
+      resources :projects, only: [:index]
+      resources :months, only: [:index]
+      resources :members, only: [:index] do
+        scope module: :members do
+          resources :allocs, only: [:index]
+        end
+      end
+    end
+  end
+
+  namespace :v1 do
+    resources :members, only: [:index] do
+      scope module: :members do
+        resources :allocs, only: [:index]
+      end
     end
   end
 end

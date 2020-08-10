@@ -50,5 +50,13 @@ class Project < ApplicationRecord
     where("end_month >= ?", Date.today.strftime("%Y%m"))
       .order(:number, :name)
   }
+
+  scope :view, -> {
+    select("projects.*")
+    .select("members.id as member_id")
+    .select("members.number as member_number")
+    .select("members.name as member_name")
+    .joins(members: :assigns)
+  }
   
 end
