@@ -1,23 +1,27 @@
-FROM ruby:2.4
+FROM ruby:2.7.1
+
+RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
+    && echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
 
 RUN apt-get update -qq && \
-	apt-get install -y --no-install-recommends \
-		build-essential \
-		libpq-dev \
-		npm \
-		nodejs && \
-		rm -rf /var/lib/apt/lists/*
+  apt-get install -y --no-install-recommends \
+  nodejs \
+  postgresql-client \
+  yarn && \
+  rm -rf /var/lib/apt/lists/*
 
-ENV APP /app
+ENV APP /moneta3
 
-RUN mkdir -p $APP
+RUN mkdir $APP
 WORKDIR $APP
-ADD Gemfile $APP/
-ADD Gemfile.lock $APP/
+COPY Gemfile $APP/Gemfile
+COPY Gemfile.lock $APP/Gemfile.lock
 
 ENV NOKOGIRI_USE_SYSTEM_LIBRARIES "YES"
 RUN bundle install
+COPY . $APP
 
-ADD . $APP
-RUN mkdir -p /root/run/
-RUN touch /root/run/app.pid
+RUN yarn
+
+EXPOSE 3000
+CMD ["rails", "server", "-b", "0.0.0.0"]
