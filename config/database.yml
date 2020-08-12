@@ -22,23 +22,23 @@
 # Do not set this db to the same as development or production.
 
 default: &default
-  adapter: sqlite3
-  pool: 5
-  timeout: 5000
-
-test:
-  <<: *default
-  database: db/test.sqlite3
-
-development:
-  <<: *default
-  database: db/development.sqlite3
-
-production:
   adapter: postgresql
   encoding: unicode
   pool: 5
   username: <%= ENV.fetch("DB_USERNAME") {"tamura"} %>
   password: <%= ENV.fetch("DB_PASSWORD") {"tamura"} %>
   host: <%= ENV.fetch("DB_HOST") {"localhost"} %>
-  database: prod_work
+
+test:
+  adapter: sqlite3
+  pool: 5
+  timeout: 5000
+  database: db/test.sqlite3
+
+development:
+  <<: *default
+  database: workplan_development
+
+production:
+  <<: *default
+  database: workplan_production

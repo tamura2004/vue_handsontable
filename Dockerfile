@@ -10,7 +10,7 @@ RUN apt-get update -qq && \
   yarn && \
   rm -rf /var/lib/apt/lists/*
 
-ENV APP /moneta3
+ENV APP /workplan
 
 RUN mkdir $APP
 WORKDIR $APP

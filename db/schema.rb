@@ -12,7 +12,10 @@
 
 ActiveRecord::Schema.define(version: 2020_08_07_135916) do
 
-  create_table "allocs", force: :cascade do |t|
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
+  create_table "allocs", id: :serial, force: :cascade do |t|
     t.integer "assign_id"
     t.string "month"
     t.float "cost"
@@ -22,7 +25,7 @@ ActiveRecord::Schema.define(version: 2020_08_07_135916) do
     t.index ["month"], name: "index_allocs_on_month"
   end
 
-  create_table "assigns", force: :cascade do |t|
+  create_table "assigns", id: :serial, force: :cascade do |t|
     t.integer "project_id"
     t.integer "member_id"
     t.datetime "created_at", null: false
@@ -31,19 +34,19 @@ ActiveRecord::Schema.define(version: 2020_08_07_135916) do
     t.index ["project_id"], name: "index_assigns_on_project_id"
   end
 
-  create_table "categories", force: :cascade do |t|
+  create_table "categories", id: :serial, force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "departments", force: :cascade do |t|
+  create_table "departments", id: :serial, force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "groups", force: :cascade do |t|
+  create_table "groups", id: :serial, force: :cascade do |t|
     t.integer "department_id"
     t.string "name"
     t.datetime "created_at", null: false
@@ -51,13 +54,13 @@ ActiveRecord::Schema.define(version: 2020_08_07_135916) do
     t.index ["department_id"], name: "index_groups_on_department_id"
   end
 
-  create_table "job_titles", force: :cascade do |t|
+  create_table "job_titles", id: :serial, force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "members", force: :cascade do |t|
+  create_table "members", id: :serial, force: :cascade do |t|
     t.string "name"
     t.integer "group_id"
     t.integer "job_title_id"
@@ -68,7 +71,7 @@ ActiveRecord::Schema.define(version: 2020_08_07_135916) do
     t.index ["job_title_id"], name: "index_members_on_job_title_id"
   end
 
-  create_table "plans", force: :cascade do |t|
+  create_table "plans", id: :serial, force: :cascade do |t|
     t.string "category"
     t.string "main_group_name"
     t.string "project_number"
@@ -120,7 +123,7 @@ ActiveRecord::Schema.define(version: 2020_08_07_135916) do
     t.integer "system_id"
   end
 
-  create_table "projects", force: :cascade do |t|
+  create_table "projects", id: :serial, force: :cascade do |t|
     t.integer "group_id"
     t.string "number"
     t.string "name"
@@ -134,7 +137,7 @@ ActiveRecord::Schema.define(version: 2020_08_07_135916) do
     t.index ["group_id"], name: "index_projects_on_group_id"
   end
 
-  create_table "projects_monthly_allocations", force: :cascade do |t|
+  create_table "projects_monthly_allocations", id: :serial, force: :cascade do |t|
     t.integer "project_id"
     t.string "month"
     t.float "cost"
@@ -143,7 +146,7 @@ ActiveRecord::Schema.define(version: 2020_08_07_135916) do
     t.index ["project_id"], name: "index_projects_monthly_allocations_on_project_id"
   end
 
-  create_table "results", force: :cascade do |t|
+  create_table "results", id: :serial, force: :cascade do |t|
     t.string "month"
     t.string "group_number"
     t.string "group_name"
@@ -164,14 +167,14 @@ ActiveRecord::Schema.define(version: 2020_08_07_135916) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "systems", force: :cascade do |t|
+  create_table "systems", id: :serial, force: :cascade do |t|
     t.string "number"
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "works", force: :cascade do |t|
+  create_table "works", id: :serial, force: :cascade do |t|
     t.integer "member_id"
     t.string "month"
     t.float "cost"

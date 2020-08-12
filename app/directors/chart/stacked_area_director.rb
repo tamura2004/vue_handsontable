@@ -29,6 +29,7 @@ module Chart
     end
 
     def self.index_label_month(allocs)
+      return if allocs.size.zero?
       month_value_total = allocs.inject(0) do |acc, alloc|
         acc += MonthTypes.parse(alloc.month).value
       end

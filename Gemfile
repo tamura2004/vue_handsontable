@@ -14,9 +14,9 @@ gem 'puma'
 gem "bootsnap"
 gem "webpacker"
 
-group :production do
+# group :production do
   gem "pg"
-end
+# end
 
 group :development, :test do
   gem "sqlite3"
